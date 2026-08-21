@@ -3,9 +3,17 @@
 Gestaltungsentwurf für die neue Website von **Gemeinsam für Wapa e. V.**
 (Stand August 2026). **Kein Livebetrieb, keine offizielle Vereinsseite.**
 
-Die Seite dient dem Vorstand als Diskussionsgrundlage. Die gelben Randnotizen
-erklären jede Abweichung vom bisherigen Auftritt und lassen sich über die
-Leiste am oberen Rand abschalten.
+Die Seite dient dem Vorstand als Diskussionsgrundlage. Über die Leiste am
+oberen Rand lassen sich **Randnotizen einblenden**, die jede Abweichung vom
+bisherigen Auftritt begründen. Sie sind standardmäßig aus.
+
+## Neu bauen
+Der Entwurf wird im Vault gepflegt, nicht hier. Nach Änderungen:
+
+    python3 build.py "…/Gemeinsam für Wapa Website/Website-Entwurf-final.html"
+
+Das Skript schreibt `index.html` neu und hängt die Seite von den lokalen
+Dateien unter `assets/` ab. Bilder werden nicht erneut geladen.
 
 ## Was hier drin steckt
 - `index.html` — der gesamte Entwurf (eine Datei, Ansichten über `#/…`)
