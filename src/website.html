@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemeinsam für Wapa — Website-Entwurf (final)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   GEMEINSAM FÜR WAPA — Entwurf final, August 2026
+   Farbwerte Grün/Gold unverändert aus dem Markenleitfaden.
+   NEU vorgeschlagen: Laterit (Erdrot) als Flächenfarbe, wärmere Neutraltöne,
+   anderer Schriftschnitt. Begründung siehe Leiste oben.
+   ========================================================================= */
+:root{
+  /* aus dem Leitfaden übernommen */
+  --gruen:#276F27; --gruen-dark:#1B4F1B; --gruen-soft:#E7EFE4;
+  --gold:#E9A825;  --gold-text:#7E5910;
+
+  /* NEU: Laterit — die Bodenfarbe von Sanguié */
+  --erde:#7E3A20; --erde-tief:#5C2916; --erde-hell:#B4592F; --erde-soft:#F3E2D8;
+
+  /* wärmere Neutraltöne statt der kühlen Grautöne */
+  --ink:#231D18; --body:#4F463E; --leise:#847768;
+  --papier:#FBF6EE; --papier2:#F2EADD; --linie:#DCD0BE; --linie-stark:#C3B49C;
+
+  --max:1240px; --mess:34rem;
+  --d:'Fraunces',Georgia,serif;
+  --t:'Atkinson Hyperlegible',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--body);font-family:var(--t);font-size:17.5px;line-height:1.62;-webkit-font-smoothing:antialiased;font-synthesis:none}
+img{display:block;max-width:100%}
+a{color:inherit}
+p{margin:0 0 1.05em;max-width:var(--mess)}
+
+h1,h2,h3{font-family:var(--d);font-weight:500;color:var(--ink);margin:0 0 .42em;
+  font-variation-settings:'SOFT' 18,'WONK' 0,'opsz' 60;line-height:1.08;letter-spacing:-.012em}
+h1{font-size:clamp(2.6rem,5.6vw,4.4rem);font-variation-settings:'SOFT' 24,'WONK' 1,'opsz' 120}
+h2{font-size:clamp(1.85rem,3.4vw,2.7rem)}
+h3{font-size:1.28rem;font-variation-settings:'SOFT' 14,'WONK' 0,'opsz' 30}
+
+/* Kolumnentitel — kleine Versalzeile, ersetzt die üblichen Icon-Badges */
+.kt{font-family:var(--t);font-size:.7rem;font-weight:700;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--leise);display:block;margin-bottom:1.1rem}
+.kt.gruen{color:var(--gruen)} .kt.gold{color:var(--gold)} .kt.hell{color:#D8BFA9}
+
+.lede{font-size:1.19rem;line-height:1.52;color:var(--body);max-width:38rem}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4vw,44px)}
+.eng{max-width:52rem}
+
+/* Ziffern: Tabellenziffern, damit Register und Preisliste sauber untereinander stehen */
+.zahl{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-variation-settings:'SOFT' 0,'WONK' 0,'opsz' 100;font-weight:400}
+
+/* ---------- Entwurfsleiste ---------- */
+#bar{background:var(--ink);color:#CFC3B4;font-size:.76rem;padding:8px 20px;display:flex;
+  gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;letter-spacing:.01em}
+#bar b{color:var(--gold);font-weight:700}
+#bar button{background:none;border:1px solid #4B4038;color:#CFC3B4;padding:2px 10px;
+  font:inherit;font-size:.72rem;cursor:pointer;border-radius:2px}
+#bar button:hover{border-color:#8A7B6C;color:#fff}
+
+/* ---------- Randnotiz statt gelber Kasten ---------- */
+.rn{border-left:2px solid var(--gold);padding:2px 0 2px 16px;margin:26px 0;
+  font-size:.85rem;line-height:1.5;color:var(--body);max-width:40rem}
+.rn b{color:var(--ink)}
+/* auf den dunklen Flächen muss die Randnotiz mitziehen */
+.erde .rn,.dunkel .rn{color:#E0C9B8;border-left-color:var(--gold)}
+.erde .rn b,.dunkel .rn b{color:#FFF3E9}
+body.clean .rn{display:none}
+body.clean .nurnotiz{display:none}
+
+/* ---------- Kopf ---------- */
+header{position:sticky;top:0;z-index:60;background:rgba(251,246,238,.93);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--linie)}
+.nav{max-width:var(--max);margin:0 auto;padding:10px clamp(20px,4vw,44px);
+  display:flex;align-items:center;gap:30px}
+.mark{display:flex;align-items:baseline;gap:9px;text-decoration:none;margin-right:auto}
+.mark .n{font-family:var(--d);font-size:1.16rem;font-weight:600;color:var(--ink);
+  letter-spacing:-.015em;font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 40}
+.mark .s{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--leise)}
+.menu{display:flex;gap:25px;align-items:center}
+.menu a{text-decoration:none;font-size:.9rem;color:var(--body);padding:6px 0;
+  border-bottom:1.5px solid transparent}
+.menu a:hover,.menu a.on{color:var(--ink);border-color:var(--gruen)}
+.burger{display:none;background:none;border:0;font-size:1.3rem;cursor:pointer;color:var(--ink)}
+
+/* ---------- Schaltflächen: eckig, hairline, kein Schatten ---------- */
+.b{display:inline-block;text-decoration:none;font-family:var(--t);font-weight:700;
+  font-size:.86rem;letter-spacing:.02em;padding:12px 22px;border-radius:2px;
+  border:1.5px solid var(--ink);background:var(--ink);color:var(--papier);
+  transition:background .14s,color .14s,border-color .14s;cursor:pointer}
+.b:hover{background:var(--gruen-dark);border-color:var(--gruen-dark)}
+.b.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.b.gold:hover{background:#D4941B;border-color:#D4941B}
+.b.leer{background:transparent;color:var(--ink)}
+.b.leer:hover{background:var(--ink);color:var(--papier)}
+.b.hell{background:transparent;color:var(--papier);border-color:rgba(255,255,255,.45)}
+.b.hell:hover{background:var(--papier);color:var(--ink);border-color:var(--papier)}
+.b.klein{padding:8px 15px;font-size:.78rem}
+
+/* Textlink mit Pfeil — ersetzt „Mehr erfahren"-Buttons */
+.pf{display:inline-flex;align-items:center;gap:.5em;text-decoration:none;
+  font-weight:700;font-size:.85rem;color:var(--gruen-dark);
+  border-bottom:1.5px solid var(--linie-stark);padding-bottom:2px}
+.pf:hover{border-color:var(--gruen)}
+.pf::after{content:"→";transition:transform .16s}
+.pf:hover::after{transform:translateX(3px)}
+
+section{padding:clamp(56px,7vw,104px) 0}
+.erde{background:var(--erde);color:#EBD9CC}
+.erde h1,.erde h2,.erde h3{color:#FFF6EE}
+.erde .lede{color:#E3CDBD}
+.dunkel{background:var(--ink);color:#CFC3B4}
+.dunkel h2,.dunkel h3{color:#FFF6EE}
+.dunkel .lede{color:#B7A897}
+.papier2{background:var(--papier2)}
+.hr{height:1px;background:var(--linie);border:0;margin:0}
+
+/* =========================  HERO  ========================= */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);min-height:min(88vh,760px)}
+.hero-t{padding:clamp(46px,6vw,88px) 0 clamp(38px,4vw,60px) clamp(20px,4vw,44px);
+  display:flex;flex-direction:column;justify-content:center;
+  max-width:calc(var(--max)/2 + 24px);margin-left:auto}
+.hero-t h1{max-width:13ch}
+.hero-t .lede{margin-top:.6rem}
+.hero-cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:2rem}
+.hero-b{position:relative;overflow:hidden;background:var(--erde-tief)}
+.hero-b img{width:100%;height:100%;object-fit:cover;object-position:52% 60%}
+.hero-b figcaption{position:absolute;left:0;bottom:0;right:0;padding:52px 26px 16px;
+  font-size:.74rem;color:#F0E2D6;letter-spacing:.02em;
+  background:linear-gradient(to top,rgba(40,20,10,.72),transparent)}
+
+/* Sprachband unter dem Hero */
+.sprachen{background:var(--erde-tief);color:#E8D2C3;padding:14px 0}
+.sprachen .wrap{display:flex;gap:clamp(16px,3vw,46px);flex-wrap:wrap;align-items:baseline;
+  font-size:.8rem;letter-spacing:.02em}
+.sprachen b{color:#FFE9D8;font-weight:700}
+.sprachen i{font-style:italic;color:#C9AC97}
+
+/* =====================  KETTE (Chronik)  ===================== */
+.kette{display:grid;grid-template-columns:14rem 1fr;gap:clamp(24px,4vw,64px)}
+.kette-l{position:sticky;top:96px;align-self:start}
+.spur{position:relative;padding-left:34px}
+.spur::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--linie-stark)}
+.gl{position:relative;padding:0 0 34px}
+.gl::before{content:"";position:absolute;left:-34px;top:9px;width:11px;height:11px;
+  border-radius:50%;background:var(--papier);border:1.5px solid var(--gruen)}
+.gl.stark::before{background:var(--gruen)}
+.gl .j{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:.92rem;color:var(--gruen);font-weight:600;letter-spacing:.04em}
+.gl h3{margin:.15em 0 .3em;font-size:1.1rem}
+.gl p{font-size:.93rem;margin:0;max-width:36rem;color:var(--body)}
+
+/* =====================  PREISLISTE  ===================== */
+.preise{border-top:1.5px solid var(--ink);max-width:46rem}
+.pz{display:grid;grid-template-columns:7.5rem 1fr;gap:clamp(14px,3vw,32px);
+  padding:17px 0;border-bottom:1px solid var(--linie);align-items:baseline}
+.pz .b1{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:1.6rem;color:var(--ink);font-variation-settings:'SOFT' 10,'opsz' 90;line-height:1}
+.pz .b2{font-size:.98rem}
+.pz .b2 span{display:block;font-size:.83rem;color:var(--leise);margin-top:2px}
+
+/* =====================  REGISTER  ===================== */
+.filter{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:26px}
+.filter button{font:inherit;font-size:.79rem;font-weight:700;letter-spacing:.03em;
+  padding:6px 14px;border:1px solid var(--linie-stark);background:transparent;
+  color:var(--body);border-radius:2px;cursor:pointer}
+.filter button:hover{border-color:var(--ink);color:var(--ink)}
+.filter button.on{background:var(--ink);border-color:var(--ink);color:var(--papier)}
+
+.reg{border-top:1.5px solid var(--ink)}
+.rz{display:grid;grid-template-columns:5.6rem minmax(0,1fr) 8.5rem 9.2rem;
+  gap:clamp(12px,2.4vw,28px);padding:19px 0;border-bottom:1px solid var(--linie);
+  text-decoration:none;align-items:baseline;position:relative;transition:background .13s}
+.rz:hover{background:var(--papier2)}
+.rz .j{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:.92rem;color:var(--leise);letter-spacing:.03em;padding-top:.2em}
+.rz .t{font-family:var(--d);font-size:1.17rem;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30;line-height:1.2}
+.rz .u{font-size:.87rem;color:var(--body);margin-top:.3em;max-width:44ch}
+.rz .s{font-size:.79rem;color:var(--leise);letter-spacing:.02em;padding-top:.35em}
+.rz .k{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--leise);padding-top:.45em}
+/* was läuft, tritt hervor; Abgeschlossenes bleibt ruhig */
+.rz .k.offen{color:var(--gruen)}
+.rz .k.offen::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--gruen);margin-right:7px;vertical-align:.12em}
+/* Vorschauplatte unten rechts — bewusst ortsfest statt am Zeiger klebend,
+   damit sie nie den Text verdeckt, den man gerade liest */
+.rz .vs{position:fixed;right:26px;bottom:26px;pointer-events:none;
+  width:286px;height:214px;object-fit:cover;opacity:0;transform:translateY(6px);
+  transition:opacity .18s,transform .18s;z-index:40;
+  border:5px solid var(--papier);box-shadow:0 6px 26px rgba(35,29,24,.22);display:none}
+@media(hover:hover) and (min-width:1080px){
+  .rz .vs{display:block}
+  .rz:hover .vs{opacity:1;transform:translateY(0)}
+}
+
+/* =====================  AKTUELLES  ===================== */
+.lead{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(22px,3.6vw,54px);
+  align-items:center;text-decoration:none;padding-bottom:clamp(28px,4vw,46px);
+  border-bottom:1px solid var(--linie);margin-bottom:8px}
+.lead img{width:100%;aspect-ratio:5/4;object-fit:cover}
+.lead h3{font-size:clamp(1.6rem,2.7vw,2.15rem);font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 80}
+.meta{font-size:.79rem;color:var(--leise);letter-spacing:.03em}
+
+/* Dritte Spalte fasst „Grundversorgung" in Versalien — 4,5 rem taten das nicht
+   und schoben jede Beitragsliste über den Rand hinaus. */
+.liste a{display:grid;grid-template-columns:8.5rem minmax(0,1fr) 9rem;gap:clamp(12px,2.4vw,28px);
+  padding:18px 0;border-bottom:1px solid var(--linie);text-decoration:none;align-items:baseline}
+.liste a > *{min-width:0}
+.liste a:hover{background:var(--papier2)}
+.liste .d{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:.86rem;color:var(--leise)}
+.liste .t{font-family:var(--d);font-size:1.12rem;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30}
+.liste .x{font-size:.88rem;color:var(--body);margin-top:.25em;max-width:52ch}
+.liste .k{font-size:.71rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gruen);text-align:right}
+
+/* =====================  SPENDEN  ===================== */
+.iban{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.95rem;
+  line-height:2;color:#FFF6EE;border:1px solid rgba(255,255,255,.22);padding:16px 19px}
+.iban b{color:var(--gold);font-weight:400}
+.betrag{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 20px}
+.betrag button{font:inherit;text-align:left;min-width:9.5rem;padding:13px 16px;cursor:pointer;
+  background:transparent;border:1px solid rgba(255,255,255,.28);color:#EBD9CC;border-radius:2px}
+.betrag button:hover{border-color:var(--gold)}
+.betrag button.on{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.betrag .a{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:1.32rem;display:block;line-height:1.1}
+.betrag .w{font-size:.77rem;display:block;margin-top:3px;opacity:.9}
+
+/* =====================  ZITAT  ===================== */
+.zitat{font-family:var(--d);font-size:clamp(1.35rem,2.5vw,1.95rem);line-height:1.32;
+  font-variation-settings:'SOFT' 26,'WONK' 1,'opsz' 90;font-weight:400;
+  color:#FFF6EE;max-width:26ch;margin:0}
+.zitat + .q{font-size:.82rem;color:#C9AC97;margin-top:1.1rem;letter-spacing:.03em}
+
+/* =====================  RASTER  ===================== */
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,66px);align-items:center}
+.zwei img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.drei{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px)}
+.drei img{width:100%;aspect-ratio:1;object-fit:cover}
+.saeulen{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1.5px solid var(--ink)}
+.saeule{padding:22px 22px 26px 0;border-right:1px solid var(--linie)}
+.saeule:last-child{border-right:0}
+.saeule .n{font-family:var(--d);font-variant-numeric:lining-nums;font-size:.85rem;
+  color:var(--gold-text);letter-spacing:.05em}
+.saeule h3{font-size:1.13rem;margin:.35em 0 .3em}
+.saeule p{font-size:.89rem;margin:0}
+
+
+/* =====================  LOGOSTEMPEL  =====================
+   Die Logodatei hat einen eingebrannten schwarzen Rahmen und keine Transparenz.
+   Statt das zu kaschieren, wird sie als Stempel auf hellem Grund gezeigt —
+   so, wie ein Verein sein Zeichen unter ein Dokument setzt. Auf hellem Grund
+   greift zusätzlich mix-blend-mode, damit kein weißer Kasten stehen bleibt. */
+.stempel{display:inline-block;background:#fff;padding:11px 13px;border:1px solid var(--linie);
+  line-height:0;max-width:212px}
+.stempel img{width:100%;height:auto;aspect-ratio:auto;object-fit:fill}
+.stempel.auf-hell{background:transparent;border:0;padding:0}
+.stempel.auf-hell img{mix-blend-mode:multiply}
+
+/* =====================  VOLLBILDBAND  =====================
+   Ein Bild in voller Breite als Atemzug zwischen den textlastigen Abschnitten.
+   Bewusst ohne Datumsangabe — es soll nicht altern. */
+.vollbild{margin:0;position:relative}
+.vollbild img{width:100%;height:clamp(260px,42vw,520px);object-fit:cover;object-position:50% 62%}
+.vollbild figcaption{position:absolute;left:0;right:0;bottom:0;
+  padding:64px clamp(20px,4vw,44px) 18px;font-size:.82rem;color:#F3E4D8;
+  background:linear-gradient(to top,rgba(40,20,10,.78),transparent)}
+
+/* =====================  BILDSTRECKE (in Beiträgen)  ===================== */
+.wg{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;
+  gap:clamp(8px,1.2vw,14px)}
+.wg figure{margin:0;position:relative;overflow:hidden}
+.wg img{width:100%;height:100%;object-fit:cover}
+.wg .gr{grid-column:span 2;grid-row:span 2}
+.wg figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 13px 9px;
+  font-size:.74rem;color:#FFF3E9;line-height:1.35;
+  background:linear-gradient(to top,rgba(40,20,10,.8),transparent);opacity:0;transition:opacity .18s}
+.wg figure:hover figcaption{opacity:1}
+@media(max-width:860px){
+  .wg{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .wg .gr{grid-column:span 2;grid-row:span 2}
+  .wg figcaption{opacity:1}
+}
+
+
+/* =====================  ROLLEN (Mitmachen)  =====================
+   Kein Bilderraster zur Zierde — was gesucht wird, steht als Liste da. */
+.rollen{border-top:1px solid rgba(255,255,255,.3)}
+.ro{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.ro-t{font-family:var(--d);font-size:1.06rem;color:#FFF6EE;font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30}
+.ro-u{font-size:.87rem;color:#E0C9B8;margin-top:.15em}
+
+
+/* =====================  PROJEKTSEITE  ===================== */
+.fakten{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;border-top:1.5px solid var(--ink);
+  border-bottom:1px solid var(--linie);padding:14px 0;margin-bottom:.4rem}
+.fakten span{display:block;font-size:.68rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--leise);margin-bottom:4px}
+.fakten b{font-family:var(--d);font-weight:500;font-size:1.02rem;color:var(--ink);
+  font-variation-settings:'SOFT' 14,'opsz' 30}
+.fakten b.gruen{color:var(--gruen)}
+.ohnebild{border-left:2px solid var(--linie-stark);padding-left:16px;color:var(--leise);
+  font-size:.9rem;margin:1.6rem 0}
+.dl{display:grid;gap:10px;margin:1.6rem 0 2rem}
+.dl a{display:flex;flex-direction:column;gap:2px;text-decoration:none;padding:14px 16px;
+  border:1px solid var(--linie);background:#fff;border-radius:2px}
+.dl a:hover{border-color:var(--gruen)}
+.dl b{font-family:var(--d);font-weight:500;color:var(--ink);font-size:1.02rem}
+.dl span{font-size:.8rem;color:var(--leise)}
+.hinweis{border-left:3px solid var(--gold);background:var(--papier2);padding:16px 18px;
+  margin:0 0 2rem;font-size:.94rem;line-height:1.55}
+.hinweis b{color:var(--ink)}
+@media(max-width:640px){.fakten{grid-template-columns:1fr 1fr}}
+/* Register innerhalb einer Textspalte: vier Spalten passen dort nicht */
+.artikel .rz{grid-template-columns:5rem 1fr auto;row-gap:3px;padding:15px 0}
+.artikel .rz .u{max-width:none}
+.artikel .rz .s{grid-column:2;font-size:.76rem;padding-top:0}
+.artikel .rz .k{grid-row:1;grid-column:3;text-align:right;padding-top:.3em}
+@media(max-width:640px){
+  .artikel .rz{grid-template-columns:1fr}
+  .artikel .rz .s,.artikel .rz .k{grid-column:1;grid-row:auto;text-align:left}
+}
+
+
+/* Beschreibungszeilen mit breiter Marke (Vorstand, Rollen, Dokumente).
+   Als Klasse, nicht inline — inline hätte jede Media Query überstimmt und
+   machte auf schmalen Geräten den ganzen Grid-Track zu breit. */
+.pz.pz-def{grid-template-columns:13rem 1fr}
+@media(max-width:620px){
+  .pz.pz-def{grid-template-columns:1fr;row-gap:3px}
+}
+/* Grid-Kinder dürfen schrumpfen; ohne min-width:0 wächst eine 1fr-Spur
+   auf die min-content-Breite ihres Inhalts und sprengt den Container. */
+.zwei > *,.kette > *,.saeulen > *,.fg > *,.reg > *,.preise > *{min-width:0}
+
+
+/* =====================  PRESSE  ===================== */
+.pz-presse{display:block;text-decoration:none;padding:15px 0;border-bottom:1px solid var(--linie)}
+.pz-presse:hover{background:var(--papier2)}
+.pq{display:block;font-size:.72rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--gruen);margin-bottom:5px}
+.pt{display:block;font-family:var(--d);font-size:1.08rem;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30;line-height:1.28}
+.pstand{display:block;font-size:.78rem;color:var(--leise);margin-top:5px}
+.presseliste{border-top:1.5px solid var(--ink)}
+
+
+/* Markierung für Angaben aus den neuen Quellen, die der Vorstand noch nicht
+   bestätigt hat. Sie verschwindet, sobald `neu` aus den Daten fällt. */
+.neu{display:inline-block;font-family:var(--t);font-size:.6rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;vertical-align:.22em;
+  background:var(--gold);color:var(--ink);padding:2px 6px;border-radius:2px;margin-left:6px}
+
+
+/* =====================  VORSTAND  ===================== */
+.menschen{border-top:1.5px solid var(--ink);max-width:56rem}
+.mensch{display:grid;grid-template-columns:13rem 1fr;gap:clamp(18px,3vw,40px);
+  padding:30px 0;border-bottom:1px solid var(--linie);align-items:start}
+.mensch > *{min-width:0}
+.mportrait img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.keinbild{width:100%;aspect-ratio:4/5;background:var(--papier2);
+  border:1px dashed var(--linie-stark);display:grid;place-items:center}
+.keinbild span{font-size:.76rem;color:var(--leise);text-align:center;line-height:1.4}
+.mtext h2{font-size:1.5rem;margin:0 0 .15em}
+.mrolle{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--gruen);margin-bottom:1rem}
+.mtext p{font-size:.97rem}
+.zit{font-family:var(--d);font-size:1.12rem;line-height:1.4;color:var(--ink);
+  font-variation-settings:'SOFT' 22,'WONK' 1,'opsz' 60;border-left:2px solid var(--gruen);
+  padding-left:16px;margin-top:1.2em}
+.zit span{display:block;font-family:var(--t);font-size:.76rem;color:var(--leise);
+  margin-top:.6em;font-variation-settings:normal}
+.mquelle{font-size:.76rem;color:var(--leise);margin-top:1rem;padding-top:.7rem;
+  border-top:1px solid var(--linie)}
+@media(max-width:640px){.mensch{grid-template-columns:1fr}.mportrait{max-width:11rem}}
+
+/* =====================  ARTIKEL  ===================== */
+.artikel{max-width:38rem;margin-inline:auto}
+.artikel p{font-size:1.07rem;max-width:none}
+.artikel h2{font-size:1.6rem;margin-top:1.8em}
+.artikel img.gross{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 30px}
+.kopf{padding:clamp(38px,5vw,68px) 0 0}
+.krume{font-size:.79rem;color:var(--leise);margin-bottom:12px;letter-spacing:.02em}
+.krume a{color:var(--gruen-dark)}
+
+/* =====================  FUSS  ===================== */
+footer{background:var(--ink);color:#9C8E7E;padding:60px 0 30px;font-size:.87rem}
+footer h4{font-family:var(--t);font-size:.7rem;letter-spacing:.17em;text-transform:uppercase;
+  color:#EBD9CC;margin:0 0 13px;font-weight:700}
+footer a{color:#C4B5A3;text-decoration:none;display:block;margin-bottom:7px;overflow-wrap:anywhere}
+footer a:hover{color:var(--gold)}
+.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;padding-bottom:34px;
+  border-bottom:1px solid #3A322B}
+.fu{padding-top:22px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.79rem}
+.flagge{display:flex;height:5px;max-width:190px;margin-top:16px}
+.flagge span{flex:1}
+
+/* =====================  RESPONSIV  ===================== */
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-t{max-width:none;margin:0;padding:44px clamp(20px,4vw,44px) 40px}
+  .hero-b{min-height:56vh}
+  .kette{grid-template-columns:1fr;gap:22px}
+  .kette-l{position:static}
+  .saeulen{grid-template-columns:1fr 1fr}
+  .saeule{border-bottom:1px solid var(--linie);padding-right:18px}
+  .saeule:nth-child(2n){border-right:0}
+}
+/* Der Fuß hatte bislang keine eigene Regel und behielt vier Spalten —
+   das allein machte jede Seite auf dem Handy 580 px breit. */
+@media(max-width:900px){
+  .fg{grid-template-columns:1fr 1fr;gap:26px 28px}
+  .fg > div:first-child{grid-column:1 / -1}
+}
+@media(max-width:520px){
+  .fg{grid-template-columns:1fr;gap:22px}
+  .fg > div:first-child{grid-column:auto}
+}
+
+@media(max-width:760px){
+  .menu{display:none} .burger{display:block}
+  .menu.auf{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;
+    gap:0;background:var(--papier);border-bottom:1px solid var(--linie);padding:8px 0}
+  .menu.auf a{padding:11px clamp(20px,4vw,44px);border-bottom:0}
+  .zwei,.lead{grid-template-columns:1fr}
+  .rz{grid-template-columns:4.6rem 1fr;row-gap:5px}
+  .rz .s,.rz .k{grid-column:2}
+  .liste a{grid-template-columns:1fr;row-gap:3px}
+  .liste .k{text-align:left}
+  .saeulen{grid-template-columns:1fr}
+  .saeule{border-right:0}
+  .drei{grid-template-columns:1fr 1fr}
+  .pz{grid-template-columns:5.6rem 1fr}
+}
+</style>
+</head>
+<body class="clean">
+
+<div id="bar">
+  <span><b>Entwurf final</b> · August 2026 · Inhalte aus der bestehenden Website, Fotos teils neu · <a href="#/neu" style="color:var(--gold)">Was ist neu?</a></span>
+  <button onclick="document.body.classList.toggle('clean')">Kommentare einblenden</button>
+  <button onclick="document.getElementById('bar').style.display='none'">Leiste ausblenden</button>
+</div>
+
+<header>
+  <div class="nav">
+    <a class="mark" href="#/">
+      <span class="n">Gemeinsam für Wapa</span>
+      <span class="s">e.&nbsp;V.</span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#/projekte">Projekte</a>
+      <a href="#/aktuelles">Aktuelles</a>
+      <a href="#/ueber-uns">Über uns</a>
+      <a href="#/mitmachen">Mitmachen</a>
+      <a class="b gold klein" href="#/spenden">Spenden</a>
+    </nav>
+    <button class="burger" onclick="document.getElementById('menu').classList.toggle('auf')">☰</button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <div style="font-family:var(--d);font-size:1.2rem;color:#FFF6EE;font-variation-settings:'SOFT' 20,'WONK' 1">Gemeinsam für Wapa e.&nbsp;V.</div>
+        <p style="margin:.7em 0 0;font-size:.85rem;max-width:30ch">Mudawane Wapa Yila · Römerweg 2, 72488 Sigmaringen. Gemeinnützigkeit anerkannt vom Finanzamt Sigmaringen am 7.11.2017.</p>
+        <div class="stempel" style="margin-top:20px">
+          <img src="https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg" alt="Vereinslogo: drei Figuren mit erhobenen Armen über einem Schild mit dem Umriss Burkina Fasos">
+        </div>
+        <div class="flagge"><span style="background:#EF2B2D"></span><span style="background:#009E49"></span></div>
+      </div>
+      <div>
+        <h4>Projekte</h4>
+        <a href="#/projekte">Alle Projekte</a>
+        <a href="#/projekte/Grundversorgung">Grundversorgung</a>
+        <a href="#/projekte/Bildung">Bildung</a>
+        <a href="#/projekte/Infrastruktur">Infrastruktur</a>
+        <a href="#/projekte/Umweltschutz">Umweltschutz</a>
+      </div>
+      <div>
+        <h4>Verein</h4>
+        <a href="#/ueber-uns">Über uns</a>
+        <a href="#/vorstand">Vorstand</a>
+        <a href="#/mitmachen">Mitmachen</a>
+        <a href="#/spenden">Spenden &amp; Patenschaft</a>
+        <a href="#/satzung">Satzung &amp; Manifest</a>
+        <a href="#/presse">Pressestimmen</a>
+        <a href="#/ueber-uns">Newsletter</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="mailto:info@gemeinsamfuerwapa.de">info@gemeinsamfuerwapa.de</a>
+        <a href="tel:+4915143627548">0151 43627548</a>
+        <a href="https://www.instagram.com/gemeinsamfuerwapa/">Instagram</a>
+        <a href="https://www.facebook.com/groups/1878369855725767/">Facebook</a>
+        <a href="https://www.linkedin.com/company/gemeinsam-f%C3%BCr-wapa/">LinkedIn</a>
+      </div>
+    </div>
+    <div class="fu">
+      <span>© 2026 Gemeinsam für Wapa e.&nbsp;V. · <a href="#/impressum" style="display:inline;text-decoration:underline">Impressum</a> · <a href="#/datenschutz" style="display:inline;text-decoration:underline">Datenschutzerklärung</a></span>
+      <span>Statische Website · Entwurf August 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------------------
+   BILDER
+   N(...) = neue Fotos aus "other assets" (August 2026, 2304×1728, unkomprimiert)
+   W(...) = noch von der alten Website gestreamt — bis die Originale aus
+            wp-content/uploads gezogen sind. Alle Personen-, Schul- und
+            Wasserbilder fallen bis dahin in diese Kategorie.
+   --------------------------------------------------------------------------- */
+const N = t => 'other%20assets/WhatsApp%20Image%202026-08-12%20at%20' + t + '.jpeg';
+/* Aufnahmen aus der Präsentation „Projektbedarf“ (08/2026). Geringere Auflösung
+   als die Waldgarten-Fotos — für mittlere Formate, nicht für Titelbilder. */
+const P = n => 'other%20assets/aus%20Projektbedarf%202026-08/' + n + '.jpg';
+const W = p => 'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/' + p + '&ssl=1';
+/* Das Vereinslogo, wie es ist: 300×158 px, JPG, schwarzer Rahmen eingebrannt,
+   keine Transparenz, kein Vektororiginal auffindbar (Entscheidung 1). */
+const LOGO = 'https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg';
+
+const B = {
+  /* neu, hochauflösend (2304×1728) — Waldgarten Wapa, August 2026.
+     Ohne die sieben Aufnahmen mit „TECNO CAMON 20"-Wasserzeichen. */
+  gaertner:      N('20.32.45'),            /* Gärtner blickt über den Garten */
+  obstgarten:    N('20.32.45%20%283%29'),  /* Obstbäume, Zaun aus Astwerk */
+  mais:          N('20.32.45%20%281%29'),  /* Maiskolben */
+  aubergine:     N('20.32.44'),            /* Auberginenreihe auf Laterit */
+  mischkultur:   N('20.32.44%20%282%29'),  /* Maniok, Mais, Schlauch */
+  maisreihen:    N('20.32.43%20%282%29'),
+  sesam:         N('20.32.43%20%281%29'),  /* Sesam mit rosa Blüten */
+  maniok:        N('20.32.42'),            /* Maniokstrauch */
+  moringa:       N('20.32.42%20%282%29'),  /* Moringa-Setzlinge */
+  moringabaum:   N('20.32.42%20%281%29'),  /* Moringa und Banane */
+  moringafeld:   N('20.32.41%20%281%29'),
+  moringasesam:  N('20.32.41%20%282%29'),
+  guave:         N('20.32.41'),            /* Blattdetail */
+  reihen:        N('20.32.40%20%281%29'),  /* Reihen: Mais, Aubergine, Maniok */
+  jungpflanzen:  N('20.32.40%20%283%29'),
+  hibiskus:      N('20.31.10'),            /* Roselle, rote Stiele */
+  blattdetail:   N('20.31.11%20%281%29'),
+  /* neu, aus der Präsentation Projektbedarf (08/2026) */
+  bertrandSolar: P('bertrand-solaranlage'),
+  dorfWasser:    P('dorfversammlung-wasserstelle'),
+  uebergabe:     P('uebergabe-wasserstelle'),
+  wasserLaeuft:  P('wasser-laeuft'),
+  turmMontage:   P('wasserturm-montage'),
+  turmKran:      P('wasserturm-kran'),
+  papaya:        P('papaya-bananen'),
+  ernte:         P('ernte-bananen-erdnuesse'),
+  bananenhain:   P('besuch-bananenhain'),
+  bananen:       P('bananenernte'),
+  zitrus:        P('zitrus-kontrolle'),
+  verarbeitung:  P('lebensmittelverarbeitung'),
+  agrarfeld:     P('agrarschule-feld'),
+
+  /* alt, von der Live-Website */
+  ekulpung:  W('2024/01/IMG-20231228-WA0054.jpg?w=1600'),
+  ekulpung2: W('2024/01/IMG-20231228-WA0060.jpg?w=1200'),
+  ekulpung3: W('2024/01/IMG-20231224-WA0009.jpg?w=1200'),
+  wasserturm:W('2021/04/Wasserturm.jpeg?w=1400'),
+  brunnen:   W('2016/08/wasser-fuer-wapa-header-1.jpg?w=1600'),
+  zentrum:   W('2018/10/IMG-20190627-WA0056Ivergr%C3%B6%C3%9Fert.jpg?w=1600'),
+  naeh:      W('2022/02/WhatsApp-Image-2022-02-04-at-20.38.16-2.jpeg?w=1200'),
+  seife:     W('2016/08/seifenherstellung.jpg?w=1200'),
+  solar:     W('2016/08/solarenergie_gr2.jpg?w=1200'),
+  sprachkurs:W('2016/08/sprachkurs_gr.jpg?w=1200'),
+  textil:    W('2020/02/HPWE7802.jpg?w=1200'),
+  pflanz:    W('2022/02/Pflanzungsaktion-Februar-2022-4.jpeg?w=1200'),
+  garten:    W('2021/08/Garten4.jpeg?w=1200')
+};
+
+/* --------------------------------------------------------------------------- */
+const rn = t => '<div class="rn">' + t + '</div>';
+
+/* Projektregister — Jahr, Titel, Ort, Säule, Stand. Zahlen wörtlich von der
+   bestehenden Website übernommen. */
+/* Projektregister. `y` = Jahr der letzten bekannten Aktivität, danach wird sortiert.
+   `img` nur dort, wo das Foto dieses Projekt auch wirklich zeigt — geplante und
+   noch nicht gebaute Vorhaben bekommen bewusst keins. Ein Bild neben etwas, das
+   es noch nicht gibt, behauptet mehr als wahr ist. */
+const REG = [
+  {y:2016, j:'2016', slug:'wasser-fuer-wapa', t:'Wasser für Wapa',                   u:'Der erste Brunnen — die Idee von Bertrands Vater Bazie Kodio Claver. Finanziert aus 2.700 € Spenden des Rotary Service Sigmaringen.', o:'Wapa', k:'Grundversorgung', s:'Abgeschlossen', img:B.brunnen},
+  {y:2018, j:'seit 2018', slug:'ausbildungszentrum', t:'Polytechnisches Ausbildungszentrum für Frauen', u:'Landwirtschaft, Handwerk, Alphabetisierung. Grundstück 4.500 €, drei Unterrichtsräume und Sanitär 10.600 €.', o:'Réo', k:'Bildung', s:'Im Betrieb', img:B.zentrum},
+  {y:2018, j:'seit 2018', slug:'baumprojekt', t:'Baumprojekt / Aufforstung',          u:'Beitrag zur African Great Green Wall. Seit 2018 rund 100 Bäume gepflanzt. Für je 2 € Spende wird ein Baum gesetzt.', o:'Sanguié', k:'Umweltschutz', s:'Laufend', img:B.moringa},
+  {y:2019, j:'2019', slug:'solaranlage', t:'Solaranlage',                       u:'Prototyp gebaut in Hohentengen bei E hoch 4, geplant und finanziert von Kirchner GmbH und ISC Konstanz.', o:'Wapa', k:'Infrastruktur', s:'Abgeschlossen', img:B.solar},
+  {y:2020, j:'2020', slug:'corona-hilfsaktion', t:'Corona-Hilfsaktion',                u:'25 Handwaschstationen an öffentlichen Plätzen, 1,5 t Getreide an 60 Haushalte. Jede Station 23 €.', o:'Réo · Wapa', k:'Grundversorgung', s:'Abgeschlossen', img:null},
+  {y:2020, j:'2020', slug:'seifenherstellung', t:'Seifenherstellung',                 u:'Ausbildungsmodul in der Nähschule Yi o kando. 28 Frauen haben teilgenommen und stellen seither eigene Seife her.', o:'Réo', k:'Bildung', s:'Abgeschlossen', img:B.seife},
+  {y:2020, j:'seit 2020', slug:'sprachkurs-lele', t:'Sprachkurs Lele',                   u:'Viele Frauen können weder lesen noch schreiben. Der Kurs macht Rechnungen und Messungen möglich.', o:'Réo', k:'Bildung', s:'Laufend', img:B.sprachkurs},
+  {y:2020, j:'seit 2020', slug:'textilfaerbung', t:'Textilfärbung',                     u:'Ausbildungsmodul zur Herstellung und Färbung von Textilien.', o:'Réo', k:'Bildung', s:'Laufend', img:B.textil},
+  {y:2020, j:'geplant', slug:'serverraum', t:'Serverraum und Copyshop',           u:'Zusätzlicher Raum an der Schule, künftig Druckereiservice für die Region. Kosten 3.500 €, Finanzierung zu 90 % gedeckt.', o:'Réo', k:'Bildung', s:'In Finanzierung', img:null},
+  {y:2021, j:'2021', slug:'tiefbrunnen', t:'Tiefbrunnen und Wasserturm',        u:'81 m tief, Pumpe auf 50 m, 2 m³/h, sechs Solarzellen. Zwei Tanks zu 4.000 l, drei öffentliche Wasserhähne.', o:'Wapa', k:'Infrastruktur', s:'Abgeschlossen', img:B.wasserturm},
+  {y:2021, j:'seit 2021', slug:'waldgarten', t:'Waldgarten am Wasserturm',          u:'Agroforstwirtschaft in vier Schichten. Ein Gärtner pflegt ihn für 23 € im Monat, bezahlt aus Spenden.', o:'Wapa', k:'Umweltschutz', s:'Laufend', img:B.gaertner},
+  {y:2021, j:'seit 2021', slug:'sommerschule', t:'Sommerschule',                      u:'Erstmals 2021: Lesen, Schreiben, Rechnen und Französisch für Kinder, unterrichtet von einem Lehrer und einer Lehramtsstudentin der Universität Ouagadougou.', o:'Réo', k:'Bildung', s:'Laufend', img:null},
+  {y:2021, j:'geplant', slug:'solaroefen', t:'Solaröfen',                         u:'Umweltfreundliche Öfen aus lokal vorhandenem Material, modelliert mit der Pharmaplan GmbH. Weniger Abholzung für Brennholz.', o:'Sanguié', k:'Umweltschutz', s:'In Planung', img:null},
+  {y:2022, j:'2022', slug:'naehmaschinen', t:'Nähmaschinenlieferung',             u:'Gespendete Maschinen, per Containerschiff nach Wapa gebracht.', o:'Wapa', k:'Bildung', s:'Abgeschlossen', img:B.naeh},
+  {y:2022, j:'seit 2022', slug:'tropfenbewaesserung', t:'Tropfenbewässerung',                u:'Gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden rund 1.000 €.', o:'Wapa', k:'Umweltschutz', s:'In Finanzierung', img:null},
+  {y:2018, j:'2018', slug:'pumpe-tukon', t:'Wasserpumpe in Tukon', u:'Zweite Pumpenanlage, in der Vereinschronik für 2018 verzeichnet.', o:'Tukon', k:'Grundversorgung', s:'Abgeschlossen', img:null, neu:'Projektbedarf 08/2026'},
+  {y:2019, j:'seit 2019', slug:'kinder-academy', t:'Kinder-Academy', u:'Gründung 2019. Wie sie sich zur Sommerschule verhält, geht aus den Unterlagen nicht hervor.', o:'Réo', k:'Bildung', s:'Laufend', img:null, neu:'Projektbedarf 08/2026'},
+  {y:2023, j:'2023', slug:'lagerraum-tierzucht', t:'Lagerraum und Schweinezucht', u:'Bau des Lagerraums, Beginn der Schweinezucht, Gründung der Arbeitsgruppe vor Ort.', o:'Réo', k:'Infrastruktur', s:'Abgeschlossen', img:B.agrarfeld, neu:'Projektbedarf 08/2026'},
+  {y:2024, j:'2024', slug:'baeume-2024', t:'700 Bäume auf dem Gelände der Agrarschule', u:'Der Bestand auf dem Gelände der Agrarschule wurde auf 700 Bäume gebracht. Im Mai 2025 kamen 100 Setzlinge nach, weil aus der ersten Pflanzung einige eingegangen waren — 700 ist also der gepflegte Bestand, nicht die Summe aller Pflanzungen.', o:'Sanguié', k:'Umweltschutz', s:'Abgeschlossen', img:B.papaya, neu:'Projektbedarf 08/2026'},
+  {y:2025, j:'2025', slug:'wasser-bankio', t:'Solar-Wasseranlage Bankio', u:'Im Oktober 2025 in Betrieb genommen. Christen und Muslime teilen sich die Wasserstelle — die Schwäbische Zeitung hat darüber berichtet.', o:'Bankio', k:'Grundversorgung', s:'Abgeschlossen', img:B.dorfWasser, neu:'Projektbedarf 08/2026 · Presse 11/2025'},
+  {y:2025, j:'2025', slug:'zweites-wassersystem', t:'Zweites Wassersystem', u:'In der Chronik für 2025 verzeichnet, zusammen mit 100 weiteren Bäumen. Ein Ort ist nicht angegeben.', o:'Sanguié', k:'Grundversorgung', s:'Abgeschlossen', img:null, neu:'Projektbedarf 08/2026'},
+  {y:2026, j:'im Bau', slug:'agrarschule', t:'Agrarschule', u:'Seit drei Jahren im Aufbau. Es fehlen eine neue Wasserpumpe, der Schulungs- und Lernraum, die Tierzuchtanlagen für Hühner, Fische, Ziegen und Schweine, ein Zaun und ein Konzept zur Lebensmittelverarbeitung. Benötigt werden 20.000 €, davon stehen 15.000 € bereit.', o:'Réo', k:'Bildung', s:'In Finanzierung', img:B.verarbeitung, neu:'Projektbedarf 08/2026'},
+  {y:2023, j:'2023', slug:'wasserstelle-ekulpung', t:'Wasserstelle Ekulpung',             u:'Am 20. Dezember 2023 in Anwesenheit des Dorfoberhaupts übergeben und in die Verantwortung des Dorfes gelegt.', o:'Ekulpung', k:'Grundversorgung', s:'Abgeschlossen', img:B.ekulpung2}
+];
+/* Projekttexte. Gekürzt aus den bestehenden Seiten des Vereins — die Formulierungen
+   sind seine eigenen, nicht neu erfunden. Wo die alte Seite nichts hergab, steht
+   nur die Kurzbeschreibung aus dem Register. */
+const PTEXT = {
+ 'wasser-fuer-wapa': `<p>Das Projekt war die Idee von Bertrands Vater, Bazie Kodio Claver. Mit dem Bau eines Brunnens wollte er den Einwohnern seines Dorfes helfen. Am 24. Juni 2015 starb er nach einer kurzen Krankheit von nur zwei Tagen.</p>
+  <p>Nach der Bestattung war der Brunnen, so wie ihn sein Vater hinterlassen hatte, noch von vielen Menschen als Wasserquelle in Gebrauch. Zurück in Deutschland erzählte Bertrand seinem Vermieter davon; der sprach mit dem Rotary Service Sigmaringen. Insgesamt kamen 2.700 Euro zusammen — genug für eine Pumpe, und es blieb Geld für einen Wasserturm übrig.</p>
+  <p>Fertiggestellt wurde der Brunnen im April 2016. Es zeigte sich bald, dass er nicht ausreichte: Auf dem Höhepunkt der Trockenzeit fiel er trocken, und die Pumpe war bei fallendem Pegel nicht mehr leistungsfähig genug. Daraus wurde das Projekt <a href="#/projekt/tiefbrunnen">Tiefbrunnen und Wasserturm</a>.</p>`,
+ 'tiefbrunnen': `<p>Anfang 2021 spendeten der Rotary Club Sigmaringen und die Schwäbische Zeitung zusammen knapp 8.000 Euro. Die Projektkosten lagen bei rund 6.300 Euro, sodass die Arbeiten beginnen konnten. Ostern 2021 fing die beauftragte Firma mit den Bohrungen an.</p>
+  <p>Bereits in 20 Metern Tiefe sprudelte das erste Wasser. Gebohrt wurde bis 81 Meter. Die Pumpe sitzt auf 50 Metern und schafft bei guten Bedingungen zwei Kubikmeter in der Stunde; dafür wurden sechs statt der geplanten vier Solarzellen installiert.</p>
+  <p>Neben den alten Wasserturm mit 1.000 Litern kam ein neuer mit 3.000 Litern, beide zu einem Reservoir von 4.000 Litern verbunden. Eine Steuerung füllt die Tanks selbsttätig auf, sobald sie einen bestimmten Pegel unterschreiten — bei voller Leistung der Solarzellen sind beide in zwei Stunden voll. Der Öffentlichkeit stehen drei Wasserhähne zur Verfügung.</p>
+  <p>Die Dorfältesten haben mit dem Abschluss dieses Projektes das Ende des Wassermangels für Wapa ausgerufen.</p>`,
+ 'waldgarten': `<p>Wo sich ein Garten besser anlegen ließe als direkt bei einem Wasserturm, ist schwer zu sagen. Rund um den neuen Turm ist deshalb ein Waldgarten entstanden.</p>
+  <p>Angelegt ist er von Anfang an als gemischte Land- und Forstwirtschaft, sogenannte Agroforstwirtschaft, typischerweise in vier Schichten: hohe Bäume, niedrige Bäume, Sträucher und Bodendecker. Sind die Bäume größer, spenden sie Schatten und schaffen ein kühleres, feuchteres Kleinklima für die Nutzpflanzen darunter; die laubabwerfenden Arten bringen zusätzlich Dünger ein.</p>
+  <p>Ein Experte für Baumschulen hat unseren Gärtner in der Pflege junger Bäume unterwiesen. Er erhält einen monatlichen Lohn von umgerechnet 23 Euro, den wir aus Spenden finanzieren. Der Rückhalt des Wassers während der Regenzeit ist durch parzellenartige Vertiefungen optimiert.</p>`,
+ 'ausbildungszentrum': `<p>Die wirtschaftliche Lage in Réo und der Provinz Sanguié verschlechtert sich mit dem zunehmenden Wassermangel. In einer patriarchalisch geprägten Kultur trifft das die Familien besonders: Männer versuchen aus Verzweiflung ihr Glück beim Goldwaschen oder im Exil, viele sterben bei dem Versuch. Dann übernimmt die Frau die Führung der Familie — nur haben die meisten Frauen nie eine Schule besucht, geschweige denn eine handwerkliche Ausbildung erhalten.</p>
+  <p>Gemeinsam mit federführenden Frauen aus Réo ist deshalb ein Zentrum entstanden, das sich dieser Fragen annimmt. In Frauen zu investieren heißt, nachhaltig zu investieren. Angeboten werden Landwirtschaft (Feldbestellung, Gartenbau, Tierzucht) und Handwerk (Schneiderei, Seifenherstellung, Weberei).</p>
+  <p>In der ersten Projektphase wurde ein Grundstück für 4.500 Euro gekauft, finanziert mit Spenden des Rotary Service Albstadt und der Schwäbischen Zeitung. Drei Unterrichtsräume und die Sanitärräume kosteten zusammen 10.600 Euro. Ein Raum entspricht 3.050 Euro; Räume werden nach ihren Stiftern benannt und diese ins Gründerbuch des Zentrums eingetragen.</p>
+  <p>Für die staatliche Anerkennung braucht das Gebäude ausreichende Sanitäranlagen — und eine Mauer, die die Schülerinnen und Schüler vor Angriffen schützt. Mit der Anerkennung darf die Schule ein CQP ausstellen, ein auch in der EU anerkanntes Zertifikat, das eine Anstellung erleichtert und höhere Berufsausbildungen ermöglicht.</p>`,
+ 'baumprojekt': `<p>In Burkina Faso werden Bäume abgeholzt, um Feuerholz zu gewinnen. Die Folgen sind Bodenerosion, Austrocknung durch fehlenden Schatten und ein fallender Grundwasserspiegel. Der Staat hat die Provinzen deshalb zur Aufforstung verpflichtet; Burkina Faso liegt zudem in der Projektzone der <i>African Great Green Wall</i>, die eine Aufforstung quer durch die Sahelzone zum Ziel hat.</p>
+  <p>Unser Beitrag: Die Menschen der Provinz Sanguié pflanzen Bäume und kümmern sich um sie, das Projekt stellt Setzlinge und Saatgut. Seit 2018 wurden rund 100 Bäume von den Frauen der Nähschule und anderen Bewohnern gepflanzt. Für je 2 Euro Spende wird ein Baum gesetzt.</p>
+  <p>Der Ansatz ist Hilfe zur Selbsthilfe: Das Projekt soll zum Verständnis ökologischer Zusammenhänge beitragen und die Menschen in die Lage versetzen, eigenverantwortlich über Umweltschutz und Ernteschutz zu entscheiden. Ausgewählte Arten sind unter anderem Papaya, Mango, Cashew und Sheabutterbaum — Früchte für den Verkauf, Schatten, Dünger aus Laub.</p>`,
+ 'solaranlage': `<p>Ziel des Projektes war, die Wasseranlage, ein Lernzentrum und die Nähschule mit Strom zu versorgen. An der Planung beteiligt waren E&amp;M Wasseranlagenbau in Ravensburg, die Kirchner GmbH und das ISC Konstanz; unterstützt wurde es durch Spenden der Rotary Clubs Ebingen-Zollernalb und Sigmaringen.</p>
+  <p>Ein Prototyp entstand in Hohentengen auf dem Gelände von E hoch 4. Über die Solarzellen werden die Wasseranlagen versorgt, wodurch die Menschen im Dorf eine bessere Wasserqualität erhalten. Als Gegenleistung für den Zugang zum Wasser pflanzt und versorgt jede Person einen Baum — beschrieben unter dem Motto „Ein Wasserhahn gleich ein Baum je Person“.</p>
+  <p>Die Solarenergie ermöglicht außerdem ein Lernzentrum, in dem Schülerinnen und Schüler auch nach Sonnenuntergang arbeiten können.</p>`,
+ 'seifenherstellung': `<p>Der Verein setzt sich dafür ein, dass Mädchen und Frauen aus Wapa und der Umgebung in der Nähschule <i>Yi o kando</i> eine handwerkliche Ausbildung erhalten. Viele von ihnen sind bereits zwischen 20 und 30 Jahre alt und haben die Schule nicht abschließen können.</p>
+  <p>Gelehrt werden Nähen, Kochen und die Herstellung von Seife; dazu Hygienestandards und Schutzmaßnahmen gegen infektiöse Krankheiten. An der Verbesserung der Seifenherstellung haben 28 Frauen teilgenommen. Sie stellen seither ihre eigene Seife her und führen diese Tätigkeit weiter, um ihren Lebensunterhalt zu finanzieren. Ermöglicht wurde das Projekt durch Spender aus Konstanz.</p>`,
+ 'sprachkurs-lele': `<p>In der Nähschule können viele Frauen weder lesen noch schreiben. Damit sie Rechnungen stellen und Maße nehmen können, wurde ein Kurs in Lele eingeführt — der Sprache, die vor Ort gesprochen wird.</p>`,
+ 'textilfaerbung': `<p>Ein Ausbildungsmodul beschäftigt sich mit der Herstellung und Färbung von Textilien. Auf der bestehenden Website sind dazu vor allem Videoaufnahmen aus der Werkstatt hinterlegt.</p>`,
+ 'sommerschule': `<p>Im Sommer 2021 wurde zum ersten Mal ein Sommerkurs angeboten. Die Schülerinnen und Schüler werden in Lesen, Schreiben, Rechnen und Französisch unterrichtet. Für das Projekt konnten ein Lehrer und eine Lehramtsstudentin der Universität Ouagadougou eingestellt werden.</p>`,
+ 'corona-hilfsaktion': `<p>Als das Coronavirus Burkina Faso erreichte, fehlte es in der Provinz von Wapa an fast allem: keine Beatmungsplätze, kaum Tests, eine lückenhafte Hygieneausstattung. Der Bürgermeister von Réo bat unseren Vorsitzenden um Hilfe.</p>
+  <p>Im April wurden 25 provisorische Wasserspender mit Seife an öffentlichen Orten in und um Réo aufgestellt — ein bewährtes System aus Tank, Wasserfilter, Wasserhahn und Seifenspender. Eine Station kostet 23 Euro. Zusätzlich wurde Getreide an Bedürftige verteilt.</p>
+  <p>Im weiteren Verlauf wurden noch einmal 1,5 Tonnen Getreide gekauft und in Einheiten zu 25 Kilogramm an insgesamt 60 Haushalte verteilt, um einer Hungersnot durch Ernteausfälle vorzubeugen. Alle Empfänger haben den Erhalt quittiert; aus Datenschutzgründen wird diese Liste nicht veröffentlicht.</p>`,
+ 'naehmaschinen': `<p>Nach einer Reise per Containerschiff kamen die gespendeten Nähmaschinen in Wapa an.</p>`,
+ 'agrarschule': `<p>Seit drei Jahren bauen wir parallel zu den laufenden Projekten eine Agrarschule auf. Junge Menschen sollen dort in der Landwirtschaft ausgebildet werden — und die neue Wasserpumpe, die dazugehört, versorgt zugleich das Dorf mit Trinkwasser.</p>
+  <p>Was noch fehlt: die neue Wasserpumpe, die Fertigstellung des Schulungs- und Lernraums, die Tierzuchtanlagen für Hühner, Fische, Ziegen und Schweine, ein neuer Zaun und ein Konzept zur Lebensmittelverarbeitung. Mit der Verarbeitung eigener Produkte ist bereits begonnen worden.</p>
+  <p><b>Benötigt werden 20.000 €. 15.000 € stehen bereits zur Verfügung.</b></p>`,
+ 'wasser-bankio': `<p>Im Oktober 2025 ging im Dorf Bankio eine solarbetriebene Wasseranlage in Betrieb. Finanziert wurde sie unter anderem aus einer Spende der Kirche.</p>
+  <p>Das Besondere daran beschreibt die Schwäbische Zeitung: In einer Region, in der die Lage angespannt ist, teilen sich Christen und Muslime eine Wasserstelle — und tragen gemeinsam die Verantwortung dafür.</p>
+  <p>Der Verein selbst schreibt dazu: Viele Dörfer in Burkina Faso leiden unter Gewalt und Vertreibung. Hier holen Christen und Muslime Wasser aus derselben Quelle und pflegen die Anlage gemeinsam. Die Menschen des Dorfes müssen dafür keine kilometerlangen Wege mehr auf sich nehmen.</p>`,
+ 'baeume-2024': `<p>Auf dem Gelände der Agrarschule stehen 700 Bäume. Im Mai 2025 wurden 100 Setzlinge nachgepflanzt, nachdem aus der ersten Pflanzung einige eingegangen waren — die 700 sind damit der gepflegte Bestand, nicht die Summe aller je gesetzten Bäume.</p>
+  <p>Die Bäume bilden zugleich die Grundlage des Waldgartens. Neben Gemüse und Obstbäumen werden auch Cashewbäume angepflanzt.</p>`,
+ 'lagerraum-tierzucht': `<p>2023 entstand der Lagerraum, die Schweinezucht begann, und vor Ort gründete sich eine Arbeitsgruppe, die den Betrieb trägt.</p>`,
+ 'pumpe-tukon': `<p>Nach Wapa die zweite Pumpenanlage. Die Vereinschronik verzeichnet sie für 2018; auf der bestehenden Website kommt Tukon nicht vor.</p>`,
+ 'kinder-academy': `<p>2019 gegründet. Aus den vorliegenden Unterlagen geht nicht hervor, wie sich die Kinder-Academy zur Sommerschule verhält — ob dasselbe Angebot gemeint ist oder zwei verschiedene.</p>`,
+ 'zweites-wassersystem': `<p>Für 2025 verzeichnet die Chronik ein zweites Wassersystem, zusammen mit 100 weiteren Bäumen. Ein Ort ist nicht angegeben.</p>`,
+ 'wasserstelle-ekulpung': `<p>Am 20. Dezember 2023 konnte unser Vorsitzender die Installation der Wasserstelle in Ekulpung durchführen. Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell freigegeben und in die Verantwortung des Dorfes übergeben.</p>
+  <p>Ekulpung erhält damit den lang ersehnten Zugang zu fließendem Wasser.</p>`,
+ 'tropfenbewaesserung': `<p>Mit dem Waldgarten soll unter anderem die Aufforstung im Sahel vorangebracht werden. Beim neuen Brunnen ist dafür ein Pilotprojekt gestartet: Eine Tropfenbewässerung gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden dafür rund 1.000 Euro.</p>
+  <p><b>Zu prüfen:</b> Die Projektseite der bestehenden Website nennt einen Finanzierungsfortschritt von 0 %, während der Beitrag vom Februar 2022 die Anlage bereits als installiert beschreibt. Was davon stimmt, muss der Vorstand klären.</p>`,
+ 'serverraum': `<p>Die Schule soll um einen zusätzlichen Raum als Serverraum erweitert werden. Damit soll künftig ein Copyshop mit Druckereiservice für die Region betrieben werden. Die Kosten liegen bei 3.500 Euro, die Finanzierung ist zu 90 Prozent gedeckt.</p>`,
+ 'solaroefen': `<p>Jedes Jahr fließt viel Geld in Entwicklungsländer, damit Bäume gepflanzt werden, um die Ausbreitung der Wüste zu bremsen. Viele dieser Bäume sterben in der Trockenzeit an Wassermangel, andere werden nach einigen Jahren als Brennstoff abgeholzt. Das geschieht nicht aus mangelndem Umweltbewusstsein, sondern aus einem Mangel an Alternativen.</p>
+  <p>Mit den Solaröfen soll den Menschen in den Dörfern die Möglichkeit eröffnet werden, aus vor Ort vorhandenem Material einen umweltfreundlichen Ofen zu bauen und zu nutzen. Modelliert wurden die Öfen mit einem Werkstudenten in Zusammenarbeit mit der Pharmaplan GmbH, dem Arbeitgeber unseres Vorsitzenden.</p>`
+};
+
+/* Pressestimmen. Jede Zeile trägt Quelle, Datum und Titel — die Angabe steht
+   auch dann noch, wenn der Link stirbt. Drei von vier Originalen sind bereits
+   tot (Stand 21.08.2026), deshalb der Archivlink als eigenes Feld.
+   Kein Artikeltext übernommen: fremdes Urheberrecht, und der Verein hat eine
+   eigene Urheberrechtsklausel im Impressum. */
+const PRESSE = [
+  {q:'Schwäbische Zeitung', d:'19. November 2025', t:'Solarbetriebener Brunnen vereint Religionen in Burkina Faso',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/eigentlich-moegen-sie-sich-nicht-aber-bei-diesem-thema-machen-sie-eine-ausnahme-4107881',
+   stand:'', projekt:'wasser-bankio'},
+  {q:'Schwäbische Zeitung', d:'6. Dezember 2024', t:'Er geht seit Jahren voran: „Afrika braucht keinen Babysitter“',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/er-geht-seit-jahren-voran-afrika-braucht-keinen-babysitter-3101632',
+   stand:'', projekt:null},
+  {q:'Schwäbische Zeitung', d:'2020', t:'Bäume mit mehrfachem Nutzen',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/baeume-mit-mehrfachem-nutzen-166198',
+   stand:'', projekt:'baumprojekt'},
+  {q:'Schwäbische Zeitung', d:'Spendenaktion', t:'Sigmaringer Projekte hoffen wieder auf Spenden',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/sigmaringer-projekte-hoffen-wieder-auf-spenden-2041830',
+   stand:'', projekt:null},
+  {q:'Südkurier', d:'2016', t:'Endlich Wasser für die Kinder von Wapa: Student baut Wasserturm in Burkina Faso',
+   u:'https://www.suedkurier.de/region/linzgau/sigmaringen/Endlich-Wasser-fuer-die-Kinder-von-Wapa-Student-baut-Wasserturm-in-Burkina-Faso;art372574,8769693',
+   stand:'', projekt:'wasser-fuer-wapa'},
+  {q:'Le Stratège', d:'Burkina Faso, vor 2019', t:'Kienewoyi Bertrand Bazie : « de l’eau potable pour les populations locales, j’en fais le combat de ma vie »',
+   u:null, archiv:'http://web.archive.org/web/20190907094640/http://lestratege.info:80/kienewoyi-bertrand-bazie-de-leau-potable-pour-les-populations-locales-jen-fais-le-combat-de-ma-vie/',
+   stand:'Seite eingestellt', projekt:'wasser-fuer-wapa'},
+  {q:'Schwäbische Zeitung', d:'26. Dezember 2020', t:'Eine Mauer für mehr Schutz',
+   u:null, archiv:'http://web.archive.org/web/20220625040048/https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-eine-mauer-fuer-mehr-schutz-_arid,11302226.html',
+   stand:'vom Verlag entfernt', projekt:'ausbildungszentrum'},
+  {q:'Schwäbische Zeitung', d:'27. Dezember 2020', t:'Verein hilft Dorf in Burkina Faso beim Pflanzen von Bäumen',
+   u:null, archiv:'http://web.archive.org/web/20220625051041/https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-verein-hilft-dorf-in-burkina-faso-beim-pflanzen-von-baeumen-_arid,11309470.html',
+   stand:'vom Verlag entfernt', projekt:'baumprojekt'}
+];
+
+function presseZeile(a){
+  const ziel = a.u || a.archiv;
+  const marke = a.u ? '' : `<span class="pstand">${a.stand} · Fassung im Internet Archive</span>`;
+  return `<a class="pz-presse" href="${ziel}" rel="noopener">
+    <span class="pq">${a.q} · ${a.d}</span>
+    <span class="pt">${a.t}</span>
+    ${marke}
+  </a>`;
+}
+
+/* Was gerade läuft — für die Startseite. Keine Auswahl nach Geschmack,
+   sondern nach Stand: alles, was nicht abgeschlossen ist. */
+const LAEUFT = s => s !== 'Abgeschlossen';
+
+const NEWS = [
+{slug:'waldgarten-august-2026', t:'So sieht der Waldgarten heute aus', k:'Umweltschutz',
+   d:'12. August 2026', a:'Vorstand', img:B.reihen, galerie:[
+     [B.reihen,'Mais, Auberginen und Maniok in derselben Reihe — die Mischkultur hält den Boden bedeckt.'],
+     [B.maniok,'Maniok'],
+     [B.sesam,'Sesam, blühend'],
+     [B.aubergine,'Auberginen auf Laterit'],
+     [B.moringafeld,'Moringa, im zweiten Jahr'],
+     [B.mais,'Mais, kurz vor der Ernte'],
+     [B.obstgarten,'Der Zaun schützt die Setzlinge vor Weidevieh.'],
+     [B.hibiskus,'Roselle'],
+     [B.mischkultur,'Der Schlauch der Tropfenbewässerung']],
+   x:'Fünf Jahre nach der ersten Pflanzung stehen vier Schichten: Mais und Sesam zwischen Auberginen und Maniok, darüber Moringa und junge Obstbäume.',
+   body:`<p style="font-size:1.16rem">Fünf Jahre nachdem rund um den Wasserturm die ersten Setzlinge in den Boden kamen, ist aus dem Versuchsfeld ein Garten geworden. Was 2021 als Pilotprojekt neben einem frisch gebohrten Brunnen begann, trägt heute in vier Schichten.</p>
+     <p>Das Prinzip der Agroforstwirtschaft ist auf den Bildern gut zu erkennen: Zwischen den Maisreihen wachsen Auberginen, Maniok und Sesam; darüber stehen Moringa und junge Obstbäume, die in einigen Jahren Schatten spenden werden. Der Boden bleibt so das ganze Jahr bedeckt — die Humusschicht wird nicht von der Sonne verbrannt und die Nährstoffe werden in der Regenzeit nicht weggespült.</p>
+     <p>Die Tropfenbewässerung aus dem Wasserturm läuft. Der Zaun aus Astwerk hält das Weidevieh ab, das in der Trockenzeit unbeaufsichtigt über das wenige Grün geht — ohne ihn wären die Setzlinge längst gefressen. Unser Gärtner, der den Garten pflegt und die Brunnenanlage wartet, hat inzwischen eigene Vorschläge, wie es weitergehen soll.</p>
+     <p>Wenn die Bäume tief genug wurzeln, um selbst an das Grundwasser zu kommen, brauchen sie kein Gießwasser mehr. Dann sollen sie Schatten und Windschutz geben, die Bodenerosion bremsen und helfen, den Grundwasserspiegel zu heben. Bis dahin wird weiter gegossen.</p>`},
+  {slug:'wasser-fuer-ekulpung', alt:'wasser-fuer-ekulpung', galerie:[[B.ekulpung2,'Die neue Zapfstelle'],[B.ekulpung3,'Übergabe an das Dorf'],[B.ekulpung,'Die Feier in Ekulpung']], t:"Wasser für Ekulpung", k:'Grundversorgung', d:'1. Januar 2024', a:'Caro Sickinger', img:B.ekulpung,
+   x:"Grosse Freude in Ekulpung: Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie wie geplant die Installation der Wasserstelle in Ekulpung erfolgreich durchführen. Die…",
+   body:`<p>Grosse Freude in Ekulpung: Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie wie geplant die Installation der Wasserstelle in Ekulpung erfolgreich durchführen. Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell für die Bewohner:innen des Dorfes freigegeben und in ihre Verantwortung übergeben.</p>
+     <p>Ekulpung erhält damit den lang ersehnten Zugang zu fließendem Wasser. Die Übergabe wurde groß gefeiert und der neue Brunnen mit Dankbarkeit und Freude von den Dorfbewohner:innen angenommen.</p>
+     <p>Wir sind stolz darauf, dieses Weihnachtsgeschenk machen zu können und sind zuversichtlich, dass die nachhaltige Bereitstellung von sauberem Wasser das Leben der Bewohner:innen nachhaltig verbessern wird. Auch 2024 wollen wir weitere Projekte umsetzen, die das Wohlbefinden von Dorfgemeinschaften in der Region Réo (Burkina Faso) positiv beeinflussen.</p>
+     <p>Herzlichen Dank allen Unterstützer:innen, Spender:innen und Beteiligten, die dazu beigetragen haben, dieses wichtige Vorhaben zu verwirklichen. Danke, dass wir dank Ihnen auch in Zukunft positive Veränderungen bewirken können. Unterstützen Sie uns auch 2024 weiter mit <a href="#/spenden" rel="noopener" style="text-decoration:underline">Ihrer Spende</a> oder helfen Sie jungen Frauen und Mädchen mit einer <a href="#/spenden" rel="noopener" style="text-decoration:underline">Schulpatenschaft</a>.</p>`},
+  {slug:'waldgarten-waechst', alt:'waldgarten-waechst', t:"Waldgarten wächst", k:'Umweltschutz', d:'2. Mai 2022', a:'Thomas Harnisch', img:B.maisreihen,
+   x:"Unser erster Waldgarten beim Dorfbrunnen wächst und gedeiht.",
+   body:`<p>Unser erster Waldgarten beim Dorfbrunnen wächst und gedeiht.</p>
+     <p>Die Wasserversorgung steht und wird aus dem neuen Wassertank gespeist.</p>
+     <p>Das Konzept von Feldern mit eingestreuten Bäumen ist sehr gut erkennbar.</p>
+     <p>Gemeinschaft aus Bäumen und Feldern</p>
+     <p>Der Zaun dient dem Schutz vor Wildtierverbiss.</p>
+     <p>Die Bäume werden in wenigen Jahren groß genug sein, sich über das Grundwasser selbst zu versorgen. Dann werden sie Schatten und Windschutz spenden und die Bodenerosion verringern. Außerdem helfen ihre Wurzeln dabei, das Grundwasserniveau zu heben.</p>
+     <p><a href="#/projekt/waldgarten" rel="noopener" style="text-decoration:underline">Link zum Projekt</a></p>
+     <p><a href="#/spenden" rel="noopener" style="text-decoration:underline">SPENDEN</a></p>`},
+  {slug:'pflanzaktion-februar-2022', alt:'pflanzaktion-februar-2022', t:"Pflanzaktion Februar 2022", k:'Umweltschutz', d:'22. Februar 2022', a:'Thomas Harnisch', img:B.pflanz,
+   x:"Der Waldgarten bei unserem Dorfbrunnen wurde mit neuen Setzlingen beliefert. Die Mangos, die wir letztes Jahr gepflanzt haben, haben bereits eine stattliche Höhe erreicht. Sie…",
+   body:`<p>Der Waldgarten bei unserem Dorfbrunnen wurde mit neuen Setzlingen beliefert. Die Mangos, die wir letztes Jahr gepflanzt haben, haben bereits eine stattliche Höhe erreicht. Sie werden sich gut als Schutzbäume eignen, wenn sie das Grundwasser erreicht haben. Diese Art von Aufforstungen im Sahel hat sich an anderen Standorten der Great Green Wall bereits als sehr erfolgreich erwiesen.</p>
+     <p>Wir haben außerdem eine Tropfenbewässerung installiert, welche das Wasser langsam und kontrolliert aus dem Wasserturm abgibt. Unser Gärtner hat bereits Ideen zur Weiterentwicklung des Waldgartens ersonnen. Damit wird es demnächst zu kleineren Projekten auf Inititative der Bevölkerung vor Ort kommen, ganz nach unserem Motto ‚Hilfe zur Selbsthilfe‘.</p>
+     <p>Unterstützen Sie uns mit einer Spende! Bereits sehr kleine Beträge werden von uns direkt für neue Setzlinge ausgegeben.</p>
+     <p><a href="#/spenden" rel="noopener" style="text-decoration:underline">SPENDEN</a></p>
+     <p>Oder werden Sie Fan unseres Auftritts bei Betterplace:</p>
+     <p><a href="https://www.betterplace.org/de/projects/95699-aufforstung-im-sahel" rel="noopener" style="text-decoration:underline">https://www.betterplace.org/de/projects/95699-aufforstung-im-sahel</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'naehmaschinenlieferung', alt:'naehmaschinenlieferung', t:"Nähmaschinenlieferung", k:'Bildung', d:'7. Februar 2022', a:'Thomas Harnisch', img:B.naeh,
+   x:"Nach einer Reise per Containerschiff kamen die Nähmaschinen nun in Wapa an.",
+   body:`<h2>Lieferung der Nähmaschinenspende</h2>
+     <p>Nach einer Reise per Containerschiff kamen die Nähmaschinen nun in Wapa an.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'garten-am-wasserturm', alt:'news_garten', t:"Garten am Wasserturm", k:'Umweltschutz', d:'21. August 2021', a:'Thomas Harnisch', img:B.garten,
+   x:"Nachdem der neue nebst erfolgreich in Betrieb genommen wurde haben wir nun mit der Anlage des Gartens begonnen. Dieser ist in unmittelbarer Nähe des Wasserturms, sodass die…",
+   body:`<p>Nachdem der neue <a href="#/projekte" rel="noopener" style="text-decoration:underline">Brunnen</a> nebst <a href="#/projekt/solaranlage" rel="noopener" style="text-decoration:underline">Solaranlage und Wasserturm</a> erfolgreich in Betrieb genommen wurde haben wir nun mit der Anlage des Gartens begonnen. Dieser ist in unmittelbarer Nähe des Wasserturms, sodass die Bewässerung ganzjährig sichergestellt ist. Wir haben zwei Gärtner engagiert, die sich um den Garten und die Wartung der Brunnenanlage kümmern. Sie wurden in der Pflege von Setzlingen ausgebildet und werden aktuell aus Vereinsmitteln bezahlt. In Zukunft sollen die Erträge des Gartens ihre Löhne finanzieren.</p>
+     <p>Wie immer freuen wir uns über <a href="#/spenden" rel="noopener" style="text-decoration:underline">Spenden</a>!</p>
+     <p>Hier der <a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a> zur Projektseite</p>`},
+  {slug:'brunnenbau-fertiggestellt', alt:'brunnenbau2', t:"Brunnenbau fertiggestellt", k:'Infrastruktur', d:'5. April 2021', a:'Thomas Harnisch', img:B.wasserturm,
+   x:"Der Brunnenbau wurde am Osterwochenende beendet. Eine wirklich tolle Leistung! Mithilfe öffentlich zugänglicher Wasserhähne und einer Straße dorthin können sich die Menschen vor Ort…",
+   body:`<p>Der Brunnenbau wurde am Osterwochenende beendet. Eine wirklich tolle Leistung! Mithilfe öffentlich zugänglicher Wasserhähne und einer Straße dorthin können sich die Menschen vor Ort mit frischem Trinkwasser versorgen.</p>
+     <p>Der Brunnen ist 81m tief. Bei 20 Metern wurde bereits Grundwasser gefunden. Da im Mai das Ende der Trockenzeit gekommen ist können wir davon ausgehen, dass wir mit diesem Brunnen auch in Zukunft sicher das ganze Jahr über Wasser fördern können.</p>
+     <p>Die Pumpe ist in 50 m Tiefe installiert. Bei guten Bedingungen schafft sie 2 Kubikmeter/h. Dafür wurden anstatt 4 Solarzellen 6 installiert. Der neue Tank hat ein Volumen von 3000 anstatt 2000 Litern. Der alte Tank hat ein Volumen von 1000 Litern. Beide Tanks wurden gemeinsam mit dem Brunnen verbunden, insgesamt stehen jetzt also 4000 Liter zur Verfügung. Der Öffentlichkeit wurden drei Wasserhähne zur Verfügung gestellt.</p>
+     <p>Das Geld wurde uns vom Rotary Club Anfang des Jahres zur Verfügung gestellt und bereits jetzt ist das Projekt fertiggestellt.</p>
+     <p>Wir sind alle mächtig stolz!! 😀</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'brunnenbau-beginnt', alt:'brunnenbau', t:"Neuer Brunnenbau", k:'Infrastruktur', d:'30. März 2021', a:'Thomas Harnisch', img:B.turmKran,
+   x:"Unser großes Projekt für 2021 wird der Bau dieses Brunnens sein. Er wird voraussichtlich etwa 80 Meter tief und dringt damit sicher in ein Aquifer, das auch in der Trockenzeit noch…",
+   body:`<p>Unser großes Projekt für 2021 wird der Bau dieses Brunnens sein. Er wird voraussichtlich etwa 80 Meter tief und dringt damit sicher in ein Aquifer, das auch in der Trockenzeit noch Grundwasser führt.</p>
+     <p>Der Brunnen soll durch eine Solarbetriebene Pumpe betrieben werden, welche das Wasser dann in ein Reservoir in Form eines voraussichtlich etwa 300 Kubikmeter großen Wasserturms fördert, ähnlich unserem ersten Brunnen in Wapa.</p>
+     <p>Ist der Brunnen in Betrieb soll er die Menschen der Umgebung kostenfrei mit Trinkwasser versorgen.</p>
+     <p>Gleichzeitig soll in seiner Umgebung ein erster kleiner Waldgarten angelegt werden welcher den ersten Testlauf für unseren zukünftigen, größeren Waldgarten darstellt.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'schulausbau', alt:'schulausbau', t:"Schulausbau", k:'Bildung', d:'4. Januar 2021', a:'Thomas Harnisch', img:B.zentrum,
+   x:"Der Ausbau der Schule schreitet voran. Hier sind einige Impressionen von der Baustelle. Ziegel und Fundament: Alles Handarbeit…",
+   body:`<h2>Ausbau der Schule</h2>
+     <p>Der Ausbau der Schule schreitet voran. Hier sind einige Impressionen von der Baustelle. Ziegel und Fundament: Alles Handarbeit…</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'neujahr-2021', alt:'7369-2', t:"Frohes neues Jahr 2021", k:'Verein', d:'1. Januar 2021', a:'Vorstand', img:null,
+   x:"Wir wünschen allen Unterstützern, Freunden und natürlich jedem sonst ein frohes neues Jahr! Auch 2021 haben wir wieder viel vor: Zertifizierung der Schule, nächste Schritte im…",
+   body:`<p>Wir wünschen allen Unterstützern, Freunden und natürlich jedem sonst ein frohes neues Jahr! Auch 2021 haben wir wieder viel vor: Zertifizierung der Schule, nächste Schritte im Projekt Waldgarten, Interviews mit Beteiligten und Interessenten aus Burkina Faso, und und und…</p>
+     <p>Wir halten euch auf dem Laufenden!</p>`},
+  {slug:'bericht-baumprojekt-2020', alt:'artikel-baumprojekt-dezember-2020', t:"Bericht über das Baumprojekt", k:'Umweltschutz', d:'27. Dezember 2020', a:'Vorstand', img:B.baum,
+   x:"",
+   body:`<p><a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-verein-hilft-dorf-in-burkina-faso-beim-pflanzen-von-baeumen-_arid,11309470.html" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <h2>Corona Spendenaktion</h2>
+     <p>Die Schwäbische Zeitung hat sich einmal mehr als wertvolle Unterstützerin unseres Vereins erwiesen und berichtete im Dezember von unserem Aufforstungsprojekt. Dies wird nach der sehr erfolgreichen Umsetzung unseres <a href="#/projekt/ausbildungszentrum" rel="noopener" style="text-decoration:underline">Schulprojekts</a> das nächste größere Projekt. Details dazu finden Sie <a href="#/projekt/baumprojekt" rel="noopener" style="text-decoration:underline">hier</a>.</p>
+     <p>Den Link zum vollständigen Artikel finden Sie <a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-verein-hilft-dorf-in-burkina-faso-beim-pflanzen-von-baeumen-_arid,11309470.html" rel="noopener" style="text-decoration:underline">hier</a>.</p>`},
+  {slug:'mauer-fuer-die-schule', alt:'mauer-fuer-die-schule', t:"Mauer für die Schule", k:'Bildung', d:'26. Dezember 2020', a:'Vorstand', img:B.zentrum,
+   x:"Ein Artikel aus der Schwäbischen Zeitung für die Weihnachtsspendenaktion. Unter anderem ist der Bau der Schutzmauer um unsere Schule geplant. .",
+   body:`<h2>Eine Mauer für mehr Schutz</h2>
+     <p>Ein Artikel aus der Schwäbischen Zeitung für die Weihnachtsspendenaktion. Unter anderem ist der Bau der Schutzmauer um unsere Schule geplant. <a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-eine-mauer-fuer-mehr-schutz-_arid,11302226.html" rel="noopener" style="text-decoration:underline">Hier der Link zu dem Artikel</a>.</p>`},
+  {slug:'schulprojekt-abschluss', alt:'schulprojekt', t:"Schulprojekt: die letzte Phase", k:'Bildung', d:'7. Dezember 2020', a:'Vorstand', img:B.zentrum,
+   x:"Unser Schulprojekt geht formal in die letzte Phase. Mit dem Bau der Schutzmauer und einiger weiterer Maßnahmen werden alle Auflagen erfüllt, damit die Schule die staatliche…",
+   body:`<h2>Schulprojekt Abschluss</h2>
+     <p>Unser Schulprojekt geht formal in die letzte Phase. Mit dem Bau der Schutzmauer und einiger weiterer Maßnahmen werden alle Auflagen erfüllt, damit die Schule die staatliche Zulassung erhält. Hierzu gab es auch einen <a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-eine-mauer-fuer-mehr-schutz-_arid,11302226.html" rel="noopener" style="text-decoration:underline">Artikel</a> in der Schwäbischen Zeitung. Hier finden Sie auch den Aufrauf zu der Weihnachts-Spendenaktion.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'corona-zwei-hilfsprojekte', alt:'corona-spendenaktion-2', t:"Zwei Hilfsprojekte umgesetzt", k:'Grundversorgung', d:'29. August 2020', a:'Vorstand', img:B.seife,
+   x:"Liebe Vereinsmitglieder, die Nachrichten sind voll von negativen Mitteilungen rund um die Coronakrise. Wir sind sehr froh, dass wir an dieser Stelle eine positive Rückmeldung aus…",
+   body:`<h2>Corona Spendenaktion</h2>
+     <p>Liebe Vereinsmitglieder, die Nachrichten sind voll von negativen Mitteilungen rund um die Coronakrise. Wir sind sehr froh, dass wir an dieser Stelle eine positive Rückmeldung aus Wapa / Burkina Faso geben können.</p>
+     <p>Wir hatten Sie und euch vor einigen Wochen um eine Spende für unsere Mitmenschen in Wapa gebeten, um die Folgen der Corona-Thematik dort etwas abmildern zu können. Dank der wundervollen, großzügigen Resonanz auf diesen Aufruf konnten zwei Hilfsprojekte realisiert werden!</p>
+     <p>Im ersten Schritt wurden im April Wasserspender und Seifen an öffentliche Orte in Réo und Wapa gebracht. Zudem wurde Getreide an Bedürftige verteilt.</p>
+     <p>Im vergangenen Monat wurden erneut 1,5 Tonnen Getreide eingekauft und dieses wurde wieder an bedürftige Menschen verteilt, sodass 60 Personen einige Zeit lang davon zehren können.</p>
+     <p>Momentan ist die Lage in Wapa und Réo ruhig. Es gibt so gut wie keine Infektionen (wobei die</p>
+     <p>Nachweisbarkeit von Infektionen vor Ort deutlich umständlicher ist als in Deutschland), es gibt aber laut unserem Vorstand Bertrand Bazie auch keinen auffälligen Anstieg der Sterberate oder der generellen Infektionen in der Region. Daher gehen wir davon aus, dass das Corona-Virus zumindest in unserer Region Wapa/Réo nur sehr spärlich vorhanden ist. Die Lage kann sich natürlich jederzeit ändern, aber wir hoffen erstmal das Beste.</p>
+     <p>Wir möchten uns auf diesem Wege nochmals ausdrücklich und ganz herzlich für die Unterstützung bedanken! Es ist nicht selbstverständlich, dass Sie und ihr in dieser belastenden Zeit noch Mitgefühl und finanzielle Unterstützung für unsere Mitmenschen in Wapa aufbringt. Danke!</p>`},
+  {slug:'corona-ende-der-phase', alt:'corona-hilfskation-ende-der-aktuellen-phase', t:"Corona Hilfskation: Ende der aktuellen Phase", k:'Grundversorgung', d:'15. August 2020', a:'Vorstand', img:B.seife,
+   x:"In den vergangenen Wochen konnten wir mit Erleichterung feststellen, dass sich kein dramatisches Infektionsgeschehen in der Provinz Sanguié entwickelt hat. Daher werden wir die…",
+   body:`<h2>Corona Spendenaktion</h2>
+     <p>In den vergangenen Wochen konnten wir mit Erleichterung feststellen, dass sich kein dramatisches Infektionsgeschehen in der Provinz Sanguié entwickelt hat. Daher werden wir die Hilfsaktion mit der letzten Lebensmittellieferung vorerst beenden. Wir sind jederzeit bereit zu weiteren Maßnahmen, wenn sich das Infektionsgeschehen wieder verschlimmern sollte.</p>
+     <p>Herzlichen Dank an alle Spender!</p>
+     <p>Mit den Spenden wurden zusätzlich 1,5 Tonnen Getreide gekauft, welche in 25kg Einheiten an insgesamt 60 Haushalte verteilt wurden. So wurde einer Hungersnot vorgebeugt, die durch Ernteausfälle infolge von fehlenden Arbeitskräften auf den Feldern durch eine Covid-19 Erkrankung zu erwarten war.</p>
+     <p>Alle Empfänger haben den Spendenempfang quittiert sodass vollständige Transparenz herrscht. Aus Datenschutzgründen können wir diese Liste natürlich nicht veröffentlichen.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'corona-erste-erfolge', alt:'1360-2', t:"Corona Spendenaktion – Erste Erfolge", k:'Grundversorgung', d:'15. April 2020', a:'Vorstand', img:B.seife,
+   x:"Nach unserem letzten Spendenaufruf sind schon einige Gelder zusammen gekommen. Die genauen Zahlen folgen in Kürze. Mit dem Geld konnten schon 25 provisorische Wasserspender gekauft…",
+   body:`<p>Nach unserem letzten Spendenaufruf sind schon einige Gelder zusammen gekommen. Die genauen Zahlen folgen in Kürze. Mit dem Geld konnten schon 25 provisorische Wasserspender gekauft werden, die an öffentlichen Orten in und um Réo aufgestellt werden.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'corona-spendenaufruf', alt:'corona-spendenaktion', t:"Corona Spendenaktion", k:'Grundversorgung', d:'2. April 2020', a:'Vorstand', img:B.seife,
+   x:"Wie zu erwarten war hat das Coronavirus nun auch Burkina Faso erreicht. Anders als in Deutschland mangelt es dort nicht nur an Klopapier, sondern leider an der gesamten für diese…",
+   body:`<p>Wie zu erwarten war hat das Coronavirus nun auch Burkina Faso erreicht. Anders als in Deutschland mangelt es dort nicht nur an Klopapier, sondern leider an der gesamten für diese Situation so wichtigen Infrastruktur. Es gibt in der Provinz von Wapa keine (!!) Beatmungsplätze, kaum Tests und eine äußerst lückenhafte Hygieneausstattung. Daher ist die Verhinderung einer Ausbreitung des Virus hier ganz besonders wichtig.</p>
+     <p>Unser Vorsitzender Bertrand wurde vom Bürgermeister von Réo um Hilfe gebeten und hat diese natürlich zugesichert.</p>
+     <p>Unser Verein hat sich dem Ziel verschrieben, allgemeine Hilfe in der Region zu leisten und insbesondere die Hygienebedingungen zu verbessern. Die Ausbildung in Seifenherstellung und der Bau unseres polytechnischen Ausbildungszentrums waren wichtige Meilensteine auf diesem Weg. Dabei ist jeder Euro direkt für die Projekte ausgegeben worden und die hohe Nachfrage der örtlichen Bevölkerung spricht dafür, dass das Geld auch sinnvoll eingesetzt wurde. Die Menschen dort sehen echte Verbesserung durch unsere Arbeit. Jetzt können wir erneut einen wichtigen Beitrag leisten. Und das Beste daran: es ist tatsächlich nur Geld was benötigt wird. Keine Zeit, keine Planung, Organisation oder Hirnschmalz, einfach nur Geld.</p>
+     <p>Wir wollen möglichst viele mobile, provisorische Waschbecken mit Seifenspender an öffentlichen Plätzen aufstellen. Es handelt sich um ein bewährtes System, bestehend aus einem Tank mit Wasserfilter und Reservoir an dessen unterem Ende ein Wasserhahn montiert ist. Daneben steht ein Seifenspender. Eine Station dieser Art kostet 23€. Weiterhin sollen Getreidevorräte aufgestockt werden um die zu erwartende Lebensmittelknappheit abzumildern.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'nachruf-marlis-schmitt-sickinger', alt:'nachruf-mitgruenderin-marlis-schmitt-sickinger', t:"Nachruf Mitgründerin Marlis Schmitt-Sickinger", k:'Verein', d:'9. März 2020', a:'Vorstand', img:null,
+   x:"Liebe Vereinsmitglieder, wir müssen euch heute mitteilen, dass unsere geschätzte Vereinsvorsteherin, Schatzmeisterin und Mitgründerin Marlis Schmitt-Sickinger nach langer Krankheit…",
+   body:`<p>Liebe Vereinsmitglieder, wir müssen euch heute mitteilen, dass unsere geschätzte Vereinsvorsteherin, Schatzmeisterin und Mitgründerin Marlis Schmitt-Sickinger nach langer Krankheit verstorben ist.</p>
+     <p>Marlis hat mit ihrer offenen und positiven Art, ihrem Organisationstalent, ihrer Herzlichkeit und mit ihrer grenzenlosen Liebe zu Afrika die Seele unseres Vereins entscheidend geprägt. Wir haben Marlis unglaublich viel zu verdanken.</p>
+     <p>Um Marlis zu gedenken, wurde an unserer Schule in Réo ein Gebet für sie gesprochen. Impressionen davon sind angehängt.</p>
+     <p>Marlis wird für uns immer unvergesslich bleiben und ihr Geist in unseren Projekten in Wapa weiterleben.</p>
+     <p>„L‘artiste ne meurt jamais“ (Der Künstler stirbt nie, er lebt immer in seinem Werk) afrikanisches Sprichwort</p>
+     <p>Foto von Marlis Schmitt-Sickinger von: Anna-Lena Janisch / Schwäbische Zeitung</p>`},
+  {slug:'schulbesuch-2020', alt:'schulbesuch', t:"Schulbesuch", k:'Bildung', d:'25. Februar 2020', a:'Vorstand', img:B.zentrum,
+   x:"Auch dieses Jahr hatte ich die Möglichkeit, unsere Schule in Reo (Burkina Faso) zu besichtigen.",
+   body:`<p>Auch dieses Jahr hatte ich die Möglichkeit, unsere Schule in Reo (Burkina Faso) zu besichtigen.</p>
+     <p>Bei meinem Überraschungsbesuch konnte ich die tolle Arbeit sehen, die geleistet wird, um den Frauen eine Bessere Zukunft zu ermöglichen. Auf den Fotos könnt Ihr Eindrücke vom derzeitigen Stand unseres Projekts sehen. Ich habe mich sehr gefreut, die Schule in einem so aktiven Zustand zu sehen. Ich bedanke mit bei allen, die uns durch Spende geholfen haben, diese tolle Schule zu bauen.</p>
+     <p>Betrand Bazie</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'besuch-in-burkina-faso', alt:'unser-besuch-in-burkina-faso', t:"Unser Besuch in Burkina Faso", k:'Verein', d:'16. Oktober 2019', a:'Sabine und Martin Vatter', img:B.naeh,
+   x:"Nach einem langen Flug landen wir müde in Ouagadogou. In unserem Hotel, welches durch Security gesichert ist, schlafen wir ganz schnell ein.",
+   body:`<p>Nach einem langen Flug landen wir müde in Ouagadogou. In unserem Hotel, welches durch Security gesichert ist, schlafen wir ganz schnell ein.</p>
+     <p>Die Hauptstadt besteht aus Motorroller, Fahrräder und ganz vielen Menschen. Der rote Staub ist ohne Mundschutz nicht auszuhalten.</p>
+     <p>Überall hat es kleine Restaurants an der Straße. Dort empfängt man uns sehr freundlich. Das Essen ist köstlich und frisch zubereitet.</p>
+     <p>Nach zwei Nächten der Akklimatisierung geht es weiter nach Reo. Drei Stunden über holprige Straßen und mit sehr vielen Eindrücken.</p>
+     <p>Endlich in Reo angekommen erwartet uns Bienvenue, Bertrands Schwester, schon ganz gespannt in einer kleinen Bar, nicht weit von der Nähschule entfernt.</p>
+     <p>Nach kurzem Beschnuppern durften wir dann die Familie in Wapa begrüßen. Mama und Isabelle, Bertrands Partnerin, erwarten und begrüßen uns ganz herzlich vor dem großen Tor.</p>
+     <p>Hier beziehen wir unser Quartier für die nächsten 7 Tage.</p>
+     <p>Das Abenteuer kann beginnen.</p>
+     <p>Gleich am nächsten Morgen besuchen wir die Nähschule. Geleitet von Bienvenue.</p>
+     <p>Ein kleines Gebäude voller Nähmaschinen erwartet uns. Eine große Anzahl der Mädchen trägt die Nähtische geschwind ins Freie, damit sie – mit Stolz, allen ihr Können präsentieren können. Geschwind wird von uns Maß genommen und ein traditionelles Gewand für uns zugeschnitten. Dies war dann auch zwei Tage später fertig.</p>
+     <p>Ein weiterer Höhepunkt sind die Webstühle, die neben dem Gebäude im Freien aufgestellt sind. Im Schatten der Bäumen mussten Martin und ich unter strenger Aufsicht das Weben üben.</p>
+     <p>Viel Lachen, ein zufälliges Berühren der weißen Haut oder ein dankbares Umarmen der Mädchen begleitet uns für etwa zwei Stunden.</p>
+     <p>Auf dem angrenzenden Grundstück erwarten uns junge Männer mit Maßband, Plänen, Eisenstangen und Hammer.</p>
+     <p>Hier soll die neue Nähschule entstehen. Jetzt wird das Grundstück vermessen und die Größe des ersten Gebäudes festgelegt und abgesteckt. Die Mädchen helfen voller Elan mit. Im März soll Baubeginn sein.</p>
+     <p>Der zweite Tag gehört den Brunnen.</p>
+     <p>Der erste Brunnen steht bei Bertrands Familie und das Wasser ist für jeden aus dem Dorf zugänglich.</p>
+     <p>Das Wasser wird durch ein großes Rad in einen Wasserspeicher gepumpt. Eine Wasserleitung versorgt den Hof mit Frischwasser. Durch einen zweiten Ablauf kann jeder ausserhalb des Hofes mit Wasser versorgt werden. Leider war der Dieselmotor defekt und die Solaranlage noch nicht angeschlossen.</p>
+     <p>Der zweite Brunnen befindet sich in einem anderen Dorf. Er ist so angelegt, dass er für jederman zugänglich ist. Auch hier wird über ein großes Rad das Wasser gefördert. Ein wenig Licht wird über die Solarzellen innerhalb des Hofes produziert.</p>
+     <p>Vielen Dank an Bertrand, der uns diese wunderschöne Reise in sein Land und zu seiner Familie ermöglicht hat.</p>
+     <p>Anebana kokoko</p>
+     <p>Martin und Sabine</p>`}
+];
+
+/* Spendenblock — auf jeder Seite gleich */
+function spendenBlock(){ return `
+<section class="dunkel">
+  <div class="wrap">
+    <div class="zwei" style="align-items:start">
+      <div>
+        <span class="kt gold">Jede Spende zählt</span>
+        <h2>Was Ihr Geld tut, steht daneben</h2>
+        <p class="lede">Verwaltung und Öffentlichkeitsarbeit machen wir selbst. Wir schreiben lieber auf, was ein Betrag konkret bewirkt, als mit Prozentzahlen zu werben.</p>
+        <div class="betrag">
+          <button onclick="waehle(this)"><span class="a">2 €</span><span class="w">Ein Baum im Waldgarten</span></button>
+          <button class="on" onclick="waehle(this)"><span class="a">23 €</span><span class="w">Ein Monatslohn des Gärtners</span></button>
+          <button onclick="waehle(this)"><span class="a">15 €</span><span class="w">Patenschaft, pro Monat</span></button>
+          <button onclick="waehle(this)"><span class="a">Frei</span><span class="w">Eigener Betrag</span></button>
+        </div>
+        <a class="b gold" href="https://www.betterplace.org/de/organisations/47348-gemeinsam-fuer-wapa">Über Betterplace spenden</a>
+      </div>
+      <div>
+        <h3 style="color:#FFF6EE">Spendenkonto</h3>
+        <div class="iban">
+          IBAN&nbsp;&nbsp;<b>DE18 6535 1050 0000 0387 28</b><br>
+          BIC&nbsp;&nbsp;&nbsp;&nbsp;SOLADES1SIG<br>
+          Sparkasse Sigmaringen
+        </div>
+        <p style="font-size:.9rem;margin-top:15px;color:#B7A897">Für ein bestimmtes Projekt genügt ein Wort im Verwendungszweck: <b style="color:var(--gold);font-weight:400">Schule</b>, <b style="color:var(--gold);font-weight:400">Aufforstung</b> oder <b style="color:var(--gold);font-weight:400">Solarofen</b>. Für die Spendenbescheinigung bitte die Adresse angeben — sie kommt zu Beginn des Folgejahres.</p>
+      </div>
+    </div>
+  </div>
+</section>`;}
+
+const VIEWS = {};
+
+/* =========================================================================
+   STARTSEITE — neue Reihenfolge
+   1 Hero · 2 Sprachband · 3 Herkunft · 4 Die Kette · 5 Was ein Betrag tut
+   6 Vier Säulen · 7 Projektregister (Auszug) · 8 Aktuelles · 9 Mitmachen · 10 Spenden
+   ========================================================================= */
+VIEWS[''] = () => `
+<div class="hero">
+  <div class="hero-t">
+    <span class="kt gruen">Sanguié · Burkina Faso</span>
+    <h1>Es fing mit einem Brunnen an, den ein Vater nicht mehr fertig bauen konnte.</h1>
+    <p class="lede">Sein Sohn hat ihn zu Ende gebracht. Aus diesem einen Brunnen sind seither eine Schule, ein Wasserturm und ein Waldgarten geworden — geplant und gebaut mit den Menschen in Sanguié.</p>
+    <div class="hero-cta">
+      <a class="b gold" href="#/spenden">Spenden</a>
+      <a class="b leer" href="#/projekte">Was wir gebaut haben</a>
+    </div>
+  </div>
+  <figure class="hero-b" style="margin:0">
+    <img src="${B.gaertner}" alt="Der Gärtner blickt über den Waldgarten am Wasserturm in Wapa">
+    <figcaption>Der Waldgarten am Wasserturm, August 2026. Der Gärtner wird aus Spenden bezahlt — 23 € im Monat.</figcaption>
+  </figure>
+</div>
+
+<div class="sprachen">
+  <div class="wrap">
+    <span><b>Gemeinsam für Wapa</b> — deutsch</span>
+    <span><b>Mudawane Wapa Yila</b> — <i>Lele, die Sprache vor Ort</i></span>
+    <span><b>Ensemble pour Wapa</b> — <i>français, Amtssprache</i></span>
+    <span style="margin-left:auto;color:#C9AC97">Verein seit 2017</span>
+  </div>
+</div>
+
+<section class="nurnotiz">
+  <div class="wrap">
+    ${rn('<b>Zur Reihenfolge:</b> Der bisherige Entwurf begann mit einem Zahlenband und den vier Säulen — also mit der eigenen Verwaltungslogik. Diese Fassung beginnt mit der Herkunft. Dass der Vorsitzende aus dem Dorf stammt und die Geschichte mit seinem Vater anfängt, ist das, was diesen Verein von hundert anderen unterscheidet. Es stand bisher im vierten Absatz von „Über uns“.')}
+    ${rn('<b>Zur Urheberschaft des Zitats:</b> Der Text steht seit 2016 auf der Projektseite <i>Wasser für Wapa</i> und ist durchgehend in der ersten Person geschrieben — er ist aber <b>nirgends gezeichnet</b>. Als WordPress-Autor ist die Agentur BateauBlanc eingetragen, was nichts besagt. Dass Bertrand ihn geschrieben hat, ist naheliegend (sein Vater wird beim Namen genannt, „Über uns“ erzählt dieselben Ereignisse in der dritten Person über ihn) — <b>belegt ist es nicht</b>. Deshalb steht hier die Quelle und nicht sein Name. Bestätigt er die Urheberschaft, kann das Zitat ihm zugeschrieben werden (→ B6).')}
+    ${rn('<b>Zum Bild:</b> Das Hero-Foto steht rechts statt hinter der Schrift. Damit muss kein Farbverlauf über das Motiv gelegt werden, um Text lesbar zu machen — der übliche Grund, warum Vereinsseiten alle gleich aussehen. Die Bildunterschrift kann so auch etwas sagen.')}
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ============ 3 · HERKUNFT ============ -->
+<section class="erde">
+  <div class="wrap">
+    <div class="zwei">
+      <div>
+        <span class="kt hell">Herkunft</span>
+        <blockquote class="zitat">„Nach der Bestattung sah ich, dass der Brunnen, so wie ihn mein Vater hinterlassen hatte, noch von vielen Menschen aktiv als Wasserquelle genutzt wurde. […] Ich habe beschlossen, das Projekt meines Vaters zu Ende zu bringen, um mich von ihm zu verabschieden.“</blockquote>
+        <div class="q">Aus dem Projektbericht „Wasser für Wapa“ auf gemeinsamfuerwapa.de, in der ersten Person geschrieben. Der Vater, Bazie Kodio Claver, starb am 24. Juni 2015.</div>
+        <p style="margin-top:2rem;color:#E3CDBD">Zurück in Deutschland erzählte er es seinem Vermieter. Der sprach mit dem Rotary Service Sigmaringen. So kamen 2.700 € zusammen — genug für die Pumpe, und es blieb noch Geld für einen Wasserturm übrig.</p>
+        <a class="pf" style="color:#FFE3CE;border-color:rgba(255,255,255,.35)" href="#/ueber-uns">Die ganze Geschichte</a>
+      </div>
+      <div>
+        <img src="${B.brunnen}" alt="Der erste Brunnen in Wapa" style="width:100%;aspect-ratio:4/5;object-fit:cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · DIE KETTE ============ -->
+<section>
+  <div class="wrap">
+    <div class="kette">
+      <div class="kette-l">
+        <span class="kt gruen">Die Kette</span>
+        <h2 style="font-size:clamp(1.5rem,2.4vw,2rem)">Ein Ding führt zum nächsten</h2>
+        <p style="font-size:.92rem">Wir fangen selten etwas Neues an. Meistens stellt sich heraus, dass das Gebaute noch etwas braucht.</p>
+      </div>
+      <div class="spur">
+        <div class="gl stark">
+          <div class="j">2016</div><h3>Der Brunnen</h3>
+          <p>Fertiggestellt im April, mit einer Pumpe und einem Wasserturm aus dem Restgeld. Er fiel auf dem Höhepunkt der Trockenzeit trocken.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2021</div><h3>Also ein tieferer Brunnen</h3>
+          <p>81 Meter statt weniger Meter. Erstes Wasser bei 20 m. Rotary Club und Schwäbische Zeitung gaben knapp 8.000 €, gekostet hat es 6.300 €.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2021</div><h3>Die Pumpe brauchte Strom</h3>
+          <p>Sechs Solarzellen statt vier. Eine Steuerung füllt die Tanks selbsttätig — bei voller Leistung beide in zwei Stunden.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2021</div><h3>Und Wasser will gespeichert sein</h3>
+          <p>Ein zweiter Turm mit 3.000 l, verbunden mit dem alten zu 4.000 l. Drei öffentliche Wasserhähne. Die Dorfältesten riefen das Ende des Wassermangels für Wapa aus.</p>
+        </div>
+        <div class="gl">
+          <div class="j">seit 2021</div><h3>Wo Wasser ist, kann ein Garten stehen</h3>
+          <p>Rund um den Turm ein Waldgarten in vier Schichten: hohe Bäume, niedrige Bäume, Sträucher, Bodendecker. Ein Gärtner pflegt ihn für 23 € im Monat.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2022</div><h3>Und ein Garten will bewässert sein</h3>
+          <p>Tropfenbewässerung aus dem Wasserturm, langsam und kontrolliert. Der Gärtner hat inzwischen eigene Ideen für den nächsten Schritt.</p>
+        </div>
+        <div class="gl stark">
+          <div class="j">2023</div><h3>Das Nächste ist das Nachbardorf</h3>
+          <p>Am 20. Dezember wurde die Wasserstelle in Ekulpung übergeben — an das Dorfoberhaupt, in die Verantwortung des Dorfes.</p>
+        </div>
+      </div>
+    </div>
+    ${rn('<b>Statt Kachelraster:</b> Die Projekte hängen inhaltlich zusammen — jedes ist aus dem vorigen entstanden. Vier gleich große Bildkacheln verstecken genau das. Diese Spur zeigt, dass Spenden hier nicht versickern, sondern aufeinander aufbauen. Der bisherige Entwurf brauchte dafür den Satz „100 % der Spenden in Projekte“, der laut Leitfaden (Entscheidung 4) rechtlich heikel ist.')}
+  </div>
+</section>
+
+<!-- ============ 4b · ATEMZUG ============ -->
+<figure class="vollbild">
+  <img src="${B.obstgarten}" alt="Junge Obstbäume im Waldgarten, dahinter Mais und ein Zaun aus Astwerk">
+  <figcaption>Aus dem Brunnen von 2016 ist ein Garten geworden. Der Zaun schützt die Setzlinge vor Weidevieh.</figcaption>
+</figure>
+
+<!-- ============ 5 · WAS EIN BETRAG TUT ============ -->
+<section>
+  <div class="wrap">
+    <span class="kt gruen">Größenordnungen</span>
+    <h2>Was ein Betrag hier bedeutet</h2>
+    <p class="lede" style="margin-bottom:2.4rem">Alle Zahlen stehen so bereits auf unserer Website. Sie sind nachrechenbar — das ist uns lieber als eine Prozentangabe.</p>
+    <div class="preise">
+      <div class="pz"><div class="b1">2 €</div><div class="b2">Ein Baum im Waldgarten<span>Setzling, gepflanzt und im ersten Jahr gegossen</span></div></div>
+      <div class="pz"><div class="b1">15 €</div><div class="b2">Eine Kinderpatenschaft, im Monat<span>Nahrung, Schulbücher und Schulgebühr</span></div></div>
+      <div class="pz"><div class="b1">23 €</div><div class="b2">Der Monatslohn unseres Gärtners<span>Er pflegt den Waldgarten und wartet die Brunnenanlage</span></div></div>
+      <div class="pz"><div class="b1">23 €</div><div class="b2">Eine Handwaschstation<span>Tank mit Filter, Wasserhahn und Seifenspender — 25 Stück standen 2020 in Réo</span></div></div>
+      <div class="pz"><div class="b1">1.000 €</div><div class="b2">Die Tropfenbewässerung<span>Noch nicht finanziert</span></div></div>
+      <div class="pz"><div class="b1">3.050 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum<span>Räume werden nach ihren Stiftern benannt und ins Gründerbuch eingetragen</span></div></div>
+      <div class="pz"><div class="b1">6.300 €</div><div class="b2">Der Tiefbrunnen von 2021<span>81 m Bohrung, Pumpe, Solarzellen, 4.000 l Speicher</span></div></div>
+    </div>
+    <div style="margin-top:2rem"><a class="b" href="#/spenden">Spenden</a></div>
+    ${rn('<b>Statt Kennzahlenband:</b> Vier große runde Zahlen unter dem Hero („120 Frauen“, „100 %“) sind das Erkennungszeichen jeder Wohltätigkeitsvorlage — und zwei davon muss der Vorstand erst prüfen. Diese Liste sagt dasselbe konkreter und steht rechtlich auf sicherem Boden.')}
+  </div>
+</section>
+
+<!-- ============ 6 · VIER SÄULEN ============ -->
+<section>
+  <div class="wrap">
+    <span class="kt gruen">Vier Säulen unserer Arbeit</span>
+    <h2 style="max-width:20ch">Hilfe zur Selbsthilfe, an den Bedürfnissen vor Ort ausgerichtet</h2>
+    <p class="lede" style="margin-bottom:2.6rem">Wir orientieren uns an unserer Satzung, unserem Manifest und den UN-Nachhaltigkeitszielen.</p>
+    <div class="saeulen">
+      <div class="saeule"><div class="n">01</div><h3>Grundversorgung</h3><p>Wasser, Nahrung und Medikamente sichern.</p></div>
+      <div class="saeule"><div class="n">02</div><h3>Bildung</h3><p>Ausbildungszentrum, Nähschule, Alphabetisierung.</p></div>
+      <div class="saeule"><div class="n">03</div><h3>Infrastruktur</h3><p>Wasser- und Stromversorgung, Solaranlagen.</p></div>
+      <div class="saeule"><div class="n">04</div><h3>Umweltschutz</h3><p>Aufforstung und die Folgen des Klimawandels abmildern.</p></div>
+    </div>
+    ${rn('<b>Herabgestuft:</b> Die vier Säulen sind eine Ordnungslogik, keine Schlagzeile. Sie bleiben — als Filter über dem Register, und hier als knappe Einordnung. Auf der alten Seite führten sie zu vier fast identischen Unterseiten (Grundversorgung, Bildung, Infrastruktur, Umweltschutz), deren Einleitungstext wörtlich derselbe ist. Diese vier Seiten entfallen.')}
+  </div>
+</section>
+
+<!-- ============ 7 · REGISTER ============ -->
+<section class="papier2">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:1.8rem">
+      <div>
+        <span class="kt gruen">Stand heute</span>
+        <h2 style="margin:0">Woran wir gerade arbeiten</h2>
+      </div>
+      <a class="pf" href="#/projekte">Alles, was gebaut wurde</a>
+    </div>
+    <div class="reg">${REG.filter(p=>LAEUFT(p.s)).sort((a,b)=>b.y-a.y).map(zeile).join('')}</div>
+    ${rn('<b>Warum hier nicht das ganze Register steht:</b> Die ersten sieben Zeilen des vollständigen Verzeichnisses sind, chronologisch sortiert, die Jahre 2016 bis 2020 — vier davon allein 2020. Das lässt den Verein eingeschlafen aussehen, obwohl neun der sechzehn Vorhaben laufen oder in Finanzierung sind. Die Startseite zeigt deshalb den <b>Stand</b>, das vollständige Register die <b>Geschichte</b>. Beides wahr, aber die Startseite beantwortet die Frage, die ein Spender zuerst stellt.')}
+  </div>
+</section>
+
+<!-- ============ 8 · AKTUELLES ============ -->
+<section>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:2rem">
+      <div>
+        <span class="kt gruen">Aktuelles</span>
+        <h2 style="margin:0">Was zuletzt passiert ist</h2>
+      </div>
+      <a class="pf" href="#/aktuelles">Alle Beiträge</a>
+    </div>
+    <a class="lead" href="#/aktuelles/${NEWS[0].slug}">
+      <img src="${NEWS[0].img}" alt="">
+      <div>
+        <div class="meta">${NEWS[0].d} · ${NEWS[0].k}</div>
+        <h3 style="margin-top:.4em">${NEWS[0].t}</h3>
+        <p>${NEWS[0].x}</p>
+        <span class="pf">Weiterlesen</span>
+      </div>
+    </a>
+    <div class="liste">${NEWS.slice(1,5).map(zl).join('')}</div>
+    ${rn('<b>Zum Rhythmus der Seite:</b> Der letzte Beitrag ist von Januar 2024. Eine Website, die auf der Startseite sechs Kacheln fordert, sieht mit sechs alten Beiträgen leer aus. Eine datierte Liste verträgt lange Pausen — sie sieht dann nach Archiv aus statt nach Vernachlässigung.')}
+  </div>
+</section>
+
+<!-- ============ 9 · MITMACHEN ============ -->
+<section class="erde">
+  <div class="wrap">
+    <div class="zwei">
+      <div>
+        <span class="kt hell">Mitmachen</span>
+        <h2>Man muss dafür nicht Mitglied werden</h2>
+        <p style="color:#E3CDBD">Der Berufsalltag drängt genug Pflichten auf. Das Engagement im Verein soll ohne Druck stattfinden — und jede und jeder soll die eigenen Stärken einbringen können. Vieles lässt sich als abgeschlossenes Kleinstprojekt erledigen.</p>
+        <a class="b hell" href="#/mitmachen">Was zu tun ist</a>
+      </div>
+      <div class="rollen">
+        <div class="ro"><div class="ro-t">Agrarwissen, Ökologie</div><div class="ro-u">Was passt in den Sahel, welche Symbiosen funktionieren?</div></div>
+        <div class="ro"><div class="ro-t">Vereinsrecht</div><div class="ro-u">Satzungsfragen, Bewertung von Verträgen.</div></div>
+        <div class="ro"><div class="ro-t">Französisch</div><div class="ro-u">Amtssprache vor Ort — Verständigung und Übersetzung.</div></div>
+        <div class="ro"><div class="ro-t">Öffentlichkeitsarbeit</div><div class="ro-u">Inhalte pflegen, Grafiken, Infostände.</div></div>
+        <div class="ro"><div class="ro-t">Netzwerk</div><div class="ro-u">Kontakte und Anerkennung für die Arbeit.</div></div>
+        <div class="ro"><div class="ro-t">Etwas anderes</div><div class="ro-u">Eine eigene Idee genügt.</div></div>
+      </div>
+    </div>
+    ${rn('<b>Nach vorn geholt:</b> „Man muss nicht Mitglied werden“ ist ein ungewöhnliches Angebot und stand bisher auf einer Unterseite, unter einer Liste von Projekten. Für einen Verein, der Nachfolger für die Öffentlichkeitsarbeit sucht, gehört es auf die Startseite.')}
+    ${rn('<b>Hier standen sechs Pflanzenfotos.</b> Sie sahen gut aus und hatten mit dem Text nichts zu tun — gesucht sind Vereinsrecht und Französisch, gezeigt wurden Maniok und Sesam. Bilder, die nur Fläche füllen, sind das eigentliche Kennzeichen einer Vorlage. Jetzt steht dort, was tatsächlich gesucht wird.')}
+  </div>
+</section>
+
+${spendenBlock()}
+`;
+
+/* ---------- Bausteine ---------- */
+function zeile(p){
+  return `<a class="rz" href="#/projekt/${p.slug}">
+    <div class="j zahl">${p.j}</div>
+    <div><div class="t">${p.t}${p.neu?' <span class="neu" title="Quelle: '+p.neu+'">neu</span>':''}</div><div class="u">${p.u}</div></div>
+    <div class="s">${p.o}</div>
+    <div class="k${p.s==='Abgeschlossen'?'':' offen'}">${p.s}</div>
+    ${p.img ? `<img class="vs" src="${p.img}" alt="" loading="lazy">` : ''}
+  </a>`;
+}
+function zl(n){
+  return `<a href="#/aktuelles/${n.slug}">
+    <div class="d">${n.d}</div>
+    <div><div class="t">${n.t}</div><div class="x">${n.x}</div></div>
+    <div class="k">${n.k}</div>
+  </a>`;
+}
+
+/* ============ PROJEKTE ============ */
+let filter = 'Alle';
+VIEWS['projekte'] = () => {
+  const kats = ['Alle','Grundversorgung','Bildung','Infrastruktur','Umweltschutz'];
+  const zeilen = REG.filter(p => filter==='Alle' || p.k===filter).slice().sort((a,b)=>b.y-a.y);
+  return `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Register</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:16ch">Alles, was gebaut wurde</h1>
+  <p class="lede">Jedes Projekt mit Jahr, Ort und Stand, neueste zuerst. Was noch Geld braucht, steht als solches da.</p>
+</div></div>
+<section style="padding-top:2.6rem"><div class="wrap">
+  <div class="filter">${kats.map(k=>`<button class="${k===filter?'on':''}" onclick="setFilter('${k}')">${k}</button>`).join('')}</div>
+  <div class="reg">${zeilen.map(zeile).join('')}</div>
+  ${rn('<b>Ein Fehler der alten Seite:</b> Die Projekte lagen in Avada-„portfolio-items“ mit Adressen wie <code>?portfolioCats=31,30</code>. „Garten Wasserturm“ erschien dadurch zweimal auf derselben Seite. In einem Register mit einer Zeile je Projekt kann das nicht passieren.')}
+</div></section>
+${spendenBlock()}`;
+};
+function setFilter(k){ location.hash = k==='Alle' ? '#/projekte' : '#/projekte/'+encodeURIComponent(k); }
+
+/* ============ AKTUELLES ============ */
+VIEWS['aktuelles'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Aktuelles</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem)">Berichte aus Sanguié</h1>
+  <p class="lede">Mehrmals im Jahr berichten wir, was aus den Projekten geworden ist. Wer nichts verpassen will, abonniert den Newsletter.</p>
+</div></div>
+<section style="padding-top:2.6rem"><div class="wrap">
+  <a class="lead" href="#/aktuelles/${NEWS[0].slug}">
+    <img src="${NEWS[0].img}" alt="">
+    <div>
+      <div class="meta">${NEWS[0].d} · ${NEWS[0].k}</div>
+      <h3 style="margin-top:.4em">${NEWS[0].t}</h3>
+      <p>${NEWS[0].x}</p><span class="pf">Weiterlesen</span>
+    </div>
+  </a>
+  <div class="liste">${NEWS.slice(1).map(zl).join('')}</div>
+  ${rn('<b>Zum Veröffentlichen:</b> Ein neuer Beitrag ist künftig eine neue Markdown-Datei im Repository. Titel, Datum, Vorschaubild und diese Liste entstehen beim Erzeugen der Seite — es gibt kein Redaktionssystem mehr zu pflegen und keine Plugins zu aktualisieren.')}
+</div></section>`;
+
+/* ============ EINZELNER BEITRAG ============ */
+VIEWS['beitrag'] = (slug) => {
+  const n = NEWS.find(x=>x.slug===slug) || NEWS[0];
+  const galerie = n.galerie
+    ? `<div class="wg" style="margin:2.2rem 0">` + n.galerie.map(function(g,i){
+        return `<figure class="${i===0?'gr':''}"><img src="${g[0]}" alt="${g[1]}" loading="lazy"><figcaption>${g[1]}</figcaption></figure>`;
+      }).join('') + `</div>`
+    : '';
+  const text = n.body || `<p style="font-size:1.16rem">${n.x}</p>`;
+  const hinweis = n.slug==='waldgarten-august-2026'
+    ? rn('<b>Dieser Beitrag ist ein Vorschlag, kein beschlossener Text.</b> Die Fotos sind echt (12. August 2026), die Worte hat der Entwurf beigesteuert — sie gehören vom Verein geschrieben oder wenigstens abgenommen. Er steht hier, weil er zeigt, wie ein neuer Beitrag aussieht: eine Markdown-Datei mit Titel, Datum, Text und einem Ordner Bilder. Und weil der bislang neueste Beitrag vom Januar 2024 stammt — eine Lücke, die auf der Startseite stärker auffällt als jedes Gestaltungsdetail.')
+    : '';
+  return `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <div class="krume"><a href="#/aktuelles">Aktuelles</a> · ${n.k}</div>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">${n.t}</h1>
+  <div class="meta" style="margin-top:1rem">${n.d} · ${n.a}</div>
+</div></div>
+<section style="padding-top:2.2rem"><div class="wrap"><div class="artikel">
+  <img class="gross" src="${n.img}" alt="">
+  ${text}
+</div></div>
+<div class="wrap">${galerie}</div>
+<div class="wrap"><div class="artikel">
+  ${hinweis}
+  <div style="border-top:1px solid var(--linie);margin-top:2.4rem;padding-top:1.6rem">
+    <span class="kt gruen">Dazu passt</span>
+    <div class="reg">${REG.filter(p=>p.k===n.k).slice(0,2).map(zeile).join('')}</div>
+  </div>
+</div></div></section>
+${spendenBlock()}`;
+};
+
+/* ============ ÜBER UNS ============ */
+VIEWS['ueber-uns'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Über uns</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:15ch">Ein Verein aus Sigmaringen und ein Dorf in Sanguié</h1>
+</div></div>
+<section style="padding-top:2.4rem"><div class="wrap">
+  <div class="zwei" style="align-items:start">
+    <div>
+      <p class="lede">Gemeinsam für Wapa ist ein gemeinnütziger Verein mit dem Ziel, in der Provinz Sanguié Hilfe zur Selbsthilfe zu leisten. Die ersten Projekte entstanden in Wapa, einem Ort mit rund 1.000 Einwohnern — dem Heimatdorf unseres Vorsitzenden.</p>
+      <p>Kienewoyi Bertrand Bazie kam 2011 zum Studium nach Deutschland und erhielt 2018 seinen Master an der Hochschule Albstadt-Sigmaringen. Heute arbeitet er als Pharmaingenieur in Frankfurt. Eine der Hauptinitiatorinnen des Vereins war die 2020 verstorbene Marlis Schmitt-Sickinger.</p>
+      <p>Die Projekte planen und setzen wir direkt mit den Menschen in Sanguié um. Bertrand kennt die Bedürfnisse vor Ort und ist bei Planung und Umsetzung im Austausch mit Offiziellen und Verantwortlichen. So oft er kann, besucht er seine alte Heimat. Verwaltung und Öffentlichkeitsarbeit organisieren wir in Eigenleistung.</p>
+      <h2 style="margin-top:2.2rem">Vorstand</h2>
+      <p style="font-size:.95rem">Vier Menschen, die das neben dem Beruf machen —
+      <a class="pf" href="#/vorstand" style="display:inline-flex">wer dahintersteht</a></p>
+      <div class="preise" style="max-width:34rem">
+        <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
+        <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
+        <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
+      </div>
+      <p style="margin-top:1.6rem;display:flex;gap:1.6rem;flex-wrap:wrap"><a class="pf" href="#/satzung">Satzung und Manifest</a><a class="pf" href="#/presse">Pressestimmen</a></p>
+    </div>
+    <div>
+      <img src="${B.zentrum}" alt="Das Ausbildungszentrum in Réo" style="width:100%;aspect-ratio:4/5;object-fit:cover">
+      <div class="rn" style="margin-top:18px"><b>Wapa in Zahlen:</b> rund 1.000 Einwohner. Regenzeit Juni bis Oktober, Trockenzeit Oktober bis Mai. Ab Ende Februar fallen viele Brunnen trocken — dann fehlt Wasser für Menschen, Gärten und Vieh.</div>
+    </div>
+  </div>
+</div></section>
+<section class="erde"><div class="wrap">
+  <span class="kt hell">Newsletter</span>
+  <h2 style="max-width:18ch">Mehrmals im Jahr, und sonst nie</h2>
+  <p style="color:#E3CDBD;max-width:34rem">Wir berichten über den Stand der Projekte und zeigen, was dank Ihrer Unterstützung möglich war. Zuletzt erschienen: 1/2024, 2/2023, 1/2023.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1.4rem">
+    <a class="b gold" href="mailto:info@gemeinsamfuerwapa.de">Newsletter abonnieren</a>
+    <a class="b hell" href="mailto:info@gemeinsamfuerwapa.de">Mitglied werden</a>
+  </div>
+</div></section>`;
+
+/* ============ MITMACHEN ============ */
+VIEWS['mitmachen'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Mitmachen</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:16ch">Man muss dafür nicht Mitglied werden</h1>
+  <p class="lede">Unser Berufsalltag drängt uns schon genug Pflichten auf. Das Engagement im Verein soll ohne Druck stattfinden — und jede und jeder soll die eigenen Stärken einbringen können.</p>
+</div></div>
+<section style="padding-top:2.4rem"><div class="wrap">
+  <div class="preise" style="max-width:52rem">
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Agrarwissen, Ökologie</div><div class="b2">Was passt in den Sahel, welche Symbiosen funktionieren, was könnte ein Geschäftsmodell sein?<span>Es muss keine Professur sein. Einfache Erfahrung genügt, einzelne Hinweise sind willkommen.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Vereinsrecht</div><div class="b2">Satzungsfragen und die Bewertung von Verträgen.<span>Auch einzelne Tipps helfen — keine Mitgliedschaft nötig.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Französisch, Kultur</div><div class="b2">Amtssprache in Burkina Faso ist Französisch.<span>Hilfe bei Verständigung und Übersetzung.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Öffentlichkeitsarbeit</div><div class="b2">Layouts, Grafiken, Inhalte pflegen, Infostände auf Märkten und Messen.<span>Es gibt viele Kanäle — helfen Sie uns, sie zu nutzen.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Netzwerk</div><div class="b2">Vernetzung und gesellschaftliche Anerkennung unserer Arbeit.<span></span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Etwas anderes</div><div class="b2">Sie haben eine Idee oder ein Anliegen?<span>Schreiben Sie uns.</span></div></div>
+  </div>
+  <div style="margin-top:2rem"><a class="b" href="mailto:info@gemeinsamfuerwapa.de">Schreiben Sie uns</a></div>
+  ${rn('<b>Umgebaut:</b> Auf der alten Seite stand diese Liste über einem gefilterten Projektraster, in dem „Marketing“ und „Rechtsberater“ als Projektkacheln zwischen Brunnen und Solaranlagen auftauchten. Aufgaben für Freiwillige sind keine Projekte — hier sind sie getrennt.')}
+</div></section>
+${spendenBlock()}`;
+
+/* ============ SPENDEN ============ */
+VIEWS['spenden'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Spenden</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:14ch">Jede Spende zählt, und jede ist nachrechenbar</h1>
+  <p class="lede">Spendenbescheinigungen stellen wir zu Beginn des Folgejahres aus. Damit wir sie schicken können, teilen Sie uns bitte Ihre Adresse mit.</p>
+</div></div>
+<section style="padding-top:2.4rem"><div class="wrap">
+  <span class="kt gruen">Größenordnungen</span>
+  <div class="preise">
+    <div class="pz"><div class="b1">2 €</div><div class="b2">Ein Baum im Waldgarten</div></div>
+    <div class="pz"><div class="b1">15 €</div><div class="b2">Eine Kinderpatenschaft, im Monat<span>Nahrung, Schulbücher und Schulgebühr für ein Kind</span></div></div>
+    <div class="pz"><div class="b1">23 €</div><div class="b2">Der Monatslohn unseres Gärtners</div></div>
+    <div class="pz"><div class="b1">1.000 €</div><div class="b2">Die Tropfenbewässerung für den Waldgarten<span>Noch nicht finanziert</span></div></div>
+    <div class="pz"><div class="b1">3.050 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum</div></div>
+    <div class="pz"><div class="b1">3.500 €</div><div class="b2">Der Serverraum und Copyshop<span>Zu 90 % finanziert</span></div></div>
+  </div>
+</div></section>
+${spendenBlock()}
+<section><div class="wrap">
+  <div class="zwei" style="align-items:start">
+    <div>
+      <span class="kt gruen">Patenschaft</span>
+      <h2>15 € im Monat für ein Kind</h2>
+      <p>Für rund 15 € im Monat kann ein Kind mit Nahrung und Schulbüchern ausgestattet werden; die Schulgebühr ist damit ebenfalls abgedeckt. Für nähere Informationen nehmen Sie bitte direkt Kontakt mit uns auf.</p>
+      <a class="b leer" href="mailto:info@gemeinsamfuerwapa.de">Patenschaft anfragen</a>
+      ${rn('<b>Zum Logo:</b> Es steht im Fuß jeder Seite und hier neben dem Spendenkonto — an den Stellen, wo ein Zeichen etwas beglaubigt. Nicht in der Kopfzeile: Die Datei ist 300×158 px groß und enthält zwei Zeilen Text, die bei Navigationsgröße (rund 40 px Höhe) unleserlich würden. Der eingebrannte schwarze Rahmen ist hier nicht wegretuschiert, sondern als Stempel gesetzt. Mit einem Vektororiginal (Entscheidung 1) ließe sich das Zeichen freistellen und auch klein verwenden.')}
+    </div>
+    <div>
+      <span class="kt gruen">Weitere Wege</span>
+      <h2>Betterplace und PayPal</h2>
+      <p>Über Betterplace.org können Sie sicher und verifiziert spenden; PayPal steht ebenfalls zur Verfügung. Beide Wege sind für uns mit Gebühren verbunden — eine Überweisung kommt vollständig an.</p>
+      <a class="b leer" href="https://www.betterplace.org/de/organisations/47348-gemeinsam-fuer-wapa">Zu Betterplace</a>
+      <div style="margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--linie)">
+        <span class="kt gruen">Gemeinnütziger Verein</span>
+        <div class="stempel auf-hell">
+          <img src="${LOGO}" alt="Vereinslogo: drei Figuren mit erhobenen Armen über einem Schild mit dem Umriss Burkina Fasos, Wapa markiert">
+        </div>
+        <p style="font-size:.86rem;margin-top:1rem;color:var(--leise)">Gemeinnützigkeit anerkannt vom Finanzamt Sigmaringen am 7.11.2017. Spendenbescheinigungen sind steuerlich absetzbar.</p>
+      </div>
+    </div>
+  </div>
+</div></section>`;
+
+/* ============ EINZELNES PROJEKT ============ */
+VIEWS['projekt'] = (slug) => {
+  const pr = REG.find(x=>x.slug===slug);
+  if(!pr) return VIEWS['projekte']();
+  const text = PTEXT[slug] || `<p>${pr.u}</p><p style="color:var(--leise)">Zu diesem Projekt liegt auf der bestehenden Website kein ausführlicher Text vor.</p>`;
+  const verwandt = REG.filter(x=>x.k===pr.k && x.slug!==pr.slug).slice(0,3);
+  const beitraege = NEWS.filter(n=>n.k===pr.k).slice(0,3);
+  return `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <div class="krume"><a href="#/projekte">Register</a> · ${pr.k}</div>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">${pr.t}</h1>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <div class="fakten">
+    <div><span>Zeitraum</span><b class="zahl">${pr.j}</b></div>
+    <div><span>Ort</span><b>${pr.o}</b></div>
+    <div><span>Bereich</span><b>${pr.k}</b></div>
+    <div><span>Stand</span><b class="${pr.s==='Abgeschlossen'?'':'gruen'}">${pr.s}</b></div>
+  </div>
+  ${pr.img ? `<img class="gross" src="${pr.img}" alt="${pr.t}" style="margin-top:2rem">`
+           : `<p class="ohnebild">Zu diesem Vorhaben gibt es noch kein Bild — es ist nicht gebaut.</p>`}
+  ${text}
+  ${(function(){const pp=PRESSE.filter(a=>a.projekt===pr.slug); return pp.length
+    ? `<div style="border-top:1px solid var(--linie);margin-top:2.6rem;padding-top:1.6rem">
+        <span class="kt gruen">Darüber wurde berichtet</span>
+        <div class="presseliste">${pp.map(presseZeile).join('')}</div></div>` : '';})()}
+  ${verwandt.length ? `<div style="border-top:1px solid var(--linie);margin-top:2.6rem;padding-top:1.6rem">
+    <span class="kt gruen">Ebenfalls ${pr.k}</span>
+    <div class="reg">${verwandt.map(zeile).join('')}</div></div>` : ''}
+  ${beitraege.length ? `<div style="margin-top:2rem">
+    <span class="kt gruen">Beiträge dazu</span>
+    <div class="liste">${beitraege.map(zl).join('')}</div></div>` : ''}
+</div></div></section>
+${spendenBlock()}`;
+};
+
+/* ============ PRÜFLISTE — was neu ist ============
+   Erzeugt sich aus den Daten selbst. Wird `neu` bei einem Projekt entfernt,
+   verschwindet es hier automatisch. Kein zweites Dokument, das veralten kann. */
+VIEWS['neu'] = () => {
+  const offen = REG.filter(p=>p.neu);
+  const quellen = [...new Set(offen.map(p=>p.neu))];
+  return `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Prüfliste</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Was neu ist und noch bestätigt werden muss</h1>
+  <p class="lede">${offen.length} Einträge stammen aus Unterlagen, die nicht auf der bisherigen Website standen. Sie sind im Register mit <span class="neu">neu</span> markiert. Diese Liste ist zum Abhaken gedacht — Punkt für Punkt.</p>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <div class="hinweis">
+    <b>So ist das gemeint:</b> Jede dieser Angaben ist aus einer Quelle übernommen,
+    aber von niemandem im Verein gegengelesen. Wer sie bestätigt, sagt Bescheid —
+    dann fällt die Markierung weg und der Eintrag ist normaler Bestand. Wer sie
+    für falsch hält, ebenso. Bis dahin steht sichtbar da, woher sie kommt.
+  </div>
+  <h2>Quellen</h2>
+  <ul>${quellen.map(q=>{const n=offen.filter(p=>p.neu===q).length; return `<li><b>${q}</b> — ${n} ${n===1?'Eintrag':'Einträge'}</li>`}).join('')}</ul>
+  <h2>Zu prüfen</h2>
+</div></div>
+<div class="wrap"><div class="reg">${offen.sort((a,b)=>b.y-a.y).map(zeile).join('')}</div></div>
+<div class="wrap"><div class="artikel" style="margin-top:2rem">
+  <h2>Bekannte Unstimmigkeiten</h2>
+  <div class="preise" style="max-width:none">
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Pumpe in Wapa</div><div class="b2">Chronik sagt 2017, Website sagt 2016. Im Register steht 2016.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Brunnentiefe</div><div class="b2">81 m im Beitrag, 83 m auf der Projektseite. Im Register steht 81 m.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kinder-Academy</div><div class="b2">Verhältnis zur Sommerschule unklar — dasselbe Angebot oder zwei?</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Tropfenbewässerung</div><div class="b2">Projektseite: 0 % finanziert. Beitrag 02/2022: installiert.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Zweites Wassersystem</div><div class="b2">Ort nicht angegeben.</div></div>
+  </div>
+  <p style="margin-top:2rem"><a class="pf" href="#/projekte">Zum vollständigen Register</a></p>
+</div></div></section>`;
+};
+
+/* ============ PRESSE ============ */
+VIEWS['presse'] = () => `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Pressestimmen</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Was andere über uns geschrieben haben</h1>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <p>Vier Berichte, zwischen 2016 und 2020. Wir geben jeweils Quelle, Datum und
+  Titel an — die Angabe bleibt auch dann brauchbar, wenn der Link nicht mehr
+  funktioniert. Genau das ist inzwischen bei drei von vier der Fall.</p>
+  <div class="presseliste">${PRESSE.map(presseZeile).join('')}</div>
+  ${rn('<b>Warum hier so viele Archivlinks stehen:</b> Beide Artikel der Schwäbischen Zeitung antworten heute mit <code>410 Gone</code> — der Verlag hat sie dauerhaft entfernt, das ist kein vorübergehender Fehler. Die Domain von <i>Le Stratège</i> existiert überhaupt nicht mehr. Erhalten sind alle drei nur im Internet Archive. Der Südkurier-Artikel von 2016 ist als einziger noch am ursprünglichen Ort erreichbar. Deshalb steht die Quellenangabe im Vordergrund und der Link dahinter, nicht umgekehrt.')}
+  ${rn('<b>Möglicherweise unvollständig:</b> Das sind die Berichte, die auf der bestehenden Website verlinkt sind. Die Schwäbische Zeitung hat außerdem zweimal eine Weihnachtsspendenaktion für den Verein gemacht (2019 rund 3.600 €, 2020 für die Schutzmauer) und den Tiefbrunnen 2021 mitfinanziert — ob es dazu weitere Artikel gab, ist der Website nicht zu entnehmen. Wer Ausschnitte hat, kann sie ergänzen.')}
+</div></div></section>`;
+
+/* ============ VORSTAND ============
+   Grundsatz: Über eine Person steht hier nur, was der Verein selbst oder die
+   Presse über sie in ihrer Vereinsrolle veröffentlicht hat — oder was sie selbst
+   beigesteuert hat. Keine aus dem Netz zusammengetragenen Profile.
+   `freigabe` sagt, worauf ein Eintrag beruht. */
+const MENSCHEN = [
+  {name:'Kienewoyi Bertrand Bazie', rolle:'Vorsitzender', seit:'Gründung 2017',
+   bild:B.bertrandSolar,
+   text:`<p>Aufgewachsen in Wapa, dem Dorf, in dem alles anfing. 2011 zum Studium nach Deutschland gekommen, 2018 Master an der Hochschule Albstadt-Sigmaringen, heute Pharmaingenieur bei einem Unternehmen in Frankfurt.</p>
+     <p>Der Verein geht auf den Brunnen zurück, den sein Vater begonnen und er nach dessen Tod zu Ende gebracht hat. Er kennt die Bedürfnisse vor Ort, spricht mit Offiziellen und Verantwortlichen und besucht seine alte Heimat, so oft er kann.</p>
+     <p class="zit">„Geld allein kann gar nichts. Wenn das Geld zum Leben erweckt wird, dann können wir Großes erreichen.“<span>Schwäbische Zeitung, 6. Dezember 2024</span></p>`,
+   freigabe:'Aus „Über uns“ des Vereins und dem Porträt der Schwäbischen Zeitung vom 6.12.2024. Foto aus der Präsentation Projektbedarf.'},
+
+  {name:'Dietmar Sickinger', rolle:'Schatzmeister', seit:'', bild:null,
+   text:`<p>Führt die Kasse des Vereins.</p>`,
+   freigabe:'Nur Name und Amt — mehr hat der Verein bislang nicht veröffentlicht.'},
+
+  {name:'Carolin Zolkiewicz', rolle:'Schriftführerin', seit:'', bild:null,
+   text:`<p>Führt die Schriftstücke des Vereins und schreibt die Beiträge für die Website.</p>`,
+   freigabe:'Nur Name und Amt — mehr hat der Verein bislang nicht veröffentlicht.'},
+
+  {name:'Noah Bisinger', rolle:'Kassenprüfer', seit:'im Verein seit 2019', bild:null,
+   text:`<p>Prüft die Kasse. Kümmert sich daneben um die interne Kommunikation und um den Umzug dieser Website.</p>
+     <p>Dem Verein ist er länger verbunden: Zwischen 2019 und 2021 betreute er den Social-Media-Auftritt und half dabei, die gespendeten Nähmaschinen für den Transport zu verpacken — jene Maschinen, die 2022 per Containerschiff in Wapa ankamen.</p>`,
+   freigabe:'Von ihm selbst beigesteuert.'}
+];
+
+VIEWS['vorstand'] = () => `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Wer dahintersteht</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Der Vorstand</h1>
+  <p class="lede">Ein kleiner Verein. Verwaltung und Öffentlichkeitsarbeit machen wir selbst, neben dem Beruf.</p>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap">
+  <div class="menschen">
+    ${MENSCHEN.map(m=>`<article class="mensch">
+      <div class="mportrait">${m.bild
+        ? `<img src="${m.bild}" alt="${m.name}">`
+        : `<div class="keinbild"><span>Foto<br>fehlt</span></div>`}</div>
+      <div class="mtext">
+        <h2>${m.name}</h2>
+        <div class="mrolle">${m.rolle}${m.seit?' · '+m.seit:''}</div>
+        ${m.text}
+        <div class="mquelle">${m.freigabe}</div>
+      </div>
+    </article>`).join('')}
+  </div>
+  <div class="artikel" style="margin-top:1rem">
+  ${rn('<b>Warum hier so wenig steht — und was noch fehlt:</b> Über Menschen steht auf dieser Seite nur, was der Verein selbst oder die Presse über sie in ihrer Vereinsrolle veröffentlicht hat, oder was sie selbst beigesteuert haben. Lebensläufe aus dem Netz zusammenzusuchen wäre etwas anderes als eine Vorstellung — und niemand kann für eine andere Person einwilligen. <b>Jede und jeder schreibt den eigenen Absatz selbst</b> und gibt das eigene Bild frei; dann wird die Seite vollständig (→ B11).')}
+  ${rn('<b>Widerspruch im Impressum:</b> Dort steht Anne Schmitz als Kassenprüferin. Wenn Noah Bisinger das Amt innehat, ist das Impressum nicht aktuell — und ein Impressum ist die eine Seite, die stimmen muss.')}
+  </div>
+</div></section>`;
+
+/* ============ SATZUNG ============ */
+VIEWS['satzung'] = () => `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Verein</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Satzung und Manifest</h1>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <p>Zusätzlich zur rechtlich bindenden Vereinssatzung haben wir uns auf ein Grundsatzprogramm geeinigt. Es stellt die Prinzipien und Werte dar und erläutert die Arbeitsweise sowie die Kriterien für Auswahl und Durchführung von Projekten.</p>
+  <p>Von jedem Vereinsmitglied wird erwartet, sich mit diesen Werten identifizieren zu können. Selbstverständlich unterziehen wir auch unser Manifest einem ständigen demokratischen Diskussions- und Änderungsprozess.</p>
+  <div class="dl">
+    <a href="assets/dokumente/Satzung-2021.pdf"><b>Vereinssatzung 2021</b><span>PDF · rechtlich bindend</span></a>
+    <a href="assets/dokumente/Manifest.pdf"><b>Manifest</b><span>PDF · Prinzipien und Arbeitsweise</span></a>
+    <a href="assets/dokumente/Wapa-Beitrittserklaerung-2021-neu.pdf"><b>Beitrittserklärung</b><span>PDF · zum Ausfüllen</span></a>
+  </div>
+  <h2>Vorstand</h2>
+  <div class="preise" style="max-width:34rem">
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
+  </div>
+</div></div></section>`;
+
+/* ============ IMPRESSUM ============ */
+VIEWS['impressum'] = () => `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Angaben gemäß § 5 TMG</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Impressum</h1>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <h2>Gemeinsam für Wapa e.&nbsp;V.</h2>
+  <p>Römerweg 2<br>72488 Sigmaringen</p>
+  <p>Körperschaft, Gemeinnützigkeit anerkannt vom Finanzamt Sigmaringen am 7.11.2017.</p>
+  <h2>Vertreten durch</h2>
+  <p>Vorsitzender: Kienewoyi Bertrand Bazie<br>
+     Schatzmeister: Dietmar Sickinger<br>
+     Schriftführerin: Carolin Zolkiewicz<br>
+     Kassenprüferin: Anne Schmitz</p>
+  <h2>Kontakt</h2>
+  <p>Telefon: <a href="tel:+4915143627548" style="text-decoration:underline">+49 151 43627548</a><br>
+     E-Mail: <a href="mailto:info@gemeinsamfuerwapa.de" style="text-decoration:underline">info@gemeinsamfuerwapa.de</a></p>
+  <h2>Streitschlichtung</h2>
+  <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  <h2>Haftung für Inhalte und Links</h2>
+  <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
+  <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für diese fremden Inhalte können wir keine Gewähr übernehmen; verantwortlich ist stets der jeweilige Anbieter. Bei Bekanntwerden von Rechtsverletzungen entfernen wir derartige Links umgehend.</p>
+  <h2>Urheberrecht</h2>
+  <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors.</p>
+  ${rn('<b>Übernommen von der bestehenden Website</b>, inhaltlich unverändert. Vor dem Umzug gehört geprüft, ob die Angaben noch stimmen — die Kassenprüferin ist dort genannt, im Satzungsabschnitt aber nicht.')}
+</div></div></section>`;
+
+/* ============ DATENSCHUTZ ============ */
+VIEWS['datenschutz'] = () => `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Datenschutz</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Datenschutzerklärung</h1>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <div class="hinweis">
+    <b>Diese Seite muss neu geschrieben werden.</b> Die Erklärung der bestehenden Website
+    beschreibt eine WordPress-Installation mit Cookies, Analysewerkzeugen und PayPal.
+    Auf eine statische Seite trifft davon fast nichts mehr zu — sie hier zu übernehmen
+    wäre schlicht falsch. Ein Entwurf gehört von jemandem geprüft, der sich damit auskennt.
+  </div>
+  <h2>Was sich durch den Umzug ändert</h2>
+  <div class="preise" style="max-width:none">
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Cookies</div><div class="b2">Entfallen. Die Seite setzt keine.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Analyse</div><div class="b2">Entfällt. Kein Tracking, keine Auswertung des Surfverhaltens.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Schriften</div><div class="b2">Werden von diesem Server geladen, nicht von Google. Es entsteht keine Verbindung zu Google.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Bilder</div><div class="b2">Liegen auf diesem Server. Kein Jetpack-CDN mehr.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">PayPal</div><div class="b2">Noch zu klären: ob es weiter angeboten wird. Falls ja, bleibt der Abschnitt nötig.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Serverprotokolle</div><div class="b2">Der Hoster protokolliert Zugriffe. Das gehört benannt, sobald der Hoster feststeht.</div></div>
+  </div>
+  <h2>Verantwortliche Stelle</h2>
+  <p>Kienewoyi Bertrand Bazie · Gemeinsam für Wapa e.&nbsp;V. · Römerweg 2, 72488 Sigmaringen<br>
+     <a href="mailto:info@gemeinsamfuerwapa.de" style="text-decoration:underline">info@gemeinsamfuerwapa.de</a></p>
+  <p>Betroffene haben jederzeit das Recht auf unentgeltliche Auskunft über ihre gespeicherten Daten, deren Herkunft und Empfänger sowie ein Recht auf Berichtigung oder Löschung, dazu ein Beschwerderecht bei der zuständigen Aufsichtsbehörde.</p>
+</div></div></section>`;
+
+/* ---------- Router ---------- */
+function waehle(el){
+  el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+}
+function render(){
+  const h = location.hash.replace(/^#\/?/,'').replace(/\/$/,'');
+  const teile = h.split('/');
+  let out;
+  if(teile[0]==='aktuelles' && teile[1]) out = VIEWS['beitrag'](decodeURIComponent(teile[1]));
+  else if(teile[0]==='projekt' && teile[1]) out = VIEWS['projekt'](decodeURIComponent(teile[1]));
+  else if(teile[0]==='projekte' && teile[1]) { filter = decodeURIComponent(teile[1]); out = VIEWS['projekte'](); }
+  else { if(teile[0]==='projekte') filter='Alle'; out = (VIEWS[teile[0]] || VIEWS[''])(); }
+  document.getElementById('app').innerHTML = out;
+  document.querySelectorAll('.menu a').forEach(a=>{
+    const ziel = teile[0]==='projekt' ? 'projekte' : teile[0];
+    a.classList.toggle('on', a.getAttribute('href') === '#/'+ziel && ziel!=='');
+  });
+  document.getElementById('menu').classList.remove('auf');
+  window.scrollTo(0,0);
+}
+
+window.addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>

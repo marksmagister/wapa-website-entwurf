@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemeinsam für Wapa — Website-Entwurf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   Tokens — identisch mit Markenleitfaden.html, Abschnitt 04/05
+   ========================================================= */
+:root{
+  --gruen:#276F27; --gruen-dark:#1E5A1E; --gruen-soft:#E8F0E6;
+  --gold:#E9A825;  --gold-hover:#D4941B; --gold-text:#8A6212; --gold-soft:#FBF0D9;
+  --ink:#1E2626;   --body:#4A5354;
+  --bg:#FCFAF6;    --flaeche:#F2EEE5; --linie:#E0D9CB;
+  --max:1180px; --r:8px;
+  --f-head:'Montserrat',system-ui,sans-serif;
+  --f-body:'Raleway',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--body);font-family:var(--f-body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--f-head);font-weight:600;line-height:1.22;margin:0 0 .5em;color:var(--ink);letter-spacing:-.005em}
+h1{font-size:clamp(2.25rem,5vw,3.5rem)}
+h2{font-size:clamp(1.62rem,3.1vw,2.3rem)}
+h3{font-size:1.19rem}
+h4{font-size:1rem;font-weight:700}
+p{margin:0 0 1.1em}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 26px}
+.eyebrow{font-family:var(--f-head);font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gruen);margin-bottom:14px}
+.lede{font-size:1.14rem;color:var(--body)}
+
+/* draft bar */
+#draftbar{background:var(--ink);color:#E8E4DC;font-size:.79rem;padding:9px 26px;display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;font-family:var(--f-head)}
+#draftbar b{color:var(--gold);font-weight:600}
+#draftbar a{color:#E8E4DC}
+#draftbar button{background:none;border:1px solid #4A5150;color:#B6B3AA;border-radius:4px;padding:3px 11px;font:inherit;font-size:.72rem;cursor:pointer}
+#draftbar button:hover{border-color:#8A8781;color:#fff}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(252,250,246,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--linie)}
+.nav{max-width:var(--max);margin:0 auto;padding:12px 26px;display:flex;align-items:center;gap:26px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto}
+.brand img{height:46px;width:auto;mix-blend-mode:multiply}
+.menu{display:flex;gap:24px;align-items:center}
+.menu a{text-decoration:none;font-family:var(--f-head);font-size:.87rem;font-weight:500;color:var(--body);padding:7px 0;border-bottom:2px solid transparent}
+.menu a:hover,.menu a.active{color:var(--gruen-dark);border-color:var(--gruen)}
+.btn{display:inline-block;text-decoration:none;font-family:var(--f-head);font-weight:600;font-size:.87rem;padding:12px 24px;border-radius:var(--r);background:var(--gruen);color:#fff;border:1px solid var(--gruen);transition:.15s;cursor:pointer}
+.btn:hover{background:var(--gruen-dark);border-color:var(--gruen-dark)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn.gold:hover{background:var(--gold-hover);border-color:var(--gold-hover)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn.onlight{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.btn.onlight:hover{background:#fff;color:var(--ink);border-color:#fff}
+.burger{display:none;background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--ink)}
+
+/* hero */
+.hero{position:relative;min-height:min(80vh,690px);display:flex;align-items:flex-end;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(18,22,22,.9) 0%,rgba(18,22,22,.5) 48%,rgba(18,22,22,.18) 100%)}
+.hero .wrap{position:relative;z-index:2;color:#fff;padding-top:110px;padding-bottom:56px}
+.hero h1{max-width:16ch;color:#fff}
+.hero .lede{color:#E4E0D7;max-width:54ch;font-size:1.18rem}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+/* stats */
+.stats{background:var(--ink)}
+.stats .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#333B3B}
+.stat{background:var(--ink);padding:32px 26px}
+.stat .n{font-family:var(--f-head);font-weight:700;font-size:2.4rem;color:var(--gold);line-height:1}
+.stat .l{font-size:.85rem;color:#B6B3AA;margin-top:6px}
+
+section{padding:84px 0}
+.alt{background:var(--flaeche)}
+.section-head{max-width:60ch;margin-bottom:42px}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pillar{background:#fff;border:1px solid var(--linie);border-radius:var(--r);overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:.18s}
+.pillar:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(30,38,38,.11);border-color:var(--gruen)}
+.pillar .ph{height:146px;overflow:hidden}
+.pillar .ph img{width:100%;height:100%;object-fit:cover}
+.pillar .bd{padding:20px 22px 24px}
+.pillar h3{margin-bottom:.35em}
+.pillar p{font-size:.9rem;margin:0}
+.pillar .more{margin-top:14px;font-family:var(--f-head);font-size:.8rem;font-weight:700;color:var(--gruen);letter-spacing:.04em}
+
+/* cards */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:#fff;border:1px solid var(--linie);border-radius:var(--r);overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:.18s}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(30,38,38,.11);border-color:var(--gruen)}
+.card .ph{aspect-ratio:16/10;overflow:hidden;background:var(--flaeche)}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.card:hover .ph img{transform:scale(1.04)}
+.card .bd{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column}
+.tag{display:inline-block;font-family:var(--f-head);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gruen);margin-bottom:9px}
+.card h3{font-size:1.14rem;margin-bottom:.4em}
+.card p{font-size:.9rem;margin:0}
+.card .date{margin-top:14px;font-size:.79rem;color:#7C8384}
+.feature{grid-column:span 3;display:grid;grid-template-columns:1.15fr 1fr}
+.feature .ph{aspect-ratio:auto;height:100%;min-height:330px}
+.feature .bd{padding:42px 44px;justify-content:center}
+.feature h3{font-size:1.85rem}
+.feature p{font-size:1rem}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.split img{border-radius:var(--r);width:100%;aspect-ratio:4/3;object-fit:cover}
+.quote{border-left:3px solid var(--gruen);padding-left:22px;font-family:var(--f-head);font-weight:500;font-size:1.15rem;line-height:1.5;color:var(--gruen-dark)}
+
+/* donate */
+.donate{background:var(--ink);color:#E8E4DC}
+.donate h2,.donate h3{color:#fff}
+.donate .lede{color:#B6B3AA}
+.donate .eyebrow{color:var(--gold)}
+.amounts{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 22px}
+.amount{border:1px solid #4A5150;background:transparent;color:#E8E4DC;border-radius:var(--r);padding:15px 19px;cursor:pointer;font:inherit;text-align:left;transition:.15s;min-width:152px}
+.amount:hover{border-color:var(--gold)}
+.amount.sel{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.amount .a{font-family:var(--f-head);font-weight:700;font-size:1.4rem;display:block;line-height:1}
+.amount .w{font-size:.79rem;opacity:.9;margin-top:5px;display:block}
+.iban{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.93rem;background:rgba(0,0,0,.3);padding:16px 18px;border-radius:var(--r);line-height:1.95;color:#E8E4DC}
+
+/* article */
+.article{max-width:720px;margin:0 auto}
+.article p{font-size:1.06rem}
+.article .hero-img{border-radius:var(--r);margin:0 0 32px;width:100%;aspect-ratio:16/9;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0}
+.gallery img{border-radius:var(--r);aspect-ratio:1;object-fit:cover;width:100%}
+.byline{display:flex;gap:13px;align-items:center;font-size:.87rem;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--linie)}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--gruen-soft);display:grid;place-items:center;font-family:var(--f-head);font-weight:700;color:var(--gruen-dark);font-size:.82rem}
+.pagehead{padding:64px 0 0}
+.crumb{font-size:.81rem;margin-bottom:14px}
+.crumb a{color:var(--gruen-dark);text-decoration:none}
+
+/* filters */
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:32px}
+.chip{border:1px solid var(--linie);background:#fff;border-radius:var(--r);padding:8px 17px;font-family:var(--f-head);font-size:.83rem;font-weight:500;cursor:pointer;transition:.15s;color:var(--body)}
+.chip:hover{border-color:var(--gruen);color:var(--gruen-dark)}
+.chip.on{background:var(--gruen);border-color:var(--gruen);color:#fff}
+
+/* footer */
+footer{background:var(--ink);color:#9A968D;padding:58px 0 28px;font-size:.89rem}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:38px;margin-bottom:42px}
+footer h4{color:#fff;font-family:var(--f-head);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:15px;font-weight:700}
+footer a{color:#9A968D;text-decoration:none;display:block;padding:4px 0}
+footer a:hover{color:var(--gold)}
+.fbot{border-top:1px solid #333B3B;padding-top:20px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.8rem;color:#7C7973}
+
+/* notes */
+.note{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:var(--r);padding:14px 18px;font-size:.85rem;color:#6B4C0E;margin:0 0 28px;line-height:1.6}
+.note b{color:#4C360A}
+body.hide-notes .note{display:none}
+
+@media(max-width:940px){
+  .pillars,.news-grid{grid-template-columns:1fr 1fr}
+  .feature{grid-column:span 2;grid-template-columns:1fr}
+  .feature .ph{min-height:230px}
+  .feature .bd{padding:30px 26px}
+  .stats .grid{grid-template-columns:1fr 1fr}
+  .split{grid-template-columns:1fr;gap:30px}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--linie);flex-direction:column;align-items:stretch;gap:0;padding:10px 26px 18px}
+  .menu.open{display:flex}
+  .menu a{padding:12px 0;border-bottom:1px solid var(--linie)}
+  .burger{display:block}
+  .nav .btn{display:none}
+  .pillars,.news-grid{grid-template-columns:1fr}
+  .feature{grid-column:span 1}
+  section{padding:56px 0}
+  .gallery{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="draftbar">
+  <span><b>Website-Entwurf</b> · gebaut auf dem <a href="Markenleitfaden.html">Markenleitfaden</a> · Inhalte und Bilder aus der bestehenden Website</span>
+  <button onclick="document.body.classList.toggle('hide-notes')">Kommentare ein/aus</button>
+  <button onclick="this.parentElement.remove()">Leiste ausblenden</button>
+</div>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="#/">
+      <img src="https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg" alt="Gemeinsam für Wapa · Mudawane Wapa Yila">
+    </a>
+    <div class="menu" id="menu">
+      <a href="#/projekte">Projekte</a>
+      <a href="#/aktuelles">Aktuelles</a>
+      <a href="#/ueber-uns">Über uns</a>
+      <a href="#/mitmachen">Mitmachen</a>
+      <a href="#/spenden">Spenden</a>
+    </div>
+    <a class="btn gold" href="#/spenden">Jetzt spenden</a>
+    <button class="burger" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </nav>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4>Gemeinsam für Wapa e.&nbsp;V.</h4>
+        <p style="color:#7C7973;max-width:34ch">Mudawane Wapa Yila — gemeinnütziger Verein aus Sigmaringen. Hilfe zur Selbsthilfe in der Provinz Sanguié, Burkina Faso. Gegründet 2017.</p>
+      </div>
+      <div>
+        <h4>Projekte</h4>
+        <a href="#/projekte">Grundversorgung</a>
+        <a href="#/projekte">Bildung</a>
+        <a href="#/projekte">Infrastruktur</a>
+        <a href="#/projekte">Umweltschutz</a>
+      </div>
+      <div>
+        <h4>Verein</h4>
+        <a href="#/ueber-uns">Über uns</a>
+        <a href="#/mitmachen">Mitmachen</a>
+        <a href="#/ueber-uns">Vereinssatzung</a>
+        <a href="#/ueber-uns">Partner</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="mailto:info@gemeinsamfuerwapa.de">info@gemeinsamfuerwapa.de</a>
+        <a href="tel:+4915143627548">0151 43627548</a>
+        <a href="https://www.instagram.com/gemeinsamfuerwapa/">Instagram</a>
+        <a href="https://www.facebook.com/groups/1878369855725767/">Facebook</a>
+        <a href="https://www.linkedin.com/company/gemeinsam-für-wapa/">LinkedIn</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 Gemeinsam für Wapa e.&nbsp;V. · Impressum · Datenschutzerklärung</span>
+      <span>Entwurf · statische Website · August 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const IMG = {
+  ekulpung1:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2024/01/IMG-20231228-WA0054.jpg?w=1400&ssl=1',
+  ekulpung2:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2024/01/IMG-20231228-WA0060.jpg?w=1200&ssl=1',
+  ekulpung3:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2024/01/IMG-20231228-WA0073.jpg?w=1200&ssl=1',
+  ekulpung4:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2024/01/IMG-20231224-WA0009.jpg?w=1200&ssl=1',
+  wasserturm:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2021/04/Wasserturm.jpeg?w=1200&ssl=1',
+  garten:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2021/08/Garten4.jpeg?w=1200&ssl=1',
+  waldgarten:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2022/05/4c387a6e-96b9-41f0-86a1-6ff9047d6a8d.jpg?w=1200&ssl=1',
+  pflanz:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2022/02/Pflanzungsaktion-Februar-2022-4.jpeg?w=1200&ssl=1',
+  naeh:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2022/02/WhatsApp-Image-2022-02-04-at-20.38.16-2.jpeg?w=1200&ssl=1',
+  wasserwapa:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2016/08/wasser-fuer-wapa-header-1.jpg?w=1400&ssl=1',
+  solar:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2016/08/solarenergie_gr2.jpg?w=1200&ssl=1',
+  seife:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2016/08/seifenherstellung.jpg?w=1200&ssl=1',
+  baum:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2016/08/baumprojekt5.jpg?w=1200&ssl=1',
+  sprachkurs:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2016/08/sprachkurs_gr.jpg?w=1200&ssl=1',
+  textil:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2020/02/HPWE7802.jpg?w=1200&ssl=1',
+  zentrum:'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2018/10/IMG-20190627-WA0056Ivergr%C3%B6%C3%9Fert.jpg?w=1400&ssl=1'
+};
+
+const PROJEKTE = [
+  {t:'Wasser für Wapa', k:'Grundversorgung', img:IMG.wasserwapa, txt:'Der Brunnen, mit dem alles begann — die Idee von Bertrands Vater Bazie Kodio Claver. Fertiggestellt im April 2016, später um eine motorisierte Pumpe erweitert.', jahr:'seit 2016'},
+  {t:'Wasserstelle Ekulpung', k:'Grundversorgung', img:IMG.ekulpung2, txt:'Zapfstelle für das Dorf Ekulpung, im Dezember 2023 in Anwesenheit des Dorfoberhaupts übergeben.', jahr:'2023'},
+  {t:'Solaranlage', k:'Infrastruktur', img:IMG.solar, txt:'Ein Prototyp entstand in Hohentengen auf dem Gelände von E hoch 4; die Anlage versorgt Pumpe und Wasserturm mit Strom.', jahr:'seit 2019'},
+  {t:'Wasserturm & Brunnenbau', k:'Infrastruktur', img:IMG.wasserturm, txt:'Öffentlich zugängliche Wasserhähne, gespeist aus einem Hochtank — fertiggestellt am Osterwochenende 2021.', jahr:'2021'},
+  {t:'Polytechnisches Ausbildungszentrum für Frauen', k:'Bildung', img:IMG.zentrum, txt:'In Réo entsteht ein Ausbildungszentrum, das Frauen wirtschaftliche Eigenständigkeit ermöglicht. Heute werden dort 120 Frauen unterrichtet.', jahr:'seit 2018'},
+  {t:'Seifenherstellung in der Nähschule', k:'Bildung', img:IMG.seife, txt:'Ein Ausbildungsmodul zur Seifenproduktion — 28 Frauen haben teilgenommen.', jahr:'2020'},
+  {t:'Textilfärbung', k:'Bildung', img:IMG.textil, txt:'Ausbildungsmodul zur Herstellung und Färbung von Textilien in der Schule.', jahr:'2020'},
+  {t:'Sprachkurs (Lele)', k:'Bildung', img:IMG.sprachkurs, txt:'Viele Frauen in der Nähschule können weder lesen noch schreiben. Der Lele-Kurs ermöglicht ihnen Rechnungen und Messungen.', jahr:'seit 2020'},
+  {t:'Waldgarten am Wasserturm', k:'Umweltschutz', img:IMG.garten, txt:'Rund um den neuen Wasserturm entsteht ein Waldgarten — Lebensgrundlage vor Ort und Beitrag zur Aufforstung.', jahr:'seit 2021'},
+  {t:'Baumprojekt', k:'Umweltschutz', img:IMG.baum, txt:'Gegen die Abholzung für Feuerholz: Aufforstung und Alternativen zur Brennholznutzung.', jahr:'seit 2016'}
+];
+
+const NEWS = [
+  {slug:'wasser-fuer-ekulpung', t:'Wasser für Ekulpung', k:'Grundversorgung', d:'1. Januar 2024', a:'Caro Sickinger', img:IMG.ekulpung1,
+   ex:'Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie die Installation der Wasserstelle in Ekulpung erfolgreich durchführen.'},
+  {slug:'waldgarten-waechst', t:'Waldgarten wächst', k:'Umweltschutz', d:'2. Mai 2022', a:'Thomas Harnisch', img:IMG.waldgarten,
+   ex:'Unser erster Waldgarten beim Dorfbrunnen wächst und gedeiht. Die Wasserversorgung steht und wird aus dem neuen Wassertank gespeist.'},
+  {slug:'pflanzaktion-februar-2022', t:'Pflanzaktion Februar 2022', k:'Umweltschutz', d:'22. Februar 2022', a:'Thomas Harnisch', img:IMG.pflanz,
+   ex:'Der Waldgarten bei unserem Dorfbrunnen wurde mit neuen Setzlingen beliefert. Die Mangos vom letzten Jahr tragen bereits.'},
+  {slug:'naehmaschinenlieferung', t:'Nähmaschinenlieferung', k:'Bildung', d:'7. Februar 2022', a:'Thomas Harnisch', img:IMG.naeh,
+   ex:'Nach einer Reise per Containerschiff kamen die gespendeten Nähmaschinen nun in Wapa an.'},
+  {slug:'garten-am-wasserturm', t:'Garten am Wasserturm', k:'Umweltschutz', d:'21. August 2021', a:'Thomas Harnisch', img:IMG.garten,
+   ex:'Nachdem der neue Brunnen nebst Solaranlage und Wasserturm in Betrieb genommen wurde, haben wir mit dem Garten begonnen.'},
+  {slug:'brunnenbau-fertiggestellt', t:'Brunnenbau fertiggestellt', k:'Infrastruktur', d:'5. April 2021', a:'Thomas Harnisch', img:IMG.wasserturm,
+   ex:'Der Brunnenbau wurde am Osterwochenende beendet — eine wirklich tolle Leistung.'}
+];
+
+const note = t => `<div class="note">${t}</div>`;
+const card = n => `<a class="card" href="#/aktuelles/${n.slug}">
+  <div class="ph"><img loading="lazy" src="${n.img}" alt=""></div>
+  <div class="bd"><span class="tag">${n.k}</span><h3>${n.t}</h3><p>${n.ex}</p><span class="date">${n.d} · ${n.a}</span></div>
+</a>`;
+
+function donateBlock(){ return `
+<section class="donate">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="eyebrow">Jede Spende zählt</div>
+        <h2>Ihre Spende kommt vollständig an</h2>
+        <p class="lede">Verwaltung und Öffentlichkeitsarbeit leisten wir ehrenamtlich. Wählen Sie einen Betrag — oder überweisen Sie direkt auf unser Spendenkonto.</p>
+        <div class="amounts">
+          <button class="amount" onclick="selAmount(this)"><span class="a">25 €</span><span class="w">Setzlinge für den Waldgarten</span></button>
+          <button class="amount sel" onclick="selAmount(this)"><span class="a">60 €</span><span class="w">Schulmaterial für ein Jahr</span></button>
+          <button class="amount" onclick="selAmount(this)"><span class="a">120 €</span><span class="w">Eine Nähmaschine</span></button>
+          <button class="amount" onclick="selAmount(this)"><span class="a">Frei</span><span class="w">Eigener Betrag</span></button>
+        </div>
+        <a class="btn gold" href="https://www.betterplace.org/de/organisations/47348-gemeinsam-fuer-wapa">Über Betterplace spenden</a>
+      </div>
+      <div>
+        <h3>Spendenkonto</h3>
+        <div class="iban">
+          IBAN&nbsp; DE18 6535 1050 0000 0387 28<br>
+          BIC&nbsp;&nbsp;&nbsp; SOLADES1SIG<br>
+          Sparkasse Sigmaringen
+        </div>
+        <p style="margin-top:16px;font-size:.92rem;color:#B6B3AA">Verwendungszweck für ein bestimmtes Projekt: <b style="color:var(--gold)">„Schule“</b>, <b style="color:var(--gold)">„Aufforstung“</b> oder <b style="color:var(--gold)">„Solarofen“</b>. Für die Spendenbescheinigung bitte Ihre Adresse angeben.</p>
+        ${note('<b>Kommentar:</b> Gold ist im Leitfaden ausschließlich für Spenden reserviert. Dadurch ist der Spenden-Button auf jeder Seite sofort auffindbar, ohne dass er größer oder lauter sein muss.')}
+      </div>
+    </div>
+  </div>
+</section>`;}
+
+const VIEWS = {};
+
+VIEWS[''] = () => `
+<div class="hero">
+  <img class="bg" src="${IMG.ekulpung1}" alt="Übergabe der Wasserstelle in Ekulpung">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)">Sanguié · Burkina Faso · seit 2017</div>
+    <h1>Wasser, Bildung und Bäume — dort, wo sie gebraucht werden.</h1>
+    <p class="lede">Unser Vorsitzender stammt aus Wapa. Wir planen und bauen zusammen mit den Menschen vor Ort. Hilfe zur Selbsthilfe, seit 2017.</p>
+    <div class="hero-cta">
+      <a class="btn gold" href="#/spenden">Jetzt spenden</a>
+      <a class="btn onlight" href="#/projekte">Unsere Projekte ansehen</a>
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="wrap" style="padding:0">
+    <div class="grid">
+      <div class="stat"><div class="n">120</div><div class="l">Frauen in Ausbildung</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Wasseranlagen gebaut</div></div>
+      <div class="stat"><div class="n">2017</div><div class="l">Verein gegründet</div></div>
+      <div class="stat"><div class="n">100 %</div><div class="l">der Spenden in Projekte</div></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    ${note('<b>Kommentar:</b> Der Hero führt jetzt mit der Herkunft, nicht mit dem Claim. „Unser Vorsitzender stammt aus Wapa“ ist das Argument, das euch von anderen Vereinen unterscheidet — es stand bisher im vierten Absatz von „Über uns“. Das Zahlenband darunter ist neu; die Werte muss der Vorstand bestätigen (Punkt 4 im Leitfaden).')}
+    <div class="section-head">
+      <div class="eyebrow">Vier Säulen unserer Arbeit</div>
+      <h2>Hilfe zur Selbsthilfe — an den Bedürfnissen vor Ort ausgerichtet</h2>
+      <p class="lede">Mudawane Wapa Yila plant und baut zusammen mit den Menschen in Sanguié. Bei jedem Projekt steht die Selbsthilfeförderung im Vordergrund.</p>
+    </div>
+    <div class="pillars">
+      <a class="pillar" href="#/projekte"><div class="ph"><img loading="lazy" src="${IMG.wasserwapa}" alt=""></div><div class="bd"><h3>Grundversorgung</h3><p>Wasser, Nahrung und Medikamente sichern.</p><div class="more">PROJEKTE ANSEHEN →</div></div></a>
+      <a class="pillar" href="#/projekte"><div class="ph"><img loading="lazy" src="${IMG.zentrum}" alt=""></div><div class="bd"><h3>Bildung</h3><p>Nähschule, Ausbildungszentrum und Alphabetisierung.</p><div class="more">PROJEKTE ANSEHEN →</div></div></a>
+      <a class="pillar" href="#/projekte"><div class="ph"><img loading="lazy" src="${IMG.solar}" alt=""></div><div class="bd"><h3>Infrastruktur</h3><p>Wasser- und Stromversorgung, Solaranlagen.</p><div class="more">PROJEKTE ANSEHEN →</div></div></a>
+      <a class="pillar" href="#/projekte"><div class="ph"><img loading="lazy" src="${IMG.baum}" alt=""></div><div class="bd"><h3>Umweltschutz</h3><p>Aufforstung und Abmilderung der Klimafolgen.</p><div class="more">PROJEKTE ANSEHEN →</div></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    ${note('<b>Kommentar:</b> Ein hervorgehobener Beitrag statt sechs gleich großer Kacheln. Genau hier setzt der neue Publikations-Workflow an: ein neuer Beitrag = eine neue Markdown-Datei, alles andere entsteht beim Build.')}
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;max-width:none;gap:20px;flex-wrap:wrap">
+      <div style="max-width:52ch">
+        <div class="eyebrow">Aktuelles</div>
+        <h2>Was zuletzt passiert ist</h2>
+      </div>
+      <a class="btn ghost" href="#/aktuelles">Alle Beiträge</a>
+    </div>
+    <div class="news-grid">
+      <a class="card feature" href="#/aktuelles/${NEWS[0].slug}">
+        <div class="ph"><img src="${NEWS[0].img}" alt=""></div>
+        <div class="bd"><span class="tag">${NEWS[0].k}</span><h3>${NEWS[0].t}</h3><p>${NEWS[0].ex}</p><span class="date">${NEWS[0].d} · ${NEWS[0].a}</span></div>
+      </a>
+      ${NEWS.slice(1,4).map(card).join('')}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="split">
+      <img src="${IMG.naeh}" alt="Nähschule in Wapa">
+      <div>
+        <div class="eyebrow">Warum es funktioniert</div>
+        <h2>Direkter geht Entwicklungs&shy;zusammenarbeit kaum</h2>
+        <p>Bertrand Bazie kennt die Bedürfnisse vor Ort, spricht mit Offiziellen und Verantwortlichen und besucht seine alte Heimat, so oft er kann.</p>
+        <p>Verwaltung und Öffentlichkeitsarbeit organisieren wir in Eigenleistung. Damit fließt jeder Euro aus Mitgliedsbeiträgen und Spenden in die Projekte.</p>
+        <p class="quote">„Sein Vater hatte begonnen, einen Brunnen für sein Heimatdorf zu bauen. Nach dessen Tod hat es sich Bertrand zur Aufgabe gemacht, dieses Projekt fortzusetzen.“</p>
+        <a class="btn ghost" href="#/ueber-uns" style="margin-top:8px">Unsere Geschichte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+${donateBlock()}
+`;
+
+VIEWS['projekte'] = () => `
+<div class="pagehead"><div class="wrap">
+  <div class="eyebrow">Projektübersicht</div>
+  <h1 style="font-size:clamp(1.9rem,3.8vw,3rem)">Unsere Projekte</h1>
+  <p class="lede" style="max-width:62ch">Wir orientieren uns bei Auswahl und Auslegung unserer Projekte an unserer Satzung, unserem Manifest und den UN-Nachhaltigkeitszielen.</p>
+</div></div>
+<section style="padding-top:40px">
+  <div class="wrap">
+    ${note('<b>Kommentar:</b> Heute liegen die Projekte in WordPress-„Portfolio-Items“ mit URLs wie <code>?portfolioCats=31,30</code> — „Garten Wasserturm“ erscheint dadurch zweimal auf derselben Seite. Neu: eine Liste, clientseitig gefiltert, jedes Projekt genau einmal.')}
+    <div class="filters" id="filters">
+      <button class="chip on" onclick="filt(this,'alle')">Alle</button>
+      <button class="chip" onclick="filt(this,'Grundversorgung')">Grundversorgung</button>
+      <button class="chip" onclick="filt(this,'Bildung')">Bildung</button>
+      <button class="chip" onclick="filt(this,'Infrastruktur')">Infrastruktur</button>
+      <button class="chip" onclick="filt(this,'Umweltschutz')">Umweltschutz</button>
+    </div>
+    <div class="news-grid" id="plist">
+      ${PROJEKTE.map(p=>`<a class="card" data-k="${p.k}" href="#/projekte">
+        <div class="ph"><img loading="lazy" src="${p.img}" alt=""></div>
+        <div class="bd"><span class="tag">${p.k}</span><h3>${p.t}</h3><p>${p.txt}</p><span class="date">${p.jahr}</span></div></a>`).join('')}
+    </div>
+  </div>
+</section>
+${donateBlock()}`;
+
+VIEWS['aktuelles'] = () => `
+<div class="pagehead"><div class="wrap">
+  <div class="eyebrow">Aktuelles</div>
+  <h1 style="font-size:clamp(1.9rem,3.8vw,3rem)">Neues aus Sanguié</h1>
+  <p class="lede" style="max-width:60ch">Mehrmals im Jahr berichten wir über den Stand unserer Projekte. Alle Beiträge erscheinen auch im Newsletter.</p>
+</div></div>
+<section style="padding-top:40px"><div class="wrap">
+  ${note('<b>Kommentar:</b> Der jüngste Beitrag stammt vom 1. Januar 2024 — zweieinhalb Jahre Stillstand. Genau das löst der neue Ablauf: Text und Fotos an Claude geben, fertige Markdown-Datei landet im Repository, die Seite baut sich selbst.')}
+  <div class="news-grid">${NEWS.map(card).join('')}</div>
+</div></section>`;
+
+VIEWS['ueber-uns'] = () => `
+<div class="pagehead"><div class="wrap">
+  <div class="eyebrow">Über uns</div>
+  <h1 style="font-size:clamp(1.9rem,3.8vw,3rem)">Gemeinsam für Wapa</h1>
+</div></div>
+<section style="padding-top:36px"><div class="wrap"><div class="article">
+  <img class="hero-img" src="${IMG.zentrum}" alt="Ausbildungszentrum in Réo">
+  <p class="lede"><i>Gemeinsam für Wapa</i> ist ein gemeinnütziger Verein mit dem Ziel, in der Provinz Sanguié, Burkina Faso, Hilfe zur Selbsthilfe zu leisten.</p>
+  <p>Die ersten Projekte wurden in Wapa durchgeführt, einem Ort mit rund 1.000 Einwohnern, aus dem unser Gründer und Vorsitzender Bertrand Bazie stammt. Bertrand kam 2011 zum Studium nach Deutschland und erhielt 2018 seinen Master an der Hochschule Albstadt-Sigmaringen. Heute arbeitet er als Pharmaingenieur in Frankfurt.</p>
+  <p>Sein Vater hatte begonnen, einen Brunnen für sein Heimatdorf zu bauen. Nach dessen Tod hat Bertrand dieses Projekt neben seinem Studium fortgesetzt und sich in Sigmaringen auf die Suche nach Unterstützern gemacht. Daraus entstand 2017 der Verein. Eine der Hauptinitiatorinnen war die 2020 verstorbene Marlis Schmitt-Sickinger.</p>
+  <p>Der Brunnen in Wapa wurde im April 2016 fertiggestellt und später um eine motorisierte Pumpe erweitert. Es folgten größere Projekte: eine Solaranlage, der Bau einer Nähschule für junge Frauen aus der Provinz Sanguié — heute unterrichten wir dort 120 Frauen — und der Dorfgarten als Beitrag zur Aufforstung der Region.</p>
+
+  ${note('<b>Kommentar:</b> Neu — die Bedeutung des Logos erklären. Die drei Figuren, das Schild, der markierte Ort: das ist eine gute Geschichte, die derzeit niemand erfährt.')}
+  <div style="background:var(--flaeche);border-radius:var(--r);padding:26px 30px;margin:30px 0;display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+    <img src="https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg" alt="" style="width:190px;flex:none;mix-blend-mode:multiply">
+    <div style="flex:1;min-width:240px">
+      <h4 style="margin-bottom:.4em">Unser Zeichen</h4>
+      <p style="margin:0;font-size:.95rem">Drei Menschen mit erhobenen Armen stehen für das Gemeinsame. Darunter die Umrisse Burkina Fasos, mit Wapa markiert — dem Dorf, in dem alles begann. „Mudawane Wapa Yila“ ist der Name des Vereins in Lele, der Sprache der Region.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2em">Vorstand</h3>
+  <p><b>Kienewoyi Bertrand Bazie</b> — 1. Vorsitzender<br><b>Dietmar Sickinger</b> — Kassier<br><b>Carolin Zolkiewicz</b> — Schriftführerin</p>
+  ${note('<b>Kommentar:</b> Der Vorstand fehlt auf der heutigen Seite komplett. Drei Porträts mit Namen und Rolle erhöhen die Glaubwürdigkeit deutlich — gerade gegenüber Stiftungen und Firmenspendern.')}
+  <p style="margin-top:2em"><a class="btn" href="#/mitmachen">Mitglied werden</a> &nbsp; <a class="btn ghost" href="mailto:info@gemeinsamfuerwapa.de">Newsletter abonnieren</a></p>
+</div></div></section>`;
+
+VIEWS['mitmachen'] = () => `
+<div class="pagehead"><div class="wrap">
+  <div class="eyebrow">Mitmachen</div>
+  <h1 style="font-size:clamp(1.9rem,3.8vw,3rem)">Es geht nicht nur ums Geld</h1>
+  <p class="lede" style="max-width:58ch">Bei <i>Gemeinsam für Wapa</i> können Sie Ihr Engagement und Ihre Ideen einbringen, um die Lebenssituation vieler Menschen in Burkina Faso nachhaltig zu verbessern.</p>
+</div></div>
+<section style="padding-top:40px"><div class="wrap">
+  <div class="pillars" style="grid-template-columns:repeat(3,1fr)">
+    <a class="pillar" href="#/mitmachen"><div class="bd"><h3>Mitglied werden</h3><p>Beitrittserklärung ausfüllen und zusenden. Der Mitgliedsbeitrag fließt vollständig in die Projekte.</p><div class="more">FORMULAR HERUNTERLADEN →</div></div></a>
+    <a class="pillar" href="#/spenden"><div class="bd"><h3>Schulpatenschaft</h3><p>Ermöglichen Sie jungen Frauen und Mädchen den Zugang zu Ausbildung.</p><div class="more">PATENSCHAFT ÜBERNEHMEN →</div></div></a>
+    <a class="pillar" href="mailto:info@gemeinsamfuerwapa.de"><div class="bd"><h3>Mitarbeiten</h3><p>Öffentlichkeitsarbeit, Veranstaltungen, Technik, Übersetzung — schreiben Sie uns einfach.</p><div class="more">E-MAIL SCHREIBEN →</div></div></a>
+  </div>
+  ${note('<b>Kommentar:</b> „Mitmachen“ ist heute ein Unterpunkt von „Über uns“ und praktisch unsichtbar. Als eigener Menüpunkt mit drei klaren Wegen wird aus Interesse eher eine Handlung.')}
+</div></section>
+${donateBlock()}`;
+
+VIEWS['spenden'] = () => `
+<div class="pagehead"><div class="wrap">
+  <div class="eyebrow">Spenden</div>
+  <h1 style="font-size:clamp(1.9rem,3.8vw,3rem)">Jede Spende zählt</h1>
+</div></div>
+${donateBlock()}
+<section><div class="wrap"><div class="article">
+  <h3>Häufige Fragen</h3>
+  <p><b>Bekomme ich eine Spendenbescheinigung?</b><br>Ja. Bescheinigungen werden zu Beginn des Folgejahres ausgestellt. Bitte teilen Sie uns dafür Ihre Adresse mit.</p>
+  <p><b>Kann ich für ein bestimmtes Projekt spenden?</b><br>Ja — geben Sie im Verwendungszweck „Schule“, „Aufforstung“ oder „Solarofen“ an.</p>
+  <p><b>Wie viel kommt an?</b><br>Verwaltung und Öffentlichkeitsarbeit leisten wir ehrenamtlich. Die Kasse wird jährlich von zwei Kassenprüfern geprüft.</p>
+</div></div></section>`;
+
+function artikel(slug){
+  const n = NEWS.find(x=>x.slug===slug) || NEWS[0];
+  const body = slug==='wasser-fuer-ekulpung' ? `
+    <p class="lede">Grosse Freude in Ekulpung: Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie wie geplant die Installation der Wasserstelle in Ekulpung erfolgreich durchführen.</p>
+    <p>Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell für die Bewohner:innen des Dorfes freigegeben und in ihre Verantwortung übergeben.</p>
+    <p>Ekulpung erhält damit den lang ersehnten Zugang zu fließendem Wasser. Die Übergabe wurde groß gefeiert und der neue Brunnen mit Dankbarkeit und Freude von den Dorfbewohner:innen angenommen.</p>
+    <div class="gallery">
+      <img loading="lazy" src="${IMG.ekulpung2}" alt=""><img loading="lazy" src="${IMG.ekulpung3}" alt=""><img loading="lazy" src="${IMG.ekulpung4}" alt="">
+    </div>
+    <p>Wir sind stolz darauf, dieses Weihnachtsgeschenk machen zu können, und zuversichtlich, dass die nachhaltige Bereitstellung von sauberem Wasser das Leben der Bewohner:innen verbessern wird.</p>
+    <p>Herzlichen Dank allen Unterstützer:innen, Spender:innen und Beteiligten, die dazu beigetragen haben, dieses wichtige Vorhaben zu verwirklichen.</p>` :
+    `<p class="lede">${n.ex}</p><p>Dieser Beitrag ist im Entwurf verkürzt dargestellt. Der vollständige Text wird bei der Migration aus WordPress übernommen.</p>`;
+  return `
+<div class="pagehead"><div class="wrap"><div class="article">
+  <div class="crumb"><a href="#/aktuelles">Aktuelles</a> · ${n.k}</div>
+  <h1 style="font-size:clamp(1.9rem,3.8vw,2.9rem)">${n.t}</h1>
+</div></div></div>
+<section style="padding-top:30px"><div class="wrap"><div class="article">
+  <div class="byline"><span class="avatar">${n.a.split(' ').map(w=>w[0]).join('')}</span><span>${n.a} · ${n.d} · 3 Minuten Lesezeit</span></div>
+  <img class="hero-img" src="${n.img}" alt="">
+  ${body}
+  ${note('<b>Kommentar:</b> So sieht ein Beitrag aus, der aus einer Markdown-Datei erzeugt wird. Für einen neuen Beitrag braucht es künftig nur Text und Fotos — Titel, Datum, Kategorie, Bildgrößen und Vorschaukarte entstehen automatisch beim Build.')}
+  <div style="background:var(--flaeche);border-radius:var(--r);padding:26px 30px;margin-top:34px">
+    <h3 style="margin-bottom:.4em">Unterstützen Sie das nächste Projekt</h3>
+    <p style="margin-bottom:1em">Mit Ihrer Spende oder einer Schulpatenschaft für junge Frauen und Mädchen.</p>
+    <a class="btn gold" href="#/spenden">Jetzt spenden</a>
+  </div>
+  <h3 style="margin-top:2.6em">Weitere Beiträge</h3>
+  <div class="news-grid" style="grid-template-columns:1fr 1fr">${NEWS.filter(x=>x.slug!==n.slug).slice(0,2).map(card).join('')}</div>
+</div></div></section>`;
+}
+
+function selAmount(el){
+  el.parentElement.querySelectorAll('.amount').forEach(a=>a.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function filt(btn,k){
+  document.querySelectorAll('#filters .chip').forEach(c=>c.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('#plist .card').forEach(c=>{
+    c.style.display = (k==='alle'||c.dataset.k===k) ? '' : 'none';
+  });
+}
+function router(){
+  const h = location.hash.replace(/^#\/?/,'').replace(/\/$/,'');
+  const parts = h.split('/');
+  let html;
+  if(parts[0]==='aktuelles' && parts[1]) html = artikel(parts[1]);
+  else html = (VIEWS[parts[0]] || VIEWS[''])();
+  document.getElementById('app').innerHTML = html;
+  document.getElementById('menu').classList.remove('open');
+  document.querySelectorAll('#menu a').forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href')==='#/'+parts[0]);
+  });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',router);
+router();
+</script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemeinsam für Wapa — Markenleitfaden (Entwurf)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gruen:#276F27; --gruen-dark:#1E5A1E; --gruen-soft:#E8F0E6;
+  --gold:#E9A825;  --gold-text:#8A6212; --gold-soft:#FBF0D9;
+  --ink:#1E2626;   --body:#4A5354;
+  --bg:#FCFAF6;    --flaeche:#F2EEE5; --linie:#E0D9CB;
+  --max:1080px; --r:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--body);font-family:'Raleway',system-ui,sans-serif;font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Montserrat',system-ui,sans-serif;font-weight:600;line-height:1.2;letter-spacing:-.01em;margin:0 0 .5em;color:var(--ink)}
+h1{font-size:clamp(2.2rem,5.4vw,3.5rem)}
+h2{font-size:clamp(1.6rem,3.2vw,2.3rem)}
+h3{font-size:1.18rem}
+h4{font-size:.98rem;font-weight:700}
+p{margin:0 0 1em}
+img{display:block;max-width:100%}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:var(--flaeche);padding:2px 6px;border-radius:5px;color:var(--ink)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+.narrow{max-width:70ch}
+section{padding:68px 0;border-top:1px solid var(--linie)}
+.num{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;color:var(--gruen);letter-spacing:.18em;margin-bottom:12px;display:block}
+.lede{font-size:1.12rem;color:var(--body)}
+
+.cover{padding:86px 0 66px;background:var(--ink);color:#E8E4DC;border:0}
+.cover h1{color:#fff;max-width:16ch}
+.cover .lede{color:#B6B3AA}
+.cover .meta{margin-top:38px;display:flex;gap:36px;flex-wrap:wrap;font-size:.85rem;color:#9A968D}
+.cover .meta b{display:block;color:var(--gold);font-weight:600;margin-bottom:3px;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
+
+.badge{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;padding:3px 9px;border-radius:99px;vertical-align:middle;margin-left:6px;font-family:'Montserrat',sans-serif}
+.b-mess{background:var(--gruen-soft);color:var(--gruen-dark)}
+.b-vor{background:var(--gold-soft);color:var(--gold-text)}
+.b-off{background:#F7E2E0;color:#8E2F26}
+.legend{display:flex;gap:24px;flex-wrap:wrap;font-size:.83rem;background:var(--flaeche);border-radius:var(--r);padding:16px 20px;margin-bottom:36px}
+
+table{width:100%;border-collapse:collapse;font-size:.89rem;margin:0 0 24px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--linie);vertical-align:top}
+th{font-family:'Montserrat',sans-serif;font-size:.69rem;letter-spacing:.11em;text-transform:uppercase;color:var(--body);font-weight:700}
+tbody tr:hover{background:var(--flaeche)}
+.ok{color:var(--gruen-dark);font-weight:700}
+.no{color:#A03328;font-weight:700}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:.85em}
+
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px}
+.sw{border-radius:var(--r);overflow:hidden;border:1px solid var(--linie);background:#fff}
+.sw .chip{height:100px;display:flex;align-items:flex-end;padding:10px 12px;font-size:.72rem;font-weight:700;font-family:'Montserrat',sans-serif}
+.sw .info{padding:12px 14px 15px}
+.sw .nm{font-weight:700;font-size:.92rem;color:var(--ink);font-family:'Montserrat',sans-serif}
+.sw .hx{font-family:ui-monospace,Menlo,monospace;font-size:.79rem;color:var(--body);margin-top:3px}
+.sw .use{font-size:.78rem;color:var(--body);margin-top:8px;line-height:1.5}
+
+.logobox{background:#fff;border:1px solid var(--linie);border-radius:var(--r);padding:34px;display:grid;place-items:center;min-height:200px}
+.logobox.dark{background:var(--ink)}
+.logobox.green{background:var(--gruen)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.caption{font-size:.81rem;color:var(--body);margin-top:10px;line-height:1.55}
+
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:10px}
+.dd > div{border-radius:var(--r);padding:20px 22px;font-size:.91rem}
+.do{background:var(--gruen-soft);border:1px solid #C6DCC2}
+.dont{background:#FBEAE7;border:1px solid #EFCFC9}
+.dd h4{margin-bottom:10px}
+.do h4{color:var(--gruen-dark)}.dont h4{color:#8E2F26}
+.dd ul{margin:0;padding-left:19px}
+.dd li{margin-bottom:7px}
+
+.spec{border-left:3px solid var(--linie);padding-left:22px;margin-bottom:26px}
+.spec .l{font-family:'Montserrat',sans-serif;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gruen);margin-bottom:8px;font-weight:700}
+
+.imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.imgs figure{margin:0}
+.imgs img{border-radius:10px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.imgs figcaption{font-size:.75rem;color:var(--body);margin-top:7px;line-height:1.45}
+
+.btn{display:inline-block;text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.87rem;padding:12px 24px;border-radius:4px;background:var(--gruen);color:#fff;border:1px solid var(--gruen);cursor:pointer}
+.btn:hover{background:var(--gruen-dark);border-color:var(--gruen-dark)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn.gold:hover{background:#D4941B;border-color:#D4941B}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gruen)}
+.comp{background:#fff;border:1px solid var(--linie);border-radius:var(--r);padding:26px;margin-bottom:18px}
+.comp .l{font-family:'Montserrat',sans-serif;font-size:.69rem;letter-spacing:.13em;text-transform:uppercase;color:var(--body);margin-bottom:16px;font-weight:700}
+
+.dec{background:#fff;border:1px solid var(--linie);border-left:4px solid var(--gold);border-radius:var(--r);padding:20px 24px;margin-bottom:14px}
+.dec h4{margin-bottom:6px}
+.dec p{margin:0;font-size:.92rem}
+.dec .who{font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gruen);font-weight:700;margin-top:10px;display:block}
+
+.cta{background:var(--flaeche);border-radius:var(--r);padding:30px 32px;margin-top:32px}
+.flag{display:flex;height:8px;border-radius:99px;overflow:hidden;max-width:300px;margin:14px 0 6px}
+.flag span{flex:1}
+footer{background:var(--ink);color:#9A968D;padding:44px 0;font-size:.85rem}
+footer a{color:var(--gold)}
+
+@media(max-width:820px){
+  .grid2,.grid3,.dd{grid-template-columns:1fr}
+  .imgs{grid-template-columns:1fr 1fr}
+  section{padding:50px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="wrap">
+    <span class="num" style="color:var(--gold)">MARKENLEITFADEN · ENTWURF v1 · AUGUST 2026</span>
+    <h1>Gemeinsam für Wapa</h1>
+    <p class="lede narrow">Dieser Leitfaden dokumentiert, was die Marke heute tatsächlich ist — die Werte sind aus der Live-Website ausgelesen, nicht geschätzt. Er schlägt vor, wo sie geordnet werden sollte, und benennt die Punkte, über die der Vorstand entscheiden muss. Er ist die Grundlage für den Website-Entwurf, nicht umgekehrt.</p>
+    <div class="meta">
+      <div><b>Verein</b>Gemeinsam für Wapa e.&nbsp;V. · Mudawane Wapa Yila</div>
+      <div><b>Quelle</b>gemeinsamfuerwapa.de, ausgelesen 19.08.2026</div>
+      <div><b>Status</b>Diskussionsvorlage, nicht beschlossen</div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="legend">
+      <span><span class="badge b-mess">gemessen</span> direkt aus der Website ausgelesen</span>
+      <span><span class="badge b-vor">Vorschlag</span> von mir hergeleitet, zur Diskussion</span>
+      <span><span class="badge b-off">offen</span> braucht eine Entscheidung von euch</span>
+    </div>
+
+    <span class="num">01</span>
+    <h2>Bestandsaufnahme</h2>
+    <p class="lede narrow">Die gute Nachricht zuerst: es gibt mehr Marke, als ihr vermutlich denkt. Logo, Farbrichtung und Schriften sind vorhanden — sie sind nur nirgends festgehalten und driften deshalb auseinander.</p>
+
+    <table style="margin-top:30px">
+      <thead><tr><th style="width:22%">Element</th><th>Befund</th><th style="width:14%">Status</th></tr></thead>
+      <tbody>
+        <tr><td>Bildmarke</td><td>Drei stilisierte Figuren mit erhobenen Armen über einem Schild, darin die Landesumrisse Burkina Fasos mit markiertem Ort Wapa. Inhaltlich stark: „gemeinsam“ und „woher“ in einem Zeichen.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Logo-Farbigkeit</td><td>Rein schwarz. Die Pixelanalyse ergibt 60&nbsp;% reines Schwarz, Rest Graustufen — <b>keine Schmuckfarbe</b>. Die Farbe der Marke kommt heute ausschließlich aus dem Website-Theme.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Logo-Datei</td><td><code>.jpg</code>, 300 × 158&nbsp;px, mit einem schwarzen Rahmen um die gesamte Fläche. JPG kann keine Transparenz — deshalb der weiße Kasten auf farbigem Grund. Für Druck viel zu klein.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Vektor-Original</td><td>Nicht auffindbar. Ohne SVG/AI/EPS sind Druck, Beschilderung, Textil und Roll-up nicht sauber möglich.</td><td><span class="badge b-off">offen</span></td></tr>
+        <tr><td>Doppelname</td><td>„Gemeinsam für Wapa“ und „Mudawane Wapa Yila“ gleichberechtigt, getrennt durch eine Linie. Bereits im Logo angelegt — der stärkste vorhandene Baustein.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Schriften</td><td>Überschriften <b>Montserrat</b> (500/700), Fließtext und Navigation <b>Raleway</b> (400, 16&nbsp;px, Zeilenhöhe 30&nbsp;px). Beide kostenlos über Google Fonts. Passt zur geometrischen Versalschrift des Logos.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Grün</td><td>Zwei Werte im Einsatz: <span class="mono">#2D862D</span> (Navigation, Links) und <span class="mono">#4FB845</span>.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Gold / Orange</td><td><b>Fünf unterschiedliche Werte</b> für dieselbe Rolle: <span class="mono">#FF9800</span> (Überschriften), <span class="mono">#E9A825</span>, <span class="mono">#FEC96B</span> (Links), <span class="mono">#E8CB90</span> und <span class="mono">#D6AD5A</span> (Button-Verlauf). Das ist der auffälligste Bruch.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Neutraltöne</td><td>Fließtext <span class="mono">#5C6668</span>, dazu <span class="mono">#333333</span>, <span class="mono">#555555</span>, <span class="mono">#B2B7B8</span>, <span class="mono">#DADADA</span>, <span class="mono">#E0E0E0</span>, <span class="mono">#BEBDBD</span> — sieben Grauwerte ohne erkennbares System.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Bildarchiv</td><td>Umfangreich und inhaltlich gut: Fotos 2016–2024, überwiegend vor Ort. Neuere Aufnahmen tragen WhatsApp-Dateinamen und sind stark komprimiert.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+        <tr><td>Tonalität</td><td>Durchgehend „Sie“. Ältere Beiträge ungegendert, der Beitrag von 2024 mit Doppelpunkt („Bewohner:innen“). Uneinheitlich.</td><td><span class="badge b-mess">gemessen</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:36px">Barrierefreiheit — der ernsteste Befund</h3>
+    <p class="narrow">Vier der fünf Goldtöne sind auf weißem Grund nicht lesbar. Gemessen nach WCAG&nbsp;2.1, wo 4,5:1 der Mindestwert für Fließtext ist:</p>
+    <table>
+      <thead><tr><th>Aktuell im Einsatz</th><th style="width:14%">Wert</th><th style="width:16%">auf Weiß</th><th style="width:16%">Fließtext</th><th>Wo</th></tr></thead>
+      <tbody>
+        <tr><td>Orange</td><td class="mono">#FF9800</td><td>2,16:1</td><td class="no">durchgefallen</td><td>alle H2-Überschriften</td></tr>
+        <tr><td>Amber</td><td class="mono">#FEC96B</td><td>1,52:1</td><td class="no">durchgefallen</td><td>Link-Farbe im Theme</td></tr>
+        <tr><td>Gold hell</td><td class="mono">#E8CB90</td><td>1,57:1</td><td class="no">durchgefallen</td><td>Button-Fläche</td></tr>
+        <tr><td>Gold</td><td class="mono">#D6AD5A</td><td>2,10:1</td><td class="no">durchgefallen</td><td>Button-Verlauf</td></tr>
+        <tr><td>Grün hell</td><td class="mono">#4FB845</td><td>2,54:1</td><td class="no">durchgefallen</td><td>Akzente</td></tr>
+        <tr><td>Grün</td><td class="mono">#2D862D</td><td>4,61:1</td><td class="ok">knapp bestanden</td><td>Navigation, Links</td></tr>
+        <tr><td>Grau</td><td class="mono">#5C6668</td><td>5,91:1</td><td class="ok">bestanden</td><td>Fließtext</td></tr>
+      </tbody>
+    </table>
+    <p class="caption narrow">Das ist kein Schönheitsfehler. Ein erheblicher Teil einer Spenderschaft ist über 65 und liest mit nachlassendem Kontrastsehen — orange Überschriften auf Weiß sind für diese Gruppe faktisch unsichtbar. Die Palette in Abschnitt 04 behält die Farbrichtung bei und korrigiert nur die Helligkeiten.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="num">02</span>
+    <h2>Markenkern</h2>
+    <p class="lede narrow">Drei Dinge unterscheiden diesen Verein von hunderten anderen Afrika-Initiativen. Sie sollten überall durchscheinen.</p>
+    <div class="grid3" style="margin-top:32px">
+      <div>
+        <h3>Von dort, nicht über dort</h3>
+        <p style="font-size:.93rem">Der Vorsitzende stammt aus Wapa. Projekte entstehen aus Kenntnis, nicht aus Bedarfsanalyse. Das steckt bereits in der Bildmarke — der markierte Ort auf der Landkarte — wird auf der Website aber erst im vierten Absatz erwähnt.</p>
+      </div>
+      <div>
+        <h3>Klein und überprüfbar</h3>
+        <p style="font-size:.93rem">Ein Brunnen, eine Nähschule, ein Waldgarten. Keine abstrakten Programme. Jedes Projekt lässt sich zeigen, zählen und besuchen.</p>
+      </div>
+      <div>
+        <h3>Ehrenamt bis zum letzten Euro</h3>
+        <p style="font-size:.93rem">Verwaltung und Öffentlichkeitsarbeit in Eigenleistung, Kasse jährlich geprüft. Ein hartes Versprechen, das selbstbewusst formuliert werden darf.</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:38px">
+      <div>
+        <h4>Claim — beibehalten <span class="badge b-mess">gemessen</span></h4>
+        <p style="font-family:'Montserrat',sans-serif;font-size:1.16rem;line-height:1.5;color:var(--gruen-dark);border-left:3px solid var(--gruen);padding-left:20px">„Wir können die Welt nicht alleine retten, aber wir haben die Aufgabe, unseren Mitmenschen eine Hoffnung zum Weiterleben zu geben.“</p>
+        <p class="caption">Gut, aber lang. Als Hero-Zitat stark, als Zeile unter dem Logo unbrauchbar.</p>
+      </div>
+      <div>
+        <h4>Kurzform — neu <span class="badge b-vor">Vorschlag</span></h4>
+        <p style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.5rem;line-height:1.35;color:var(--ink)">Hilfe zur Selbsthilfe.<br>Aus Wapa, für Sanguié.</p>
+        <p class="caption">Funktioniert unter dem Logo, auf einem Flyer, in der E-Mail-Signatur. „Hilfe zur Selbsthilfe“ steht bereits in eurer Satzung — das ist keine Erfindung, sondern eine Zuspitzung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="num">03</span>
+    <h2>Logo &amp; Wortmarke</h2>
+    <p class="lede narrow">Das Zeichen ist inhaltlich richtig und braucht keine Neuerfindung — es braucht eine ordentliche Datei und klare Regeln.</p>
+
+    <div class="grid3" style="margin-top:30px">
+      <div>
+        <div class="logobox"><img src="https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg" alt="Logo Gemeinsam für Wapa" style="max-width:230px"></div>
+        <p class="caption"><b>Bestand.</b> Wie es heute ausgeliefert wird — mit Rahmen und weißem Kasten.</p>
+      </div>
+      <div>
+        <div class="logobox dark"><img src="https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg" alt="" style="max-width:230px"></div>
+        <p class="caption"><b>Das Problem.</b> Auf dunklem Grund erscheint der weiße JPG-Kasten. Genau deshalb braucht es SVG und PNG mit Transparenz sowie eine Negativfassung in Weiß.</p>
+      </div>
+      <div>
+        <div class="logobox green"><img src="https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg" alt="" style="max-width:230px"></div>
+        <p class="caption">Dasselbe auf der Hausfarbe. Solange nur die JPG existiert, ist jede Anwendung außerhalb weißer Flächen unsauber.</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:36px">
+      <div>
+        <h4>Aufbau — so belassen</h4>
+        <p style="font-size:.93rem">Bildmarke links, zweizeilige Wortmarke rechts, getrennt durch eine waagerechte Linie. Deutscher Name oben, Lele-Name darunter. Der zweite Name ist der Beleg dafür, dass der Verein aus der Region kommt — er wird nie weggelassen.</p>
+        <h4 style="margin-top:22px">Bedeutung — dokumentieren</h4>
+        <p style="font-size:.93rem">Die drei Figuren stehen für das Gemeinsame, das Schild für Burkina Faso, der markierte Punkt für Wapa. Das sollte auf der Website erklärt werden — es ist eine gute Geschichte, die derzeit niemand erfährt.</p>
+        <h4 style="margin-top:22px">Schutzraum &amp; Mindestgröße <span class="badge b-vor">Vorschlag</span></h4>
+        <p style="font-size:.93rem">Rundum die Höhe der Bildmarke freihalten. Digital mindestens 40&nbsp;px Bildmarkenhöhe, Druck 15&nbsp;mm. Darunter nur die Bildmarke ohne Wortmarke.</p>
+      </div>
+      <div>
+        <h4>Benötigte Dateien <span class="badge b-off">offen</span></h4>
+        <table style="font-size:.85rem;margin-top:8px">
+          <tbody>
+            <tr><td><b>SVG</b></td><td>Web, beliebig skalierbar, ohne Rahmen</td></tr>
+            <tr><td><b>PNG transparent</b></td><td>400 / 800 / 1600 px Breite</td></tr>
+            <tr><td><b>PNG negativ</b></td><td>Weiß, für Fotos und dunkle Flächen</td></tr>
+            <tr><td><b>PDF / EPS</b></td><td>Druckerei, Roll-up, Beschilderung</td></tr>
+            <tr><td><b>Favicon</b></td><td>32 px, nur Bildmarke</td></tr>
+            <tr><td><b>Social</b></td><td>800 × 800 px quadratisch, Bildmarke zentriert</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Der schwarze Rahmen der aktuellen Datei sollte beim Neuaufbau entfallen — er ist ein Relikt und verhindert freie Platzierung.</p>
+      </div>
+    </div>
+
+    <div class="dd" style="margin-top:32px">
+      <div class="do">
+        <h4>So</h4>
+        <ul>
+          <li>Schwarz auf hellen Flächen (Hirse, Sand, Weiß)</li>
+          <li>Weiß als Negativ auf Grün, Ink oder Fotos</li>
+          <li>Beide Namen zusammen, in festem Verhältnis</li>
+          <li>Bei sehr wenig Platz: Bildmarke solo</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <h4>Nicht so</h4>
+        <ul>
+          <li>Kein weißer JPG-Kasten auf farbigem Grund</li>
+          <li>Nicht einfärben — die Marke ist einfarbig, das ist ihre Stärke</li>
+          <li>Nicht verzerren, drehen oder mit Schatten versehen</li>
+          <li>Nicht auf unruhige Bildbereiche legen</li>
+          <li>Den Lele-Namen nicht dauerhaft weglassen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="num">04</span>
+    <h2>Farbe</h2>
+    <p class="lede narrow">Grün und Gold bleiben — sie sind bereits eure Farben und entsprechen zufällig auch den Landesfarben Burkina Fasos. Geändert wird nur die Anzahl: statt fünf Goldtönen und zwei Grüntönen je einer, in lesbaren Helligkeiten.</p>
+
+    <div class="flag"><span style="background:#2D862D"></span><span style="background:#FF9800"></span><span style="background:#FEC96B"></span><span style="background:#E8CB90"></span><span style="background:#D6AD5A"></span><span style="background:#4FB845"></span></div>
+    <p class="caption" style="margin-bottom:26px">Bestand: sieben Akzentfarben für zwei Aufgaben.</p>
+    <div class="flag"><span style="background:#276F27"></span><span style="background:#E9A825"></span><span style="background:#1E2626"></span></div>
+    <p class="caption">Vorschlag: drei. Grün handelt, Gold hebt hervor, Ink trägt den Text.</p>
+
+    <h3 style="margin-top:40px">Primär</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#276F27;color:#fff">Aa</div><div class="info"><div class="nm">Wapa-Grün</div><div class="hx">#276F27</div><div class="use">Hausfarbe. Buttons, Links, aktive Zustände, Kategorien. Abgeleitet aus dem bestehenden <span class="mono">#2D862D</span>, minimal abgedunkelt für sichere Lesbarkeit.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1E5A1E;color:#fff">Aa</div><div class="info"><div class="nm">Grün dunkel</div><div class="hx">#1E5A1E</div><div class="use">Hover- und Druckzustand, Textlinks im Fließtext.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#1E2626;color:#FCFAF6">Aa</div><div class="info"><div class="nm">Ink</div><div class="hx">#1E2626</div><div class="use">Überschriften, dunkle Flächen, Footer. Entspricht dem Schwarz des Logos, minimal aufgehellt, damit es auf Bildschirmen nicht hart wirkt.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#4A5354;color:#FCFAF6">Aa</div><div class="info"><div class="nm">Grau</div><div class="hx">#4A5354</div><div class="use">Fließtext und Sekundärtext. Ersetzt die sieben bisherigen Grauwerte. Beibehaltener Farbton des alten <span class="mono">#5C6668</span>, nur dunkler.</div></div></div>
+    </div>
+
+    <h3>Akzent</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#E9A825;color:#1E2626">Aa</div><div class="info"><div class="nm">Sahel-Gold</div><div class="hx">#E9A825</div><div class="use"><b>Nur auf Ink oder Grün.</b> Kennzahlen, Spenden-Button, Auszeichnungen. Auf hellem Grund als Textfarbe verboten.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#8A6212;color:#FCFAF6">Aa</div><div class="info"><div class="nm">Gold-Text</div><div class="hx">#8A6212</div><div class="use">Die lesbare Goldvariante für Text auf hellem Grund. Entspricht dem bereits vorhandenen Button-Textton <span class="mono">#785510</span>.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#FBF0D9;color:#8A6212">Aa</div><div class="info"><div class="nm">Gold weich</div><div class="hx">#FBF0D9</div><div class="use">Hinweiskästen, Hervorhebungen, Badges.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#E8F0E6;color:#1E5A1E">Aa</div><div class="info"><div class="nm">Grün weich</div><div class="hx">#E8F0E6</div><div class="use">Erfolgsmeldungen, Kategoriehintergründe.</div></div></div>
+    </div>
+
+    <h3>Flächen</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#FCFAF6;color:#1E2626;border-bottom:1px solid var(--linie)">Aa</div><div class="info"><div class="nm">Hirse</div><div class="hx">#FCFAF6</div><div class="use">Standard-Hintergrund. Minimal wärmer als Weiß, nimmt den Fotos die Härte.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#F2EEE5;color:#1E2626">Aa</div><div class="info"><div class="nm">Sand</div><div class="hx">#F2EEE5</div><div class="use">Abwechselnde Abschnitte, Infokästen, Formularfelder.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#E0D9CB;color:#1E2626">Aa</div><div class="info"><div class="nm">Linie</div><div class="hx">#E0D9CB</div><div class="use">Rahmen, Trennlinien, Kartenkanten.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#fff;color:#1E2626;border-bottom:1px solid var(--linie)">Aa</div><div class="info"><div class="nm">Weiß</div><div class="hx">#FFFFFF</div><div class="use">Nur für Karten auf Hirse — nicht als Seitenhintergrund.</div></div></div>
+    </div>
+
+    <h3 style="margin-top:38px">Kontrast — rechnerisch geprüft</h3>
+    <table>
+      <thead><tr><th>Kombination</th><th style="width:14%">Verhältnis</th><th style="width:15%">AA Text</th><th style="width:15%">AA Groß</th><th>Einsatz</th></tr></thead>
+      <tbody>
+        <tr><td>Ink auf Hirse</td><td>14,81:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Überschriften</td></tr>
+        <tr><td>Grau auf Hirse</td><td>7,58:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Fließtext</td></tr>
+        <tr><td>Grün dunkel auf Hirse</td><td>7,94:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Textlinks</td></tr>
+        <tr><td>Gold auf Ink</td><td>7,42:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Kennzahlen</td></tr>
+        <tr><td>Ink auf Gold</td><td>7,42:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Spenden-Button</td></tr>
+        <tr><td>Weiß auf Grün</td><td>6,20:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Primär-Button</td></tr>
+        <tr><td>Grün auf Hirse</td><td>5,94:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Links, Kategorien</td></tr>
+        <tr><td>Gold-Text auf Hirse</td><td>5,25:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Hervorhebung hell</td></tr>
+        <tr><td>Grau auf Sand</td><td>6,83:1</td><td class="ok">bestanden</td><td class="ok">bestanden</td><td>Text in Kästen</td></tr>
+        <tr><td>Gold auf Hirse</td><td>2,00:1</td><td class="no">durchgefallen</td><td class="no">durchgefallen</td><td><b>verboten</b></td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Alle Werte nach WCAG 2.1 berechnet, nicht geschätzt. Die einzige verbotene Kombination ist Gold auf hellem Grund — dafür gibt es Gold-Text.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="num">05</span>
+    <h2>Typografie</h2>
+    <p class="lede narrow">Beide Schriften bleiben, wie sie sind. Montserrat und Raleway sind bereits im Einsatz, kostenlos, und Montserrat passt zur geometrischen Versalschrift der Wortmarke. Neu ist nur die Staffelung. <span class="badge b-mess">gemessen</span></p>
+
+    <div class="spec" style="margin-top:32px">
+      <div class="l">Überschriften — Montserrat</div>
+      <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:2.4rem;line-height:1.2;margin-bottom:8px;color:var(--ink)">Wasser für Ekulpung</div>
+      <p style="font-size:.92rem;max-width:62ch">Geometrische Grotesk, wie die Wortmarke im Logo. Gewichte 600 für Überschriften, 700 für Labels und Buttons. Das bisher verwendete 500 wirkt bei großen Graden zu dünn.</p>
+    </div>
+
+    <div class="spec">
+      <div class="l">Fließtext &amp; Navigation — Raleway</div>
+      <div style="font-size:1.24rem;margin-bottom:8px">Am 20. Dezember konnte unser Vorsitzender die Installation der Wasserstelle erfolgreich durchführen.</div>
+      <p style="font-size:.92rem;max-width:62ch">Bereits im Einsatz, gut lesbar, vollständige Unterstützung für Umlaute und französische Akzente (Sanguié, Réo). Gewichte 400 und 600.</p>
+    </div>
+
+    <table style="margin-top:30px">
+      <thead><tr><th>Ebene</th><th>Schrift</th><th>Größe</th><th>Zeilenhöhe</th><th>Einsatz</th></tr></thead>
+      <tbody>
+        <tr><td>H1</td><td>Montserrat 600</td><td>36–56 px fließend</td><td>1,2</td><td>Seitentitel, Hero</td></tr>
+        <tr><td>H2</td><td>Montserrat 600</td><td>26–37 px</td><td>1,25</td><td>Abschnitte</td></tr>
+        <tr><td>H3</td><td>Montserrat 600</td><td>19 px</td><td>1,3</td><td>Karten, Teaser</td></tr>
+        <tr><td>Lead</td><td>Raleway 400</td><td>19 px</td><td>1,6</td><td>Einleitungsabsatz</td></tr>
+        <tr><td>Fließtext</td><td>Raleway 400</td><td>17 px</td><td>1,7</td><td>Standard</td></tr>
+        <tr><td>Klein</td><td>Raleway 400</td><td>14 px</td><td>1,55</td><td>Datum, Bildunterschrift</td></tr>
+        <tr><td>Label</td><td>Montserrat 700</td><td>11 px, Versal, 0,14 em</td><td>1,4</td><td>Kategorien, Buttons</td></tr>
+      </tbody>
+    </table>
+    <p class="caption">Zeilenlänge im Fließtext maximal 70 Zeichen. Kein Blocksatz — im Deutschen entstehen dabei Löcher. Die aktuelle H1-Größe von 18&nbsp;px ist ein Theme-Fehler und sollte nicht übernommen werden.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="num">06</span>
+    <h2>Bildsprache</h2>
+    <p class="lede narrow">Der heikelste Teil eines jeden Hilfsvereins-Auftritts. Eure vorhandenen Fotos sind besser als bei den meisten — sie zeigen fertige Anlagen und arbeitende Menschen, nicht Not.</p>
+
+    <div class="imgs">
+      <figure><img loading="lazy" src="https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2024/01/IMG-20231228-WA0060.jpg?w=700&ssl=1" alt=""><figcaption>Menschen bei der Nutzung, nicht beim Empfangen. Vorbildlich.</figcaption></figure>
+      <figure><img loading="lazy" src="https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2021/04/Wasserturm.jpeg?w=700&ssl=1" alt=""><figcaption>Gebaute Infrastruktur — belegt, dass Spenden ankommen.</figcaption></figure>
+      <figure><img loading="lazy" src="https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2020/02/HPWE7802.jpg?w=700&ssl=1" alt=""><figcaption>Arbeit und Können im Mittelpunkt, Würde gewahrt.</figcaption></figure>
+      <figure><img loading="lazy" src="https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/2022/05/4c387a6e-96b9-41f0-86a1-6ff9047d6a8d.jpg?w=700&ssl=1" alt=""><figcaption>Fortschritt über Zeit — dieselbe Stelle mehrfach fotografieren.</figcaption></figure>
+    </div>
+
+    <div class="dd">
+      <div class="do">
+        <h4>Leitlinien</h4>
+        <ul>
+          <li>Menschen handelnd zeigen: pumpen, nähen, pflanzen, unterrichten</li>
+          <li>Auf Augenhöhe fotografieren, nicht von oben herab</li>
+          <li>Namen nennen, wo möglich — „eine Frau in Réo“ ist schwächer als ein Name</li>
+          <li>Dieselben Orte wiederholt fotografieren, um Entwicklung zu belegen</li>
+          <li>Warme, natürliche Farben; keine kräftigen Filter</li>
+          <li>Einverständnis einholen, besonders bei Kindern</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <h4>Zu vermeiden</h4>
+        <ul>
+          <li>Keine Bilder, die allein Mangel oder Leid zeigen</li>
+          <li>Keine europäischen Helfer im Mittelpunkt, umringt von Kindern</li>
+          <li>Keine Nahaufnahmen weinender oder kranker Kinder</li>
+          <li>Keine Stockfotos „Afrika“ — ausschließlich eigene Aufnahmen</li>
+          <li>Keine Schwarzweiß-Umsetzung zur Dramatisierung</li>
+          <li>Keine WhatsApp-Bilder als Titelbild</li>
+        </ul>
+      </div>
+    </div>
+    <p class="caption" style="margin-top:18px"><b>Technischer Hinweis:</b> Die Fotos von 2023/24 tragen Dateinamen wie <code>IMG-20231228-WA0054.jpg</code> — sie stammen aus WhatsApp und sind bereits stark komprimiert. Für Titelbilder künftig die Originale per E-Mail oder Cloud anfordern, nicht per Messenger.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="num">07</span>
+    <h2>Sprache &amp; Tonalität</h2>
+    <div class="grid2" style="margin-top:28px">
+      <div>
+        <h4>Anrede</h4>
+        <p style="font-size:.93rem">„Sie“, durchgehend. Passt zur Spenderschaft und ist etabliert. <span class="badge b-mess">gemessen</span></p>
+        <h4 style="margin-top:22px">Geschlechtergerechte Sprache <span class="badge b-off">offen</span></h4>
+        <p style="font-size:.93rem">Derzeit uneinheitlich. Der Vorstand muss sich für eine Variante entscheiden — Doppelpunkt, Paarform oder neutrale Umschreibung. Jede ist vertretbar, die Uneinheitlichkeit ist es nicht.</p>
+        <h4 style="margin-top:22px">Ortsnamen</h4>
+        <p style="font-size:.93rem">Immer lokale Schreibweise mit Akzenten: Sanguié, Réo, Ekulpung. Beim ersten Vorkommen kurz einordnen.</p>
+      </div>
+      <div>
+        <h4>Haltung</h4>
+        <p style="font-size:.93rem">Sachlich und konkret statt pathetisch. „Am 20. Dezember wurde die Zapfstelle übergeben“ wirkt stärker als „Ein Wunder ist geschehen“. Zahlen, Daten, Namen — das ist bereits euer Stil und er funktioniert.</p>
+        <h4 style="margin-top:20px">Wortwahl</h4>
+        <table style="font-size:.85rem;margin-top:8px">
+          <thead><tr><th>statt</th><th>besser</th></tr></thead>
+          <tbody>
+            <tr><td>die Bedürftigen</td><td>die Bewohnerinnen und Bewohner von Ekulpung</td></tr>
+            <tr><td>Entwicklungshilfe</td><td>Entwicklungszusammenarbeit</td></tr>
+            <tr><td>Dritte Welt</td><td>Burkina Faso, Sanguié</td></tr>
+            <tr><td>wir haben ihnen gebracht</td><td>gemeinsam gebaut / übergeben</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="num">08</span>
+    <h2>Bausteine</h2>
+    <p class="lede narrow">Die Elemente, aus denen die Website zusammengesetzt ist — direkt abgeleitet aus Farbe und Typografie oben.</p>
+
+    <div class="comp" style="margin-top:28px">
+      <div class="l">Schaltflächen</div>
+      <a class="btn" href="#">Alle Projekte</a> &nbsp;
+      <a class="btn gold" href="#">Jetzt spenden</a> &nbsp;
+      <a class="btn ghost" href="#">Mehr erfahren</a>
+      <p class="caption">Grün für Navigation und Standardhandlungen, Gold ausschließlich für Spenden — dadurch wird der Spenden-Button überall sofort erkennbar. Höchstens ein Gold-Button pro Bildschirmbereich. Leicht abgerundet statt vollrund, passend zur sachlichen Anmutung des Logos.</p>
+    </div>
+
+    <div class="comp">
+      <div class="l">Kategorie-Kennzeichnung — die vier Säulen</div>
+      <span class="tag">Grundversorgung</span> &nbsp;&nbsp; <span class="tag">Bildung</span> &nbsp;&nbsp; <span class="tag">Infrastruktur</span> &nbsp;&nbsp; <span class="tag">Umweltschutz</span>
+      <p class="caption">Wapa-Grün, Versalien, gesperrt. Ordnet jeden Beitrag und jedes Projekt einer der vier Säulen zu — die Struktur existiert bereits, wird aber nirgends sichtbar gemacht.</p>
+    </div>
+
+    <div class="comp">
+      <div class="l">Kennzahl</div>
+      <div style="background:var(--ink);border-radius:8px;padding:24px 28px;display:inline-block">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:2.3rem;color:var(--gold);line-height:1">120</div>
+        <div style="color:#B6B3AA;font-size:.85rem;margin-top:4px">Frauen in Ausbildung</div>
+      </div>
+      <p class="caption">Gold nur auf Ink. Jede Kennzahl muss durch ein Projekt oder einen Kassenbericht belegbar sein.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--flaeche)">
+  <div class="wrap">
+    <span class="num">09</span>
+    <h2>Zu entscheiden</h2>
+    <p class="lede narrow">Diese Punkte kann ich nicht für euch klären. Sie eignen sich als Tagesordnung für eine Vorstandssitzung.</p>
+
+    <div style="margin-top:28px">
+      <div class="dec"><h4>1 · Gibt es das Logo als Vektordatei?</h4><p>Bateau Blanc hat die Website gestaltet und hat die Originale vermutlich noch. Die vorhandene JPG mit 300 px Breite reicht für nichts außer der Website. Falls verloren: Nachzeichnung beauftragen — das Zeichen ist einfarbig und geometrisch, das ist ein überschaubarer Aufwand.</p><span class="who">Vorstand → Bateau Blanc anfragen</span></div>
+      <div class="dec"><h4>2 · Farbkorrektur akzeptiert?</h4><p>Grün wird von <span class="mono">#2D862D</span> auf <span class="mono">#276F27</span> abgedunkelt, das Orange der Überschriften entfällt zugunsten von Ink. Farbrichtung bleibt, Lesbarkeit steigt. Wer das aktuelle Orange erhalten will, sollte wissen, dass es mit 2,16:1 unter jedem Barrierefreiheitsstandard liegt.</p><span class="who">Vorstand</span></div>
+      <div class="dec"><h4>3 · Gendern — ja, und wie?</h4><p>Doppelpunkt, Paarform oder neutral. Betrifft alle künftigen Beiträge und den Newsletter.</p><span class="who">Vorstand, einmalige Festlegung</span></div>
+      <div class="dec"><h4>4 · Welche Kennzahlen dürfen öffentlich genannt werden?</h4><p>Der Entwurf zeigt „120 Frauen“, „4 Wasseranlagen“, „100 % der Spenden in Projekte“. Alle drei müssen belegbar sein — die letzte hat als Aussage rechtliche Relevanz.</p><span class="who">Vorstand + Kassenprüfung</span></div>
+      <div class="dec"><h4>5 · Kurzform des Claims — annehmen oder verwerfen?</h4><p>„Hilfe zur Selbsthilfe. Aus Wapa, für Sanguié.“ Wenn ja, gehört sie unter das Logo und in die Signatur.</p><span class="who">Vorstand</span></div>
+      <div class="dec"><h4>6 · Wer darf künftig veröffentlichen?</h4><p>Der neue Ablauf ist technisch einfach, braucht aber einen Zuständigen. Eine Person mit Vertretung genügt.</p><span class="who">Vorstand</span></div>
+      <div class="dec"><h4>7 · Wer verwaltet Domain und DNS?</h4><p>Vor einem Umzug auf statisches Hosting muss das geklärt sein. Aktuell läuft die Seite über Bateau Blanc.</p><span class="who">Vorstand</span></div>
+    </div>
+
+    <div class="cta" style="background:#fff;border:1px solid var(--linie)">
+      <h3 style="margin-bottom:.3em">Der Website-Entwurf auf dieser Grundlage</h3>
+      <p style="margin-bottom:1.2em;font-size:.95rem">Alle Farben, Schriften und Bausteine dieses Leitfadens sind im Website-Entwurf eins zu eins umgesetzt. Wenn ihr hier etwas ändert, ändert sich dort dasselbe.</p>
+      <a class="btn" href="Website-Entwurf.html">Website-Entwurf öffnen →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0">Markenleitfaden · Entwurf v1 · August 2026 · Diskussionsvorlage für den Vorstand von Gemeinsam für Wapa e.&nbsp;V.<br>
+    Farbwerte, Schriften und Logo-Analyse am 19.08.2026 direkt von gemeinsamfuerwapa.de ausgelesen. Kontrastwerte nach WCAG&nbsp;2.1 berechnet.</p>
+  </div>
+</footer>
+
+</body>
+</html>

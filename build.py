@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Baut die statische Fassung für GitHub Pages aus dem Entwurf im Vault.
+"""Baut die ausgelieferte Fassung aus der Quelle im selben Repo.
 
-    python3 build.py <Pfad zu Website-Entwurf-final.html>          # nur HTML
-    python3 build.py <Pfad ...> --assets                            # auch Bilder neu
+    python3 build.py              # nur index.html
+    python3 build.py --assets     # zusätzlich die Bilder aus src/originals/
 
-Der Entwurf im Vault ist das Original. `index.html` hier ist abgeleitet und wird
-bei jedem Lauf überschrieben — niemals von Hand bearbeiten.
+Quelle ist `src/website.html`. Alles im Wurzelverzeichnis (`index.html`,
+`assets/*.jpg`) ist daraus **abgeleitet** und wird bei jedem Lauf überschrieben —
+niemals von Hand bearbeiten.
 
-Mit `--assets` werden die Bilder aus den Originalen im Vault-Ordner
-`other assets/` neu erzeugt und auf Webgröße gebracht. Ohne den Schalter bleibt
-`assets/` unangetastet; das ist der Normalfall, weil Bilder sich selten ändern.
+`--assets` erzeugt die Webfassungen aus `src/originals/` (längste Kante 1500 px,
+JPEG 78) und entfernt anschließend alles, was `index.html` nicht referenziert.
+Ohne den Schalter bleibt `assets/` unangetastet; das ist der Normalfall, weil
+Bilder sich selten ändern. Braucht Pillow.
 """
 import io, re, sys, os, shutil
 
@@ -54,12 +56,26 @@ def bilder_bauen(quelle, hier):
     except ImportError:
         sys.exit("Pillow fehlt:  python3 -m pip install Pillow")
 
-    vault = os.path.join(os.path.dirname(os.path.abspath(quelle)), "other assets")
+    vault = os.path.join(hier, "src", "originals")
     if not os.path.isdir(vault):
         sys.exit("Originalordner nicht gefunden: " + vault)
 
+    uebersprungen = []
+
     def einpassen(src, dst):
-        im = Image.open(src); im = ImageOps.exif_transpose(im).convert("RGB")
+        """Ein Original auf Webgröße bringen.
+
+        Gibt 0 zurück, wenn die Datei nicht lesbar ist. Das kommt vor: macOS
+        bindet Dateien aus iCloud per `com.apple.macl` an den Ort, an dem sie
+        angelegt wurden. Wird eine solche Datei verschoben, verliert ein
+        Hintergrundprozess den Zugriff — die Datei ist unversehrt, nur für uns
+        nicht mehr zu öffnen. Dann bleibt die bereits erzeugte Webfassung stehen,
+        statt dass der ganze Lauf abbricht."""
+        try:
+            im = Image.open(src); im = ImageOps.exif_transpose(im).convert("RGB")
+        except (PermissionError, OSError) as e:
+            uebersprungen.append((os.path.basename(src), type(e).__name__))
+            return 0
         im.thumbnail((BREITE, BREITE), Image.LANCZOS)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         im.save(dst, "JPEG", quality=QUALITAET, optimize=True, progressive=True)
@@ -91,10 +107,16 @@ def bilder_bauen(quelle, hier):
                 gesamt += einpassen(os.path.join(d, f),
                                     os.path.join(hier, "assets", "archiv", name + ".jpg")); anzahl += 1
 
-    print("Bilder erzeugt: %d Dateien, %.1f MB" % (anzahl, gesamt / 1048576))
-    aufraeumen(hier)
+    print("Bilder erzeugt: %d Dateien, %.1f MB" % (anzahl - len(uebersprungen), gesamt / 1048576))
+    if uebersprungen:
+        print("  %d Originale nicht lesbar, vorhandene Webfassung behalten:" % len(uebersprungen))
+        for name, art in uebersprungen[:4]:
+            print("    %s (%s)" % (name, art))
+        if len(uebersprungen) > 4:
+            print("    … und %d weitere" % (len(uebersprungen) - 4))
+    aufraeumen(hier, schonen=bool(uebersprungen))
 
-def aufraeumen(hier):
+def aufraeumen(hier, schonen=False):
     """Bilder entfernen, die index.html nicht referenziert.
 
     Die Originale liegen im Vault; hier gehört nur hinein, was die Seite braucht.
@@ -105,6 +127,9 @@ def aufraeumen(hier):
         return
     s = io.open(idx, encoding="utf-8").read()
     genutzt = set(re.findall(r"['\"](assets/[^'\"]+\.jpg)['\"]", s))
+    if schonen:
+        print("  Aufräumen übersprungen — es waren nicht alle Originale lesbar.")
+        return
     weg = 0
     for ordner in ("fotos", "fotos-2026", "archiv"):
         d = os.path.join(hier, "assets", ordner)
@@ -115,14 +140,15 @@ def aufraeumen(hier):
             if f.endswith(".jpg") and rel not in genutzt:
                 os.remove(os.path.join(hier, rel)); weg += 1
     if weg:
-        print("  %d ungenutzte Bilder entfernt (im Vault bleiben sie erhalten)" % weg)
+        print("  %d ungenutzte Bilder entfernt" % weg)
 
 if __name__ == "__main__":
-    argumente = [a for a in sys.argv[1:] if not a.startswith("--")]
-    if not argumente or not os.path.exists(argumente[0]):
-        sys.exit("Aufruf: python3 build.py <Website-Entwurf-final.html> [--assets]")
-    quelle = argumente[0]
     hier = os.path.dirname(os.path.abspath(__file__))
+    # Pfad ist optional — Vorgabe ist die Quelle im Repo
+    argumente = [a for a in sys.argv[1:] if not a.startswith("--")]
+    quelle = argumente[0] if argumente else os.path.join(hier, "src", "website.html")
+    if not os.path.exists(quelle):
+        sys.exit("Quelle nicht gefunden: " + quelle)
     html_bauen(quelle, hier)
     if "--assets" in sys.argv:
         bilder_bauen(quelle, hier)
