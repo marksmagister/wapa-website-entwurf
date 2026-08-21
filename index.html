@@ -343,6 +343,47 @@ section{padding:clamp(56px,7vw,104px) 0}
    auf die min-content-Breite ihres Inhalts und sprengt den Container. */
 .zwei > *,.kette > *,.saeulen > *,.fg > *,.reg > *,.preise > *{min-width:0}
 
+
+/* =====================  PRESSE  ===================== */
+.pz-presse{display:block;text-decoration:none;padding:15px 0;border-bottom:1px solid var(--linie)}
+.pz-presse:hover{background:var(--papier2)}
+.pq{display:block;font-size:.72rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--gruen);margin-bottom:5px}
+.pt{display:block;font-family:var(--d);font-size:1.08rem;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30;line-height:1.28}
+.pstand{display:block;font-size:.78rem;color:var(--leise);margin-top:5px}
+.presseliste{border-top:1.5px solid var(--ink)}
+
+
+/* Markierung für Angaben aus den neuen Quellen, die der Vorstand noch nicht
+   bestätigt hat. Sie verschwindet, sobald `neu` aus den Daten fällt. */
+.neu{display:inline-block;font-family:var(--t);font-size:.6rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;vertical-align:.22em;
+  background:var(--gold);color:var(--ink);padding:2px 6px;border-radius:2px;margin-left:6px}
+
+
+/* =====================  VORSTAND  ===================== */
+.menschen{border-top:1.5px solid var(--ink);max-width:56rem}
+.mensch{display:grid;grid-template-columns:13rem 1fr;gap:clamp(18px,3vw,40px);
+  padding:30px 0;border-bottom:1px solid var(--linie);align-items:start}
+.mensch > *{min-width:0}
+.mportrait img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.keinbild{width:100%;aspect-ratio:4/5;background:var(--papier2);
+  border:1px dashed var(--linie-stark);display:grid;place-items:center}
+.keinbild span{font-size:.76rem;color:var(--leise);text-align:center;line-height:1.4}
+.mtext h2{font-size:1.5rem;margin:0 0 .15em}
+.mrolle{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--gruen);margin-bottom:1rem}
+.mtext p{font-size:.97rem}
+.zit{font-family:var(--d);font-size:1.12rem;line-height:1.4;color:var(--ink);
+  font-variation-settings:'SOFT' 22,'WONK' 1,'opsz' 60;border-left:2px solid var(--gruen);
+  padding-left:16px;margin-top:1.2em}
+.zit span{display:block;font-family:var(--t);font-size:.76rem;color:var(--leise);
+  margin-top:.6em;font-variation-settings:normal}
+.mquelle{font-size:.76rem;color:var(--leise);margin-top:1rem;padding-top:.7rem;
+  border-top:1px solid var(--linie)}
+@media(max-width:640px){.mensch{grid-template-columns:1fr}.mportrait{max-width:11rem}}
+
 /* =====================  ARTIKEL  ===================== */
 .artikel{max-width:38rem;margin-inline:auto}
 .artikel p{font-size:1.07rem;max-width:none}
@@ -406,7 +447,7 @@ footer a:hover{color:var(--gold)}
 <body class="clean">
 
 <div id="bar">
-  <span><b>Entwurf final</b> · August 2026 · Inhalte aus der bestehenden Website, Fotos teils neu · offene Punkte in <b>Offene Entscheidungen.md</b></span>
+  <span><b>Entwurf final</b> · August 2026 · Inhalte aus der bestehenden Website, Fotos teils neu · <a href="#/neu" style="color:var(--gold)">Was ist neu?</a></span>
   <button onclick="document.body.classList.toggle('clean')">Kommentare einblenden</button>
   <button onclick="document.getElementById('bar').style.display='none'">Leiste ausblenden</button>
 </div>
@@ -452,9 +493,11 @@ footer a:hover{color:var(--gold)}
       <div>
         <h4>Verein</h4>
         <a href="#/ueber-uns">Über uns</a>
+        <a href="#/vorstand">Vorstand</a>
         <a href="#/mitmachen">Mitmachen</a>
         <a href="#/spenden">Spenden &amp; Patenschaft</a>
         <a href="#/satzung">Satzung &amp; Manifest</a>
+        <a href="#/presse">Pressestimmen</a>
         <a href="#/ueber-uns">Newsletter</a>
       </div>
       <div>
@@ -480,6 +523,8 @@ footer a:hover{color:var(--gold)}
             wp-content/uploads gezogen sind. Alle Personen-, Schul- und
             Wasserbilder fallen bis dahin in diese Kategorie.
    --------------------------------------------------------------------------- */
+/* Aufnahmen aus der Präsentation „Projektbedarf“ (08/2026). Geringere Auflösung
+   als die Waldgarten-Fotos — für mittlere Formate, nicht für Titelbilder. */
 /* Das Vereinslogo, wie es ist: 300×158 px, JPG, schwarzer Rahmen eingebrannt,
    keine Transparenz, kein Vektororiginal auffindbar (Entscheidung 1). */
 const LOGO = 'assets/logo.jpg';
@@ -504,6 +549,21 @@ const B = {
   jungpflanzen:  'assets/fotos/20-32-403.jpg',
   hibiskus:      'assets/fotos/20-31-10.jpg',            /* Roselle, rote Stiele */
   blattdetail:   'assets/fotos/20-31-111.jpg',
+  /* neu, aus der Präsentation Projektbedarf (08/2026) */
+  bertrandSolar: 'assets/fotos-2026/bertrand-solaranlage.jpg',
+  dorfWasser:    'assets/fotos-2026/dorfversammlung-wasserstelle.jpg',
+  uebergabe:     'assets/fotos-2026/uebergabe-wasserstelle.jpg',
+  wasserLaeuft:  'assets/fotos-2026/wasser-laeuft.jpg',
+  turmMontage:   'assets/fotos-2026/wasserturm-montage.jpg',
+  turmKran:      'assets/fotos-2026/wasserturm-kran.jpg',
+  papaya:        'assets/fotos-2026/papaya-bananen.jpg',
+  ernte:         'assets/fotos-2026/ernte-bananen-erdnuesse.jpg',
+  bananenhain:   'assets/fotos-2026/besuch-bananenhain.jpg',
+  bananen:       'assets/fotos-2026/bananenernte.jpg',
+  zitrus:        'assets/fotos-2026/zitrus-kontrolle.jpg',
+  verarbeitung:  'assets/fotos-2026/lebensmittelverarbeitung.jpg',
+  agrarfeld:     'assets/fotos-2026/agrarschule-feld.jpg',
+
   /* alt, von der Live-Website */
   ekulpung: 'assets/archiv/ekulpung.jpg',
   ekulpung2: 'assets/archiv/ekulpung2.jpg',
@@ -545,6 +605,13 @@ const REG = [
   {y:2021, j:'geplant', slug:'solaroefen', t:'Solaröfen',                         u:'Umweltfreundliche Öfen aus lokal vorhandenem Material, modelliert mit der Pharmaplan GmbH. Weniger Abholzung für Brennholz.', o:'Sanguié', k:'Umweltschutz', s:'In Planung', img:null},
   {y:2022, j:'2022', slug:'naehmaschinen', t:'Nähmaschinenlieferung',             u:'Gespendete Maschinen, per Containerschiff nach Wapa gebracht.', o:'Wapa', k:'Bildung', s:'Abgeschlossen', img:B.naeh},
   {y:2022, j:'seit 2022', slug:'tropfenbewaesserung', t:'Tropfenbewässerung',                u:'Gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden rund 1.000 €.', o:'Wapa', k:'Umweltschutz', s:'In Finanzierung', img:null},
+  {y:2018, j:'2018', slug:'pumpe-tukon', t:'Wasserpumpe in Tukon', u:'Zweite Pumpenanlage, in der Vereinschronik für 2018 verzeichnet.', o:'Tukon', k:'Grundversorgung', s:'Abgeschlossen', img:null, neu:'Projektbedarf 08/2026'},
+  {y:2019, j:'seit 2019', slug:'kinder-academy', t:'Kinder-Academy', u:'Gründung 2019. Wie sie sich zur Sommerschule verhält, geht aus den Unterlagen nicht hervor.', o:'Réo', k:'Bildung', s:'Laufend', img:null, neu:'Projektbedarf 08/2026'},
+  {y:2023, j:'2023', slug:'lagerraum-tierzucht', t:'Lagerraum und Schweinezucht', u:'Bau des Lagerraums, Beginn der Schweinezucht, Gründung der Arbeitsgruppe vor Ort.', o:'Réo', k:'Infrastruktur', s:'Abgeschlossen', img:B.agrarfeld, neu:'Projektbedarf 08/2026'},
+  {y:2024, j:'2024', slug:'baeume-2024', t:'700 Bäume', u:'Bislang größte Pflanzaktion. Auf der bestehenden Website kommt sie nicht vor.', o:'Sanguié', k:'Umweltschutz', s:'Abgeschlossen', img:B.papaya, neu:'Projektbedarf 08/2026'},
+  {y:2025, j:'2025', slug:'wasser-bankio', t:'Solar-Wasseranlage Bankio', u:'Im Oktober 2025 in Betrieb genommen. Christen und Muslime teilen sich die Wasserstelle — die Schwäbische Zeitung hat darüber berichtet.', o:'Bankio', k:'Grundversorgung', s:'Abgeschlossen', img:B.dorfWasser, neu:'Projektbedarf 08/2026 · Presse 11/2025'},
+  {y:2025, j:'2025', slug:'zweites-wassersystem', t:'Zweites Wassersystem', u:'In der Chronik für 2025 verzeichnet, zusammen mit 100 weiteren Bäumen. Ein Ort ist nicht angegeben.', o:'Sanguié', k:'Grundversorgung', s:'Abgeschlossen', img:null, neu:'Projektbedarf 08/2026'},
+  {y:2026, j:'im Bau', slug:'agrarschule', t:'Agrarschule', u:'Seit drei Jahren im Aufbau. Es fehlen eine neue Wasserpumpe, der Schulungs- und Lernraum, die Tierzuchtanlagen für Hühner, Fische, Ziegen und Schweine, ein Zaun und ein Konzept zur Lebensmittelverarbeitung. Benötigt werden 20.000 €, davon stehen 15.000 € bereit.', o:'Réo', k:'Bildung', s:'In Finanzierung', img:B.verarbeitung, neu:'Projektbedarf 08/2026'},
   {y:2023, j:'2023', slug:'wasserstelle-ekulpung', t:'Wasserstelle Ekulpung',             u:'Am 20. Dezember 2023 in Anwesenheit des Dorfoberhaupts übergeben und in die Verantwortung des Dorfes gelegt.', o:'Ekulpung', k:'Grundversorgung', s:'Abgeschlossen', img:B.ekulpung2}
 ];
 /* Projekttexte. Gekürzt aus den bestehenden Seiten des Vereins — die Formulierungen
@@ -580,6 +647,16 @@ const PTEXT = {
   <p>Im April wurden 25 provisorische Wasserspender mit Seife an öffentlichen Orten in und um Réo aufgestellt — ein bewährtes System aus Tank, Wasserfilter, Wasserhahn und Seifenspender. Eine Station kostet 23 Euro. Zusätzlich wurde Getreide an Bedürftige verteilt.</p>
   <p>Im weiteren Verlauf wurden noch einmal 1,5 Tonnen Getreide gekauft und in Einheiten zu 25 Kilogramm an insgesamt 60 Haushalte verteilt, um einer Hungersnot durch Ernteausfälle vorzubeugen. Alle Empfänger haben den Erhalt quittiert; aus Datenschutzgründen wird diese Liste nicht veröffentlicht.</p>`,
  'naehmaschinen': `<p>Nach einer Reise per Containerschiff kamen die gespendeten Nähmaschinen in Wapa an.</p>`,
+ 'agrarschule': `<p>Seit drei Jahren bauen wir parallel zu den laufenden Projekten eine Agrarschule auf. Junge Menschen sollen dort in der Landwirtschaft ausgebildet werden — und die neue Wasserpumpe, die dazugehört, versorgt zugleich das Dorf mit Trinkwasser.</p>
+  <p>Was noch fehlt: die neue Wasserpumpe, die Fertigstellung des Schulungs- und Lernraums, die Tierzuchtanlagen für Hühner, Fische, Ziegen und Schweine, ein neuer Zaun und ein Konzept zur Lebensmittelverarbeitung. Mit der Verarbeitung eigener Produkte ist bereits begonnen worden.</p>
+  <p><b>Benötigt werden 20.000 €. 15.000 € stehen bereits zur Verfügung.</b></p>`,
+ 'wasser-bankio': `<p>Im Oktober 2025 ging im Dorf Bankio eine solarbetriebene Wasseranlage in Betrieb. Finanziert wurde sie unter anderem aus einer Spende der Kirche.</p>
+  <p>Das Besondere daran beschreibt die Schwäbische Zeitung: In einer Region, in der die Lage angespannt ist, teilen sich Christen und Muslime eine Wasserstelle — und tragen gemeinsam die Verantwortung dafür.</p>`,
+ 'baeume-2024': `<p>2024 wurden rund 700 Bäume gepflanzt — die bislang größte Aktion im Rahmen des Aufforstungsprojekts. 2025 kamen weitere 100 hinzu.</p>`,
+ 'lagerraum-tierzucht': `<p>2023 entstand der Lagerraum, die Schweinezucht begann, und vor Ort gründete sich eine Arbeitsgruppe, die den Betrieb trägt.</p>`,
+ 'pumpe-tukon': `<p>Nach Wapa die zweite Pumpenanlage. Die Vereinschronik verzeichnet sie für 2018; auf der bestehenden Website kommt Tukon nicht vor.</p>`,
+ 'kinder-academy': `<p>2019 gegründet. Aus den vorliegenden Unterlagen geht nicht hervor, wie sich die Kinder-Academy zur Sommerschule verhält — ob dasselbe Angebot gemeint ist oder zwei verschiedene.</p>`,
+ 'zweites-wassersystem': `<p>Für 2025 verzeichnet die Chronik ein zweites Wassersystem, zusammen mit 100 weiteren Bäumen. Ein Ort ist nicht angegeben.</p>`,
  'wasserstelle-ekulpung': `<p>Am 20. Dezember 2023 konnte unser Vorsitzender die Installation der Wasserstelle in Ekulpung durchführen. Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell freigegeben und in die Verantwortung des Dorfes übergeben.</p>
   <p>Ekulpung erhält damit den lang ersehnten Zugang zu fließendem Wasser.</p>`,
  'tropfenbewaesserung': `<p>Mit dem Waldgarten soll unter anderem die Aufforstung im Sahel vorangebracht werden. Beim neuen Brunnen ist dafür ein Pilotprojekt gestartet: Eine Tropfenbewässerung gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden dafür rund 1.000 Euro.</p>
@@ -588,6 +665,48 @@ const PTEXT = {
  'solaroefen': `<p>Jedes Jahr fließt viel Geld in Entwicklungsländer, damit Bäume gepflanzt werden, um die Ausbreitung der Wüste zu bremsen. Viele dieser Bäume sterben in der Trockenzeit an Wassermangel, andere werden nach einigen Jahren als Brennstoff abgeholzt. Das geschieht nicht aus mangelndem Umweltbewusstsein, sondern aus einem Mangel an Alternativen.</p>
   <p>Mit den Solaröfen soll den Menschen in den Dörfern die Möglichkeit eröffnet werden, aus vor Ort vorhandenem Material einen umweltfreundlichen Ofen zu bauen und zu nutzen. Modelliert wurden die Öfen mit einem Werkstudenten in Zusammenarbeit mit der Pharmaplan GmbH, dem Arbeitgeber unseres Vorsitzenden.</p>`
 };
+
+/* Pressestimmen. Jede Zeile trägt Quelle, Datum und Titel — die Angabe steht
+   auch dann noch, wenn der Link stirbt. Drei von vier Originalen sind bereits
+   tot (Stand 21.08.2026), deshalb der Archivlink als eigenes Feld.
+   Kein Artikeltext übernommen: fremdes Urheberrecht, und der Verein hat eine
+   eigene Urheberrechtsklausel im Impressum. */
+const PRESSE = [
+  {q:'Schwäbische Zeitung', d:'19. November 2025', t:'Solarbetriebener Brunnen vereint Religionen in Burkina Faso',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/eigentlich-moegen-sie-sich-nicht-aber-bei-diesem-thema-machen-sie-eine-ausnahme-4107881',
+   stand:'', projekt:'wasser-bankio'},
+  {q:'Schwäbische Zeitung', d:'6. Dezember 2024', t:'Er geht seit Jahren voran: „Afrika braucht keinen Babysitter“',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/er-geht-seit-jahren-voran-afrika-braucht-keinen-babysitter-3101632',
+   stand:'', projekt:null},
+  {q:'Schwäbische Zeitung', d:'2020', t:'Bäume mit mehrfachem Nutzen',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/baeume-mit-mehrfachem-nutzen-166198',
+   stand:'', projekt:'baumprojekt'},
+  {q:'Schwäbische Zeitung', d:'Spendenaktion', t:'Sigmaringer Projekte hoffen wieder auf Spenden',
+   u:'https://www.schwaebische.de/regional/sigmaringen/sigmaringen/sigmaringer-projekte-hoffen-wieder-auf-spenden-2041830',
+   stand:'', projekt:null},
+  {q:'Südkurier', d:'2016', t:'Endlich Wasser für die Kinder von Wapa: Student baut Wasserturm in Burkina Faso',
+   u:'https://www.suedkurier.de/region/linzgau/sigmaringen/Endlich-Wasser-fuer-die-Kinder-von-Wapa-Student-baut-Wasserturm-in-Burkina-Faso;art372574,8769693',
+   stand:'', projekt:'wasser-fuer-wapa'},
+  {q:'Le Stratège', d:'Burkina Faso, vor 2019', t:'Kienewoyi Bertrand Bazie : « de l’eau potable pour les populations locales, j’en fais le combat de ma vie »',
+   u:null, archiv:'http://web.archive.org/web/20190907094640/http://lestratege.info:80/kienewoyi-bertrand-bazie-de-leau-potable-pour-les-populations-locales-jen-fais-le-combat-de-ma-vie/',
+   stand:'Seite eingestellt', projekt:'wasser-fuer-wapa'},
+  {q:'Schwäbische Zeitung', d:'26. Dezember 2020', t:'Eine Mauer für mehr Schutz',
+   u:null, archiv:'http://web.archive.org/web/20220625040048/https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-eine-mauer-fuer-mehr-schutz-_arid,11302226.html',
+   stand:'vom Verlag entfernt', projekt:'ausbildungszentrum'},
+  {q:'Schwäbische Zeitung', d:'27. Dezember 2020', t:'Verein hilft Dorf in Burkina Faso beim Pflanzen von Bäumen',
+   u:null, archiv:'http://web.archive.org/web/20220625051041/https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-verein-hilft-dorf-in-burkina-faso-beim-pflanzen-von-baeumen-_arid,11309470.html',
+   stand:'vom Verlag entfernt', projekt:'baumprojekt'}
+];
+
+function presseZeile(a){
+  const ziel = a.u || a.archiv;
+  const marke = a.u ? '' : `<span class="pstand">${a.stand} · Fassung im Internet Archive</span>`;
+  return `<a class="pz-presse" href="${ziel}" rel="noopener">
+    <span class="pq">${a.q} · ${a.d}</span>
+    <span class="pt">${a.t}</span>
+    ${marke}
+  </a>`;
+}
 
 /* Was gerade läuft — für die Startseite. Keine Auswahl nach Geschmack,
    sondern nach Stand: alles, was nicht abgeschlossen ist. */
@@ -880,7 +999,7 @@ ${spendenBlock()}
 function zeile(p){
   return `<a class="rz" href="#/projekt/${p.slug}">
     <div class="j zahl">${p.j}</div>
-    <div><div class="t">${p.t}</div><div class="u">${p.u}</div></div>
+    <div><div class="t">${p.t}${p.neu?' <span class="neu" title="Quelle: '+p.neu+'">neu</span>':''}</div><div class="u">${p.u}</div></div>
     <div class="s">${p.o}</div>
     <div class="k${p.s==='Abgeschlossen'?'':' offen'}">${p.s}</div>
     ${p.img ? `<img class="vs" src="${p.img}" alt="" loading="lazy">` : ''}
@@ -981,12 +1100,14 @@ VIEWS['ueber-uns'] = () => `
       <p>Kienewoyi Bertrand Bazie kam 2011 zum Studium nach Deutschland und erhielt 2018 seinen Master an der Hochschule Albstadt-Sigmaringen. Heute arbeitet er als Pharmaingenieur in Frankfurt. Eine der Hauptinitiatorinnen des Vereins war die 2020 verstorbene Marlis Schmitt-Sickinger.</p>
       <p>Die Projekte planen und setzen wir direkt mit den Menschen in Sanguié um. Bertrand kennt die Bedürfnisse vor Ort und ist bei Planung und Umsetzung im Austausch mit Offiziellen und Verantwortlichen. So oft er kann, besucht er seine alte Heimat. Verwaltung und Öffentlichkeitsarbeit organisieren wir in Eigenleistung.</p>
       <h2 style="margin-top:2.2rem">Vorstand</h2>
+      <p style="font-size:.95rem">Vier Menschen, die das neben dem Beruf machen —
+      <a class="pf" href="#/vorstand" style="display:inline-flex">wer dahintersteht</a></p>
       <div class="preise" style="max-width:34rem">
         <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
         <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
         <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
       </div>
-      <p style="margin-top:1.6rem"><a class="pf" href="#/satzung">Satzung und Manifest</a></p>
+      <p style="margin-top:1.6rem;display:flex;gap:1.6rem;flex-wrap:wrap"><a class="pf" href="#/satzung">Satzung und Manifest</a><a class="pf" href="#/presse">Pressestimmen</a></p>
     </div>
     <div>
       <img src="${B.zentrum}" alt="Das Ausbildungszentrum in Réo" style="width:100%;aspect-ratio:4/5;object-fit:cover">
@@ -1091,6 +1212,10 @@ VIEWS['projekt'] = (slug) => {
   ${pr.img ? `<img class="gross" src="${pr.img}" alt="${pr.t}" style="margin-top:2rem">`
            : `<p class="ohnebild">Zu diesem Vorhaben gibt es noch kein Bild — es ist nicht gebaut.</p>`}
   ${text}
+  ${(function(){const pp=PRESSE.filter(a=>a.projekt===pr.slug); return pp.length
+    ? `<div style="border-top:1px solid var(--linie);margin-top:2.6rem;padding-top:1.6rem">
+        <span class="kt gruen">Darüber wurde berichtet</span>
+        <div class="presseliste">${pp.map(presseZeile).join('')}</div></div>` : '';})()}
   ${verwandt.length ? `<div style="border-top:1px solid var(--linie);margin-top:2.6rem;padding-top:1.6rem">
     <span class="kt gruen">Ebenfalls ${pr.k}</span>
     <div class="reg">${verwandt.map(zeile).join('')}</div></div>` : ''}
@@ -1100,6 +1225,110 @@ VIEWS['projekt'] = (slug) => {
 </div></div></section>
 ${spendenBlock()}`;
 };
+
+/* ============ PRÜFLISTE — was neu ist ============
+   Erzeugt sich aus den Daten selbst. Wird `neu` bei einem Projekt entfernt,
+   verschwindet es hier automatisch. Kein zweites Dokument, das veralten kann. */
+VIEWS['neu'] = () => {
+  const offen = REG.filter(p=>p.neu);
+  const quellen = [...new Set(offen.map(p=>p.neu))];
+  return `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Prüfliste</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Was neu ist und noch bestätigt werden muss</h1>
+  <p class="lede">${offen.length} Einträge stammen aus Unterlagen, die nicht auf der bisherigen Website standen. Sie sind im Register mit <span class="neu">neu</span> markiert. Diese Liste ist zum Abhaken gedacht — Punkt für Punkt.</p>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <div class="hinweis">
+    <b>So ist das gemeint:</b> Jede dieser Angaben ist aus einer Quelle übernommen,
+    aber von niemandem im Verein gegengelesen. Wer sie bestätigt, sagt Bescheid —
+    dann fällt die Markierung weg und der Eintrag ist normaler Bestand. Wer sie
+    für falsch hält, ebenso. Bis dahin steht sichtbar da, woher sie kommt.
+  </div>
+  <h2>Quellen</h2>
+  <ul>${quellen.map(q=>{const n=offen.filter(p=>p.neu===q).length; return `<li><b>${q}</b> — ${n} ${n===1?'Eintrag':'Einträge'}</li>`}).join('')}</ul>
+  <h2>Zu prüfen</h2>
+</div></div>
+<div class="wrap"><div class="reg">${offen.sort((a,b)=>b.y-a.y).map(zeile).join('')}</div></div>
+<div class="wrap"><div class="artikel" style="margin-top:2rem">
+  <h2>Bekannte Unstimmigkeiten</h2>
+  <div class="preise" style="max-width:none">
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Pumpe in Wapa</div><div class="b2">Chronik sagt 2017, Website sagt 2016. Im Register steht 2016.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Brunnentiefe</div><div class="b2">81 m im Beitrag, 83 m auf der Projektseite. Im Register steht 81 m.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kinder-Academy</div><div class="b2">Verhältnis zur Sommerschule unklar — dasselbe Angebot oder zwei?</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Tropfenbewässerung</div><div class="b2">Projektseite: 0 % finanziert. Beitrag 02/2022: installiert.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Zweites Wassersystem</div><div class="b2">Ort nicht angegeben.</div></div>
+  </div>
+  <p style="margin-top:2rem"><a class="pf" href="#/projekte">Zum vollständigen Register</a></p>
+</div></div></section>`;
+};
+
+/* ============ PRESSE ============ */
+VIEWS['presse'] = () => `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Pressestimmen</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Was andere über uns geschrieben haben</h1>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap"><div class="artikel">
+  <p>Vier Berichte, zwischen 2016 und 2020. Wir geben jeweils Quelle, Datum und
+  Titel an — die Angabe bleibt auch dann brauchbar, wenn der Link nicht mehr
+  funktioniert. Genau das ist inzwischen bei drei von vier der Fall.</p>
+  <div class="presseliste">${PRESSE.map(presseZeile).join('')}</div>
+  ${rn('<b>Warum hier so viele Archivlinks stehen:</b> Beide Artikel der Schwäbischen Zeitung antworten heute mit <code>410 Gone</code> — der Verlag hat sie dauerhaft entfernt, das ist kein vorübergehender Fehler. Die Domain von <i>Le Stratège</i> existiert überhaupt nicht mehr. Erhalten sind alle drei nur im Internet Archive. Der Südkurier-Artikel von 2016 ist als einziger noch am ursprünglichen Ort erreichbar. Deshalb steht die Quellenangabe im Vordergrund und der Link dahinter, nicht umgekehrt.')}
+  ${rn('<b>Möglicherweise unvollständig:</b> Das sind die Berichte, die auf der bestehenden Website verlinkt sind. Die Schwäbische Zeitung hat außerdem zweimal eine Weihnachtsspendenaktion für den Verein gemacht (2019 rund 3.600 €, 2020 für die Schutzmauer) und den Tiefbrunnen 2021 mitfinanziert — ob es dazu weitere Artikel gab, ist der Website nicht zu entnehmen. Wer Ausschnitte hat, kann sie ergänzen.')}
+</div></div></section>`;
+
+/* ============ VORSTAND ============
+   Grundsatz: Über eine Person steht hier nur, was der Verein selbst oder die
+   Presse über sie in ihrer Vereinsrolle veröffentlicht hat — oder was sie selbst
+   beigesteuert hat. Keine aus dem Netz zusammengetragenen Profile.
+   `freigabe` sagt, worauf ein Eintrag beruht. */
+const MENSCHEN = [
+  {name:'Kienewoyi Bertrand Bazie', rolle:'Vorsitzender', seit:'Gründung 2017',
+   bild:B.bertrandSolar,
+   text:`<p>Aufgewachsen in Wapa, dem Dorf, in dem alles anfing. 2011 zum Studium nach Deutschland gekommen, 2018 Master an der Hochschule Albstadt-Sigmaringen, heute Pharmaingenieur bei einem Unternehmen in Frankfurt.</p>
+     <p>Der Verein geht auf den Brunnen zurück, den sein Vater begonnen und er nach dessen Tod zu Ende gebracht hat. Er kennt die Bedürfnisse vor Ort, spricht mit Offiziellen und Verantwortlichen und besucht seine alte Heimat, so oft er kann.</p>
+     <p class="zit">„Geld allein kann gar nichts. Wenn das Geld zum Leben erweckt wird, dann können wir Großes erreichen.“<span>Schwäbische Zeitung, 6. Dezember 2024</span></p>`,
+   freigabe:'Aus „Über uns“ des Vereins und dem Porträt der Schwäbischen Zeitung vom 6.12.2024. Foto aus der Präsentation Projektbedarf.'},
+
+  {name:'Dietmar Sickinger', rolle:'Schatzmeister', seit:'', bild:null,
+   text:`<p>Führt die Kasse des Vereins.</p>`,
+   freigabe:'Nur Name und Amt — mehr hat der Verein bislang nicht veröffentlicht.'},
+
+  {name:'Carolin Zolkiewicz', rolle:'Schriftführerin', seit:'', bild:null,
+   text:`<p>Führt die Schriftstücke des Vereins und schreibt die Beiträge für die Website.</p>`,
+   freigabe:'Nur Name und Amt — mehr hat der Verein bislang nicht veröffentlicht.'},
+
+  {name:'Noah Bisinger', rolle:'Kassenprüfer', seit:'', bild:null,
+   text:`<p>Prüft die Kasse. Arbeitet daneben an der internen Kommunikation des Vereins und an diesem Website-Umzug.</p>`,
+   freigabe:'Von ihm selbst beigesteuert.'}
+];
+
+VIEWS['vorstand'] = () => `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Wer dahintersteht</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">Der Vorstand</h1>
+  <p class="lede">Ein kleiner Verein. Verwaltung und Öffentlichkeitsarbeit machen wir selbst, neben dem Beruf.</p>
+</div></div>
+<section style="padding-top:2rem"><div class="wrap">
+  <div class="menschen">
+    ${MENSCHEN.map(m=>`<article class="mensch">
+      <div class="mportrait">${m.bild
+        ? `<img src="${m.bild}" alt="${m.name}">`
+        : `<div class="keinbild"><span>Foto<br>fehlt</span></div>`}</div>
+      <div class="mtext">
+        <h2>${m.name}</h2>
+        <div class="mrolle">${m.rolle}${m.seit?' · '+m.seit:''}</div>
+        ${m.text}
+        <div class="mquelle">${m.freigabe}</div>
+      </div>
+    </article>`).join('')}
+  </div>
+  <div class="artikel" style="margin-top:1rem">
+  ${rn('<b>Warum hier so wenig steht — und was noch fehlt:</b> Über Menschen steht auf dieser Seite nur, was der Verein selbst oder die Presse über sie in ihrer Vereinsrolle veröffentlicht hat, oder was sie selbst beigesteuert haben. Lebensläufe aus dem Netz zusammenzusuchen wäre etwas anderes als eine Vorstellung — und niemand kann für eine andere Person einwilligen. <b>Jede und jeder schreibt den eigenen Absatz selbst</b> und gibt das eigene Bild frei; dann wird die Seite vollständig (→ B11).')}
+  ${rn('<b>Widerspruch im Impressum:</b> Dort steht Anne Schmitz als Kassenprüferin. Wenn Noah Bisinger das Amt innehat, ist das Impressum nicht aktuell — und ein Impressum ist die eine Seite, die stimmen muss.')}
+  </div>
+</div></section>`;
 
 /* ============ SATZUNG ============ */
 VIEWS['satzung'] = () => `

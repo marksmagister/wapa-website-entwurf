@@ -34,6 +34,10 @@ def slug(t):
 s = re.sub(r"N\('([^']+)'\)", lambda m: "'assets/fotos/%s.jpg'" % slug(m.group(1)), s)
 s = re.sub(r"const N = [^;]+;\s*", "", s)
 
+# Aufnahmen aus der Präsentation Projektbedarf
+s = re.sub(r"P\('([^']+)'\)", lambda m: "'assets/fotos-2026/%s.jpg'" % m.group(1), s)
+s = re.sub(r"const P = [^;]+;\s*", "", s)
+
 # Archivbilder: der Schlüsselname ist der Dateiname
 s = re.sub(r"^(\s*)(\w+):\s*W\('[^']+'\)", r"\1\2: 'assets/archiv/\2.jpg'", s, flags=re.M)
 s = re.sub(r"const W = [^;]+;\s*", "", s)
