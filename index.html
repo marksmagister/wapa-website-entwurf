@@ -716,7 +716,7 @@ function presseZeile(a){
 const LAEUFT = s => s !== 'Abgeschlossen';
 
 const NEWS = [
-  {slug:'waldgarten-august-2026', t:'So sieht der Waldgarten heute aus', k:'Umweltschutz',
+{slug:'waldgarten-august-2026', t:'So sieht der Waldgarten heute aus', k:'Umweltschutz',
    d:'12. August 2026', a:'Vorstand', img:B.reihen, galerie:[
      [B.reihen,'Mais, Auberginen und Maniok in derselben Reihe — die Mischkultur hält den Boden bedeckt.'],
      [B.maniok,'Maniok'],
@@ -732,27 +732,180 @@ const NEWS = [
      <p>Das Prinzip der Agroforstwirtschaft ist auf den Bildern gut zu erkennen: Zwischen den Maisreihen wachsen Auberginen, Maniok und Sesam; darüber stehen Moringa und junge Obstbäume, die in einigen Jahren Schatten spenden werden. Der Boden bleibt so das ganze Jahr bedeckt — die Humusschicht wird nicht von der Sonne verbrannt und die Nährstoffe werden in der Regenzeit nicht weggespült.</p>
      <p>Die Tropfenbewässerung aus dem Wasserturm läuft. Der Zaun aus Astwerk hält das Weidevieh ab, das in der Trockenzeit unbeaufsichtigt über das wenige Grün geht — ohne ihn wären die Setzlinge längst gefressen. Unser Gärtner, der den Garten pflegt und die Brunnenanlage wartet, hat inzwischen eigene Vorschläge, wie es weitergehen soll.</p>
      <p>Wenn die Bäume tief genug wurzeln, um selbst an das Grundwasser zu kommen, brauchen sie kein Gießwasser mehr. Dann sollen sie Schatten und Windschutz geben, die Bodenerosion bremsen und helfen, den Grundwasserspiegel zu heben. Bis dahin wird weiter gegossen.</p>`},
-  {slug:'wasser-fuer-ekulpung', t:'Wasser für Ekulpung', k:'Grundversorgung', d:'1. Januar 2024', a:'Caro Sickinger', img:B.ekulpung,
-   galerie:[[B.ekulpung2,'Die neue Zapfstelle'],[B.ekulpung3,'Übergabe an das Dorf'],[B.ekulpung,'Die Feier in Ekulpung']],
-   x:'Am 20. Dezember hat unser Vorsitzender die Wasserstelle in Ekulpung übergeben — im Beisein des Dorfoberhaupts und des dortigen Vorstands.',
-   body:`<p style="font-size:1.16rem">Grosse Freude in Ekulpung: Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie wie geplant die Installation der Wasserstelle in Ekulpung erfolgreich durchführen. Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell für die Bewohner:innen des Dorfes freigegeben und in ihre Verantwortung übergeben.</p>
+  {slug:'wasser-fuer-ekulpung', alt:'wasser-fuer-ekulpung', galerie:[[B.ekulpung2,'Die neue Zapfstelle'],[B.ekulpung3,'Übergabe an das Dorf'],[B.ekulpung,'Die Feier in Ekulpung']], t:"Wasser für Ekulpung", k:'Grundversorgung', d:'1. Januar 2024', a:'Caro Sickinger', img:B.ekulpung,
+   x:"Grosse Freude in Ekulpung: Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie wie geplant die Installation der Wasserstelle in Ekulpung erfolgreich durchführen. Die…",
+   body:`<p>Grosse Freude in Ekulpung: Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie wie geplant die Installation der Wasserstelle in Ekulpung erfolgreich durchführen. Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell für die Bewohner:innen des Dorfes freigegeben und in ihre Verantwortung übergeben.</p>
      <p>Ekulpung erhält damit den lang ersehnten Zugang zu fließendem Wasser. Die Übergabe wurde groß gefeiert und der neue Brunnen mit Dankbarkeit und Freude von den Dorfbewohner:innen angenommen.</p>
-     <p>Wir sind stolz darauf, dieses Weihnachtsgeschenk machen zu können, und zuversichtlich, dass die nachhaltige Bereitstellung von sauberem Wasser das Leben der Bewohner:innen verbessern wird.</p>
-     <p>Herzlichen Dank allen Unterstützer:innen, Spender:innen und Beteiligten, die dazu beigetragen haben, dieses Vorhaben zu verwirklichen.</p>`},
-  {slug:'waldgarten-waechst', t:'Waldgarten wächst', k:'Umweltschutz', d:'2. Mai 2022', a:'Thomas Harnisch', img:B.maisreihen,
-   x:'Der erste Waldgarten beim Dorfbrunnen wächst. Die Bewässerung steht und wird aus dem neuen Wassertank gespeist.'},
-  {slug:'pflanzaktion-februar-2022', t:'Pflanzaktion Februar 2022', k:'Umweltschutz', d:'22. Februar 2022', a:'Thomas Harnisch', img:B.pflanz,
-   x:'Neue Setzlinge für den Waldgarten. Die Mangos vom Vorjahr haben bereits eine stattliche Höhe erreicht.'},
-  {slug:'naehmaschinenlieferung', t:'Nähmaschinenlieferung', k:'Bildung', d:'7. Februar 2022', a:'Thomas Harnisch', img:B.naeh,
-   x:'Nach einer Reise per Containerschiff sind die gespendeten Nähmaschinen in Wapa angekommen.'},
-  {slug:'garten-am-wasserturm', t:'Garten am Wasserturm', k:'Umweltschutz', d:'21. August 2021', a:'Thomas Harnisch', img:B.garten,
-   x:'Zwei Gärtner wurden engagiert. Sie pflegen den Garten und warten die Brunnenanlage.'},
-  {slug:'brunnenbau-fertiggestellt', t:'Brunnenbau fertiggestellt', k:'Infrastruktur', d:'5. April 2021', a:'Thomas Harnisch', img:B.wasserturm,
-   x:'Am Osterwochenende beendet. 81 Meter tief, drei öffentlich zugängliche Wasserhähne.'},
-  {slug:'nachruf-marlis', t:'Nachruf Marlis Schmitt-Sickinger', k:'Verein', d:'9. März 2020', a:'Vorstand', img:B.naeh,
-   x:'Unsere Mitgründerin und Schatzmeisterin ist nach langer Krankheit verstorben. An unserer Schule in Réo wurde ein Gebet für sie gesprochen.'},
-  {slug:'corona-spendenaktion', t:'Corona-Spendenaktion', k:'Grundversorgung', d:'29. August 2020', a:'Vorstand', img:B.seife,
-   x:'Zwei Hilfsprojekte umgesetzt: Wasserspender und Seife an öffentlichen Orten, dazu 1,5 Tonnen Getreide für 60 Haushalte.'}
+     <p>Wir sind stolz darauf, dieses Weihnachtsgeschenk machen zu können und sind zuversichtlich, dass die nachhaltige Bereitstellung von sauberem Wasser das Leben der Bewohner:innen nachhaltig verbessern wird. Auch 2024 wollen wir weitere Projekte umsetzen, die das Wohlbefinden von Dorfgemeinschaften in der Region Réo (Burkina Faso) positiv beeinflussen.</p>
+     <p>Herzlichen Dank allen Unterstützer:innen, Spender:innen und Beteiligten, die dazu beigetragen haben, dieses wichtige Vorhaben zu verwirklichen. Danke, dass wir dank Ihnen auch in Zukunft positive Veränderungen bewirken können. Unterstützen Sie uns auch 2024 weiter mit <a href="#/spenden" rel="noopener" style="text-decoration:underline">Ihrer Spende</a> oder helfen Sie jungen Frauen und Mädchen mit einer <a href="#/spenden" rel="noopener" style="text-decoration:underline">Schulpatenschaft</a>.</p>`},
+  {slug:'waldgarten-waechst', alt:'waldgarten-waechst', t:"Waldgarten wächst", k:'Umweltschutz', d:'2. Mai 2022', a:'Thomas Harnisch', img:B.maisreihen,
+   x:"Unser erster Waldgarten beim Dorfbrunnen wächst und gedeiht.",
+   body:`<p>Unser erster Waldgarten beim Dorfbrunnen wächst und gedeiht.</p>
+     <p>Die Wasserversorgung steht und wird aus dem neuen Wassertank gespeist.</p>
+     <p>Das Konzept von Feldern mit eingestreuten Bäumen ist sehr gut erkennbar.</p>
+     <p>Gemeinschaft aus Bäumen und Feldern</p>
+     <p>Der Zaun dient dem Schutz vor Wildtierverbiss.</p>
+     <p>Die Bäume werden in wenigen Jahren groß genug sein, sich über das Grundwasser selbst zu versorgen. Dann werden sie Schatten und Windschutz spenden und die Bodenerosion verringern. Außerdem helfen ihre Wurzeln dabei, das Grundwasserniveau zu heben.</p>
+     <p><a href="#/projekt/waldgarten" rel="noopener" style="text-decoration:underline">Link zum Projekt</a></p>
+     <p><a href="#/spenden" rel="noopener" style="text-decoration:underline">SPENDEN</a></p>`},
+  {slug:'pflanzaktion-februar-2022', alt:'pflanzaktion-februar-2022', t:"Pflanzaktion Februar 2022", k:'Umweltschutz', d:'22. Februar 2022', a:'Thomas Harnisch', img:B.pflanz,
+   x:"Der Waldgarten bei unserem Dorfbrunnen wurde mit neuen Setzlingen beliefert. Die Mangos, die wir letztes Jahr gepflanzt haben, haben bereits eine stattliche Höhe erreicht. Sie…",
+   body:`<p>Der Waldgarten bei unserem Dorfbrunnen wurde mit neuen Setzlingen beliefert. Die Mangos, die wir letztes Jahr gepflanzt haben, haben bereits eine stattliche Höhe erreicht. Sie werden sich gut als Schutzbäume eignen, wenn sie das Grundwasser erreicht haben. Diese Art von Aufforstungen im Sahel hat sich an anderen Standorten der Great Green Wall bereits als sehr erfolgreich erwiesen.</p>
+     <p>Wir haben außerdem eine Tropfenbewässerung installiert, welche das Wasser langsam und kontrolliert aus dem Wasserturm abgibt. Unser Gärtner hat bereits Ideen zur Weiterentwicklung des Waldgartens ersonnen. Damit wird es demnächst zu kleineren Projekten auf Inititative der Bevölkerung vor Ort kommen, ganz nach unserem Motto ‚Hilfe zur Selbsthilfe‘.</p>
+     <p>Unterstützen Sie uns mit einer Spende! Bereits sehr kleine Beträge werden von uns direkt für neue Setzlinge ausgegeben.</p>
+     <p><a href="#/spenden" rel="noopener" style="text-decoration:underline">SPENDEN</a></p>
+     <p>Oder werden Sie Fan unseres Auftritts bei Betterplace:</p>
+     <p><a href="https://www.betterplace.org/de/projects/95699-aufforstung-im-sahel" rel="noopener" style="text-decoration:underline">https://www.betterplace.org/de/projects/95699-aufforstung-im-sahel</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'naehmaschinenlieferung', alt:'naehmaschinenlieferung', t:"Nähmaschinenlieferung", k:'Bildung', d:'7. Februar 2022', a:'Thomas Harnisch', img:B.naeh,
+   x:"Nach einer Reise per Containerschiff kamen die Nähmaschinen nun in Wapa an.",
+   body:`<h2>Lieferung der Nähmaschinenspende</h2>
+     <p>Nach einer Reise per Containerschiff kamen die Nähmaschinen nun in Wapa an.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'garten-am-wasserturm', alt:'news_garten', t:"Garten am Wasserturm", k:'Umweltschutz', d:'21. August 2021', a:'Thomas Harnisch', img:B.garten,
+   x:"Nachdem der neue nebst erfolgreich in Betrieb genommen wurde haben wir nun mit der Anlage des Gartens begonnen. Dieser ist in unmittelbarer Nähe des Wasserturms, sodass die…",
+   body:`<p>Nachdem der neue <a href="#/projekte" rel="noopener" style="text-decoration:underline">Brunnen</a> nebst <a href="#/projekt/solaranlage" rel="noopener" style="text-decoration:underline">Solaranlage und Wasserturm</a> erfolgreich in Betrieb genommen wurde haben wir nun mit der Anlage des Gartens begonnen. Dieser ist in unmittelbarer Nähe des Wasserturms, sodass die Bewässerung ganzjährig sichergestellt ist. Wir haben zwei Gärtner engagiert, die sich um den Garten und die Wartung der Brunnenanlage kümmern. Sie wurden in der Pflege von Setzlingen ausgebildet und werden aktuell aus Vereinsmitteln bezahlt. In Zukunft sollen die Erträge des Gartens ihre Löhne finanzieren.</p>
+     <p>Wie immer freuen wir uns über <a href="#/spenden" rel="noopener" style="text-decoration:underline">Spenden</a>!</p>
+     <p>Hier der <a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a> zur Projektseite</p>`},
+  {slug:'brunnenbau-fertiggestellt', alt:'brunnenbau2', t:"Brunnenbau fertiggestellt", k:'Infrastruktur', d:'5. April 2021', a:'Thomas Harnisch', img:B.wasserturm,
+   x:"Der Brunnenbau wurde am Osterwochenende beendet. Eine wirklich tolle Leistung! Mithilfe öffentlich zugänglicher Wasserhähne und einer Straße dorthin können sich die Menschen vor Ort…",
+   body:`<p>Der Brunnenbau wurde am Osterwochenende beendet. Eine wirklich tolle Leistung! Mithilfe öffentlich zugänglicher Wasserhähne und einer Straße dorthin können sich die Menschen vor Ort mit frischem Trinkwasser versorgen.</p>
+     <p>Der Brunnen ist 81m tief. Bei 20 Metern wurde bereits Grundwasser gefunden. Da im Mai das Ende der Trockenzeit gekommen ist können wir davon ausgehen, dass wir mit diesem Brunnen auch in Zukunft sicher das ganze Jahr über Wasser fördern können.</p>
+     <p>Die Pumpe ist in 50 m Tiefe installiert. Bei guten Bedingungen schafft sie 2 Kubikmeter/h. Dafür wurden anstatt 4 Solarzellen 6 installiert. Der neue Tank hat ein Volumen von 3000 anstatt 2000 Litern. Der alte Tank hat ein Volumen von 1000 Litern. Beide Tanks wurden gemeinsam mit dem Brunnen verbunden, insgesamt stehen jetzt also 4000 Liter zur Verfügung. Der Öffentlichkeit wurden drei Wasserhähne zur Verfügung gestellt.</p>
+     <p>Das Geld wurde uns vom Rotary Club Anfang des Jahres zur Verfügung gestellt und bereits jetzt ist das Projekt fertiggestellt.</p>
+     <p>Wir sind alle mächtig stolz!! 😀</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'brunnenbau-beginnt', alt:'brunnenbau', t:"Neuer Brunnenbau", k:'Infrastruktur', d:'30. März 2021', a:'Thomas Harnisch', img:B.turmKran,
+   x:"Unser großes Projekt für 2021 wird der Bau dieses Brunnens sein. Er wird voraussichtlich etwa 80 Meter tief und dringt damit sicher in ein Aquifer, das auch in der Trockenzeit noch…",
+   body:`<p>Unser großes Projekt für 2021 wird der Bau dieses Brunnens sein. Er wird voraussichtlich etwa 80 Meter tief und dringt damit sicher in ein Aquifer, das auch in der Trockenzeit noch Grundwasser führt.</p>
+     <p>Der Brunnen soll durch eine Solarbetriebene Pumpe betrieben werden, welche das Wasser dann in ein Reservoir in Form eines voraussichtlich etwa 300 Kubikmeter großen Wasserturms fördert, ähnlich unserem ersten Brunnen in Wapa.</p>
+     <p>Ist der Brunnen in Betrieb soll er die Menschen der Umgebung kostenfrei mit Trinkwasser versorgen.</p>
+     <p>Gleichzeitig soll in seiner Umgebung ein erster kleiner Waldgarten angelegt werden welcher den ersten Testlauf für unseren zukünftigen, größeren Waldgarten darstellt.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'schulausbau', alt:'schulausbau', t:"Schulausbau", k:'Bildung', d:'4. Januar 2021', a:'Thomas Harnisch', img:B.zentrum,
+   x:"Der Ausbau der Schule schreitet voran. Hier sind einige Impressionen von der Baustelle. Ziegel und Fundament: Alles Handarbeit…",
+   body:`<h2>Ausbau der Schule</h2>
+     <p>Der Ausbau der Schule schreitet voran. Hier sind einige Impressionen von der Baustelle. Ziegel und Fundament: Alles Handarbeit…</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'neujahr-2021', alt:'7369-2', t:"Frohes neues Jahr 2021", k:'Verein', d:'1. Januar 2021', a:'Vorstand', img:null,
+   x:"Wir wünschen allen Unterstützern, Freunden und natürlich jedem sonst ein frohes neues Jahr! Auch 2021 haben wir wieder viel vor: Zertifizierung der Schule, nächste Schritte im…",
+   body:`<p>Wir wünschen allen Unterstützern, Freunden und natürlich jedem sonst ein frohes neues Jahr! Auch 2021 haben wir wieder viel vor: Zertifizierung der Schule, nächste Schritte im Projekt Waldgarten, Interviews mit Beteiligten und Interessenten aus Burkina Faso, und und und…</p>
+     <p>Wir halten euch auf dem Laufenden!</p>`},
+  {slug:'bericht-baumprojekt-2020', alt:'artikel-baumprojekt-dezember-2020', t:"Bericht über das Baumprojekt", k:'Umweltschutz', d:'27. Dezember 2020', a:'Vorstand', img:B.baum,
+   x:"",
+   body:`<p><a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-verein-hilft-dorf-in-burkina-faso-beim-pflanzen-von-baeumen-_arid,11309470.html" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <h2>Corona Spendenaktion</h2>
+     <p>Die Schwäbische Zeitung hat sich einmal mehr als wertvolle Unterstützerin unseres Vereins erwiesen und berichtete im Dezember von unserem Aufforstungsprojekt. Dies wird nach der sehr erfolgreichen Umsetzung unseres <a href="#/projekt/ausbildungszentrum" rel="noopener" style="text-decoration:underline">Schulprojekts</a> das nächste größere Projekt. Details dazu finden Sie <a href="#/projekt/baumprojekt" rel="noopener" style="text-decoration:underline">hier</a>.</p>
+     <p>Den Link zum vollständigen Artikel finden Sie <a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-verein-hilft-dorf-in-burkina-faso-beim-pflanzen-von-baeumen-_arid,11309470.html" rel="noopener" style="text-decoration:underline">hier</a>.</p>`},
+  {slug:'mauer-fuer-die-schule', alt:'mauer-fuer-die-schule', t:"Mauer für die Schule", k:'Bildung', d:'26. Dezember 2020', a:'Vorstand', img:B.zentrum,
+   x:"Ein Artikel aus der Schwäbischen Zeitung für die Weihnachtsspendenaktion. Unter anderem ist der Bau der Schutzmauer um unsere Schule geplant. .",
+   body:`<h2>Eine Mauer für mehr Schutz</h2>
+     <p>Ein Artikel aus der Schwäbischen Zeitung für die Weihnachtsspendenaktion. Unter anderem ist der Bau der Schutzmauer um unsere Schule geplant. <a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-eine-mauer-fuer-mehr-schutz-_arid,11302226.html" rel="noopener" style="text-decoration:underline">Hier der Link zu dem Artikel</a>.</p>`},
+  {slug:'schulprojekt-abschluss', alt:'schulprojekt', t:"Schulprojekt: die letzte Phase", k:'Bildung', d:'7. Dezember 2020', a:'Vorstand', img:B.zentrum,
+   x:"Unser Schulprojekt geht formal in die letzte Phase. Mit dem Bau der Schutzmauer und einiger weiterer Maßnahmen werden alle Auflagen erfüllt, damit die Schule die staatliche…",
+   body:`<h2>Schulprojekt Abschluss</h2>
+     <p>Unser Schulprojekt geht formal in die letzte Phase. Mit dem Bau der Schutzmauer und einiger weiterer Maßnahmen werden alle Auflagen erfüllt, damit die Schule die staatliche Zulassung erhält. Hierzu gab es auch einen <a href="https://www.schwaebische.de/landkreis/landkreis-sigmaringen/sigmaringen_artikel,-eine-mauer-fuer-mehr-schutz-_arid,11302226.html" rel="noopener" style="text-decoration:underline">Artikel</a> in der Schwäbischen Zeitung. Hier finden Sie auch den Aufrauf zu der Weihnachts-Spendenaktion.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'corona-zwei-hilfsprojekte', alt:'corona-spendenaktion-2', t:"Zwei Hilfsprojekte umgesetzt", k:'Grundversorgung', d:'29. August 2020', a:'Vorstand', img:B.seife,
+   x:"Liebe Vereinsmitglieder, die Nachrichten sind voll von negativen Mitteilungen rund um die Coronakrise. Wir sind sehr froh, dass wir an dieser Stelle eine positive Rückmeldung aus…",
+   body:`<h2>Corona Spendenaktion</h2>
+     <p>Liebe Vereinsmitglieder, die Nachrichten sind voll von negativen Mitteilungen rund um die Coronakrise. Wir sind sehr froh, dass wir an dieser Stelle eine positive Rückmeldung aus Wapa / Burkina Faso geben können.</p>
+     <p>Wir hatten Sie und euch vor einigen Wochen um eine Spende für unsere Mitmenschen in Wapa gebeten, um die Folgen der Corona-Thematik dort etwas abmildern zu können. Dank der wundervollen, großzügigen Resonanz auf diesen Aufruf konnten zwei Hilfsprojekte realisiert werden!</p>
+     <p>Im ersten Schritt wurden im April Wasserspender und Seifen an öffentliche Orte in Réo und Wapa gebracht. Zudem wurde Getreide an Bedürftige verteilt.</p>
+     <p>Im vergangenen Monat wurden erneut 1,5 Tonnen Getreide eingekauft und dieses wurde wieder an bedürftige Menschen verteilt, sodass 60 Personen einige Zeit lang davon zehren können.</p>
+     <p>Momentan ist die Lage in Wapa und Réo ruhig. Es gibt so gut wie keine Infektionen (wobei die</p>
+     <p>Nachweisbarkeit von Infektionen vor Ort deutlich umständlicher ist als in Deutschland), es gibt aber laut unserem Vorstand Bertrand Bazie auch keinen auffälligen Anstieg der Sterberate oder der generellen Infektionen in der Region. Daher gehen wir davon aus, dass das Corona-Virus zumindest in unserer Region Wapa/Réo nur sehr spärlich vorhanden ist. Die Lage kann sich natürlich jederzeit ändern, aber wir hoffen erstmal das Beste.</p>
+     <p>Wir möchten uns auf diesem Wege nochmals ausdrücklich und ganz herzlich für die Unterstützung bedanken! Es ist nicht selbstverständlich, dass Sie und ihr in dieser belastenden Zeit noch Mitgefühl und finanzielle Unterstützung für unsere Mitmenschen in Wapa aufbringt. Danke!</p>`},
+  {slug:'corona-ende-der-phase', alt:'corona-hilfskation-ende-der-aktuellen-phase', t:"Corona Hilfskation: Ende der aktuellen Phase", k:'Grundversorgung', d:'15. August 2020', a:'Vorstand', img:B.seife,
+   x:"In den vergangenen Wochen konnten wir mit Erleichterung feststellen, dass sich kein dramatisches Infektionsgeschehen in der Provinz Sanguié entwickelt hat. Daher werden wir die…",
+   body:`<h2>Corona Spendenaktion</h2>
+     <p>In den vergangenen Wochen konnten wir mit Erleichterung feststellen, dass sich kein dramatisches Infektionsgeschehen in der Provinz Sanguié entwickelt hat. Daher werden wir die Hilfsaktion mit der letzten Lebensmittellieferung vorerst beenden. Wir sind jederzeit bereit zu weiteren Maßnahmen, wenn sich das Infektionsgeschehen wieder verschlimmern sollte.</p>
+     <p>Herzlichen Dank an alle Spender!</p>
+     <p>Mit den Spenden wurden zusätzlich 1,5 Tonnen Getreide gekauft, welche in 25kg Einheiten an insgesamt 60 Haushalte verteilt wurden. So wurde einer Hungersnot vorgebeugt, die durch Ernteausfälle infolge von fehlenden Arbeitskräften auf den Feldern durch eine Covid-19 Erkrankung zu erwarten war.</p>
+     <p>Alle Empfänger haben den Spendenempfang quittiert sodass vollständige Transparenz herrscht. Aus Datenschutzgründen können wir diese Liste natürlich nicht veröffentlichen.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'corona-erste-erfolge', alt:'1360-2', t:"Corona Spendenaktion – Erste Erfolge", k:'Grundversorgung', d:'15. April 2020', a:'Vorstand', img:B.seife,
+   x:"Nach unserem letzten Spendenaufruf sind schon einige Gelder zusammen gekommen. Die genauen Zahlen folgen in Kürze. Mit dem Geld konnten schon 25 provisorische Wasserspender gekauft…",
+   body:`<p>Nach unserem letzten Spendenaufruf sind schon einige Gelder zusammen gekommen. Die genauen Zahlen folgen in Kürze. Mit dem Geld konnten schon 25 provisorische Wasserspender gekauft werden, die an öffentlichen Orten in und um Réo aufgestellt werden.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'corona-spendenaufruf', alt:'corona-spendenaktion', t:"Corona Spendenaktion", k:'Grundversorgung', d:'2. April 2020', a:'Vorstand', img:B.seife,
+   x:"Wie zu erwarten war hat das Coronavirus nun auch Burkina Faso erreicht. Anders als in Deutschland mangelt es dort nicht nur an Klopapier, sondern leider an der gesamten für diese…",
+   body:`<p>Wie zu erwarten war hat das Coronavirus nun auch Burkina Faso erreicht. Anders als in Deutschland mangelt es dort nicht nur an Klopapier, sondern leider an der gesamten für diese Situation so wichtigen Infrastruktur. Es gibt in der Provinz von Wapa keine (!!) Beatmungsplätze, kaum Tests und eine äußerst lückenhafte Hygieneausstattung. Daher ist die Verhinderung einer Ausbreitung des Virus hier ganz besonders wichtig.</p>
+     <p>Unser Vorsitzender Bertrand wurde vom Bürgermeister von Réo um Hilfe gebeten und hat diese natürlich zugesichert.</p>
+     <p>Unser Verein hat sich dem Ziel verschrieben, allgemeine Hilfe in der Region zu leisten und insbesondere die Hygienebedingungen zu verbessern. Die Ausbildung in Seifenherstellung und der Bau unseres polytechnischen Ausbildungszentrums waren wichtige Meilensteine auf diesem Weg. Dabei ist jeder Euro direkt für die Projekte ausgegeben worden und die hohe Nachfrage der örtlichen Bevölkerung spricht dafür, dass das Geld auch sinnvoll eingesetzt wurde. Die Menschen dort sehen echte Verbesserung durch unsere Arbeit. Jetzt können wir erneut einen wichtigen Beitrag leisten. Und das Beste daran: es ist tatsächlich nur Geld was benötigt wird. Keine Zeit, keine Planung, Organisation oder Hirnschmalz, einfach nur Geld.</p>
+     <p>Wir wollen möglichst viele mobile, provisorische Waschbecken mit Seifenspender an öffentlichen Plätzen aufstellen. Es handelt sich um ein bewährtes System, bestehend aus einem Tank mit Wasserfilter und Reservoir an dessen unterem Ende ein Wasserhahn montiert ist. Daneben steht ein Seifenspender. Eine Station dieser Art kostet 23€. Weiterhin sollen Getreidevorräte aufgestockt werden um die zu erwartende Lebensmittelknappheit abzumildern.</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'nachruf-marlis-schmitt-sickinger', alt:'nachruf-mitgruenderin-marlis-schmitt-sickinger', t:"Nachruf Mitgründerin Marlis Schmitt-Sickinger", k:'Verein', d:'9. März 2020', a:'Vorstand', img:null,
+   x:"Liebe Vereinsmitglieder, wir müssen euch heute mitteilen, dass unsere geschätzte Vereinsvorsteherin, Schatzmeisterin und Mitgründerin Marlis Schmitt-Sickinger nach langer Krankheit…",
+   body:`<p>Liebe Vereinsmitglieder, wir müssen euch heute mitteilen, dass unsere geschätzte Vereinsvorsteherin, Schatzmeisterin und Mitgründerin Marlis Schmitt-Sickinger nach langer Krankheit verstorben ist.</p>
+     <p>Marlis hat mit ihrer offenen und positiven Art, ihrem Organisationstalent, ihrer Herzlichkeit und mit ihrer grenzenlosen Liebe zu Afrika die Seele unseres Vereins entscheidend geprägt. Wir haben Marlis unglaublich viel zu verdanken.</p>
+     <p>Um Marlis zu gedenken, wurde an unserer Schule in Réo ein Gebet für sie gesprochen. Impressionen davon sind angehängt.</p>
+     <p>Marlis wird für uns immer unvergesslich bleiben und ihr Geist in unseren Projekten in Wapa weiterleben.</p>
+     <p>„L‘artiste ne meurt jamais“ (Der Künstler stirbt nie, er lebt immer in seinem Werk) afrikanisches Sprichwort</p>
+     <p>Foto von Marlis Schmitt-Sickinger von: Anna-Lena Janisch / Schwäbische Zeitung</p>`},
+  {slug:'schulbesuch-2020', alt:'schulbesuch', t:"Schulbesuch", k:'Bildung', d:'25. Februar 2020', a:'Vorstand', img:B.zentrum,
+   x:"Auch dieses Jahr hatte ich die Möglichkeit, unsere Schule in Reo (Burkina Faso) zu besichtigen.",
+   body:`<p>Auch dieses Jahr hatte ich die Möglichkeit, unsere Schule in Reo (Burkina Faso) zu besichtigen.</p>
+     <p>Bei meinem Überraschungsbesuch konnte ich die tolle Arbeit sehen, die geleistet wird, um den Frauen eine Bessere Zukunft zu ermöglichen. Auf den Fotos könnt Ihr Eindrücke vom derzeitigen Stand unseres Projekts sehen. Ich habe mich sehr gefreut, die Schule in einem so aktiven Zustand zu sehen. Ich bedanke mit bei allen, die uns durch Spende geholfen haben, diese tolle Schule zu bauen.</p>
+     <p>Betrand Bazie</p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>
+     <p><a href="#/projekte" rel="noopener" style="text-decoration:underline">Link</a></p>`},
+  {slug:'besuch-in-burkina-faso', alt:'unser-besuch-in-burkina-faso', t:"Unser Besuch in Burkina Faso", k:'Verein', d:'16. Oktober 2019', a:'Sabine und Martin Vatter', img:B.naeh,
+   x:"Nach einem langen Flug landen wir müde in Ouagadogou. In unserem Hotel, welches durch Security gesichert ist, schlafen wir ganz schnell ein.",
+   body:`<p>Nach einem langen Flug landen wir müde in Ouagadogou. In unserem Hotel, welches durch Security gesichert ist, schlafen wir ganz schnell ein.</p>
+     <p>Die Hauptstadt besteht aus Motorroller, Fahrräder und ganz vielen Menschen. Der rote Staub ist ohne Mundschutz nicht auszuhalten.</p>
+     <p>Überall hat es kleine Restaurants an der Straße. Dort empfängt man uns sehr freundlich. Das Essen ist köstlich und frisch zubereitet.</p>
+     <p>Nach zwei Nächten der Akklimatisierung geht es weiter nach Reo. Drei Stunden über holprige Straßen und mit sehr vielen Eindrücken.</p>
+     <p>Endlich in Reo angekommen erwartet uns Bienvenue, Bertrands Schwester, schon ganz gespannt in einer kleinen Bar, nicht weit von der Nähschule entfernt.</p>
+     <p>Nach kurzem Beschnuppern durften wir dann die Familie in Wapa begrüßen. Mama und Isabelle, Bertrands Partnerin, erwarten und begrüßen uns ganz herzlich vor dem großen Tor.</p>
+     <p>Hier beziehen wir unser Quartier für die nächsten 7 Tage.</p>
+     <p>Das Abenteuer kann beginnen.</p>
+     <p>Gleich am nächsten Morgen besuchen wir die Nähschule. Geleitet von Bienvenue.</p>
+     <p>Ein kleines Gebäude voller Nähmaschinen erwartet uns. Eine große Anzahl der Mädchen trägt die Nähtische geschwind ins Freie, damit sie – mit Stolz, allen ihr Können präsentieren können. Geschwind wird von uns Maß genommen und ein traditionelles Gewand für uns zugeschnitten. Dies war dann auch zwei Tage später fertig.</p>
+     <p>Ein weiterer Höhepunkt sind die Webstühle, die neben dem Gebäude im Freien aufgestellt sind. Im Schatten der Bäumen mussten Martin und ich unter strenger Aufsicht das Weben üben.</p>
+     <p>Viel Lachen, ein zufälliges Berühren der weißen Haut oder ein dankbares Umarmen der Mädchen begleitet uns für etwa zwei Stunden.</p>
+     <p>Auf dem angrenzenden Grundstück erwarten uns junge Männer mit Maßband, Plänen, Eisenstangen und Hammer.</p>
+     <p>Hier soll die neue Nähschule entstehen. Jetzt wird das Grundstück vermessen und die Größe des ersten Gebäudes festgelegt und abgesteckt. Die Mädchen helfen voller Elan mit. Im März soll Baubeginn sein.</p>
+     <p>Der zweite Tag gehört den Brunnen.</p>
+     <p>Der erste Brunnen steht bei Bertrands Familie und das Wasser ist für jeden aus dem Dorf zugänglich.</p>
+     <p>Das Wasser wird durch ein großes Rad in einen Wasserspeicher gepumpt. Eine Wasserleitung versorgt den Hof mit Frischwasser. Durch einen zweiten Ablauf kann jeder ausserhalb des Hofes mit Wasser versorgt werden. Leider war der Dieselmotor defekt und die Solaranlage noch nicht angeschlossen.</p>
+     <p>Der zweite Brunnen befindet sich in einem anderen Dorf. Er ist so angelegt, dass er für jederman zugänglich ist. Auch hier wird über ein großes Rad das Wasser gefördert. Ein wenig Licht wird über die Solarzellen innerhalb des Hofes produziert.</p>
+     <p>Vielen Dank an Bertrand, der uns diese wunderschöne Reise in sein Land und zu seiner Familie ermöglicht hat.</p>
+     <p>Anebana kokoko</p>
+     <p>Martin und Sabine</p>`}
 ];
 
 /* Spendenblock — auf jeder Seite gleich */
@@ -1064,8 +1217,7 @@ VIEWS['beitrag'] = (slug) => {
         return `<figure class="${i===0?'gr':''}"><img src="${g[0]}" alt="${g[1]}" loading="lazy"><figcaption>${g[1]}</figcaption></figure>`;
       }).join('') + `</div>`
     : '';
-  const text = n.body || `<p style="font-size:1.16rem">${n.x}</p>
-     <p style="color:var(--leise)">Der vollständige Text wird beim Übertragen aus der bestehenden Website übernommen.</p>`;
+  const text = n.body || `<p style="font-size:1.16rem">${n.x}</p>`;
   const hinweis = n.slug==='waldgarten-august-2026'
     ? rn('<b>Dieser Beitrag ist ein Vorschlag, kein beschlossener Text.</b> Die Fotos sind echt (12. August 2026), die Worte hat der Entwurf beigesteuert — sie gehören vom Verein geschrieben oder wenigstens abgenommen. Er steht hier, weil er zeigt, wie ein neuer Beitrag aussieht: eine Markdown-Datei mit Titel, Datum, Text und einem Ordner Bilder. Und weil der bislang neueste Beitrag vom Januar 2024 stammt — eine Lücke, die auf der Startseite stärker auffällt als jedes Gestaltungsdetail.')
     : '';
@@ -1304,8 +1456,7 @@ const MENSCHEN = [
 
   {name:'Noah Bisinger', rolle:'Kassenprüfer', seit:'im Verein seit 2019', bild:null,
    text:`<p>Prüft die Kasse. Kümmert sich daneben um die interne Kommunikation und um den Umzug dieser Website.</p>
-     <p>Er ist dem Verein schon länger verbunden: Zwischen 2019 und 2021 betreute er den Social-Media-Auftritt und half dabei, die gespendeten Nähmaschinen zu reparieren und für den Transport zu verpacken — jene Maschinen, die 2022 per Containerschiff in Wapa ankamen.</p>
-     <p>Studiert hat er Politik, Psychologie, Recht und Wirtschaft an der Universität Amsterdam, dazu Data Science. Nebenher gründete er die studentische Mensa <i>De Nieuwe Mensa</i> mit, die wöchentlich über 1.500 Essen ausgibt, und führte sie ein Jahr als Vorsitzender. Er schreibt und redigiert für studentische Zeitschriften.</p>`,
+     <p>Dem Verein ist er länger verbunden: Zwischen 2019 und 2021 betreute er den Social-Media-Auftritt und half dabei, die gespendeten Nähmaschinen für den Transport zu verpacken — jene Maschinen, die 2022 per Containerschiff in Wapa ankamen.</p>`,
    freigabe:'Von ihm selbst beigesteuert.'}
 ];
 
