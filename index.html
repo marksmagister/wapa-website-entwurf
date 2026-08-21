@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemeinsam für Wapa — Website-Entwurf (final)</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+/* =========================================================================
+   GEMEINSAM FÜR WAPA — Entwurf final, August 2026
+   Farbwerte Grün/Gold unverändert aus dem Markenleitfaden.
+   NEU vorgeschlagen: Laterit (Erdrot) als Flächenfarbe, wärmere Neutraltöne,
+   anderer Schriftschnitt. Begründung siehe Leiste oben.
+   ========================================================================= */
+:root{
+  /* aus dem Leitfaden übernommen */
+  --gruen:#276F27; --gruen-dark:#1B4F1B; --gruen-soft:#E7EFE4;
+  --gold:#E9A825;  --gold-text:#7E5910;
+
+  /* NEU: Laterit — die Bodenfarbe von Sanguié */
+  --erde:#7E3A20; --erde-tief:#5C2916; --erde-hell:#B4592F; --erde-soft:#F3E2D8;
+
+  /* wärmere Neutraltöne statt der kühlen Grautöne */
+  --ink:#231D18; --body:#4F463E; --leise:#847768;
+  --papier:#FBF6EE; --papier2:#F2EADD; --linie:#DCD0BE; --linie-stark:#C3B49C;
+
+  --max:1240px; --mess:34rem;
+  --d:'Fraunces',Georgia,serif;
+  --t:'Atkinson Hyperlegible',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--body);font-family:var(--t);font-size:17.5px;line-height:1.62;-webkit-font-smoothing:antialiased;font-synthesis:none}
+img{display:block;max-width:100%}
+a{color:inherit}
+p{margin:0 0 1.05em;max-width:var(--mess)}
+
+h1,h2,h3{font-family:var(--d);font-weight:500;color:var(--ink);margin:0 0 .42em;
+  font-variation-settings:'SOFT' 18,'WONK' 0,'opsz' 60;line-height:1.08;letter-spacing:-.012em}
+h1{font-size:clamp(2.6rem,5.6vw,4.4rem);font-variation-settings:'SOFT' 24,'WONK' 1,'opsz' 120}
+h2{font-size:clamp(1.85rem,3.4vw,2.7rem)}
+h3{font-size:1.28rem;font-variation-settings:'SOFT' 14,'WONK' 0,'opsz' 30}
+
+/* Kolumnentitel — kleine Versalzeile, ersetzt die üblichen Icon-Badges */
+.kt{font-family:var(--t);font-size:.7rem;font-weight:700;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--leise);display:block;margin-bottom:1.1rem}
+.kt.gruen{color:var(--gruen)} .kt.gold{color:var(--gold)} .kt.hell{color:#D8BFA9}
+
+.lede{font-size:1.19rem;line-height:1.52;color:var(--body);max-width:38rem}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4vw,44px)}
+.eng{max-width:52rem}
+
+/* Ziffern: Tabellenziffern, damit Register und Preisliste sauber untereinander stehen */
+.zahl{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-variation-settings:'SOFT' 0,'WONK' 0,'opsz' 100;font-weight:400}
+
+/* ---------- Entwurfsleiste ---------- */
+#bar{background:var(--ink);color:#CFC3B4;font-size:.76rem;padding:8px 20px;display:flex;
+  gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;letter-spacing:.01em}
+#bar b{color:var(--gold);font-weight:700}
+#bar button{background:none;border:1px solid #4B4038;color:#CFC3B4;padding:2px 10px;
+  font:inherit;font-size:.72rem;cursor:pointer;border-radius:2px}
+#bar button:hover{border-color:#8A7B6C;color:#fff}
+
+/* ---------- Randnotiz statt gelber Kasten ---------- */
+.rn{border-left:2px solid var(--gold);padding:2px 0 2px 16px;margin:26px 0;
+  font-size:.85rem;line-height:1.5;color:var(--body);max-width:40rem}
+.rn b{color:var(--ink)}
+/* auf den dunklen Flächen muss die Randnotiz mitziehen */
+.erde .rn,.dunkel .rn{color:#E0C9B8;border-left-color:var(--gold)}
+.erde .rn b,.dunkel .rn b{color:#FFF3E9}
+body.clean .rn{display:none}
+body.clean .nurnotiz{display:none}
+
+/* ---------- Kopf ---------- */
+header{position:sticky;top:0;z-index:60;background:rgba(251,246,238,.93);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--linie)}
+.nav{max-width:var(--max);margin:0 auto;padding:10px clamp(20px,4vw,44px);
+  display:flex;align-items:center;gap:30px}
+.mark{display:flex;align-items:baseline;gap:9px;text-decoration:none;margin-right:auto}
+.mark .n{font-family:var(--d);font-size:1.16rem;font-weight:600;color:var(--ink);
+  letter-spacing:-.015em;font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 40}
+.mark .s{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--leise)}
+.menu{display:flex;gap:25px;align-items:center}
+.menu a{text-decoration:none;font-size:.9rem;color:var(--body);padding:6px 0;
+  border-bottom:1.5px solid transparent}
+.menu a:hover,.menu a.on{color:var(--ink);border-color:var(--gruen)}
+.burger{display:none;background:none;border:0;font-size:1.3rem;cursor:pointer;color:var(--ink)}
+
+/* ---------- Schaltflächen: eckig, hairline, kein Schatten ---------- */
+.b{display:inline-block;text-decoration:none;font-family:var(--t);font-weight:700;
+  font-size:.86rem;letter-spacing:.02em;padding:12px 22px;border-radius:2px;
+  border:1.5px solid var(--ink);background:var(--ink);color:var(--papier);
+  transition:background .14s,color .14s,border-color .14s;cursor:pointer}
+.b:hover{background:var(--gruen-dark);border-color:var(--gruen-dark)}
+.b.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.b.gold:hover{background:#D4941B;border-color:#D4941B}
+.b.leer{background:transparent;color:var(--ink)}
+.b.leer:hover{background:var(--ink);color:var(--papier)}
+.b.hell{background:transparent;color:var(--papier);border-color:rgba(255,255,255,.45)}
+.b.hell:hover{background:var(--papier);color:var(--ink);border-color:var(--papier)}
+.b.klein{padding:8px 15px;font-size:.78rem}
+
+/* Textlink mit Pfeil — ersetzt „Mehr erfahren"-Buttons */
+.pf{display:inline-flex;align-items:center;gap:.5em;text-decoration:none;
+  font-weight:700;font-size:.85rem;color:var(--gruen-dark);
+  border-bottom:1.5px solid var(--linie-stark);padding-bottom:2px}
+.pf:hover{border-color:var(--gruen)}
+.pf::after{content:"→";transition:transform .16s}
+.pf:hover::after{transform:translateX(3px)}
+
+section{padding:clamp(56px,7vw,104px) 0}
+.erde{background:var(--erde);color:#EBD9CC}
+.erde h1,.erde h2,.erde h3{color:#FFF6EE}
+.erde .lede{color:#E3CDBD}
+.dunkel{background:var(--ink);color:#CFC3B4}
+.dunkel h2,.dunkel h3{color:#FFF6EE}
+.dunkel .lede{color:#B7A897}
+.papier2{background:var(--papier2)}
+.hr{height:1px;background:var(--linie);border:0;margin:0}
+
+/* =========================  HERO  ========================= */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);min-height:min(88vh,760px)}
+.hero-t{padding:clamp(46px,6vw,88px) 0 clamp(38px,4vw,60px) clamp(20px,4vw,44px);
+  display:flex;flex-direction:column;justify-content:center;
+  max-width:calc(var(--max)/2 + 24px);margin-left:auto}
+.hero-t h1{max-width:13ch}
+.hero-t .lede{margin-top:.6rem}
+.hero-cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:2rem}
+.hero-b{position:relative;overflow:hidden;background:var(--erde-tief)}
+.hero-b img{width:100%;height:100%;object-fit:cover;object-position:52% 60%}
+.hero-b figcaption{position:absolute;left:0;bottom:0;right:0;padding:52px 26px 16px;
+  font-size:.74rem;color:#F0E2D6;letter-spacing:.02em;
+  background:linear-gradient(to top,rgba(40,20,10,.72),transparent)}
+
+/* Sprachband unter dem Hero */
+.sprachen{background:var(--erde-tief);color:#E8D2C3;padding:14px 0}
+.sprachen .wrap{display:flex;gap:clamp(16px,3vw,46px);flex-wrap:wrap;align-items:baseline;
+  font-size:.8rem;letter-spacing:.02em}
+.sprachen b{color:#FFE9D8;font-weight:700}
+.sprachen i{font-style:italic;color:#C9AC97}
+
+/* =====================  KETTE (Chronik)  ===================== */
+.kette{display:grid;grid-template-columns:14rem 1fr;gap:clamp(24px,4vw,64px)}
+.kette-l{position:sticky;top:96px;align-self:start}
+.spur{position:relative;padding-left:34px}
+.spur::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--linie-stark)}
+.gl{position:relative;padding:0 0 34px}
+.gl::before{content:"";position:absolute;left:-34px;top:9px;width:11px;height:11px;
+  border-radius:50%;background:var(--papier);border:1.5px solid var(--gruen)}
+.gl.stark::before{background:var(--gruen)}
+.gl .j{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:.92rem;color:var(--gruen);font-weight:600;letter-spacing:.04em}
+.gl h3{margin:.15em 0 .3em;font-size:1.1rem}
+.gl p{font-size:.93rem;margin:0;max-width:36rem;color:var(--body)}
+
+/* =====================  PREISLISTE  ===================== */
+.preise{border-top:1.5px solid var(--ink);max-width:46rem}
+.pz{display:grid;grid-template-columns:7.5rem 1fr;gap:clamp(14px,3vw,32px);
+  padding:17px 0;border-bottom:1px solid var(--linie);align-items:baseline}
+.pz .b1{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:1.6rem;color:var(--ink);font-variation-settings:'SOFT' 10,'opsz' 90;line-height:1}
+.pz .b2{font-size:.98rem}
+.pz .b2 span{display:block;font-size:.83rem;color:var(--leise);margin-top:2px}
+
+/* =====================  REGISTER  ===================== */
+.filter{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:26px}
+.filter button{font:inherit;font-size:.79rem;font-weight:700;letter-spacing:.03em;
+  padding:6px 14px;border:1px solid var(--linie-stark);background:transparent;
+  color:var(--body);border-radius:2px;cursor:pointer}
+.filter button:hover{border-color:var(--ink);color:var(--ink)}
+.filter button.on{background:var(--ink);border-color:var(--ink);color:var(--papier)}
+
+.reg{border-top:1.5px solid var(--ink)}
+.rz{display:grid;grid-template-columns:5.6rem minmax(0,1fr) 8.5rem 9.2rem;
+  gap:clamp(12px,2.4vw,28px);padding:19px 0;border-bottom:1px solid var(--linie);
+  text-decoration:none;align-items:baseline;position:relative;transition:background .13s}
+.rz:hover{background:var(--papier2)}
+.rz .j{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:.92rem;color:var(--leise);letter-spacing:.03em;padding-top:.2em}
+.rz .t{font-family:var(--d);font-size:1.17rem;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30;line-height:1.2}
+.rz .u{font-size:.87rem;color:var(--body);margin-top:.3em;max-width:44ch}
+.rz .s{font-size:.79rem;color:var(--leise);letter-spacing:.02em;padding-top:.35em}
+.rz .k{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--leise);padding-top:.45em}
+/* was läuft, tritt hervor; Abgeschlossenes bleibt ruhig */
+.rz .k.offen{color:var(--gruen)}
+.rz .k.offen::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--gruen);margin-right:7px;vertical-align:.12em}
+/* Vorschauplatte unten rechts — bewusst ortsfest statt am Zeiger klebend,
+   damit sie nie den Text verdeckt, den man gerade liest */
+.rz .vs{position:fixed;right:26px;bottom:26px;pointer-events:none;
+  width:286px;height:214px;object-fit:cover;opacity:0;transform:translateY(6px);
+  transition:opacity .18s,transform .18s;z-index:40;
+  border:5px solid var(--papier);box-shadow:0 6px 26px rgba(35,29,24,.22);display:none}
+@media(hover:hover) and (min-width:1080px){
+  .rz .vs{display:block}
+  .rz:hover .vs{opacity:1;transform:translateY(0)}
+}
+
+/* =====================  AKTUELLES  ===================== */
+.lead{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(22px,3.6vw,54px);
+  align-items:center;text-decoration:none;padding-bottom:clamp(28px,4vw,46px);
+  border-bottom:1px solid var(--linie);margin-bottom:8px}
+.lead img{width:100%;aspect-ratio:5/4;object-fit:cover}
+.lead h3{font-size:clamp(1.6rem,2.7vw,2.15rem);font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 80}
+.meta{font-size:.79rem;color:var(--leise);letter-spacing:.03em}
+
+.liste a{display:grid;grid-template-columns:8.5rem 1fr 4.5rem;gap:clamp(12px,2.4vw,28px);
+  padding:18px 0;border-bottom:1px solid var(--linie);text-decoration:none;align-items:baseline}
+.liste a:hover{background:var(--papier2)}
+.liste .d{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:.86rem;color:var(--leise)}
+.liste .t{font-family:var(--d);font-size:1.12rem;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30}
+.liste .x{font-size:.88rem;color:var(--body);margin-top:.25em;max-width:52ch}
+.liste .k{font-size:.71rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gruen);text-align:right}
+
+/* =====================  SPENDEN  ===================== */
+.iban{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.95rem;
+  line-height:2;color:#FFF6EE;border:1px solid rgba(255,255,255,.22);padding:16px 19px}
+.iban b{color:var(--gold);font-weight:400}
+.betrag{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 20px}
+.betrag button{font:inherit;text-align:left;min-width:9.5rem;padding:13px 16px;cursor:pointer;
+  background:transparent;border:1px solid rgba(255,255,255,.28);color:#EBD9CC;border-radius:2px}
+.betrag button:hover{border-color:var(--gold)}
+.betrag button.on{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.betrag .a{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
+  font-size:1.32rem;display:block;line-height:1.1}
+.betrag .w{font-size:.77rem;display:block;margin-top:3px;opacity:.9}
+
+/* =====================  ZITAT  ===================== */
+.zitat{font-family:var(--d);font-size:clamp(1.35rem,2.5vw,1.95rem);line-height:1.32;
+  font-variation-settings:'SOFT' 26,'WONK' 1,'opsz' 90;font-weight:400;
+  color:#FFF6EE;max-width:26ch;margin:0}
+.zitat + .q{font-size:.82rem;color:#C9AC97;margin-top:1.1rem;letter-spacing:.03em}
+
+/* =====================  RASTER  ===================== */
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,66px);align-items:center}
+.zwei img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.drei{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,20px)}
+.drei img{width:100%;aspect-ratio:1;object-fit:cover}
+.saeulen{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1.5px solid var(--ink)}
+.saeule{padding:22px 22px 26px 0;border-right:1px solid var(--linie)}
+.saeule:last-child{border-right:0}
+.saeule .n{font-family:var(--d);font-variant-numeric:lining-nums;font-size:.85rem;
+  color:var(--gold-text);letter-spacing:.05em}
+.saeule h3{font-size:1.13rem;margin:.35em 0 .3em}
+.saeule p{font-size:.89rem;margin:0}
+
+
+/* =====================  LOGOSTEMPEL  =====================
+   Die Logodatei hat einen eingebrannten schwarzen Rahmen und keine Transparenz.
+   Statt das zu kaschieren, wird sie als Stempel auf hellem Grund gezeigt —
+   so, wie ein Verein sein Zeichen unter ein Dokument setzt. Auf hellem Grund
+   greift zusätzlich mix-blend-mode, damit kein weißer Kasten stehen bleibt. */
+.stempel{display:inline-block;background:#fff;padding:11px 13px;border:1px solid var(--linie);
+  line-height:0;max-width:212px}
+.stempel img{width:100%;height:auto;aspect-ratio:auto;object-fit:fill}
+.stempel.auf-hell{background:transparent;border:0;padding:0}
+.stempel.auf-hell img{mix-blend-mode:multiply}
+
+/* =====================  VOLLBILDBAND  =====================
+   Ein Bild in voller Breite als Atemzug zwischen den textlastigen Abschnitten.
+   Bewusst ohne Datumsangabe — es soll nicht altern. */
+.vollbild{margin:0;position:relative}
+.vollbild img{width:100%;height:clamp(260px,42vw,520px);object-fit:cover;object-position:50% 62%}
+.vollbild figcaption{position:absolute;left:0;right:0;bottom:0;
+  padding:64px clamp(20px,4vw,44px) 18px;font-size:.82rem;color:#F3E4D8;
+  background:linear-gradient(to top,rgba(40,20,10,.78),transparent)}
+
+/* =====================  BILDSTRECKE (in Beiträgen)  ===================== */
+.wg{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;
+  gap:clamp(8px,1.2vw,14px)}
+.wg figure{margin:0;position:relative;overflow:hidden}
+.wg img{width:100%;height:100%;object-fit:cover}
+.wg .gr{grid-column:span 2;grid-row:span 2}
+.wg figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 13px 9px;
+  font-size:.74rem;color:#FFF3E9;line-height:1.35;
+  background:linear-gradient(to top,rgba(40,20,10,.8),transparent);opacity:0;transition:opacity .18s}
+.wg figure:hover figcaption{opacity:1}
+@media(max-width:860px){
+  .wg{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .wg .gr{grid-column:span 2;grid-row:span 2}
+  .wg figcaption{opacity:1}
+}
+
+
+/* =====================  ROLLEN (Mitmachen)  =====================
+   Kein Bilderraster zur Zierde — was gesucht wird, steht als Liste da. */
+.rollen{border-top:1px solid rgba(255,255,255,.3)}
+.ro{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.ro-t{font-family:var(--d);font-size:1.06rem;color:#FFF6EE;font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 30}
+.ro-u{font-size:.87rem;color:#E0C9B8;margin-top:.15em}
+
+/* =====================  ARTIKEL  ===================== */
+.artikel{max-width:38rem;margin-inline:auto}
+.artikel p{font-size:1.07rem;max-width:none}
+.artikel h2{font-size:1.6rem;margin-top:1.8em}
+.artikel img.gross{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 30px}
+.kopf{padding:clamp(38px,5vw,68px) 0 0}
+.krume{font-size:.79rem;color:var(--leise);margin-bottom:12px;letter-spacing:.02em}
+.krume a{color:var(--gruen-dark)}
+
+/* =====================  FUSS  ===================== */
+footer{background:var(--ink);color:#9C8E7E;padding:60px 0 30px;font-size:.87rem}
+footer h4{font-family:var(--t);font-size:.7rem;letter-spacing:.17em;text-transform:uppercase;
+  color:#EBD9CC;margin:0 0 13px;font-weight:700}
+footer a{color:#C4B5A3;text-decoration:none;display:block;margin-bottom:7px}
+footer a:hover{color:var(--gold)}
+.fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;padding-bottom:34px;
+  border-bottom:1px solid #3A322B}
+.fu{padding-top:22px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.79rem}
+.flagge{display:flex;height:5px;max-width:190px;margin-top:16px}
+.flagge span{flex:1}
+
+/* =====================  RESPONSIV  ===================== */
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-t{max-width:none;margin:0;padding:44px clamp(20px,4vw,44px) 40px}
+  .hero-b{min-height:56vh}
+  .kette{grid-template-columns:1fr;gap:22px}
+  .kette-l{position:static}
+  .saeulen{grid-template-columns:1fr 1fr}
+  .saeule{border-bottom:1px solid var(--linie);padding-right:18px}
+  .saeule:nth-child(2n){border-right:0}
+}
+@media(max-width:760px){
+  .menu{display:none} .burger{display:block}
+  .menu.auf{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;
+    gap:0;background:var(--papier);border-bottom:1px solid var(--linie);padding:8px 0}
+  .menu.auf a{padding:11px clamp(20px,4vw,44px);border-bottom:0}
+  .zwei,.lead{grid-template-columns:1fr}
+  .rz{grid-template-columns:4.6rem 1fr;row-gap:5px}
+  .rz .s,.rz .k{grid-column:2}
+  .liste a{grid-template-columns:1fr;row-gap:3px}
+  .liste .k{text-align:left}
+  .saeulen{grid-template-columns:1fr}
+  .saeule{border-right:0}
+  .drei{grid-template-columns:1fr 1fr}
+  .pz{grid-template-columns:5.6rem 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="bar">
+  <span><b>Entwurf final</b> · August 2026 · Inhalte aus der bestehenden Website, Fotos teils neu · offene Punkte in <b>Offene Entscheidungen.md</b></span>
+  <button onclick="document.body.classList.toggle('clean')">Kommentare ein/aus</button>
+  <button onclick="document.getElementById('bar').style.display='none'">Leiste ausblenden</button>
+</div>
+
+<header>
+  <div class="nav">
+    <a class="mark" href="#/">
+      <span class="n">Gemeinsam für Wapa</span>
+      <span class="s">e.&nbsp;V.</span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#/projekte">Projekte</a>
+      <a href="#/aktuelles">Aktuelles</a>
+      <a href="#/ueber-uns">Über uns</a>
+      <a href="#/mitmachen">Mitmachen</a>
+      <a class="b gold klein" href="#/spenden">Spenden</a>
+    </nav>
+    <button class="burger" onclick="document.getElementById('menu').classList.toggle('auf')">☰</button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <div style="font-family:var(--d);font-size:1.2rem;color:#FFF6EE;font-variation-settings:'SOFT' 20,'WONK' 1">Gemeinsam für Wapa e.&nbsp;V.</div>
+        <p style="margin:.7em 0 0;font-size:.85rem;max-width:30ch">Mudawane Wapa Yila · Römerweg 2, 72488 Sigmaringen. Gemeinnützigkeit anerkannt vom Finanzamt Sigmaringen am 7.11.2017.</p>
+        <div class="stempel" style="margin-top:20px">
+          <img src="assets/logo.jpg" alt="Vereinslogo: drei Figuren mit erhobenen Armen über einem Schild mit dem Umriss Burkina Fasos">
+        </div>
+        <div class="flagge"><span style="background:#EF2B2D"></span><span style="background:#009E49"></span></div>
+      </div>
+      <div>
+        <h4>Projekte</h4>
+        <a href="#/projekte">Alle Projekte</a>
+        <a href="#/projekte">Grundversorgung</a>
+        <a href="#/projekte">Bildung</a>
+        <a href="#/projekte">Infrastruktur</a>
+        <a href="#/projekte">Umweltschutz</a>
+      </div>
+      <div>
+        <h4>Verein</h4>
+        <a href="#/ueber-uns">Über uns</a>
+        <a href="#/mitmachen">Mitmachen</a>
+        <a href="#/spenden">Spenden &amp; Patenschaft</a>
+        <a href="#/ueber-uns">Satzung &amp; Manifest</a>
+        <a href="#/ueber-uns">Newsletter</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <a href="mailto:info@gemeinsamfuerwapa.de">info@gemeinsamfuerwapa.de</a>
+        <a href="tel:+4915143627548">0151 43627548</a>
+        <a href="https://www.instagram.com/gemeinsamfuerwapa/">Instagram</a>
+        <a href="https://www.facebook.com/groups/1878369855725767/">Facebook</a>
+        <a href="https://www.linkedin.com/company/gemeinsam-für-wapa/">LinkedIn</a>
+      </div>
+    </div>
+    <div class="fu">
+      <span>© 2026 Gemeinsam für Wapa e.&nbsp;V. · Impressum · Datenschutzerklärung</span>
+      <span>Statische Website · Entwurf August 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------------------
+   BILDER
+   N(...) = neue Fotos aus "other assets" (August 2026, 2304×1728, unkomprimiert)
+   W(...) = noch von der alten Website gestreamt — bis die Originale aus
+            wp-content/uploads gezogen sind. Alle Personen-, Schul- und
+            Wasserbilder fallen bis dahin in diese Kategorie.
+   --------------------------------------------------------------------------- */
+/* Das Vereinslogo, wie es ist: 300×158 px, JPG, schwarzer Rahmen eingebrannt,
+   keine Transparenz, kein Vektororiginal auffindbar (Entscheidung 1). */
+const LOGO = 'assets/logo.jpg';
+
+const B = {
+  /* neu, hochauflösend (2304×1728) — Waldgarten Wapa, August 2026.
+     Ohne die sieben Aufnahmen mit „TECNO CAMON 20"-Wasserzeichen. */
+  gaertner:      'assets/fotos/20-32-45.jpg',            /* Gärtner blickt über den Garten */
+  obstgarten:    'assets/fotos/20-32-453.jpg',  /* Obstbäume, Zaun aus Astwerk */
+  mais:          'assets/fotos/20-32-451.jpg',  /* Maiskolben */
+  aubergine:     'assets/fotos/20-32-44.jpg',            /* Auberginenreihe auf Laterit */
+  mischkultur:   'assets/fotos/20-32-442.jpg',  /* Maniok, Mais, Schlauch */
+  maisreihen:    'assets/fotos/20-32-432.jpg',
+  sesam:         'assets/fotos/20-32-431.jpg',  /* Sesam mit rosa Blüten */
+  maniok:        'assets/fotos/20-32-42.jpg',            /* Maniokstrauch */
+  moringa:       'assets/fotos/20-32-422.jpg',  /* Moringa-Setzlinge */
+  moringabaum:   'assets/fotos/20-32-421.jpg',  /* Moringa und Banane */
+  moringafeld:   'assets/fotos/20-32-411.jpg',
+  moringasesam:  'assets/fotos/20-32-412.jpg',
+  guave:         'assets/fotos/20-32-41.jpg',            /* Blattdetail */
+  reihen:        'assets/fotos/20-32-401.jpg',  /* Reihen: Mais, Aubergine, Maniok */
+  jungpflanzen:  'assets/fotos/20-32-403.jpg',
+  hibiskus:      'assets/fotos/20-31-10.jpg',            /* Roselle, rote Stiele */
+  blattdetail:   'assets/fotos/20-31-111.jpg',
+  /* alt, von der Live-Website */
+  ekulpung: 'assets/archiv/ekulpung.jpg',
+  ekulpung2: 'assets/archiv/ekulpung2.jpg',
+  ekulpung3: 'assets/archiv/ekulpung3.jpg',
+  wasserturm: 'assets/archiv/wasserturm.jpg',
+  brunnen: 'assets/archiv/brunnen.jpg',
+  zentrum: 'assets/archiv/zentrum.jpg',
+  naeh: 'assets/archiv/naeh.jpg',
+  seife: 'assets/archiv/seife.jpg',
+  solar: 'assets/archiv/solar.jpg',
+  sprachkurs: 'assets/archiv/sprachkurs.jpg',
+  textil: 'assets/archiv/textil.jpg',
+  pflanz: 'assets/archiv/pflanz.jpg',
+  garten: 'assets/archiv/garten.jpg'
+};
+
+/* --------------------------------------------------------------------------- */
+const rn = t => '<div class="rn">' + t + '</div>';
+
+/* Projektregister — Jahr, Titel, Ort, Säule, Stand. Zahlen wörtlich von der
+   bestehenden Website übernommen. */
+/* Projektregister. `y` = Jahr der letzten bekannten Aktivität, danach wird sortiert.
+   `img` nur dort, wo das Foto dieses Projekt auch wirklich zeigt — geplante und
+   noch nicht gebaute Vorhaben bekommen bewusst keins. Ein Bild neben etwas, das
+   es noch nicht gibt, behauptet mehr als wahr ist. */
+const REG = [
+  {y:2016, j:'2016',      t:'Wasser für Wapa',                   u:'Der erste Brunnen — die Idee von Bertrands Vater Bazie Kodio Claver. Finanziert aus 2.700 € Spenden des Rotary Service Sigmaringen.', o:'Wapa', k:'Grundversorgung', s:'Abgeschlossen', img:B.brunnen},
+  {y:2018, j:'seit 2018', t:'Polytechnisches Ausbildungszentrum für Frauen', u:'Landwirtschaft, Handwerk, Alphabetisierung. Grundstück 4.500 €, drei Unterrichtsräume und Sanitär 10.600 €.', o:'Réo', k:'Bildung', s:'Im Betrieb', img:B.zentrum},
+  {y:2018, j:'seit 2018', t:'Baumprojekt / Aufforstung',          u:'Beitrag zur African Great Green Wall. Seit 2018 rund 100 Bäume gepflanzt. Für je 2 € Spende wird ein Baum gesetzt.', o:'Sanguié', k:'Umweltschutz', s:'Laufend', img:B.moringa},
+  {y:2019, j:'2019',      t:'Solaranlage',                       u:'Prototyp gebaut in Hohentengen bei E hoch 4, geplant und finanziert von Kirchner GmbH und ISC Konstanz.', o:'Wapa', k:'Infrastruktur', s:'Abgeschlossen', img:B.solar},
+  {y:2020, j:'2020',      t:'Corona-Hilfsaktion',                u:'25 Handwaschstationen an öffentlichen Plätzen, 1,5 t Getreide an 60 Haushalte. Jede Station 23 €.', o:'Réo · Wapa', k:'Grundversorgung', s:'Abgeschlossen', img:null},
+  {y:2020, j:'2020',      t:'Seifenherstellung',                 u:'Ausbildungsmodul in der Nähschule Yi o kando. 28 Frauen haben teilgenommen und stellen seither eigene Seife her.', o:'Réo', k:'Bildung', s:'Abgeschlossen', img:B.seife},
+  {y:2020, j:'seit 2020', t:'Sprachkurs Lele',                   u:'Viele Frauen können weder lesen noch schreiben. Der Kurs macht Rechnungen und Messungen möglich.', o:'Réo', k:'Bildung', s:'Laufend', img:B.sprachkurs},
+  {y:2020, j:'seit 2020', t:'Textilfärbung',                     u:'Ausbildungsmodul zur Herstellung und Färbung von Textilien.', o:'Réo', k:'Bildung', s:'Laufend', img:B.textil},
+  {y:2020, j:'geplant',   t:'Serverraum und Copyshop',           u:'Zusätzlicher Raum an der Schule, künftig Druckereiservice für die Region. Kosten 3.500 €, Finanzierung zu 90 % gedeckt.', o:'Réo', k:'Bildung', s:'In Finanzierung', img:null},
+  {y:2021, j:'2021',      t:'Tiefbrunnen und Wasserturm',        u:'81 m tief, Pumpe auf 50 m, 2 m³/h, sechs Solarzellen. Zwei Tanks zu 4.000 l, drei öffentliche Wasserhähne.', o:'Wapa', k:'Infrastruktur', s:'Abgeschlossen', img:B.wasserturm},
+  {y:2021, j:'seit 2021', t:'Waldgarten am Wasserturm',          u:'Agroforstwirtschaft in vier Schichten. Ein Gärtner pflegt ihn für 23 € im Monat, bezahlt aus Spenden.', o:'Wapa', k:'Umweltschutz', s:'Laufend', img:B.gaertner},
+  {y:2021, j:'seit 2021', t:'Sommerschule',                      u:'Erstmals 2021: Lesen, Schreiben, Rechnen und Französisch für Kinder, unterrichtet von einem Lehrer und einer Lehramtsstudentin der Universität Ouagadougou.', o:'Réo', k:'Bildung', s:'Laufend', img:null},
+  {y:2021, j:'geplant',   t:'Solaröfen',                         u:'Umweltfreundliche Öfen aus lokal vorhandenem Material, modelliert mit der Pharmaplan GmbH. Weniger Abholzung für Brennholz.', o:'Sanguié', k:'Umweltschutz', s:'In Planung', img:null},
+  {y:2022, j:'2022',      t:'Nähmaschinenlieferung',             u:'Gespendete Maschinen, per Containerschiff nach Wapa gebracht.', o:'Wapa', k:'Bildung', s:'Abgeschlossen', img:B.naeh},
+  {y:2022, j:'seit 2022', t:'Tropfenbewässerung',                u:'Gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden rund 1.000 €.', o:'Wapa', k:'Umweltschutz', s:'In Finanzierung', img:null},
+  {y:2023, j:'2023',      t:'Wasserstelle Ekulpung',             u:'Am 20. Dezember 2023 in Anwesenheit des Dorfoberhaupts übergeben und in die Verantwortung des Dorfes gelegt.', o:'Ekulpung', k:'Grundversorgung', s:'Abgeschlossen', img:B.ekulpung2}
+];
+/* Was gerade läuft — für die Startseite. Keine Auswahl nach Geschmack,
+   sondern nach Stand: alles, was nicht abgeschlossen ist. */
+const LAEUFT = s => s !== 'Abgeschlossen';
+
+const NEWS = [
+  {slug:'waldgarten-august-2026', t:'So sieht der Waldgarten heute aus', k:'Umweltschutz',
+   d:'12. August 2026', a:'Vorstand', img:B.reihen, galerie:[
+     [B.reihen,'Mais, Auberginen und Maniok in derselben Reihe — die Mischkultur hält den Boden bedeckt.'],
+     [B.maniok,'Maniok'],
+     [B.sesam,'Sesam, blühend'],
+     [B.aubergine,'Auberginen auf Laterit'],
+     [B.moringafeld,'Moringa, im zweiten Jahr'],
+     [B.mais,'Mais, kurz vor der Ernte'],
+     [B.obstgarten,'Der Zaun schützt die Setzlinge vor Weidevieh.'],
+     [B.hibiskus,'Roselle'],
+     [B.mischkultur,'Der Schlauch der Tropfenbewässerung']],
+   x:'Fünf Jahre nach der ersten Pflanzung stehen vier Schichten: Mais und Sesam zwischen Auberginen und Maniok, darüber Moringa und junge Obstbäume.',
+   body:`<p style="font-size:1.16rem">Fünf Jahre nachdem rund um den Wasserturm die ersten Setzlinge in den Boden kamen, ist aus dem Versuchsfeld ein Garten geworden. Was 2021 als Pilotprojekt neben einem frisch gebohrten Brunnen begann, trägt heute in vier Schichten.</p>
+     <p>Das Prinzip der Agroforstwirtschaft ist auf den Bildern gut zu erkennen: Zwischen den Maisreihen wachsen Auberginen, Maniok und Sesam; darüber stehen Moringa und junge Obstbäume, die in einigen Jahren Schatten spenden werden. Der Boden bleibt so das ganze Jahr bedeckt — die Humusschicht wird nicht von der Sonne verbrannt und die Nährstoffe werden in der Regenzeit nicht weggespült.</p>
+     <p>Die Tropfenbewässerung aus dem Wasserturm läuft. Der Zaun aus Astwerk hält das Weidevieh ab, das in der Trockenzeit unbeaufsichtigt über das wenige Grün geht — ohne ihn wären die Setzlinge längst gefressen. Unser Gärtner, der den Garten pflegt und die Brunnenanlage wartet, hat inzwischen eigene Vorschläge, wie es weitergehen soll.</p>
+     <p>Wenn die Bäume tief genug wurzeln, um selbst an das Grundwasser zu kommen, brauchen sie kein Gießwasser mehr. Dann sollen sie Schatten und Windschutz geben, die Bodenerosion bremsen und helfen, den Grundwasserspiegel zu heben. Bis dahin wird weiter gegossen.</p>`},
+  {slug:'wasser-fuer-ekulpung', t:'Wasser für Ekulpung', k:'Grundversorgung', d:'1. Januar 2024', a:'Caro Sickinger', img:B.ekulpung,
+   galerie:[[B.ekulpung2,'Die neue Zapfstelle'],[B.ekulpung3,'Übergabe an das Dorf'],[B.ekulpung,'Die Feier in Ekulpung']],
+   x:'Am 20. Dezember hat unser Vorsitzender die Wasserstelle in Ekulpung übergeben — im Beisein des Dorfoberhaupts und des dortigen Vorstands.',
+   body:`<p style="font-size:1.16rem">Grosse Freude in Ekulpung: Am 20. Dezember konnte unser Vorsitzender Kienewoyi Bertrand Bazie wie geplant die Installation der Wasserstelle in Ekulpung erfolgreich durchführen. Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell für die Bewohner:innen des Dorfes freigegeben und in ihre Verantwortung übergeben.</p>
+     <p>Ekulpung erhält damit den lang ersehnten Zugang zu fließendem Wasser. Die Übergabe wurde groß gefeiert und der neue Brunnen mit Dankbarkeit und Freude von den Dorfbewohner:innen angenommen.</p>
+     <p>Wir sind stolz darauf, dieses Weihnachtsgeschenk machen zu können, und zuversichtlich, dass die nachhaltige Bereitstellung von sauberem Wasser das Leben der Bewohner:innen verbessern wird.</p>
+     <p>Herzlichen Dank allen Unterstützer:innen, Spender:innen und Beteiligten, die dazu beigetragen haben, dieses Vorhaben zu verwirklichen.</p>`},
+  {slug:'waldgarten-waechst', t:'Waldgarten wächst', k:'Umweltschutz', d:'2. Mai 2022', a:'Thomas Harnisch', img:B.maisreihen,
+   x:'Der erste Waldgarten beim Dorfbrunnen wächst. Die Bewässerung steht und wird aus dem neuen Wassertank gespeist.'},
+  {slug:'pflanzaktion-februar-2022', t:'Pflanzaktion Februar 2022', k:'Umweltschutz', d:'22. Februar 2022', a:'Thomas Harnisch', img:B.pflanz,
+   x:'Neue Setzlinge für den Waldgarten. Die Mangos vom Vorjahr haben bereits eine stattliche Höhe erreicht.'},
+  {slug:'naehmaschinenlieferung', t:'Nähmaschinenlieferung', k:'Bildung', d:'7. Februar 2022', a:'Thomas Harnisch', img:B.naeh,
+   x:'Nach einer Reise per Containerschiff sind die gespendeten Nähmaschinen in Wapa angekommen.'},
+  {slug:'garten-am-wasserturm', t:'Garten am Wasserturm', k:'Umweltschutz', d:'21. August 2021', a:'Thomas Harnisch', img:B.garten,
+   x:'Zwei Gärtner wurden engagiert. Sie pflegen den Garten und warten die Brunnenanlage.'},
+  {slug:'brunnenbau-fertiggestellt', t:'Brunnenbau fertiggestellt', k:'Infrastruktur', d:'5. April 2021', a:'Thomas Harnisch', img:B.wasserturm,
+   x:'Am Osterwochenende beendet. 81 Meter tief, drei öffentlich zugängliche Wasserhähne.'},
+  {slug:'nachruf-marlis', t:'Nachruf Marlis Schmitt-Sickinger', k:'Verein', d:'9. März 2020', a:'Vorstand', img:B.naeh,
+   x:'Unsere Mitgründerin und Schatzmeisterin ist nach langer Krankheit verstorben. An unserer Schule in Réo wurde ein Gebet für sie gesprochen.'},
+  {slug:'corona-spendenaktion', t:'Corona-Spendenaktion', k:'Grundversorgung', d:'29. August 2020', a:'Vorstand', img:B.seife,
+   x:'Zwei Hilfsprojekte umgesetzt: Wasserspender und Seife an öffentlichen Orten, dazu 1,5 Tonnen Getreide für 60 Haushalte.'}
+];
+
+/* Spendenblock — auf jeder Seite gleich */
+function spendenBlock(){ return `
+<section class="dunkel">
+  <div class="wrap">
+    <div class="zwei" style="align-items:start">
+      <div>
+        <span class="kt gold">Jede Spende zählt</span>
+        <h2>Was Ihr Geld tut, steht daneben</h2>
+        <p class="lede">Verwaltung und Öffentlichkeitsarbeit machen wir selbst. Wir schreiben lieber auf, was ein Betrag konkret bewirkt, als mit Prozentzahlen zu werben.</p>
+        <div class="betrag">
+          <button onclick="waehle(this)"><span class="a">2 €</span><span class="w">Ein Baum im Waldgarten</span></button>
+          <button class="on" onclick="waehle(this)"><span class="a">23 €</span><span class="w">Ein Monatslohn des Gärtners</span></button>
+          <button onclick="waehle(this)"><span class="a">15 €</span><span class="w">Patenschaft, pro Monat</span></button>
+          <button onclick="waehle(this)"><span class="a">Frei</span><span class="w">Eigener Betrag</span></button>
+        </div>
+        <a class="b gold" href="https://www.betterplace.org/de/organisations/47348-gemeinsam-fuer-wapa">Über Betterplace spenden</a>
+      </div>
+      <div>
+        <h3 style="color:#FFF6EE">Spendenkonto</h3>
+        <div class="iban">
+          IBAN&nbsp;&nbsp;<b>DE18 6535 1050 0000 0387 28</b><br>
+          BIC&nbsp;&nbsp;&nbsp;&nbsp;SOLADES1SIG<br>
+          Sparkasse Sigmaringen
+        </div>
+        <p style="font-size:.9rem;margin-top:15px;color:#B7A897">Für ein bestimmtes Projekt genügt ein Wort im Verwendungszweck: <b style="color:var(--gold);font-weight:400">Schule</b>, <b style="color:var(--gold);font-weight:400">Aufforstung</b> oder <b style="color:var(--gold);font-weight:400">Solarofen</b>. Für die Spendenbescheinigung bitte die Adresse angeben — sie kommt zu Beginn des Folgejahres.</p>
+      </div>
+    </div>
+  </div>
+</section>`;}
+
+const VIEWS = {};
+
+/* =========================================================================
+   STARTSEITE — neue Reihenfolge
+   1 Hero · 2 Sprachband · 3 Herkunft · 4 Die Kette · 5 Was ein Betrag tut
+   6 Vier Säulen · 7 Projektregister (Auszug) · 8 Aktuelles · 9 Mitmachen · 10 Spenden
+   ========================================================================= */
+VIEWS[''] = () => `
+<div class="hero">
+  <div class="hero-t">
+    <span class="kt gruen">Sanguié · Burkina Faso</span>
+    <h1>Es fing mit einem Brunnen an, den ein Vater nicht mehr fertig bauen konnte.</h1>
+    <p class="lede">Sein Sohn hat ihn zu Ende gebracht. Aus diesem einen Brunnen sind seither eine Schule, ein Wasserturm und ein Waldgarten geworden — geplant und gebaut mit den Menschen in Sanguié.</p>
+    <div class="hero-cta">
+      <a class="b gold" href="#/spenden">Spenden</a>
+      <a class="b leer" href="#/projekte">Was wir gebaut haben</a>
+    </div>
+  </div>
+  <figure class="hero-b" style="margin:0">
+    <img src="${B.gaertner}" alt="Der Gärtner blickt über den Waldgarten am Wasserturm in Wapa">
+    <figcaption>Der Waldgarten am Wasserturm, August 2026. Der Gärtner wird aus Spenden bezahlt — 23 € im Monat.</figcaption>
+  </figure>
+</div>
+
+<div class="sprachen">
+  <div class="wrap">
+    <span><b>Gemeinsam für Wapa</b> — deutsch</span>
+    <span><b>Mudawane Wapa Yila</b> — <i>Lele, die Sprache vor Ort</i></span>
+    <span><b>Ensemble pour Wapa</b> — <i>français, Amtssprache</i></span>
+    <span style="margin-left:auto;color:#C9AC97">Verein seit 2017</span>
+  </div>
+</div>
+
+<section class="nurnotiz">
+  <div class="wrap">
+    ${rn('<b>Zur Reihenfolge:</b> Der bisherige Entwurf begann mit einem Zahlenband und den vier Säulen — also mit der eigenen Verwaltungslogik. Diese Fassung beginnt mit der Herkunft. Dass der Vorsitzende aus dem Dorf stammt und die Geschichte mit seinem Vater anfängt, ist das, was diesen Verein von hundert anderen unterscheidet. Es stand bisher im vierten Absatz von „Über uns“.')}
+    ${rn('<b>Zum Bild:</b> Das Hero-Foto steht rechts statt hinter der Schrift. Damit muss kein Farbverlauf über das Motiv gelegt werden, um Text lesbar zu machen — der übliche Grund, warum Vereinsseiten alle gleich aussehen. Die Bildunterschrift kann so auch etwas sagen.')}
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- ============ 3 · HERKUNFT ============ -->
+<section class="erde">
+  <div class="wrap">
+    <div class="zwei">
+      <div>
+        <span class="kt hell">Herkunft</span>
+        <blockquote class="zitat">„Nach der Bestattung sah ich, dass der Brunnen, so wie ihn mein Vater hinterlassen hatte, noch von vielen Menschen genutzt wurde. Ich habe beschlossen, das Projekt meines Vaters zu Ende zu bringen, um mich von ihm zu verabschieden.“</blockquote>
+        <div class="q">Kienewoyi Bertrand Bazie, Vorsitzender — über den Tod seines Vaters Bazie Kodio Claver am 24. Juni 2015</div>
+        <p style="margin-top:2rem;color:#E3CDBD">Zurück in Deutschland erzählte er es seinem Vermieter. Der sprach mit dem Rotary Service Sigmaringen. So kamen 2.700 € zusammen — genug für die Pumpe, und es blieb noch Geld für einen Wasserturm übrig.</p>
+        <a class="pf" style="color:#FFE3CE;border-color:rgba(255,255,255,.35)" href="#/ueber-uns">Die ganze Geschichte</a>
+      </div>
+      <div>
+        <img src="${B.brunnen}" alt="Der erste Brunnen in Wapa" style="width:100%;aspect-ratio:4/5;object-fit:cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · DIE KETTE ============ -->
+<section>
+  <div class="wrap">
+    <div class="kette">
+      <div class="kette-l">
+        <span class="kt gruen">Die Kette</span>
+        <h2 style="font-size:clamp(1.5rem,2.4vw,2rem)">Ein Ding führt zum nächsten</h2>
+        <p style="font-size:.92rem">Wir fangen selten etwas Neues an. Meistens stellt sich heraus, dass das Gebaute noch etwas braucht.</p>
+      </div>
+      <div class="spur">
+        <div class="gl stark">
+          <div class="j">2016</div><h3>Der Brunnen</h3>
+          <p>Fertiggestellt im April, mit einer Pumpe und einem Wasserturm aus dem Restgeld. Er fiel auf dem Höhepunkt der Trockenzeit trocken.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2021</div><h3>Also ein tieferer Brunnen</h3>
+          <p>81 Meter statt weniger Meter. Erstes Wasser bei 20 m. Rotary Club und Schwäbische Zeitung gaben knapp 8.000 €, gekostet hat es 6.300 €.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2021</div><h3>Die Pumpe brauchte Strom</h3>
+          <p>Sechs Solarzellen statt vier. Eine Steuerung füllt die Tanks selbsttätig — bei voller Leistung beide in zwei Stunden.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2021</div><h3>Und Wasser will gespeichert sein</h3>
+          <p>Ein zweiter Turm mit 3.000 l, verbunden mit dem alten zu 4.000 l. Drei öffentliche Wasserhähne. Die Dorfältesten riefen das Ende des Wassermangels für Wapa aus.</p>
+        </div>
+        <div class="gl">
+          <div class="j">seit 2021</div><h3>Wo Wasser ist, kann ein Garten stehen</h3>
+          <p>Rund um den Turm ein Waldgarten in vier Schichten: hohe Bäume, niedrige Bäume, Sträucher, Bodendecker. Ein Gärtner pflegt ihn für 23 € im Monat.</p>
+        </div>
+        <div class="gl">
+          <div class="j">2022</div><h3>Und ein Garten will bewässert sein</h3>
+          <p>Tropfenbewässerung aus dem Wasserturm, langsam und kontrolliert. Der Gärtner hat inzwischen eigene Ideen für den nächsten Schritt.</p>
+        </div>
+        <div class="gl stark">
+          <div class="j">2023</div><h3>Das Nächste ist das Nachbardorf</h3>
+          <p>Am 20. Dezember wurde die Wasserstelle in Ekulpung übergeben — an das Dorfoberhaupt, in die Verantwortung des Dorfes.</p>
+        </div>
+      </div>
+    </div>
+    ${rn('<b>Statt Kachelraster:</b> Die Projekte hängen inhaltlich zusammen — jedes ist aus dem vorigen entstanden. Vier gleich große Bildkacheln verstecken genau das. Diese Spur zeigt, dass Spenden hier nicht versickern, sondern aufeinander aufbauen. Der bisherige Entwurf brauchte dafür den Satz „100 % der Spenden in Projekte“, der laut Leitfaden (Entscheidung 4) rechtlich heikel ist.')}
+  </div>
+</section>
+
+<!-- ============ 4b · ATEMZUG ============ -->
+<figure class="vollbild">
+  <img src="${B.obstgarten}" alt="Junge Obstbäume im Waldgarten, dahinter Mais und ein Zaun aus Astwerk">
+  <figcaption>Aus dem Brunnen von 2016 ist ein Garten geworden. Der Zaun schützt die Setzlinge vor Weidevieh.</figcaption>
+</figure>
+
+<!-- ============ 5 · WAS EIN BETRAG TUT ============ -->
+<section>
+  <div class="wrap">
+    <span class="kt gruen">Größenordnungen</span>
+    <h2>Was ein Betrag hier bedeutet</h2>
+    <p class="lede" style="margin-bottom:2.4rem">Alle Zahlen stehen so bereits auf unserer Website. Sie sind nachrechenbar — das ist uns lieber als eine Prozentangabe.</p>
+    <div class="preise">
+      <div class="pz"><div class="b1">2 €</div><div class="b2">Ein Baum im Waldgarten<span>Setzling, gepflanzt und im ersten Jahr gegossen</span></div></div>
+      <div class="pz"><div class="b1">15 €</div><div class="b2">Eine Kinderpatenschaft, im Monat<span>Nahrung, Schulbücher und Schulgebühr</span></div></div>
+      <div class="pz"><div class="b1">23 €</div><div class="b2">Der Monatslohn unseres Gärtners<span>Er pflegt den Waldgarten und wartet die Brunnenanlage</span></div></div>
+      <div class="pz"><div class="b1">23 €</div><div class="b2">Eine Handwaschstation<span>Tank mit Filter, Wasserhahn und Seifenspender — 25 Stück standen 2020 in Réo</span></div></div>
+      <div class="pz"><div class="b1">1.000 €</div><div class="b2">Die Tropfenbewässerung<span>Noch nicht finanziert</span></div></div>
+      <div class="pz"><div class="b1">3.050 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum<span>Räume werden nach ihren Stiftern benannt und ins Gründerbuch eingetragen</span></div></div>
+      <div class="pz"><div class="b1">6.300 €</div><div class="b2">Der Tiefbrunnen von 2021<span>81 m Bohrung, Pumpe, Solarzellen, 4.000 l Speicher</span></div></div>
+    </div>
+    <div style="margin-top:2rem"><a class="b" href="#/spenden">Spenden</a></div>
+    ${rn('<b>Statt Kennzahlenband:</b> Vier große runde Zahlen unter dem Hero („120 Frauen“, „100 %“) sind das Erkennungszeichen jeder Wohltätigkeitsvorlage — und zwei davon muss der Vorstand erst prüfen. Diese Liste sagt dasselbe konkreter und steht rechtlich auf sicherem Boden.')}
+  </div>
+</section>
+
+<!-- ============ 6 · VIER SÄULEN ============ -->
+<section>
+  <div class="wrap">
+    <span class="kt gruen">Vier Säulen unserer Arbeit</span>
+    <h2 style="max-width:20ch">Hilfe zur Selbsthilfe, an den Bedürfnissen vor Ort ausgerichtet</h2>
+    <p class="lede" style="margin-bottom:2.6rem">Wir orientieren uns an unserer Satzung, unserem Manifest und den UN-Nachhaltigkeitszielen.</p>
+    <div class="saeulen">
+      <div class="saeule"><div class="n">01</div><h3>Grundversorgung</h3><p>Wasser, Nahrung und Medikamente sichern.</p></div>
+      <div class="saeule"><div class="n">02</div><h3>Bildung</h3><p>Ausbildungszentrum, Nähschule, Alphabetisierung.</p></div>
+      <div class="saeule"><div class="n">03</div><h3>Infrastruktur</h3><p>Wasser- und Stromversorgung, Solaranlagen.</p></div>
+      <div class="saeule"><div class="n">04</div><h3>Umweltschutz</h3><p>Aufforstung und die Folgen des Klimawandels abmildern.</p></div>
+    </div>
+    ${rn('<b>Herabgestuft:</b> Die vier Säulen sind eine Ordnungslogik, keine Schlagzeile. Sie bleiben — als Filter über dem Register, und hier als knappe Einordnung. Auf der alten Seite führten sie zu vier fast identischen Unterseiten (Grundversorgung, Bildung, Infrastruktur, Umweltschutz), deren Einleitungstext wörtlich derselbe ist. Diese vier Seiten entfallen.')}
+  </div>
+</section>
+
+<!-- ============ 7 · REGISTER ============ -->
+<section class="papier2">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:1.8rem">
+      <div>
+        <span class="kt gruen">Stand heute</span>
+        <h2 style="margin:0">Woran wir gerade arbeiten</h2>
+      </div>
+      <a class="pf" href="#/projekte">Alles, was gebaut wurde</a>
+    </div>
+    <div class="reg">${REG.filter(p=>LAEUFT(p.s)).sort((a,b)=>b.y-a.y).map(zeile).join('')}</div>
+    ${rn('<b>Warum hier nicht das ganze Register steht:</b> Die ersten sieben Zeilen des vollständigen Verzeichnisses sind, chronologisch sortiert, die Jahre 2016 bis 2020 — vier davon allein 2020. Das lässt den Verein eingeschlafen aussehen, obwohl neun der sechzehn Vorhaben laufen oder in Finanzierung sind. Die Startseite zeigt deshalb den <b>Stand</b>, das vollständige Register die <b>Geschichte</b>. Beides wahr, aber die Startseite beantwortet die Frage, die ein Spender zuerst stellt.')}
+  </div>
+</section>
+
+<!-- ============ 8 · AKTUELLES ============ -->
+<section>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:2rem">
+      <div>
+        <span class="kt gruen">Aktuelles</span>
+        <h2 style="margin:0">Was zuletzt passiert ist</h2>
+      </div>
+      <a class="pf" href="#/aktuelles">Alle Beiträge</a>
+    </div>
+    <a class="lead" href="#/aktuelles/${NEWS[0].slug}">
+      <img src="${NEWS[0].img}" alt="">
+      <div>
+        <div class="meta">${NEWS[0].d} · ${NEWS[0].k}</div>
+        <h3 style="margin-top:.4em">${NEWS[0].t}</h3>
+        <p>${NEWS[0].x}</p>
+        <span class="pf">Weiterlesen</span>
+      </div>
+    </a>
+    <div class="liste">${NEWS.slice(1,5).map(zl).join('')}</div>
+    ${rn('<b>Zum Rhythmus der Seite:</b> Der letzte Beitrag ist von Januar 2024. Eine Website, die auf der Startseite sechs Kacheln fordert, sieht mit sechs alten Beiträgen leer aus. Eine datierte Liste verträgt lange Pausen — sie sieht dann nach Archiv aus statt nach Vernachlässigung.')}
+  </div>
+</section>
+
+<!-- ============ 9 · MITMACHEN ============ -->
+<section class="erde">
+  <div class="wrap">
+    <div class="zwei">
+      <div>
+        <span class="kt hell">Mitmachen</span>
+        <h2>Man muss dafür nicht Mitglied werden</h2>
+        <p style="color:#E3CDBD">Der Berufsalltag drängt genug Pflichten auf. Das Engagement im Verein soll ohne Druck stattfinden — und jede und jeder soll die eigenen Stärken einbringen können. Vieles lässt sich als abgeschlossenes Kleinstprojekt erledigen.</p>
+        <a class="b hell" href="#/mitmachen">Was zu tun ist</a>
+      </div>
+      <div class="rollen">
+        <div class="ro"><div class="ro-t">Agrarwissen, Ökologie</div><div class="ro-u">Was passt in den Sahel, welche Symbiosen funktionieren?</div></div>
+        <div class="ro"><div class="ro-t">Vereinsrecht</div><div class="ro-u">Satzungsfragen, Bewertung von Verträgen.</div></div>
+        <div class="ro"><div class="ro-t">Französisch</div><div class="ro-u">Amtssprache vor Ort — Verständigung und Übersetzung.</div></div>
+        <div class="ro"><div class="ro-t">Öffentlichkeitsarbeit</div><div class="ro-u">Inhalte pflegen, Grafiken, Infostände.</div></div>
+        <div class="ro"><div class="ro-t">Netzwerk</div><div class="ro-u">Kontakte und Anerkennung für die Arbeit.</div></div>
+        <div class="ro"><div class="ro-t">Etwas anderes</div><div class="ro-u">Eine eigene Idee genügt.</div></div>
+      </div>
+    </div>
+    ${rn('<b>Nach vorn geholt:</b> „Man muss nicht Mitglied werden“ ist ein ungewöhnliches Angebot und stand bisher auf einer Unterseite, unter einer Liste von Projekten. Für einen Verein, der Nachfolger für die Öffentlichkeitsarbeit sucht, gehört es auf die Startseite.')}
+    ${rn('<b>Hier standen sechs Pflanzenfotos.</b> Sie sahen gut aus und hatten mit dem Text nichts zu tun — gesucht sind Vereinsrecht und Französisch, gezeigt wurden Maniok und Sesam. Bilder, die nur Fläche füllen, sind das eigentliche Kennzeichen einer Vorlage. Jetzt steht dort, was tatsächlich gesucht wird.')}
+  </div>
+</section>
+
+${spendenBlock()}
+`;
+
+/* ---------- Bausteine ---------- */
+function zeile(p){
+  return `<a class="rz" href="#/projekte">
+    <div class="j zahl">${p.j}</div>
+    <div><div class="t">${p.t}</div><div class="u">${p.u}</div></div>
+    <div class="s">${p.o}</div>
+    <div class="k${p.s==='Abgeschlossen'?'':' offen'}">${p.s}</div>
+    ${p.img ? `<img class="vs" src="${p.img}" alt="" loading="lazy">` : ''}
+  </a>`;
+}
+function zl(n){
+  return `<a href="#/aktuelles/${n.slug}">
+    <div class="d">${n.d}</div>
+    <div><div class="t">${n.t}</div><div class="x">${n.x}</div></div>
+    <div class="k">${n.k}</div>
+  </a>`;
+}
+
+/* ============ PROJEKTE ============ */
+let filter = 'Alle';
+VIEWS['projekte'] = () => {
+  const kats = ['Alle','Grundversorgung','Bildung','Infrastruktur','Umweltschutz'];
+  const zeilen = REG.filter(p => filter==='Alle' || p.k===filter).slice().sort((a,b)=>b.y-a.y);
+  return `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Register</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:16ch">Alles, was gebaut wurde</h1>
+  <p class="lede">Jedes Projekt mit Jahr, Ort und Stand, neueste zuerst. Was noch Geld braucht, steht als solches da.</p>
+</div></div>
+<section style="padding-top:2.6rem"><div class="wrap">
+  <div class="filter">${kats.map(k=>`<button class="${k===filter?'on':''}" onclick="setFilter('${k}')">${k}</button>`).join('')}</div>
+  <div class="reg">${zeilen.map(zeile).join('')}</div>
+  ${rn('<b>Ein Fehler der alten Seite:</b> Die Projekte lagen in Avada-„portfolio-items“ mit Adressen wie <code>?portfolioCats=31,30</code>. „Garten Wasserturm“ erschien dadurch zweimal auf derselben Seite. In einem Register mit einer Zeile je Projekt kann das nicht passieren.')}
+</div></section>
+${spendenBlock()}`;
+};
+function setFilter(k){ filter = k; render(); }
+
+/* ============ AKTUELLES ============ */
+VIEWS['aktuelles'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Aktuelles</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem)">Berichte aus Sanguié</h1>
+  <p class="lede">Mehrmals im Jahr berichten wir, was aus den Projekten geworden ist. Wer nichts verpassen will, abonniert den Newsletter.</p>
+</div></div>
+<section style="padding-top:2.6rem"><div class="wrap">
+  <a class="lead" href="#/aktuelles/${NEWS[0].slug}">
+    <img src="${NEWS[0].img}" alt="">
+    <div>
+      <div class="meta">${NEWS[0].d} · ${NEWS[0].k}</div>
+      <h3 style="margin-top:.4em">${NEWS[0].t}</h3>
+      <p>${NEWS[0].x}</p><span class="pf">Weiterlesen</span>
+    </div>
+  </a>
+  <div class="liste">${NEWS.slice(1).map(zl).join('')}</div>
+  ${rn('<b>Zum Veröffentlichen:</b> Ein neuer Beitrag ist künftig eine neue Markdown-Datei im Repository. Titel, Datum, Vorschaubild und diese Liste entstehen beim Erzeugen der Seite — es gibt kein Redaktionssystem mehr zu pflegen und keine Plugins zu aktualisieren.')}
+</div></section>`;
+
+/* ============ EINZELNER BEITRAG ============ */
+VIEWS['beitrag'] = (slug) => {
+  const n = NEWS.find(x=>x.slug===slug) || NEWS[0];
+  const galerie = n.galerie
+    ? `<div class="wg" style="margin:2.2rem 0">` + n.galerie.map(function(g,i){
+        return `<figure class="${i===0?'gr':''}"><img src="${g[0]}" alt="${g[1]}" loading="lazy"><figcaption>${g[1]}</figcaption></figure>`;
+      }).join('') + `</div>`
+    : '';
+  const text = n.body || `<p style="font-size:1.16rem">${n.x}</p>
+     <p style="color:var(--leise)">Der vollständige Text wird beim Übertragen aus der bestehenden Website übernommen.</p>`;
+  const hinweis = n.slug==='waldgarten-august-2026'
+    ? rn('<b>Dieser Beitrag ist ein Vorschlag, kein beschlossener Text.</b> Die Fotos sind echt (12. August 2026), die Worte hat der Entwurf beigesteuert — sie gehören vom Verein geschrieben oder wenigstens abgenommen. Er steht hier, weil er zeigt, wie ein neuer Beitrag aussieht: eine Markdown-Datei mit Titel, Datum, Text und einem Ordner Bilder. Und weil der bislang neueste Beitrag vom Januar 2024 stammt — eine Lücke, die auf der Startseite stärker auffällt als jedes Gestaltungsdetail.')
+    : '';
+  return `
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <div class="krume"><a href="#/aktuelles">Aktuelles</a> · ${n.k}</div>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem)">${n.t}</h1>
+  <div class="meta" style="margin-top:1rem">${n.d} · ${n.a}</div>
+</div></div>
+<section style="padding-top:2.2rem"><div class="wrap"><div class="artikel">
+  <img class="gross" src="${n.img}" alt="">
+  ${text}
+</div></div>
+<div class="wrap">${galerie}</div>
+<div class="wrap"><div class="artikel">
+  ${hinweis}
+  <div style="border-top:1px solid var(--linie);margin-top:2.4rem;padding-top:1.6rem">
+    <span class="kt gruen">Dazu passt</span>
+    <div class="reg">${REG.filter(p=>p.k===n.k).slice(0,2).map(zeile).join('')}</div>
+  </div>
+</div></div></section>
+${spendenBlock()}`;
+};
+
+/* ============ ÜBER UNS ============ */
+VIEWS['ueber-uns'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Über uns</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:15ch">Ein Verein aus Sigmaringen und ein Dorf in Sanguié</h1>
+</div></div>
+<section style="padding-top:2.4rem"><div class="wrap">
+  <div class="zwei" style="align-items:start">
+    <div>
+      <p class="lede">Gemeinsam für Wapa ist ein gemeinnütziger Verein mit dem Ziel, in der Provinz Sanguié Hilfe zur Selbsthilfe zu leisten. Die ersten Projekte entstanden in Wapa, einem Ort mit rund 1.000 Einwohnern — dem Heimatdorf unseres Vorsitzenden.</p>
+      <p>Kienewoyi Bertrand Bazie kam 2011 zum Studium nach Deutschland und erhielt 2018 seinen Master an der Hochschule Albstadt-Sigmaringen. Heute arbeitet er als Pharmaingenieur in Frankfurt. Eine der Hauptinitiatorinnen des Vereins war die 2020 verstorbene Marlis Schmitt-Sickinger.</p>
+      <p>Die Projekte planen und setzen wir direkt mit den Menschen in Sanguié um. Bertrand kennt die Bedürfnisse vor Ort und ist bei Planung und Umsetzung im Austausch mit Offiziellen und Verantwortlichen. So oft er kann, besucht er seine alte Heimat. Verwaltung und Öffentlichkeitsarbeit organisieren wir in Eigenleistung.</p>
+      <h2 style="margin-top:2.2rem">Vorstand</h2>
+      <div class="preise" style="max-width:34rem">
+        <div class="pz" style="grid-template-columns:12rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
+        <div class="pz" style="grid-template-columns:12rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
+        <div class="pz" style="grid-template-columns:12rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
+      </div>
+      <p style="margin-top:1.6rem"><a class="pf" href="#/ueber-uns">Satzung und Manifest</a></p>
+    </div>
+    <div>
+      <img src="${B.zentrum}" alt="Das Ausbildungszentrum in Réo" style="width:100%;aspect-ratio:4/5;object-fit:cover">
+      <div class="rn" style="margin-top:18px"><b>Wapa in Zahlen:</b> rund 1.000 Einwohner. Regenzeit Juni bis Oktober, Trockenzeit Oktober bis Mai. Ab Ende Februar fallen viele Brunnen trocken — dann fehlt Wasser für Menschen, Gärten und Vieh.</div>
+    </div>
+  </div>
+</div></section>
+<section class="erde"><div class="wrap">
+  <span class="kt hell">Newsletter</span>
+  <h2 style="max-width:18ch">Mehrmals im Jahr, und sonst nie</h2>
+  <p style="color:#E3CDBD;max-width:34rem">Wir berichten über den Stand der Projekte und zeigen, was dank Ihrer Unterstützung möglich war. Zuletzt erschienen: 1/2024, 2/2023, 1/2023.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1.4rem">
+    <a class="b gold" href="mailto:info@gemeinsamfuerwapa.de">Newsletter abonnieren</a>
+    <a class="b hell" href="mailto:info@gemeinsamfuerwapa.de">Mitglied werden</a>
+  </div>
+</div></section>`;
+
+/* ============ MITMACHEN ============ */
+VIEWS['mitmachen'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Mitmachen</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:16ch">Man muss dafür nicht Mitglied werden</h1>
+  <p class="lede">Unser Berufsalltag drängt uns schon genug Pflichten auf. Das Engagement im Verein soll ohne Druck stattfinden — und jede und jeder soll die eigenen Stärken einbringen können.</p>
+</div></div>
+<section style="padding-top:2.4rem"><div class="wrap">
+  <div class="preise" style="max-width:52rem">
+    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Agrarwissen, Ökologie</div><div class="b2">Was passt in den Sahel, welche Symbiosen funktionieren, was könnte ein Geschäftsmodell sein?<span>Es muss keine Professur sein. Einfache Erfahrung genügt, einzelne Hinweise sind willkommen.</span></div></div>
+    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Vereinsrecht</div><div class="b2">Satzungsfragen und die Bewertung von Verträgen.<span>Auch einzelne Tipps helfen — keine Mitgliedschaft nötig.</span></div></div>
+    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Französisch, Kultur</div><div class="b2">Amtssprache in Burkina Faso ist Französisch.<span>Hilfe bei Verständigung und Übersetzung.</span></div></div>
+    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Öffentlichkeitsarbeit</div><div class="b2">Layouts, Grafiken, Inhalte pflegen, Infostände auf Märkten und Messen.<span>Es gibt viele Kanäle — helfen Sie uns, sie zu nutzen.</span></div></div>
+    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Netzwerk</div><div class="b2">Vernetzung und gesellschaftliche Anerkennung unserer Arbeit.<span></span></div></div>
+    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Etwas anderes</div><div class="b2">Sie haben eine Idee oder ein Anliegen?<span>Schreiben Sie uns.</span></div></div>
+  </div>
+  <div style="margin-top:2rem"><a class="b" href="mailto:info@gemeinsamfuerwapa.de">Schreiben Sie uns</a></div>
+  ${rn('<b>Umgebaut:</b> Auf der alten Seite stand diese Liste über einem gefilterten Projektraster, in dem „Marketing“ und „Rechtsberater“ als Projektkacheln zwischen Brunnen und Solaranlagen auftauchten. Aufgaben für Freiwillige sind keine Projekte — hier sind sie getrennt.')}
+</div></section>
+${spendenBlock()}`;
+
+/* ============ SPENDEN ============ */
+VIEWS['spenden'] = () => `
+<div class="kopf"><div class="wrap">
+  <span class="kt gruen">Spenden</span>
+  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:14ch">Jede Spende zählt, und jede ist nachrechenbar</h1>
+  <p class="lede">Spendenbescheinigungen stellen wir zu Beginn des Folgejahres aus. Damit wir sie schicken können, teilen Sie uns bitte Ihre Adresse mit.</p>
+</div></div>
+<section style="padding-top:2.4rem"><div class="wrap">
+  <span class="kt gruen">Größenordnungen</span>
+  <div class="preise">
+    <div class="pz"><div class="b1">2 €</div><div class="b2">Ein Baum im Waldgarten</div></div>
+    <div class="pz"><div class="b1">15 €</div><div class="b2">Eine Kinderpatenschaft, im Monat<span>Nahrung, Schulbücher und Schulgebühr für ein Kind</span></div></div>
+    <div class="pz"><div class="b1">23 €</div><div class="b2">Der Monatslohn unseres Gärtners</div></div>
+    <div class="pz"><div class="b1">1.000 €</div><div class="b2">Die Tropfenbewässerung für den Waldgarten<span>Noch nicht finanziert</span></div></div>
+    <div class="pz"><div class="b1">3.050 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum</div></div>
+    <div class="pz"><div class="b1">3.500 €</div><div class="b2">Der Serverraum und Copyshop<span>Zu 90 % finanziert</span></div></div>
+  </div>
+</div></section>
+${spendenBlock()}
+<section><div class="wrap">
+  <div class="zwei" style="align-items:start">
+    <div>
+      <span class="kt gruen">Patenschaft</span>
+      <h2>15 € im Monat für ein Kind</h2>
+      <p>Für rund 15 € im Monat kann ein Kind mit Nahrung und Schulbüchern ausgestattet werden; die Schulgebühr ist damit ebenfalls abgedeckt. Für nähere Informationen nehmen Sie bitte direkt Kontakt mit uns auf.</p>
+      <a class="b leer" href="mailto:info@gemeinsamfuerwapa.de">Patenschaft anfragen</a>
+      ${rn('<b>Zum Logo:</b> Es steht im Fuß jeder Seite und hier neben dem Spendenkonto — an den Stellen, wo ein Zeichen etwas beglaubigt. Nicht in der Kopfzeile: Die Datei ist 300×158 px groß und enthält zwei Zeilen Text, die bei Navigationsgröße (rund 40 px Höhe) unleserlich würden. Der eingebrannte schwarze Rahmen ist hier nicht wegretuschiert, sondern als Stempel gesetzt. Mit einem Vektororiginal (Entscheidung 1) ließe sich das Zeichen freistellen und auch klein verwenden.')}
+    </div>
+    <div>
+      <span class="kt gruen">Weitere Wege</span>
+      <h2>Betterplace und PayPal</h2>
+      <p>Über Betterplace.org können Sie sicher und verifiziert spenden; PayPal steht ebenfalls zur Verfügung. Beide Wege sind für uns mit Gebühren verbunden — eine Überweisung kommt vollständig an.</p>
+      <a class="b leer" href="https://www.betterplace.org/de/organisations/47348-gemeinsam-fuer-wapa">Zu Betterplace</a>
+      <div style="margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--linie)">
+        <span class="kt gruen">Gemeinnütziger Verein</span>
+        <div class="stempel auf-hell">
+          <img src="${LOGO}" alt="Vereinslogo: drei Figuren mit erhobenen Armen über einem Schild mit dem Umriss Burkina Fasos, Wapa markiert">
+        </div>
+        <p style="font-size:.86rem;margin-top:1rem;color:var(--leise)">Gemeinnützigkeit anerkannt vom Finanzamt Sigmaringen am 7.11.2017. Spendenbescheinigungen sind steuerlich absetzbar.</p>
+      </div>
+    </div>
+  </div>
+</div></section>`;
+
+/* ---------- Router ---------- */
+function waehle(el){
+  el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+}
+function render(){
+  const h = location.hash.replace(/^#\/?/,'').replace(/\/$/,'');
+  const teile = h.split('/');
+  let out;
+  if(teile[0]==='aktuelles' && teile[1]) out = VIEWS['beitrag'](teile[1]);
+  else out = (VIEWS[teile[0]] || VIEWS[''])();
+  document.getElementById('app').innerHTML = out;
+  document.querySelectorAll('.menu a').forEach(a=>{
+    a.classList.toggle('on', a.getAttribute('href') === '#/'+teile[0] && teile[0]!=='');
+  });
+  document.getElementById('menu').classList.remove('auf');
+  window.scrollTo(0,0);
+}
+
+window.addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>
