@@ -208,8 +208,11 @@ section{padding:clamp(56px,7vw,104px) 0}
 .lead h3{font-size:clamp(1.6rem,2.7vw,2.15rem);font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 80}
 .meta{font-size:.79rem;color:var(--leise);letter-spacing:.03em}
 
-.liste a{display:grid;grid-template-columns:8.5rem 1fr 4.5rem;gap:clamp(12px,2.4vw,28px);
+/* Dritte Spalte fasst „Grundversorgung" in Versalien — 4,5 rem taten das nicht
+   und schoben jede Beitragsliste über den Rand hinaus. */
+.liste a{display:grid;grid-template-columns:8.5rem minmax(0,1fr) 9rem;gap:clamp(12px,2.4vw,28px);
   padding:18px 0;border-bottom:1px solid var(--linie);text-decoration:none;align-items:baseline}
+.liste a > *{min-width:0}
 .liste a:hover{background:var(--papier2)}
 .liste .d{font-family:var(--d);font-variant-numeric:tabular-nums lining-nums;
   font-size:.86rem;color:var(--leise)}
@@ -328,6 +331,18 @@ section{padding:clamp(56px,7vw,104px) 0}
   .artikel .rz .s,.artikel .rz .k{grid-column:1;grid-row:auto;text-align:left}
 }
 
+
+/* Beschreibungszeilen mit breiter Marke (Vorstand, Rollen, Dokumente).
+   Als Klasse, nicht inline — inline hätte jede Media Query überstimmt und
+   machte auf schmalen Geräten den ganzen Grid-Track zu breit. */
+.pz.pz-def{grid-template-columns:13rem 1fr}
+@media(max-width:620px){
+  .pz.pz-def{grid-template-columns:1fr;row-gap:3px}
+}
+/* Grid-Kinder dürfen schrumpfen; ohne min-width:0 wächst eine 1fr-Spur
+   auf die min-content-Breite ihres Inhalts und sprengt den Container. */
+.zwei > *,.kette > *,.saeulen > *,.fg > *,.reg > *,.preise > *{min-width:0}
+
 /* =====================  ARTIKEL  ===================== */
 .artikel{max-width:38rem;margin-inline:auto}
 .artikel p{font-size:1.07rem;max-width:none}
@@ -341,7 +356,7 @@ section{padding:clamp(56px,7vw,104px) 0}
 footer{background:var(--ink);color:#9C8E7E;padding:60px 0 30px;font-size:.87rem}
 footer h4{font-family:var(--t);font-size:.7rem;letter-spacing:.17em;text-transform:uppercase;
   color:#EBD9CC;margin:0 0 13px;font-weight:700}
-footer a{color:#C4B5A3;text-decoration:none;display:block;margin-bottom:7px}
+footer a{color:#C4B5A3;text-decoration:none;display:block;margin-bottom:7px;overflow-wrap:anywhere}
 footer a:hover{color:var(--gold)}
 .fg{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;padding-bottom:34px;
   border-bottom:1px solid #3A322B}
@@ -360,6 +375,17 @@ footer a:hover{color:var(--gold)}
   .saeule{border-bottom:1px solid var(--linie);padding-right:18px}
   .saeule:nth-child(2n){border-right:0}
 }
+/* Der Fuß hatte bislang keine eigene Regel und behielt vier Spalten —
+   das allein machte jede Seite auf dem Handy 580 px breit. */
+@media(max-width:900px){
+  .fg{grid-template-columns:1fr 1fr;gap:26px 28px}
+  .fg > div:first-child{grid-column:1 / -1}
+}
+@media(max-width:520px){
+  .fg{grid-template-columns:1fr;gap:22px}
+  .fg > div:first-child{grid-column:auto}
+}
+
 @media(max-width:760px){
   .menu{display:none} .burger{display:block}
   .menu.auf{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;
@@ -956,9 +982,9 @@ VIEWS['ueber-uns'] = () => `
       <p>Die Projekte planen und setzen wir direkt mit den Menschen in Sanguié um. Bertrand kennt die Bedürfnisse vor Ort und ist bei Planung und Umsetzung im Austausch mit Offiziellen und Verantwortlichen. So oft er kann, besucht er seine alte Heimat. Verwaltung und Öffentlichkeitsarbeit organisieren wir in Eigenleistung.</p>
       <h2 style="margin-top:2.2rem">Vorstand</h2>
       <div class="preise" style="max-width:34rem">
-        <div class="pz" style="grid-template-columns:12rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
-        <div class="pz" style="grid-template-columns:12rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
-        <div class="pz" style="grid-template-columns:12rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
+        <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
+        <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
+        <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
       </div>
       <p style="margin-top:1.6rem"><a class="pf" href="#/satzung">Satzung und Manifest</a></p>
     </div>
@@ -987,12 +1013,12 @@ VIEWS['mitmachen'] = () => `
 </div></div>
 <section style="padding-top:2.4rem"><div class="wrap">
   <div class="preise" style="max-width:52rem">
-    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Agrarwissen, Ökologie</div><div class="b2">Was passt in den Sahel, welche Symbiosen funktionieren, was könnte ein Geschäftsmodell sein?<span>Es muss keine Professur sein. Einfache Erfahrung genügt, einzelne Hinweise sind willkommen.</span></div></div>
-    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Vereinsrecht</div><div class="b2">Satzungsfragen und die Bewertung von Verträgen.<span>Auch einzelne Tipps helfen — keine Mitgliedschaft nötig.</span></div></div>
-    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Französisch, Kultur</div><div class="b2">Amtssprache in Burkina Faso ist Französisch.<span>Hilfe bei Verständigung und Übersetzung.</span></div></div>
-    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Öffentlichkeitsarbeit</div><div class="b2">Layouts, Grafiken, Inhalte pflegen, Infostände auf Märkten und Messen.<span>Es gibt viele Kanäle — helfen Sie uns, sie zu nutzen.</span></div></div>
-    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Netzwerk</div><div class="b2">Vernetzung und gesellschaftliche Anerkennung unserer Arbeit.<span></span></div></div>
-    <div class="pz" style="grid-template-columns:14rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Etwas anderes</div><div class="b2">Sie haben eine Idee oder ein Anliegen?<span>Schreiben Sie uns.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Agrarwissen, Ökologie</div><div class="b2">Was passt in den Sahel, welche Symbiosen funktionieren, was könnte ein Geschäftsmodell sein?<span>Es muss keine Professur sein. Einfache Erfahrung genügt, einzelne Hinweise sind willkommen.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Vereinsrecht</div><div class="b2">Satzungsfragen und die Bewertung von Verträgen.<span>Auch einzelne Tipps helfen — keine Mitgliedschaft nötig.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Französisch, Kultur</div><div class="b2">Amtssprache in Burkina Faso ist Französisch.<span>Hilfe bei Verständigung und Übersetzung.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Öffentlichkeitsarbeit</div><div class="b2">Layouts, Grafiken, Inhalte pflegen, Infostände auf Märkten und Messen.<span>Es gibt viele Kanäle — helfen Sie uns, sie zu nutzen.</span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Netzwerk</div><div class="b2">Vernetzung und gesellschaftliche Anerkennung unserer Arbeit.<span></span></div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Etwas anderes</div><div class="b2">Sie haben eine Idee oder ein Anliegen?<span>Schreiben Sie uns.</span></div></div>
   </div>
   <div style="margin-top:2rem"><a class="b" href="mailto:info@gemeinsamfuerwapa.de">Schreiben Sie uns</a></div>
   ${rn('<b>Umgebaut:</b> Auf der alten Seite stand diese Liste über einem gefilterten Projektraster, in dem „Marketing“ und „Rechtsberater“ als Projektkacheln zwischen Brunnen und Solaranlagen auftauchten. Aufgaben für Freiwillige sind keine Projekte — hier sind sie getrennt.')}
@@ -1091,9 +1117,9 @@ VIEWS['satzung'] = () => `
   </div>
   <h2>Vorstand</h2>
   <div class="preise" style="max-width:34rem">
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kienewoyi Bertrand Bazie</div><div class="b2">Vorsitzender</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Dietmar Sickinger</div><div class="b2">Schatzmeister</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Carolin Zolkiewicz</div><div class="b2">Schriftführerin</div></div>
   </div>
 </div></div></section>`;
 
@@ -1140,12 +1166,12 @@ VIEWS['datenschutz'] = () => `
   </div>
   <h2>Was sich durch den Umzug ändert</h2>
   <div class="preise" style="max-width:none">
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Cookies</div><div class="b2">Entfallen. Die Seite setzt keine.</div></div>
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Analyse</div><div class="b2">Entfällt. Kein Tracking, keine Auswertung des Surfverhaltens.</div></div>
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Schriften</div><div class="b2">Werden von diesem Server geladen, nicht von Google. Es entsteht keine Verbindung zu Google.</div></div>
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Bilder</div><div class="b2">Liegen auf diesem Server. Kein Jetpack-CDN mehr.</div></div>
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">PayPal</div><div class="b2">Noch zu klären: ob es weiter angeboten wird. Falls ja, bleibt der Abschnitt nötig.</div></div>
-    <div class="pz" style="grid-template-columns:13rem 1fr"><div class="b2" style="font-weight:700;color:var(--ink)">Serverprotokolle</div><div class="b2">Der Hoster protokolliert Zugriffe. Das gehört benannt, sobald der Hoster feststeht.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Cookies</div><div class="b2">Entfallen. Die Seite setzt keine.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Analyse</div><div class="b2">Entfällt. Kein Tracking, keine Auswertung des Surfverhaltens.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Schriften</div><div class="b2">Werden von diesem Server geladen, nicht von Google. Es entsteht keine Verbindung zu Google.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Bilder</div><div class="b2">Liegen auf diesem Server. Kein Jetpack-CDN mehr.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">PayPal</div><div class="b2">Noch zu klären: ob es weiter angeboten wird. Falls ja, bleibt der Abschnitt nötig.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Serverprotokolle</div><div class="b2">Der Hoster protokolliert Zugriffe. Das gehört benannt, sobald der Hoster feststeht.</div></div>
   </div>
   <h2>Verantwortliche Stelle</h2>
   <p>Kienewoyi Bertrand Bazie · Gemeinsam für Wapa e.&nbsp;V. · Römerweg 2, 72488 Sigmaringen<br>
