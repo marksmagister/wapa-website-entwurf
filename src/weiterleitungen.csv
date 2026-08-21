@@ -1,0 +1,88 @@
+alt,neu,grund
+/,#/,Seite
+/home/,#/,Seite
+/ueber-uns/,#/ueber-uns,Seite
+/mitmachen/,#/mitmachen,Seite
+/spenden/,#/spenden,Seite
+/impressum/,#/impressum,Seite
+/datenschutzerklaerung/,#/datenschutz,Seite
+/satzung/,#/satzung,Seite
+/projekte/,#/projekte,Seite
+/bildung/,#/projekte/Bildung,Seite
+/grundversorgung/,#/projekte/Grundversorgung,Seite
+/infrastruktur/,#/projekte/Infrastruktur,Seite
+/umweltschutz/,#/projekte/Umweltschutz,Seite
+/patenschaft/,#/spenden,Seite
+/sommerschule/,#/projekt/sommerschule,Seite
+/ausbildungszentrum_bau/,#/projekt/ausbildungszentrum,Seite
+/partner/,#/partner,Seite
+/wapa-burkina-faso/,#/burkina-faso,Seite
+/danke/,#/spenden,Seite
+/projekte/bericht-von-sabine-und-martin-vatter/,#/aktuelles/bericht-vatter,Seite
+/1360-2/,#/aktuelles/corona-erste-erfolge,Beitrag
+/7369-2/,#/aktuelles/neujahr-2021,Beitrag
+/artikel-baumprojekt-dezember-2020/,#/aktuelles/bericht-baumprojekt-2020,Beitrag
+/brunnenbau/,#/aktuelles/brunnenbau-beginnt,Beitrag
+/brunnenbau2/,#/aktuelles/brunnenbau-fertiggestellt,Beitrag
+/corona-hilfskation-ende-der-aktuellen-phase/,#/aktuelles/corona-ende-der-phase,Beitrag
+/corona-spendenaktion/,#/aktuelles/corona-spendenaufruf,Beitrag
+/corona-spendenaktion-2/,#/aktuelles/corona-zwei-hilfsprojekte,Beitrag
+/mauer-fuer-die-schule/,#/aktuelles/mauer-fuer-die-schule,Beitrag
+/nachruf-mitgruenderin-marlis-schmitt-sickinger/,#/aktuelles/nachruf-marlis-schmitt-sickinger,Beitrag
+/naehmaschinenlieferung/,#/aktuelles/naehmaschinenlieferung,Beitrag
+/news_garten/,#/aktuelles/garten-am-wasserturm,Beitrag
+/pflanzaktion-februar-2022/,#/aktuelles/pflanzaktion-februar-2022,Beitrag
+/schulausbau/,#/aktuelles/schulausbau,Beitrag
+/schulbesuch/,#/aktuelles/schulbesuch-2020,Beitrag
+/schulprojekt/,#/aktuelles/schulprojekt-abschluss,Beitrag
+/unser-besuch-in-burkina-faso/,#/aktuelles/besuch-in-burkina-faso,Beitrag
+/waldgarten-waechst/,#/aktuelles/waldgarten-waechst,Beitrag
+/wasser-fuer-ekulpung/,#/aktuelles/wasser-fuer-ekulpung,Beitrag
+/portfolio-items/agrarexperten/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/ausbildungszentrum/,#/projekt/ausbildungszentrum,Projekt
+/portfolio-items/baumprojekt/,#/projekt/baumprojekt,Projekt
+/portfolio-items/garten-wasserturm/,#/projekt/waldgarten,Projekt
+/portfolio-items/impressionen/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/marketing/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/neuer-brunnen-in-wapa/,#/projekt/tiefbrunnen,Projekt
+/portfolio-items/rechtsberater/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/seife/,#/projekt/seifenherstellung,Projekt
+/portfolio-items/serverraum/,#/projekt/serverraum,Projekt
+/portfolio-items/solaranlage/,#/projekt/solaranlage,Projekt
+/portfolio-items/solarofen/,#/projekt/solaroefen,Projekt
+/portfolio-items/sprachkurs/,#/projekt/sprachkurs-lele,Projekt
+/portfolio-items/textilfaerbung/,#/projekt/textilfaerbung,Projekt
+/portfolio-items/tropfenbewaesserung/,#/projekt/tropfenbewaesserung,Projekt
+/portfolio-items/wasser/,#/projekt/wasser-fuer-wapa,Projekt
+/portfolio_category/all/,#/projekte,Portfolio-Kategorie
+/portfolio_category/baumprojekt/,#/projekte/Umweltschutz,Portfolio-Kategorie
+/portfolio_category/mithelfen/,#/mitmachen,Portfolio-Kategorie
+/portfolio_category/polytechnisches-ausbildungszentrum/,#/projekte/Bildung,Portfolio-Kategorie
+/portfolio_category/projekt-finanzieren/,#/spenden,Portfolio-Kategorie
+/portfolio_category/wasser-fuer-wapa/,#/projekte/Grundversorgung,Portfolio-Kategorie
+/tag/aufforstung/,#/projekt/baumprojekt,Schlagwort
+/tag/waldgarten/,#/projekt/waldgarten,Schlagwort
+/category/uncategorized/,#/aktuelles,Sammelkategorie
+/author/bateaublanc/,#/aktuelles,"Autorenarchiv — entfällt, Namen stehen am Beitrag"
+/author/caro/,#/aktuelles,"Autorenarchiv — entfällt, Namen stehen am Beitrag"
+/author/thomas/,#/aktuelles,"Autorenarchiv — entfällt, Namen stehen am Beitrag"
+/portfolio-items/,#/projekte,Übersicht der Portfolio-Items
+/portfolio_category/solaranlage/,#/projekt/solaranlage,Portfolio-Kategorie
+/slide-page/burkina/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-blog-post-1/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-blog-post-5/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-blog-post-6/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-blog-post-7/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-dontate/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-fair-trade/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-farming/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-mission/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/charity-shelter/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/datenschutz/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/gartenprojekt/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/impressum/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/patenschaft/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/poly-ausbildungszentrum/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/polytechnikum/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/startseite/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"
+/slide-page/waldgarten/,#/,"Demo-Rest des Avada-Themes — kein Inhalt, den jemand sucht"

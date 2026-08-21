@@ -21,6 +21,49 @@ Zum Anschauen: **<https://marksmagister.github.io/wapa-website-entwurf/>**
 
 Legende: **⬜ offen** · **✅ entschieden** · **↺ zurückgestellt**
 
+
+## Triage — was den Start blockiert
+
+20 offene Punkte sind zu viel für eine Sitzung. Diese Einteilung sagt, **was
+vorher entschieden sein muss** und was danach noch geändert werden kann, ohne
+dass etwas zurückzubauen wäre.
+
+### Blockiert den Start — ohne das geht nichts online
+| # | | Warum es nicht warten kann |
+|---|---|---|
+| **B12** | Register 2024/2025 bestätigen | Sieben Einträge stehen ungeprüft auf der Seite. Falsche Angaben über die eigene Arbeit sind schlimmer als fehlende. |
+| **B13** | Agrarschule-Zahlen freigeben | „15.000 von 20.000 €“ ist die stärkste Aussage der ganzen Seite — und eine Zahl, die stimmen muss. |
+| **B2** | Gendern festlegen | Betrifft jeden Text. Hinterher zu vereinheitlichen heißt, alles noch einmal anzufassen. |
+| **C2** | Domain und DNS | Ohne Zugriff kein Umschalten. Läuft über Bateau Blanc — Vorlauf einplanen. |
+| **C1** | Wer veröffentlicht | Entscheidet, ob ein Generator reicht oder ein Login gebraucht wird (Decap). Hängt am Bauplan, nicht am Design. |
+| — | **Impressum berichtigen** | Dort steht Anne Schmitz als Kassenprüferin. Stimmt das nicht mehr, ist es ein Rechtsmangel, kein Schönheitsfehler. |
+
+### Sollte vorher entschieden sein, hält aber nicht auf
+| # | | |
+|---|---|---|
+| **A2** | Farbkorrektur | Der Entwurf setzt sie bereits um; ein Nein hieße zurückbauen. |
+| **A4** | Schriftwechsel | Dasselbe. Beides sind Design-Grundsatzfragen — besser jetzt als nach dem Start. |
+| **A3** | Laterit als Fläche | Wie A2/A4. |
+| **B7** | Waldgarten-Beitrag | Der Text ist von mir. Entweder abnehmen oder ersetzen — oder den Beitrag vorerst weglassen. |
+| **B1** | Welche Zahlen öffentlich | Entschärft, solange der Entwurf ohne „100 %“ auskommt. Nur nötig, falls jemand die Kennzahlen zurückwill. |
+
+### Kann nach dem Start passieren
+| # | | |
+|---|---|---|
+| **A1** | Vektorlogo bei Bateau Blanc erfragen | Der Stempel funktioniert bis dahin. |
+| **A5** | Logo nur als Stempel | Hängt an A1. |
+| **A6** | Kurzclaim | Wird zurzeit nicht verwendet. |
+| **B3** | Brunnentiefe 81 oder 83 m | Eine Zahl in einem Satz. |
+| **B4** | Vier Säulenseiten auflösen | Ist umgesetzt, die Weiterleitungen stehen. |
+| **B5** | Slider-Reste | Weiterleitungen stehen. |
+| **B8** | Bildzuordnung prüfen | Falsche Zuordnung ist ärgerlich, aber nachträglich zu heilen. |
+| **B9** | Datenschutzerklärung neu fassen | **Muss vor dem Start stehen** — aber als Text, nicht als Entscheidung. Gehört an jemanden mit Sachkenntnis, nicht in eine Vorstandsrunde. |
+| **B11** | Vorstandsseite | Die Seite steht, die Lücken sind sichtbar. Wächst, wenn Texte und Bilder kommen. |
+| **C3** | *erledigt* | |
+
+**Kürzestmögliche Fassung:** Sechs Punkte blockieren. Fünf davon sind in einer
+Sitzung zu klären, der sechste (Domain) ist ein Anruf bei Bateau Blanc.
+
 ---
 
 ## A · Marke und Gestaltung
@@ -43,7 +86,6 @@ Legende: **⬜ offen** · **✅ entschieden** · **↺ zurückgestellt**
 | B3 | **Brunnentiefe: 81 m oder 83 m?** | ⬜ | Widerspruch in den eigenen Quellen — Beitrag *Brunnenbau2* schreibt 81 m, das Portfolio *Wasser für Wapa* schreibt 83 m. Im Entwurf steht 81 m. |
 | B4 | **Vier Säulenseiten auflösen?** | ⬜ | Grundversorgung, Bildung, Infrastruktur und Umweltschutz haben **wörtlich denselben** Einleitungstext und unterscheiden sich nur in der Projektliste. Der Entwurf ersetzt sie durch einen Filter über dem Projektregister. Braucht dann eine Weiterleitungskarte. |
 | B5 | **18 verwaiste `slide-page`-Einträge ersatzlos streichen?** | ⬜ | Demo-Reste des Avada-Themes (`charity-blog-post-1`, `charity-farming`, `charity-shelter` …), stehen in der Sitemap und sind indexierbar. Vorschlag: ohne Weiterleitung entfernen. |
-| B6 | **Einstieg über die Herkunftsgeschichte — und wer hat sie geschrieben?** | ⬜ | Der Entwurf beginnt mit dem Brunnen von Bertrands Vater und dessen Tod im Juni 2015. **Zwei Fragen, nicht eine.** *Erstens:* Will der Verein das so nach außen tragen? Es ist persönlicher als bisher. *Zweitens — und zuerst zu klären:* Der zitierte Text steht seit 2016 auf der Projektseite *Wasser für Wapa*, durchgehend in der ersten Person, ist aber **nirgends gezeichnet**; als WordPress-Autor ist die Agentur BateauBlanc eingetragen. Dass Bertrand ihn geschrieben hat, ist naheliegend, belegt ist es nicht. Solange das offen ist, nennt der Entwurf die **Quelle** und nicht seinen Namen. Bestätigt er die Urheberschaft, kann das Zitat ihm zugeschrieben werden. **Er sollte ohnehin gefragt werden — es geht um seinen Vater, und die Entwurfsseite steht öffentlich.** |
 | B7 | **Beitrag „So sieht der Waldgarten heute aus" veröffentlichen?** | ⬜ | Die Fotos vom 12.08.2026 sind als erster neuer Beitrag seit Januar 2024 angelegt. **Den Text hat der Entwurf beigesteuert** — er gehört vom Verein geschrieben oder wenigstens abgenommen, bevor er online geht. Er wäre zugleich der Testlauf für den neuen Weg: eine Markdown-Datei plus ein Ordner Bilder. |
 | B8 | **Bildzuordnung prüfen** | ⬜ | Welches Foto welches Projekt zeigt, ist im Entwurf **geraten**, nicht belegt — die alte Website beschriftet ihre Bilder kaum. Aufgefallen ist es bei den geplanten Vorhaben: Neben *Solaröfen* stand der Solaranlagen-Prototyp aus Hohentengen, ein anderes Projekt; neben *Serverraum* das bestehende Schulgebäude. **Geplante und noch nicht gebaute Vorhaben haben jetzt gar kein Bild** — ein Foto neben etwas, das es nicht gibt, behauptet mehr als wahr ist. Beim Ziehen der Originale gehört jede Zuordnung einmal geprüft. |
 | B9 | **Datenschutzerklärung neu fassen** | ⬜ | Die bestehende beschreibt eine WordPress-Installation mit Cookies, Analysewerkzeugen und PayPal — auf einer statischen Seite trifft davon fast nichts mehr zu. Sie unverändert zu übernehmen wäre falsch. Im Entwurf steht deshalb eine Seite, die auflistet, was sich ändert; die Endfassung gehört von jemandem geprüft, der sich damit auskennt. **Nebenbefund:** Die alte Erklärung behauptet schon heute, die Google Fonts seien lokal installiert — auf der Live-Seite stimmt das nicht, auf der neuen jetzt schon. |
@@ -63,6 +105,13 @@ Legende: **⬜ offen** · **✅ entschieden** · **↺ zurückgestellt**
 ---
 
 ## Erledigt
+
+**B6 · Herkunftsgeschichte und Urheberschaft des Zitats** — erteilt 21.08.2026.
+Bertrand Bazie hat bestätigt, dass der Text auf der Projektseite *Wasser für Wapa*
+von ihm stammt und dass der Verein die Geschichte über seinen Vater so erzählen
+darf. Das Zitat auf der Startseite ist ihm seither **namentlich** zugeschrieben;
+vorher stand dort die Quelle. *(Falls die Freigabe enger gemeint war als beide
+Teilfragen, hier korrigieren — die Zuschreibung hängt daran.)*
 
 **B10 · Facebook und LinkedIn** — erledigt 21.08.2026. Die LinkedIn-Seite des Vereins
 existiert und wird bespielt: <https://www.linkedin.com/company/gemeinsam-für-wapa/>.
