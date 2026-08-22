@@ -15,6 +15,11 @@ Bilder sich selten ändern. Braucht Pillow.
 """
 import io, re, sys, os, shutil
 
+# Adresse, unter der die Seite ausgeliefert wird. Beim Umzug auf die eigene
+# Domain hier ändern — og:image muss absolut sein, sonst zeigen WhatsApp, Mail
+# und die sozialen Netze beim Teilen kein Vorschaubild.
+BASIS = "https://marksmagister.github.io/wapa-website-entwurf"
+
 BREITE   = 1500   # längste Kante der Webfassung
 QUALITAET = 78
 
@@ -41,6 +46,13 @@ def html_bauen(quelle, hier):
     s = re.sub(r"const W = [^;]+;\s*", "", s)
     s = re.sub(r"https://gemeinsamfuerwapa\.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo\.jpg",
                "assets/logo.jpg", s)
+
+    # og:image und canonical absolut setzen
+    s = s.replace('<meta property="og:image" content="assets/',
+                  '<meta property="og:image" content="%s/assets/' % BASIS)
+    if '<link rel="canonical"' not in s:
+        s = s.replace('<meta property="og:type"',
+                      '<link rel="canonical" href="%s/">\n<meta property="og:url" content="%s/">\n<meta property="og:type"' % (BASIS, BASIS))
 
     io.open(os.path.join(hier, "index.html"), "w", encoding="utf-8").write(s)
     uebrig = re.findall(r'https?://(?!www\.betterplace|www\.instagram|www\.facebook|www\.linkedin'
