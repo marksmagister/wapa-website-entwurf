@@ -2,6 +2,7 @@
 # Fassung dauerhaft behält — dieselbe Überlegung wie bei den Originalbildern
 # im Vault. Herkunft und Bezugsquellen stehen im Kopf von karte.py; das
 # erzeugte karte.svg.txt ist das Ergebnis, auf das es ankommt.
+# Holen: werkzeug/holen.sh
 werkzeug/*.json
 
 # Python-Zwischenstand

@@ -59,19 +59,42 @@ class Projektion:
     def __call__(self, lon, lat):
         return (lon * self.k * self.s + self.ox, self.oy - lat * self.s)
 
-def pfad(geom, proj, tol):
+def pfad(geom, proj, tol, dez=1, mindest=0):
+    """`dez` = Nachkommastellen. Auf der Kontinentkarte reichen ganze Pixel und
+    sparen ein knappes Drittel der Zeichen. `mindest` wirft Ringe weg, die im
+    Bild kleiner als ein paar Pixel wären — Inseln und Kleinstaaten, die man
+    ohnehin nicht sieht, aber voll bezahlt."""
+    fmt = "%%.%df %%.%df" % (dez, dez)
     aus = []
     for ring in ringe(geom):
         r = vereinfachen(ring, tol)
         if len(r) < 3:
             continue
         pts = [proj(x, y) for x, y in r]
-        aus.append("M" + "L".join("%.1f %.1f" % p for p in pts) + "Z")
+        if mindest:
+            xs = [q[0] for q in pts]; ys = [q[1] for q in pts]
+            if (max(xs)-min(xs)) < mindest and (max(ys)-min(ys)) < mindest:
+                continue
+        aus.append("M" + "L".join(fmt % q for q in pts) + "Z")
     return "".join(aus)
 
-def laden(datei):
-    d = json.load(io.open(os.path.join(ROH, datei), encoding="utf-8"))
-    return d["features"][0]["geometry"]
+_WELT = None
+def welt():
+    """Alle Länderumrisse aus einer Datei. Einmal einlesen, nach Namen greifen."""
+    global _WELT
+    if _WELT is None:
+        d = json.load(io.open(os.path.join(ROH, "welt.json"), encoding="utf-8"))
+        _WELT = {f["properties"]["name"]: f["geometry"] for f in d["features"]}
+    return _WELT
+
+def im_fenster(geom, lon0, lon1, lat0, lat1):
+    """Grobprüfung, ob ein Land überhaupt ins Bild ragt. Spart Pfade für
+    Länder, die vollständig außerhalb liegen."""
+    for r in ringe(geom):
+        for x, y in r:
+            if lon0 <= x <= lon1 and lat0 <= y <= lat1:
+                return True
+    return False
 
 def sanguie():
     d = json.load(io.open(os.path.join(ROH, "adm2.json"), encoding="utf-8"))
@@ -113,7 +136,7 @@ ORTE = [
      "anker": "end", "dx": -14, "dy": 16},
     {"name": "Tukon", "lat": 12.382, "lon": -2.542, "fest": False,
      "was": "Wasserpumpe", "anker": "end", "dx": -14, "dy": -4},
-    {"name": "Bankio", "lat": 12.205, "lon": -2.501, "fest": False,
+    {"name": "Banakio", "lat": 12.205, "lon": -2.501, "fest": False,
      "was": "Solar-Wasseranlage", "anker": "start", "dx": 14, "dy": 4},
     {"name": "Ekulpung", "lat": 12.352, "lon": -2.629, "fest": False,
      "was": "Wasserstelle", "anker": "end", "dx": -14, "dy": 4},
@@ -122,39 +145,67 @@ SIGMARINGEN = (48.087, 9.218)
 OUAGADOUGOU = (12.3714, -1.5197)
 
 # ---------------------------------------------------------------- Karte A
-def karte_fern(b=430, h=580):
-    """Deutschland und Burkina Faso in einem Bild. Beantwortet die Frage,
-    die sich ein Leser hier zuerst stellt: wo ist das überhaupt?
-    Hochformat, weil der Ausschnitt hoch ist — im Querformat stünde die
-    Karte als schmaler Streifen in viel leerer Fläche."""
-    proj = Projektion(-13, 19, 4, 56, b, h, rand=16)
+def karte_fern(b=560, h=680):
+    """Der ganze Kontinent, und Deutschland am oberen Rand.
+
+    Vorher standen dort nur Burkina Faso und seine unmittelbaren Nachbarn —
+    dazwischen nichts. Ein Leser, der Westafrika nicht im Kopf hat, konnte die
+    Fläche an nichts festmachen. Die Umrisse von Afrika und dem Mittelmeer
+    kennt dagegen fast jeder; Marokko, Algerien und Ägypten geben dem Bild
+    Halt, und Burkina Faso bekommt darin einen Platz statt nur eine Form."""
+    LON0, LON1, LAT0, LAT1 = -20, 52, -36, 58
+    proj = Projektion(LON0, LON1, LAT0, LAT1, b, h, rand=12)
+    W = welt()
+
     teile = []
-    for datei in ("MLI.json","NER.json","GHA.json","CIV.json","TGO.json","BEN.json"):
-        teile.append('<path d="%s" class="k-land"/>' % pfad(laden(datei), proj, .07))
-    teile.append('<path d="%s" class="k-de"/>' % pfad(laden("DEU.json"), proj, .07))
-    teile.append('<path d="%s" class="k-bf"/>' % pfad(laden("bf.geo.json"), proj, .04))
+    for name, geom in sorted(W.items()):
+        if name in ("Burkina Faso", "Germany"):
+            continue
+        if not im_fenster(geom, LON0, LON1, LAT0, LAT1):
+            continue
+        d = pfad(geom, proj, .42, dez=0, mindest=5)
+        if d:
+            teile.append('<path d="%s" class="k-land"/>' % d)
+    teile.append('<path d="%s" class="k-de"/>' % pfad(W["Germany"], proj, .18, dez=0))
+    teile.append('<path d="%s" class="k-bf"/>' % pfad(W["Burkina Faso"], proj, .05, dez=1))
+
+    # Suchrahmen um Burkina Faso — derselbe Rahmen wie auf den nächsten Karten
+    xs = [proj(x, y)[0] for r in ringe(W["Burkina Faso"]) for x, y in r]
+    ys = [proj(x, y)[1] for r in ringe(W["Burkina Faso"]) for x, y in r]
+    rx, ry = min(xs) - 6, min(ys) - 6
+    rw, rh = max(xs) - min(xs) + 12, max(ys) - min(ys) + 12
+    teile.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="2" class="k-rahmen"/>'
+                 % (rx, ry, rw, rh))
+
+    # Wenige Länder zur Orientierung. Mehr würde das Bild zustellen.
+    for name, lon, lat, anker in (("Marokko", -6.9, 31.4, "end"),
+                                  ("Algerien", 2.6, 27.5, "middle"),
+                                  ("Ägypten", 29.5, 26.5, "middle"),
+                                  ("Nigeria", 8.4, 9.3, "middle")):
+        x, y = proj(lon, lat)
+        teile.append('<text x="%.1f" y="%.1f" class="k-neben halo" text-anchor="%s">%s</text>'
+                     % (x, y, anker, name))
 
     a = proj(SIGMARINGEN[1], SIGMARINGEN[0])
     z = proj(ORTE[0]["lon"], ORTE[0]["lat"])
     km = entfernung(SIGMARINGEN, (ORTE[0]["lat"], ORTE[0]["lon"]))
-    # Steuerpunkt seitlich versetzt, damit der Bogen sichtbar krümmt
-    mx, my = (a[0]+z[0])/2 - 86, (a[1]+z[1])/2
+    mx, my = (a[0]+z[0])/2 - 62, (a[1]+z[1])/2
     teile.append('<path d="M%.1f %.1fQ%.1f %.1f %.1f %.1f" class="k-bogen"/>'
                  % (a[0],a[1],mx,my,z[0],z[1]))
-    teile.append('<circle cx="%.1f" cy="%.1f" r="3.4" class="k-pkt-de"/>' % a)
-    teile.append('<circle cx="%.1f" cy="%.1f" r="4" class="k-pkt"/>' % z)
-    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo">Sigmaringen</text>' % (a[0]+10, a[1]+4))
-    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo">Réo · Wapa</text>' % (z[0]+11, z[1]+4))
-    teile.append('<text x="%.1f" y="%.1f" class="k-land-be halo" text-anchor="middle">Burkina Faso</text>'
-                 % (z[0]-4, z[1]+34))
-    # Massangabe auf dem Bogen, mit Papier-Halo freigestellt
-    bx = 0.25*a[0] + 0.5*mx + 0.25*z[0]
-    by = 0.25*a[1] + 0.5*my + 0.25*z[1]
-    # 30 px neben den Bogen, sonst läuft die Linie mitten durch die Schrift
+    teile.append('<circle cx="%.1f" cy="%.1f" r="3.2" class="k-pkt-de"/>' % a)
+    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo">Sigmaringen</text>' % (a[0]+9, a[1]-6))
+    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo" text-anchor="end">Burkina Faso</text>'
+                 % (rx - 8, ry + rh/2 + 4))
+
+    # Punkt bei t=0.32 auf der Kurve — dort liegt der Atlantik vor Portugal,
+    # die einzige größere freie Fläche neben dem Bogen.
+    t = 0.32
+    bx = (1-t)**2*a[0] + 2*(1-t)*t*mx + t*t*z[0]
+    by = (1-t)**2*a[1] + 2*(1-t)*t*my + t*t*z[1]
     teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="end">%s km</text>'
-                 % (bx-48, by, format(int(round(km/10.0)*10), ",d").replace(",", ".")))
+                 % (bx-12, by, format(int(round(km/10.0)*10), ",d").replace(",", ".")))
     teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="end">Luftlinie</text>'
-                 % (bx-48, by+14))
+                 % (bx-12, by+13))
     return b, h, "".join(teile)
 
 # ---------------------------------------------------------------- Karte B
@@ -166,12 +217,18 @@ def karte_land(b=560, h=430):
     etwas drin. Der goldene Suchrahmen taucht auf der nächsten Karte wieder
     auf — daran erkennt man, dass die eine der Ausschnitt der anderen ist."""
     gs = sanguie()
-    proj = Projektion(-5.9, 2.8, 9.2, 15.3, b, h, rand=14)
+    LON0, LON1, LAT0, LAT1 = -5.9, 2.8, 9.2, 15.3
+    proj = Projektion(LON0, LON1, LAT0, LAT1, b, h, rand=14)
+    W = welt()
 
     teile = []
-    for datei in ("MLI.json","NER.json","GHA.json","CIV.json","TGO.json","BEN.json"):
-        teile.append('<path d="%s" class="k-land"/>' % pfad(laden(datei), proj, .035))
-    teile.append('<path d="%s" class="k-bf-voll"/>' % pfad(laden("bf.geo.json"), proj, .02))
+    for name, geom in sorted(W.items()):
+        if name == "Burkina Faso" or not im_fenster(geom, LON0, LON1, LAT0, LAT1):
+            continue
+        d = pfad(geom, proj, .06, dez=0, mindest=4)
+        if d:
+            teile.append('<path d="%s" class="k-land"/>' % d)
+    teile.append('<path d="%s" class="k-bf-voll"/>' % pfad(W["Burkina Faso"], proj, .02))
     teile.append('<path d="%s" class="k-prov-klein"/>' % pfad(gs, proj, .012))
 
     # Suchrahmen um die Provinz
