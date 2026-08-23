@@ -116,6 +116,15 @@ def liegt_in(lon, lat, ring):
             drin = not drin
     return drin
 
+def kurs(a, b):
+    """Anfangskurs von a nach b in Grad, von Nord im Uhrzeigersinn.
+    Damit zeigt der Pfeil wirklich dorthin, statt nur ungefähr nach oben."""
+    la1, lo1, la2, lo2 = map(math.radians, (a[0], a[1], b[0], b[1]))
+    dlo = lo2 - lo1
+    y = math.sin(dlo) * math.cos(la2)
+    x = math.cos(la1)*math.sin(la2) - math.sin(la1)*math.cos(la2)*math.cos(dlo)
+    return (math.degrees(math.atan2(y, x)) + 360) % 360
+
 def entfernung(a, b):
     """Großkreis in km."""
     la1, lo1, la2, lo2 = map(math.radians, (a[0], a[1], b[0], b[1]))
@@ -145,31 +154,30 @@ SIGMARINGEN = (48.087, 9.218)
 OUAGADOUGOU = (12.3714, -1.5197)
 
 # ---------------------------------------------------------------- Karte A
-def karte_fern(b=560, h=680):
-    """Der ganze Kontinent, und Deutschland am oberen Rand.
+def karte_fern(b=560, h=420):
+    """Westafrika, und darin Burkina Faso.
 
-    Vorher standen dort nur Burkina Faso und seine unmittelbaren Nachbarn —
-    dazwischen nichts. Ein Leser, der Westafrika nicht im Kopf hat, konnte die
-    Fläche an nichts festmachen. Die Umrisse von Afrika und dem Mittelmeer
-    kennt dagegen fast jeder; Marokko, Algerien und Ägypten geben dem Bild
-    Halt, und Burkina Faso bekommt darin einen Platz statt nur eine Form."""
-    LON0, LON1, LAT0, LAT1 = -20, 52, -36, 58
+    Der ganze Kontinent war zu weit gegriffen: Burkina Faso schrumpfte darin
+    auf einen Fleck, und die Nachbarn, auf die es ankommt, waren nicht mehr
+    auseinanderzuhalten. Dieser Ausschnitt zeigt die Region, in der der Verein
+    arbeitet — Mali und Niger im Norden, die Küstenländer im Süden.
+
+    Deutschland liegt außerhalb des Bildes. Die Entfernung geht deshalb nicht
+    verloren, sondern steht am Pfeil, der in die richtige Richtung zeigt: der
+    Kurs ist gerechnet, nicht geraten."""
+    LON0, LON1, LAT0, LAT1 = -18.5, 16.5, 3.0, 26.5
     proj = Projektion(LON0, LON1, LAT0, LAT1, b, h, rand=12)
     W = welt()
 
     teile = []
     for name, geom in sorted(W.items()):
-        if name in ("Burkina Faso", "Germany"):
+        if name == "Burkina Faso" or not im_fenster(geom, LON0, LON1, LAT0, LAT1):
             continue
-        if not im_fenster(geom, LON0, LON1, LAT0, LAT1):
-            continue
-        d = pfad(geom, proj, .42, dez=0, mindest=5)
+        d = pfad(geom, proj, .10, dez=0, mindest=4)
         if d:
             teile.append('<path d="%s" class="k-land"/>' % d)
-    teile.append('<path d="%s" class="k-de"/>' % pfad(W["Germany"], proj, .18, dez=0))
-    teile.append('<path d="%s" class="k-bf"/>' % pfad(W["Burkina Faso"], proj, .05, dez=1))
+    teile.append('<path d="%s" class="k-bf"/>' % pfad(W["Burkina Faso"], proj, .03))
 
-    # Suchrahmen um Burkina Faso — derselbe Rahmen wie auf den nächsten Karten
     xs = [proj(x, y)[0] for r in ringe(W["Burkina Faso"]) for x, y in r]
     ys = [proj(x, y)[1] for r in ringe(W["Burkina Faso"]) for x, y in r]
     rx, ry = min(xs) - 6, min(ys) - 6
@@ -177,35 +185,41 @@ def karte_fern(b=560, h=680):
     teile.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="2" class="k-rahmen"/>'
                  % (rx, ry, rw, rh))
 
-    # Wenige Länder zur Orientierung. Mehr würde das Bild zustellen.
-    for name, lon, lat, anker in (("Marokko", -6.9, 31.4, "end"),
-                                  ("Algerien", 2.6, 27.5, "middle"),
-                                  ("Ägypten", 29.5, 26.5, "middle"),
-                                  ("Nigeria", 8.4, 9.3, "middle")):
+    # Nachbarn, auf die es ankommt. Benin und Togo sind zu schmal für eine
+    # Beschriftung in dieser Größe und bleiben unbenannt.
+    for name, lon, lat, anker in (("Mali", -6.2, 19.6, "middle"),
+                                  ("Niger", 9.2, 17.6, "middle"),
+                                  ("Nigeria", 8.2, 9.2, "middle"),
+                                  ("Ghana", -1.2, 7.6, "middle"),
+                                  ("Elfenbeinküste", -6.6, 7.2, "middle"),
+                                  ("Senegal", -15.4, 14.9, "middle"),
+                                  ("Mauretanien", -11.5, 21.0, "middle"),
+                                  ("Guinea", -11.6, 10.4, "middle")):
         x, y = proj(lon, lat)
         teile.append('<text x="%.1f" y="%.1f" class="k-neben halo" text-anchor="%s">%s</text>'
                      % (x, y, anker, name))
 
-    a = proj(SIGMARINGEN[1], SIGMARINGEN[0])
-    z = proj(ORTE[0]["lon"], ORTE[0]["lat"])
+    # Richtungspfeil nach Sigmaringen — außerhalb des Bildes
+    cx, cy = proj(ORTE[0]["lon"], ORTE[0]["lat"])
+    k = kurs((ORTE[0]["lat"], ORTE[0]["lon"]), SIGMARINGEN)
     km = entfernung(SIGMARINGEN, (ORTE[0]["lat"], ORTE[0]["lon"]))
-    mx, my = (a[0]+z[0])/2 - 62, (a[1]+z[1])/2
-    teile.append('<path d="M%.1f %.1fQ%.1f %.1f %.1f %.1f" class="k-bogen"/>'
-                 % (a[0],a[1],mx,my,z[0],z[1]))
-    teile.append('<circle cx="%.1f" cy="%.1f" r="3.2" class="k-pkt-de"/>' % a)
-    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo">Sigmaringen</text>' % (a[0]+9, a[1]-6))
-    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo" text-anchor="end">Burkina Faso</text>'
-                 % (rx - 8, ry + rh/2 + 4))
+    dx, dy = math.sin(math.radians(k)), -math.cos(math.radians(k))
+    x0, y0 = cx + dx*26, cy + dy*26
+    x1, y1 = cx + dx*104, cy + dy*104
+    teile.append('<path d="M%.1f %.1fL%.1f %.1f" class="k-bogen"/>' % (x0, y0, x1, y1))
+    # Spitze
+    for w in (150, -150):
+        a2 = math.radians(k + w)
+        teile.append('<path d="M%.1f %.1fL%.1f %.1f" class="k-bogen"/>'
+                     % (x1, y1, x1 + math.sin(a2)*9, y1 - math.cos(a2)*9))
+    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="middle">Sigmaringen</text>'
+                 % (x1 + 6, y1 - 26))
+    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="middle">%s km</text>'
+                 % (x1 + 6, y1 - 14, format(int(round(km/10.0)*10), ",d").replace(",", ".")))
 
-    # Punkt bei t=0.32 auf der Kurve — dort liegt der Atlantik vor Portugal,
-    # die einzige größere freie Fläche neben dem Bogen.
-    t = 0.32
-    bx = (1-t)**2*a[0] + 2*(1-t)*t*mx + t*t*z[0]
-    by = (1-t)**2*a[1] + 2*(1-t)*t*my + t*t*z[1]
-    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="end">%s km</text>'
-                 % (bx-12, by, format(int(round(km/10.0)*10), ",d").replace(",", ".")))
-    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="end">Luftlinie</text>'
-                 % (bx-12, by+13))
+    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo" text-anchor="end">Burkina Faso</text>'
+                 % (rx - 9, ry + rh/2 + 4))
+    teile.append('<text x="16" y="24" class="k-titel">Westafrika</text>')
     return b, h, "".join(teile)
 
 # ---------------------------------------------------------------- Karte B
