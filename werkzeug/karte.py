@@ -154,28 +154,40 @@ SIGMARINGEN = (48.087, 9.218)
 OUAGADOUGOU = (12.3714, -1.5197)
 
 # ---------------------------------------------------------------- Karte A
-def karte_fern(b=560, h=420):
-    """Westafrika, und darin Burkina Faso.
+# Die Region, um die es geht. Diese Länder bekommen Fläche; alles andere im
+# Bild nur einen Umriss. So bleibt der Blick unten, obwohl Deutschland
+# mit im Bild ist.
+WESTAFRIKA = {
+    "Burkina Faso", "Mali", "Niger", "Nigeria", "Ghana", "Ivory Coast",
+    "Benin", "Togo", "Senegal", "Guinea", "Guinea Bissau", "Sierra Leone",
+    "Liberia", "Gambia", "Mauritania",
+}
 
-    Der ganze Kontinent war zu weit gegriffen: Burkina Faso schrumpfte darin
-    auf einen Fleck, und die Nachbarn, auf die es ankommt, waren nicht mehr
-    auseinanderzuhalten. Dieser Ausschnitt zeigt die Region, in der der Verein
-    arbeitet — Mali und Niger im Norden, die Küstenländer im Süden.
+def karte_fern(b=520, h=700):
+    """Westafrika, mit Deutschland gerade noch am oberen Rand.
 
-    Deutschland liegt außerhalb des Bildes. Die Entfernung geht deshalb nicht
-    verloren, sondern steht am Pfeil, der in die richtige Richtung zeigt: der
-    Kurs ist gerechnet, nicht geraten."""
-    LON0, LON1, LAT0, LAT1 = -18.5, 16.5, 3.0, 26.5
+    Zwei Stufen: die Länder der Region sind gefüllt, alles dazwischen —
+    Maghreb, Iberische Halbinsel, Frankreich — steht nur als Umriss da. Das
+    Bild bleibt damit auf Westafrika gewichtet, obwohl es bis Süddeutschland
+    reicht, und die Strecke dazwischen ist trotzdem zu sehen statt nur
+    behauptet."""
+    LON0, LON1, LAT0, LAT1 = -18.5, 16.5, 3.0, 50.0
     proj = Projektion(LON0, LON1, LAT0, LAT1, b, h, rand=12)
     W = welt()
 
-    teile = []
+    umriss, flaeche = [], []
     for name, geom in sorted(W.items()):
-        if name == "Burkina Faso" or not im_fenster(geom, LON0, LON1, LAT0, LAT1):
+        if name in ("Burkina Faso", "Germany"):
             continue
-        d = pfad(geom, proj, .10, dez=0, mindest=4)
-        if d:
-            teile.append('<path d="%s" class="k-land"/>' % d)
+        if not im_fenster(geom, LON0, LON1, LAT0, LAT1):
+            continue
+        d = pfad(geom, proj, .14, dez=0, mindest=4)
+        if not d:
+            continue
+        (flaeche if name in WESTAFRIKA else umriss).append(
+            '<path d="%s" class="%s"/>' % (d, "k-land" if name in WESTAFRIKA else "k-durch"))
+    teile = umriss + flaeche
+    teile.append('<path d="%s" class="k-de"/>' % pfad(W["Germany"], proj, .12, dez=0))
     teile.append('<path d="%s" class="k-bf"/>' % pfad(W["Burkina Faso"], proj, .03))
 
     xs = [proj(x, y)[0] for r in ringe(W["Burkina Faso"]) for x, y in r]
@@ -185,37 +197,39 @@ def karte_fern(b=560, h=420):
     teile.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" rx="2" class="k-rahmen"/>'
                  % (rx, ry, rw, rh))
 
-    # Nachbarn, auf die es ankommt. Benin und Togo sind zu schmal für eine
-    # Beschriftung in dieser Größe und bleiben unbenannt.
-    for name, lon, lat, anker in (("Mali", -6.2, 19.6, "middle"),
-                                  ("Niger", 9.2, 17.6, "middle"),
-                                  ("Nigeria", 8.2, 9.2, "middle"),
-                                  ("Ghana", -1.2, 7.6, "middle"),
-                                  ("Elfenbeinküste", -6.6, 7.2, "middle"),
-                                  ("Senegal", -15.4, 14.9, "middle"),
-                                  ("Mauretanien", -11.5, 21.0, "middle"),
-                                  ("Guinea", -11.6, 10.4, "middle")):
+    # Nachbarn in der Region. Benin und Togo sind hierfür zu schmal.
+    for name, lon, lat in (("Mali", -5.4, 19.2), ("Niger", 9.4, 17.4),
+                           ("Nigeria", 8.2, 9.2), ("Ghana", -1.2, 7.5),
+                           ("Elfenbeinküste", -6.4, 7.2), ("Senegal", -15.0, 14.7),
+                           ("Mauretanien", -11.4, 20.8), ("Guinea", -11.8, 10.4)):
         x, y = proj(lon, lat)
-        teile.append('<text x="%.1f" y="%.1f" class="k-neben halo" text-anchor="%s">%s</text>'
-                     % (x, y, anker, name))
+        teile.append('<text x="%.1f" y="%.1f" class="k-neben halo" text-anchor="middle">%s</text>'
+                     % (x, y, name))
+    # Die Länder dazwischen, noch zurückhaltender beschriftet
+    for name, lon, lat in (("Marokko", -7.4, 31.6), ("Algerien", 2.4, 27.8),
+                           ("Spanien", -3.9, 40.2), ("Frankreich", 2.2, 46.6)):
+        x, y = proj(lon, lat)
+        teile.append('<text x="%.1f" y="%.1f" class="k-fern halo" text-anchor="middle">%s</text>'
+                     % (x, y, name))
 
-    # Richtungspfeil nach Sigmaringen — außerhalb des Bildes
-    cx, cy = proj(ORTE[0]["lon"], ORTE[0]["lat"])
-    k = kurs((ORTE[0]["lat"], ORTE[0]["lon"]), SIGMARINGEN)
+    a = proj(SIGMARINGEN[1], SIGMARINGEN[0])
+    z = proj(ORTE[0]["lon"], ORTE[0]["lat"])
     km = entfernung(SIGMARINGEN, (ORTE[0]["lat"], ORTE[0]["lon"]))
-    dx, dy = math.sin(math.radians(k)), -math.cos(math.radians(k))
-    x0, y0 = cx + dx*26, cy + dy*26
-    x1, y1 = cx + dx*104, cy + dy*104
-    teile.append('<path d="M%.1f %.1fL%.1f %.1f" class="k-bogen"/>' % (x0, y0, x1, y1))
-    # Spitze
-    for w in (150, -150):
-        a2 = math.radians(k + w)
-        teile.append('<path d="M%.1f %.1fL%.1f %.1f" class="k-bogen"/>'
-                     % (x1, y1, x1 + math.sin(a2)*9, y1 - math.cos(a2)*9))
-    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="middle">Sigmaringen</text>'
-                 % (x1 + 6, y1 - 26))
-    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="middle">%s km</text>'
-                 % (x1 + 6, y1 - 14, format(int(round(km/10.0)*10), ",d").replace(",", ".")))
+    mx, my = (a[0]+z[0])/2 - 74, (a[1]+z[1])/2
+    teile.append('<path d="M%.1f %.1fQ%.1f %.1f %.1f %.1f" class="k-bogen"/>'
+                 % (a[0], a[1], mx, my, z[0], z[1]))
+    teile.append('<circle cx="%.1f" cy="%.1f" r="3.2" class="k-pkt-de"/>' % a)
+    teile.append('<text x="%.1f" y="%.1f" class="k-ort halo" text-anchor="end">Sigmaringen</text>'
+                 % (a[0]-9, a[1]+4))
+
+    # Entfernung neben den Bogen, im freien Atlantik
+    t = 0.42
+    bx = (1-t)**2*a[0] + 2*(1-t)*t*mx + t*t*z[0]
+    by = (1-t)**2*a[1] + 2*(1-t)*t*my + t*t*z[1]
+    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="end">%s km</text>'
+                 % (bx-20, by, format(int(round(km/10.0)*10), ",d").replace(",", ".")))
+    teile.append('<text x="%.1f" y="%.1f" class="k-mass halo" text-anchor="end">Luftlinie</text>'
+                 % (bx-20, by+13))
 
     teile.append('<text x="%.1f" y="%.1f" class="k-ort halo" text-anchor="end">Burkina Faso</text>'
                  % (rx - 9, ry + rh/2 + 4))
