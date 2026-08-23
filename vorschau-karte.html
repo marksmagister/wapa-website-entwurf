@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vorschau — Übersichtskarte</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{
+  --gruen:#276F27; --gruen-dark:#1B4F1B; --gruen-soft:#E7EFE4;
+  --gold:#E9A825;  --gold-text:#7E5910;
+  --erde:#7E3A20; --erde-tief:#5C2916; --erde-hell:#B4592F; --erde-soft:#F3E2D8;
+  --ink:#231D18; --body:#4F463E; --leise:#847768;
+  --papier:#FBF6EE; --papier2:#F2EADD; --linie:#DCD0BE; --linie-stark:#C3B49C;
+  --max:1240px; --mess:34rem;
+  --d:'Fraunces',Georgia,serif;
+  --t:'Atkinson Hyperlegible',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--body);font-family:var(--t);
+  font-size:17.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+p{margin:0 0 1.05em;max-width:var(--mess)}
+h1,h2,h3{font-family:var(--d);font-weight:500;color:var(--ink);margin:0 0 .42em;
+  font-variation-settings:'SOFT' 18,'WONK' 0,'opsz' 60;line-height:1.08;letter-spacing:-.012em}
+h2{font-size:clamp(1.85rem,3.4vw,2.7rem)}
+h3{font-size:1.28rem;font-variation-settings:'SOFT' 14,'WONK' 0,'opsz' 30}
+.kt{font-family:var(--t);font-size:.7rem;font-weight:700;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--leise);display:block;margin-bottom:1.1rem}
+.kt.gruen{color:var(--gruen)}
+.lede{font-size:1.19rem;line-height:1.52;max-width:38rem}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4vw,44px)}
+.kopf{padding:clamp(38px,5vw,68px) 0 0}
+.artikel{max-width:38rem;margin-inline:auto}
+.artikel p{font-size:1.07rem;max-width:none}
+.artikel h2{font-size:1.6rem;margin-top:1.8em}
+.rn{border-left:2px solid var(--gold);padding:2px 0 2px 16px;margin:26px 0;
+  font-size:.85rem;line-height:1.5;max-width:40rem}
+.rn b{color:var(--ink)}
+.hinweis{border-left:3px solid var(--gold);background:var(--papier2);padding:16px 18px;
+  margin:0 0 2rem;font-size:.94rem;line-height:1.55}
+.hinweis b{color:var(--ink)}
+.neu{display:inline-block;font-family:var(--t);font-size:.6rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;vertical-align:.22em;
+  background:var(--gold);color:var(--ink);padding:2px 6px;border-radius:2px;margin-left:6px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--papier2);
+  padding:1px 5px;border-radius:2px}
+pre{background:var(--ink);color:#D8CFC2;padding:16px 18px;border-radius:3px;
+  overflow-x:auto;font-size:.78rem;line-height:1.55}
+pre code{background:none;color:inherit;padding:0}
+
+/* ================= KARTE =================
+   Statisches SVG. Kein JavaScript, keine Kachel, keine externe Anfrage.
+   Beide Karten im Hochformat, weil beide Ausschnitte hoch sind. */
+.karte{width:100%;height:auto;display:block}
+.k-land{fill:var(--papier2);stroke:var(--linie);stroke-width:.8}
+.k-de{fill:var(--linie);stroke:var(--linie-stark);stroke-width:.8}
+.k-bf{fill:var(--gruen-soft);stroke:var(--gruen);stroke-width:1.4}
+/* Landkarte: das Land als ruhige Fläche, die Provinz als Akzent darin */
+.k-bf-voll{fill:var(--papier);stroke:var(--gruen);stroke-width:1.5}
+.k-prov-klein{fill:var(--gruen);stroke:var(--gruen-dark);stroke-width:.8;opacity:.9}
+.k-rahmen{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-dasharray:4 3}
+.k-pkt-neben{fill:var(--leise)}
+.k-neben{font-family:var(--t);font-size:10.5px;fill:var(--leise)}
+.k-massstab{stroke:var(--leise);stroke-width:1.2}
+.k-prov{fill:var(--gruen-soft);stroke:var(--gruen);stroke-width:1.6}
+.k-bogen{fill:none;stroke:var(--erde-hell);stroke-width:1.4;stroke-dasharray:5 4;opacity:.9}
+.k-fuehr{stroke:var(--linie-stark);stroke-width:.9}
+.k-pkt{fill:var(--gruen)}
+.k-pkt-de{fill:var(--erde)}
+.k-pkt-frei{fill:none;stroke:var(--gold);stroke-width:1.8;stroke-dasharray:3 2.6}
+.k-pkt-kern{fill:var(--gold-text)}
+.k-ort{font-family:var(--d);font-size:14px;fill:var(--ink);font-weight:500}
+.k-land-be{font-family:var(--t);font-size:10px;fill:var(--gruen);
+  letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.k-mass{font-family:var(--t);font-size:11px;fill:var(--erde);letter-spacing:.03em}
+.k-titel{font-family:var(--t);font-size:11px;fill:var(--leise);
+  letter-spacing:.19em;text-transform:uppercase;font-weight:700}
+/* Beschriftung vom Kartenbild freistellen, statt sie mit einem Kasten zu unterlegen */
+.halo{paint-order:stroke fill;stroke:var(--papier);stroke-width:3.5;stroke-linejoin:round}
+
+.paar{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:clamp(24px,4vw,54px);
+  align-items:center;max-width:56rem;margin:0 auto 3rem}
+.paar .text{max-width:30rem}
+.mitte{max-width:34rem;margin:0 auto}
+.k-quelle{font-size:.72rem;color:var(--leise);margin:.8rem 0 0}
+
+/* Ortsliste — dasselbe Muster wie das Projektregister */
+.orte{border-top:1.5px solid var(--ink);max-width:44rem;margin:2.2rem auto 0}
+.oz{display:grid;grid-template-columns:9rem 1fr auto;gap:14px;align-items:baseline;
+  padding:14px 0;border-bottom:1px solid var(--linie)}
+.o-n{font-family:var(--d);font-size:1.06rem;color:var(--ink);font-weight:500}
+.o-w{font-size:.9rem;color:var(--body)}
+.o-k{font-size:.72rem;color:var(--leise);letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap}
+@media(max-width:700px){
+  .paar{grid-template-columns:1fr}
+  .oz{grid-template-columns:1fr;row-gap:3px}
+  /* Gestapelt sagt die Marke schon alles — die Statusspalte wäre doppelt */
+  .o-k{display:none}
+}
+.legende{display:flex;gap:26px;flex-wrap:wrap;font-size:.8rem;color:var(--leise);
+  max-width:44rem;margin:1.4rem auto 0;padding-top:2px}
+.legende span{display:inline-flex;align-items:center;gap:8px}
+.legende svg{flex:none}
+</style>
+</head>
+<body>
+
+<div class="kopf"><div class="wrap" style="max-width:44rem;margin-inline:auto">
+  <span class="kt gruen">Vorschau — nichts davon ist eingebaut</span>
+  <h1 style="font-size:clamp(2rem,3.8vw,2.9rem);font-family:var(--d)">Übersichtskarte</h1>
+  <p class="lede">Drei Karten, zusammen 12,5&nbsp;KB. Statisches SVG, kein JavaScript,
+  keine Kachel von einem fremden Server — dieselbe Haltung wie bei den Schriften.</p>
+</div></div>
+
+<section style="padding-top:2.6rem"><div class="wrap">
+
+  <div class="artikel">
+    <div class="hinweis">
+      <b>Vier von fünf Positionen sind geschätzt.</b> Réo ist belegt — der Punkt
+      liegt nachweislich innerhalb der echten Provinzgrenze. Wapa, Tukon, Bankio
+      und Ekulpung habe ich <i>ungefähr</i> gesetzt; für sie habe ich keine Quelle.
+      Sie sind mit offenem Ring gezeichnet statt mit vollem Punkt. Die Unsicherheit
+      steht damit im Bild, nicht in einer Fußnote daneben.
+    </div>
+  </div>
+
+  <div class="paar">
+    <div><svg class="karte" viewBox="0 0 430 580" role="img" aria-label="Karte"><path d="M76.5 452.1L79.6 450.2L81.1 444.0L84.0 443.7L90.4 446.7L95.6 444.6L99.1 445.3L100.5 442.9L137.1 442.8L139.1 435.4L137.5 434.1L128.7 343.1L142.7 343.0L204.3 388.9L206.4 393.9L216.3 398.6L216.4 405.3L226.6 404.3L226.6 428.6L221.6 435.6L220.8 442.1L200.3 444.7L196.9 448.4L185.2 448.9L182.9 446.9L177.9 448.4L169.4 452.7L167.6 456.0L160.5 460.7L159.3 463.4L155.5 465.6L151.1 464.2L148.6 466.7L147.2 474.0L140.0 482.7L140.2 486.3L137.7 490.7L138.3 496.9L132.4 499.8L131.0 495.2L126.8 496.2L125.1 499.3L118.1 499.2L115.5 497.6L114.3 498.6L111.5 495.6L112.0 492.4L110.9 491.2L108.9 492.2L109.3 488.8L111.2 486.1L104.3 476.4L102.5 476.2L94.8 481.3L90.9 480.5L86.9 477.5L83.1 478.9L82.2 467.7L78.8 464.7L77.0 458.7L76.5 452.1Z" class="k-land"/><path d="M207.3 480.3L207.5 473.1L197.0 470.7L196.7 465.6L191.5 458.7L190.3 453.9L191.0 448.8L196.9 448.4L200.3 444.7L220.8 442.1L221.6 435.6L226.6 428.6L226.6 404.3L239.4 399.6L265.9 378.9L297.1 358.8L311.6 363.3L316.7 369.1L323.2 365.2L325.4 381.6L328.8 384.3L329.0 387.7L332.8 391.3L330.8 395.8L327.3 417.2L326.8 430.9L315.1 440.9L311.2 454.7L315.0 458.7L315.0 465.4L320.8 465.7L319.9 470.6L317.3 471.2L317.0 474.6L315.3 474.8L309.2 463.3L307.0 462.9L299.9 468.8L292.8 465.7L287.9 465.1L285.3 466.6L279.9 466.2L274.6 470.7L269.9 471.0L258.9 465.5L254.5 468.1L249.9 467.9L246.4 464.0L237.3 460.0L227.5 461.3L225.1 463.6L223.8 469.6L221.2 473.9L220.6 483.3L213.6 477.2L210.3 477.2L207.3 480.3Z" class="k-land"/><path d="M197.3 543.7L169.7 556.5L161.6 553.5L162.0 549.4L158.0 540.3L160.4 528.4L164.2 519.5L160.6 496.6L160.8 490.6L180.7 490.9L183.6 489.2L187.8 490.0L187.2 493.3L191.0 498.8L191.8 514.7L194.1 518.6L192.1 528.0L192.8 533.3L197.3 543.7Z" class="k-land"/><path d="M161.6 553.5L157.4 553.6L151.0 551.6L145.2 551.7L134.4 553.5L119.0 560.4L117.2 560.2L117.9 551.5L118.8 550.2L118.5 546.0L114.7 541.6L111.8 540.9L109.1 538.0L111.1 533.3L110.2 528.2L110.6 525.2L112.0 525.1L112.6 520.5L111.9 518.5L112.8 517.0L116.1 515.8L111.8 503.0L112.5 499.4L115.5 497.6L118.1 499.2L125.1 499.3L126.8 496.2L131.0 495.2L132.4 499.8L138.3 496.9L142.4 499.2L144.0 502.6L148.1 504.9L151.3 502.2L155.6 501.8L161.8 504.5L164.2 519.5L160.4 528.4L158.0 540.3L162.0 549.4L161.6 553.5Z" class="k-land"/><path d="M204.6 541.4L197.3 543.7L192.8 533.3L192.1 528.0L194.1 518.6L191.8 514.7L191.0 498.8L187.2 493.3L187.8 490.0L195.8 490.3L194.7 495.8L200.6 502.6L201.0 507.8L202.8 510.0L202.4 534.2L204.6 541.4Z" class="k-land"/><path d="M212.2 540.2L204.6 541.4L202.4 534.2L202.8 510.0L201.0 507.8L200.6 502.6L194.7 495.8L195.8 490.3L199.0 489.1L200.8 484.5L205.3 483.5L210.3 477.2L213.6 477.2L220.6 483.3L220.2 486.8L222.3 493.0L220.5 497.3L221.4 500.1L214.2 509.9L212.5 516.5L212.2 540.2Z" class="k-land"/><path d="M278.2 26.7L278.3 30.8L287.6 33.2L287.5 37.0L296.7 35.0L301.9 32.1L312.2 36.3L316.5 39.6L318.6 45.0L316.1 47.8L319.4 51.6L321.6 57.2L320.9 60.8L324.7 67.6L320.6 68.7L318.2 67.5L315.9 69.5L299.3 76.4L301.9 84.0L311.7 91.1L308.5 95.9L305.2 97.3L306.5 104.1L305.7 105.9L302.8 103.8L298.4 103.4L291.9 105.3L283.9 104.9L282.6 107.7L277.9 104.7L275.2 105.3L265.4 102.1L263.5 104.4L255.8 104.3L256.9 96.8L261.5 89.6L248.4 87.6L244.1 84.9L244.6 80.3L242.8 77.9L243.8 70.8L242.3 59.7L247.8 59.7L250.1 55.7L252.3 46.1L250.6 42.5L252.4 40.3L260.1 39.7L261.7 42.1L267.9 36.9L265.9 32.9L265.4 26.9L272.3 28.3L278.2 26.7Z" class="k-de"/><path d="M161.8 504.5L155.6 501.8L151.3 502.2L148.1 504.9L144.0 502.6L142.4 499.2L138.3 496.9L137.7 490.7L140.2 486.3L140.0 482.7L147.2 474.0L148.6 466.7L151.1 464.2L155.5 465.6L159.3 463.4L160.5 460.7L167.6 456.0L169.4 452.7L177.9 448.4L182.9 446.9L185.2 448.9L191.0 448.8L190.3 453.9L191.5 458.7L196.7 465.6L197.0 470.7L207.5 473.1L207.3 480.3L205.3 483.5L200.8 484.5L199.0 489.1L195.8 490.3L187.8 490.0L183.6 489.2L180.7 490.9L176.6 490.1L160.8 490.6L160.6 496.6L161.8 504.5Z" class="k-bf"/><path d="M271.7 99.4Q132.4 287.9 165.1 476.4" class="k-bogen"/><circle cx="271.7" cy="99.4" r="3.4" class="k-pkt-de"/><circle cx="165.1" cy="476.4" r="4" class="k-pkt"/><text x="281.7" y="103.4" class="k-ort halo">Sigmaringen</text><text x="176.1" y="480.4" class="k-ort halo">Réo · Wapa</text><text x="161.1" y="510.4" class="k-land-be halo" text-anchor="middle">Burkina Faso</text><text x="127.4" y="287.9" class="k-mass halo" text-anchor="end">4.120 km</text><text x="127.4" y="301.9" class="k-mass halo" text-anchor="end">Luftlinie</text></svg></div>
+    <div class="text">
+      <h3>Wo ist das überhaupt?</h3>
+      <p>Das ist die Frage, die sich ein Leser hier zuerst stellt — und die die
+      Seite bisher nirgends beantwortet. Die meisten können Burkina Faso nicht
+      auf einer Karte zeigen, Sanguié erst recht nicht.</p>
+      <p>Die Entfernung ist mit der Großkreisformel gerechnet, nicht geschätzt.</p>
+    </div>
+  </div>
+
+  <div class="mitte" style="margin-bottom:2.6rem"><svg class="karte" viewBox="0 0 560 430" role="img" aria-label="Karte"><path d="M-369.5 66.9L-348.9 55.5L-338.6 18.6L-319.2 17.2L-276.5 34.6L-242.0 22.2L-218.4 26.4L-209.2 12.5L36.2 11.5L49.8 -32.3L39.2 -40.0L-19.9 -580.1L73.7 -581.2L486.3 -308.2L500.8 -278.8L567.2 -250.8L567.9 -211.0L635.7 -217.1L635.9 -73.0L602.5 -31.2L597.3 7.4L542.9 17.3L459.5 22.7L436.9 44.9L358.5 47.7L343.2 35.7L309.6 44.6L252.4 70.5L240.8 90.1L193.3 118.1L185.0 134.2L159.4 146.9L129.8 138.5L113.0 153.8L104.1 196.7L55.5 248.5L56.9 269.7L40.3 296.3L44.3 332.6L4.8 349.8L-4.7 323.0L-22.3 330.1L-32.9 328.8L-44.1 347.1L-91.3 346.6L-108.3 337.2L-116.2 342.9L-134.9 324.8L-131.7 306.2L-139.3 298.9L-152.3 305.1L-150.0 284.7L-137.4 268.6L-162.5 242.4L-169.8 225.1L-183.4 211.4L-195.6 209.7L-230.0 226.9L-246.8 240.4L-273.0 235.4L-290.0 219.5L-300.1 217.4L-316.1 225.8L-325.8 225.8L-329.3 202.9L-326.5 183.4L-331.7 159.2L-354.6 141.7L-366.6 105.8L-369.5 66.9Z" class="k-land"/><path d="M506.5 234.4L507.9 191.5L437.4 177.3L435.5 147.1L401.1 106.2L392.9 77.7L397.7 47.4L436.9 44.9L459.5 22.7L542.9 17.3L597.3 7.4L602.5 -31.2L635.9 -73.0L635.7 -217.1L722.0 -245.0L899.0 -367.9L1108.5 -487.2L1205.3 -460.2L1239.7 -425.8L1282.9 -449.1L1297.9 -351.8L1320.8 -335.6L1321.8 -315.7L1347.3 -294.2L1334.0 -267.3L1310.4 -140.3L1307.2 -58.9L1229.2 0.1L1202.8 82.5L1228.2 105.7L1228.1 146.0L1267.3 147.4L1261.2 176.9L1243.9 180.5L1242.0 200.4L1230.6 201.8L1189.2 133.3L1174.9 130.8L1127.0 165.7L1079.7 147.5L1046.8 143.8L1029.1 152.6L993.3 150.7L957.2 177.4L926.0 178.9L852.0 146.6L823.1 161.9L791.8 160.9L768.9 137.2L707.6 113.9L641.9 121.3L626.0 134.8L617.4 170.8L599.9 196.0L595.6 251.9L549.0 215.9L527.1 216.1L506.5 234.4Z" class="k-land"/><path d="M439.6 610.5L343.7 647.2L309.7 668.6L254.6 686.8L200.1 669.0L202.9 644.3L176.4 590.4L192.3 519.8L218.1 467.2L193.5 331.1L195.0 295.6L301.2 292.6L328.2 297.2L348.0 287.1L376.2 292.0L371.7 311.6L397.3 343.8L397.2 389.3L403.0 438.6L418.3 461.4L404.8 517.7L409.7 548.9L426.0 588.6L439.6 610.5Z" class="k-land"/><path d="M200.1 669.0L172.3 669.6L129.6 657.4L90.4 658.1L18.0 669.1L-85.0 710.1L-96.8 708.4L-92.1 656.9L-86.3 649.1L-88.1 624.4L-114.0 598.2L-133.5 594.0L-151.3 576.8L-138.0 549.0L-144.1 518.8L-141.3 500.6L-131.6 500.5L-128.0 473.2L-132.7 461.1L-126.9 452.4L-104.1 444.9L-119.3 394.8L-133.3 369.0L-128.4 347.7L-108.3 337.2L-91.3 346.6L-44.1 347.1L-32.9 328.8L-22.3 330.1L-4.7 323.0L4.8 349.8L44.3 332.6L71.8 346.2L82.5 366.9L110.0 380.1L131.4 364.4L160.0 362.0L201.9 378.2L218.1 467.2L192.3 519.8L176.4 590.4L202.9 644.3L200.1 669.0Z" class="k-land"/><path d="M488.8 597.2L439.6 610.5L426.0 588.6L409.7 548.9L404.8 517.7L418.3 461.4L403.0 438.6L397.2 389.3L397.3 343.8L371.7 311.6L376.2 292.0L429.8 293.4L422.0 326.3L461.9 366.7L464.2 397.4L476.6 410.3L473.8 554.0L488.8 597.2Z" class="k-land"/><path d="M539.4 589.9L488.8 597.2L473.8 554.0L476.6 410.3L464.2 397.4L461.9 366.7L422.0 326.3L429.8 293.4L450.8 286.3L463.3 258.9L493.2 253.1L506.5 234.4L527.1 216.1L549.0 215.9L595.6 251.9L593.2 272.7L607.0 309.8L594.9 335.0L601.4 351.8L552.9 409.8L541.3 449.2L539.4 589.9Z" class="k-land"/><path d="M201.9 378.2L160.0 362.0L131.4 364.4L110.0 380.1L82.5 366.9L71.8 346.2L44.3 332.6L40.3 296.3L56.9 269.7L55.5 248.5L104.1 196.7L113.0 153.8L129.8 138.5L159.4 146.9L185.0 134.2L193.3 118.1L240.8 90.1L252.4 70.5L309.6 44.6L343.2 35.7L358.5 47.7L397.7 47.4L392.9 77.7L401.1 106.2L435.5 147.1L437.4 177.3L507.9 191.5L506.5 234.4L493.2 253.1L463.3 258.9L450.8 286.3L429.8 293.4L376.2 292.0L348.0 287.1L328.2 297.2L301.2 292.6L195.0 295.6L193.5 331.1L201.9 378.2Z" class="k-bf-voll"/><path d="M209.4 255.3L212.9 253.8L217.7 254.0L217.1 247.1L218.7 246.1L219.4 242.3L220.5 242.8L226.8 236.8L235.6 235.4L235.1 233.3L237.5 232.0L236.4 230.6L229.4 233.3L226.5 230.2L223.2 230.3L222.2 229.2L222.3 225.3L225.9 223.3L225.9 222.2L221.9 220.4L222.0 219.3L227.8 215.9L225.0 202.2L229.1 202.2L234.8 198.1L238.4 190.6L235.8 191.4L235.9 193.1L234.3 193.7L232.6 189.5L223.1 192.1L223.1 188.7L225.3 188.4L225.9 186.7L220.3 187.3L220.1 183.4L222.5 182.1L221.4 179.1L219.0 178.0L206.2 190.8L205.5 192.2L208.3 198.7L205.0 203.0L200.6 206.4L201.7 206.9L202.0 209.3L200.5 209.3L198.7 211.8L198.6 214.1L201.6 216.7L202.4 220.6L204.1 222.7L203.3 226.3L199.1 224.3L195.7 226.9L197.2 229.1L200.2 230.5L200.6 232.3L198.7 234.9L202.2 238.4L200.6 241.3L196.1 242.4L196.2 244.0L199.0 246.1L203.4 245.5L206.2 247.5L208.4 249.9L209.4 255.3Z" class="k-prov-klein"/><rect x="188.7" y="171.0" width="56.7" height="91.4" rx="2" class="k-rahmen"/><line x1="185.7" y1="216.7" x2="162.7" y2="216.7" class="k-fuehr"/><text x="157.7" y="220.7" class="k-ort halo" text-anchor="end">Provinz Sanguié</text><circle cx="281.9" cy="207.4" r="2.8" class="k-pkt-neben"/><text x="289.9" y="211.4" class="k-neben halo">Ouagadougou</text><text x="16" y="24" class="k-titel">Burkina Faso</text></svg>
+    <p class="k-quelle">Die Provinz liegt im Zentrum des Landes. Réo ist rund 100&nbsp;km von Ouagadougou entfernt; die Provinz misst etwa 137&nbsp;×&nbsp;76&nbsp;km.</p>
+  </div>
+
+  <div class="mitte"><svg class="karte" viewBox="0 0 520 620" role="img" aria-label="Karte"><path d="M206.8 580.1L231.0 569.5L264.8 571.0L266.8 546.1L264.7 531.6L260.6 522.5L271.7 515.7L276.6 488.9L284.1 492.9L300.0 471.9L317.8 463.2L327.9 450.8L347.2 450.9L378.8 445.2L389.3 441.2L386.4 426.1L402.9 417.4L395.1 407.6L346.6 426.0L335.2 417.8L326.3 404.9L322.3 407.1L314.0 401.3L303.1 405.5L296.1 397.7L301.3 384.6L296.8 370.6L321.6 356.3L321.9 348.6L320.6 346.2L293.9 336.3L294.3 328.3L334.2 307.2L335.4 304.9L335.8 284.4L320.3 223.6L314.3 216.8L315.5 209.1L344.4 208.8L368.0 186.9L384.2 180.6L406.6 140.9L405.0 137.8L408.5 133.4L409.3 128.1L399.9 128.3L391.3 133.5L391.6 145.8L380.6 149.7L378.4 149.5L375.0 143.2L373.5 138.8L374.8 133.5L368.4 120.2L302.1 138.4L301.9 115.1L317.6 112.6L322.0 107.0L322.0 100.6L291.8 102.4L282.8 105.2L279.6 96.9L281.2 78.0L298.2 68.8L290.2 48.0L285.5 43.6L273.6 39.9L267.3 45.8L265.8 51.3L217.2 93.7L213.9 105.2L202.0 108.0L198.0 116.0L184.0 129.1L179.1 139.0L199.2 184.6L186.3 195.8L185.4 205.1L176.1 214.9L144.9 238.4L152.8 241.6L156.1 251.9L155.1 258.6L152.4 260.1L144.5 258.4L137.4 266.0L131.9 275.9L129.4 287.9L130.8 292.1L152.1 310.1L158.6 330.6L157.8 337.7L159.1 340.9L165.4 344.9L169.3 351.9L169.5 356.4L164.7 366.8L164.1 377.0L159.1 380.3L147.7 367.1L134.9 363.1L118.1 370.8L112.4 375.3L110.7 381.6L117.7 388.5L121.3 397.1L142.3 407.0L145.8 414.2L144.8 419.3L132.8 432.3L131.9 437.3L135.8 442.7L141.8 444.0L152.9 452.9L156.3 462.2L145.0 482.4L130.8 489.2L113.6 489.6L114.4 501.1L133.7 515.7L164.6 511.8L184.2 525.7L199.6 542.1L204.7 578.0L206.8 580.1Z" class="k-prov"/><line x1="312.2" y1="269.2" x2="317.7" y2="259.2" class="k-fuehr"/><circle cx="306.7" cy="269.2" r="5" class="k-pkt"/><text x="320.7" y="263.2" class="k-ort halo" text-anchor="start">Réo</text><line x1="267.9" y1="290.6" x2="262.4" y2="302.6" class="k-fuehr"/><circle cx="273.4" cy="290.6" r="6" class="k-pkt-frei"/><circle cx="273.4" cy="290.6" r="1.7" class="k-pkt-kern"/><text x="259.4" y="306.6" class="k-ort halo" text-anchor="end">Wapa</text><line x1="270.5" y1="240.8" x2="265.0" y2="232.8" class="k-fuehr"/><circle cx="276.0" cy="240.8" r="6" class="k-pkt-frei"/><circle cx="276.0" cy="240.8" r="1.7" class="k-pkt-kern"/><text x="262.0" y="236.8" class="k-ort halo" text-anchor="end">Tukon</text><line x1="299.0" y1="318.1" x2="304.5" y2="318.1" class="k-fuehr"/><circle cx="293.5" cy="318.1" r="6" class="k-pkt-frei"/><circle cx="293.5" cy="318.1" r="1.7" class="k-pkt-kern"/><text x="307.5" y="322.1" class="k-ort halo" text-anchor="start">Bankio</text><line x1="233.3" y1="253.9" x2="227.8" y2="253.9" class="k-fuehr"/><circle cx="238.8" cy="253.9" r="6" class="k-pkt-frei"/><circle cx="238.8" cy="253.9" r="1.7" class="k-pkt-kern"/><text x="224.8" y="257.9" class="k-ort halo" text-anchor="end">Ekulpung</text><line x1="20.0" y1="590.0" x2="98.5" y2="590.0" class="k-massstab"/><line x1="20.0" y1="586.5" x2="20.0" y2="593.5" class="k-massstab"/><line x1="98.5" y1="586.5" x2="98.5" y2="593.5" class="k-massstab"/><text x="105.5" y="594.0" class="k-neben">20 km</text><rect x="3" y="3" width="514" height="614" rx="2" class="k-rahmen"/><text x="18" y="26" class="k-titel">Ausschnitt — Provinz Sanguié</text></svg>
+    <div class="legende">
+      <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="k-pkt"/></svg>
+        Position belegt</span>
+      <span><svg width="14" height="14"><circle cx="7" cy="7" r="6" class="k-pkt-frei"/><circle cx="7" cy="7" r="1.7" class="k-pkt-kern"/></svg>
+        Position geschätzt</span>
+    </div>
+  </div>
+
+  <div class="orte"><div class="oz"><div class="o-n">Réo</div><div class="o-w">Ausbildungszentrum · Agrarschule · Kinder-Academy · Sommerschule</div><div class="o-k">belegt</div></div><div class="oz"><div class="o-n">Wapa<span class="neu">Position offen</span></div><div class="o-w">Erster Brunnen · Tiefbrunnen mit Wasserturm · Waldgarten</div><div class="o-k">geschätzt</div></div><div class="oz"><div class="o-n">Tukon<span class="neu">Position offen</span></div><div class="o-w">Wasserpumpe</div><div class="o-k">geschätzt</div></div><div class="oz"><div class="o-n">Bankio<span class="neu">Position offen</span></div><div class="o-w">Solar-Wasseranlage</div><div class="o-k">geschätzt</div></div><div class="oz"><div class="o-n">Ekulpung<span class="neu">Position offen</span></div><div class="o-w">Wasserstelle</div><div class="o-k">geschätzt</div></div></div>
+  <p class="k-quelle" style="max-width:44rem;margin-inline:auto">
+    Ländergrenzen: Natural Earth (gemeinfrei). Provinzgrenze: geoBoundaries
+    (CC&nbsp;BY&nbsp;4.0) — die Namensnennung ist Bedingung der Lizenz und steht deshalb hier.</p>
+
+  <div class="artikel" style="margin-top:3.4rem">
+    <h2>Warum drei Karten</h2>
+    <p>Eine Fläche mit Umriss und Füllung wird als Land gelesen, wenn sie in
+    nichts drinliegt. Deshalb steht die Provinz jetzt nicht mehr allein, sondern
+    zwischen zwei Bezugsrahmen: Burkina Faso im Verhältnis zu Deutschland, dann
+    Sanguié im Verhältnis zum Land, dann der Ausschnitt selbst. Der goldene
+    Suchrahmen auf der Landkarte und der goldene Rand der Detailkarte sind
+    derselbe Rahmen — daran sieht man, dass die eine Karte in der anderen liegt.
+    Der Maßstabsbalken tut den Rest: 20&nbsp;km neben einer Fläche schließen die
+    Verwechslung mit einem Staat endgültig aus.</p>
+
+    <h2>Warum der offene Ring</h2>
+    <p>Im Register steuert das Feld <code>neu</code>, ob ein Projekt in der
+    Prüfliste unter <code>#/neu</code> auftaucht. Die Karte macht es genauso:
+    jeder Ort trägt ein Feld <code>fest</code>. Steht es auf <code>False</code>,
+    wird der Ort offen gezeichnet, die Liste bekommt die Marke
+    <span class="neu">Position offen</span>, und der Warnhinweis oben erscheint.
+    Trägt jemand die echte Koordinate nach und setzt <code>fest</code> auf
+    <code>True</code>, schließt sich der Ring von selbst — und sobald keiner mehr
+    offen ist, verschwindet der Hinweis ganz. Kein zweites Dokument, das veralten kann.</p>
+
+    <h2>Wie es eingebaut würde</h2>
+    <p>Der Generator <code>werkzeug/karte.py</code> rechnet die Umrisse
+    <b>einmal</b> und schreibt fertiges SVG heraus. Das SVG wandert als
+    Textbaustein in die Vault-Datei; zur Laufzeit passiert nichts mehr. Die Seite
+    bleibt eine Datei und lädt weiterhin nichts nach.</p>
+<pre><code># nur nötig, wenn sich Orte oder Grenzen ändern
+python3 werkzeug/karte.py          # -&gt; werkzeug/karte.svg.txt
+
+# Inhalt in die Vault-Datei einsetzen, dann wie gewohnt:
+python3 build.py "…/Website-Entwurf-final.html"</code></pre>
+    <p>Platz auf der Seite: am ehesten in <code>#/ueber-uns</code>, kurz vor dem
+    Abschnitt über Wapa. Dort steht schon der Satz über Regenzeit und Trockenzeit
+    — die Karte beantwortet die Frage, die davor kommt.</p>
+
+    <h2>Was ich nicht gelöst habe</h2>
+    <p><b>Die vier Koordinaten.</b> Ohne sie bleibt die Karte in dem halbfertigen
+    Zustand, den sie gerade selbst anzeigt. Vier Pins von Bertrand, einmal, und
+    die Sache ist dauerhaft erledigt.</p>
+    <p><b>Die Provinzgrenze bringt eine Lizenzpflicht mit.</b> geoBoundaries ist
+    CC&nbsp;BY&nbsp;4.0 — die Namensnennung muss stehen bleiben. Die Ländergrenzen
+    von Natural Earth sind gemeinfrei und völlig unproblematisch. Wenn die
+    Nennung stört, ließe sich die Provinz auch weglassen.</p>
+    <div class="rn"><b>Nicht enthalten:</b> Satellitenbild. Das hier ist die
+    kostenlose, rechtlich saubere Hälfte des Vorschlags — die Orientierung.
+    Ob zusätzlich ein gekauftes Bild vom Waldgarten dazukommt, ist eine
+    getrennte Entscheidung.</div>
+  </div>
+
+</div></section>
+
+</body>
+</html>

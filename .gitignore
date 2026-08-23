@@ -1,0 +1,8 @@
+# Eingangs-Geodaten für werkzeug/karte.py. Nicht eingecheckt, weil Git jede
+# Fassung dauerhaft behält — dieselbe Überlegung wie bei den Originalbildern
+# im Vault. Herkunft und Bezugsquellen stehen im Kopf von karte.py; das
+# erzeugte karte.svg.txt ist das Ergebnis, auf das es ankommt.
+werkzeug/*.json
+
+# Python-Zwischenstand
+__pycache__/
