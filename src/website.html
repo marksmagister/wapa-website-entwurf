@@ -2,23 +2,22 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gemeinsam für Wapa — Website-Entwurf</title>
 <meta name="description" content="Entwurf für die neue Website von Gemeinsam für Wapa e. V. Aus einem Brunnen in Burkina Faso sind eine Schule, ein Wasserturm und ein Waldgarten geworden.">
 <meta name="author" content="Gemeinsam für Wapa e. V.">
 <!-- Vorschau beim Teilen in Messengern und E-Mail -->
-<link rel="canonical" href="https://marksmagister.github.io/wapa-website-entwurf/">
-<meta property="og:url" content="https://marksmagister.github.io/wapa-website-entwurf/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:title" content="Gemeinsam für Wapa — Website-Entwurf">
 <meta property="og:description" content="Entwurf für die neue Vereinswebsite. Aus einem Brunnen in Burkina Faso sind eine Schule, ein Wasserturm und ein Waldgarten geworden.">
-<meta property="og:image" content="https://marksmagister.github.io/wapa-website-entwurf/assets/fotos/20-32-45.jpg">
+<meta property="og:image" content="assets/fotos/20-32-45.jpg">
 <meta property="og:image:alt" content="Der Gärtner blickt über den Waldgarten am Wasserturm in Wapa">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#7E3A20">
-<link rel="stylesheet" href="fonts.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* =========================================================================
    GEMEINSAM FÜR WAPA — Entwurf final, August 2026
@@ -515,7 +514,7 @@ footer a:hover{color:var(--gold)}
         <div style="font-family:var(--d);font-size:1.2rem;color:#FFF6EE;font-variation-settings:'SOFT' 20,'WONK' 1">Gemeinsam für Wapa e.&nbsp;V.</div>
         <p style="margin:.7em 0 0;font-size:.85rem;max-width:30ch">Mudawane Wapa Yila · Römerweg 2, 72488 Sigmaringen. Gemeinnützigkeit anerkannt vom Finanzamt Sigmaringen am 7.11.2017.</p>
         <div class="stempel" style="margin-top:20px">
-          <img src="assets/logo.jpg" alt="Vereinslogo: drei Figuren mit erhobenen Armen über einem Schild mit dem Umriss Burkina Fasos">
+          <img src="https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg" alt="Vereinslogo: drei Figuren mit erhobenen Armen über einem Schild mit dem Umriss Burkina Fasos">
         </div>
         <div class="flagge"><span style="background:#EF2B2D"></span><span style="background:#009E49"></span></div>
       </div>
@@ -563,62 +562,65 @@ footer a:hover{color:var(--gold)}
             wp-content/uploads gezogen sind. Alle Personen-, Schul- und
             Wasserbilder fallen bis dahin in diese Kategorie.
    --------------------------------------------------------------------------- */
+const N = t => 'other%20assets/WhatsApp%20Image%202026-08-12%20at%20' + t + '.jpeg';
 /* Aufnahmen aus der Präsentation „Projektbedarf“ (08/2026). Geringere Auflösung
    als die Waldgarten-Fotos — für mittlere Formate, nicht für Titelbilder. */
+const P = n => 'other%20assets/aus%20Projektbedarf%202026-08/' + n + '.jpg';
+const W = p => 'https://i0.wp.com/gemeinsamfuerwapa.de/wp-content/uploads/' + p + '&ssl=1';
 /* Das Vereinslogo, wie es ist: 300×158 px, JPG, schwarzer Rahmen eingebrannt,
    keine Transparenz, kein Vektororiginal auffindbar (Entscheidung 1). */
-const LOGO = 'assets/logo.jpg';
+const LOGO = 'https://gemeinsamfuerwapa.de/wp-content/uploads/2018/07/gemeinsam-fuer-wapa-logo.jpg';
 
 const B = {
   /* neu, hochauflösend (2304×1728) — Waldgarten Wapa, August 2026.
      Ohne die sieben Aufnahmen mit „TECNO CAMON 20"-Wasserzeichen. */
-  gaertner:      'assets/fotos/20-32-45.jpg',            /* Gärtner blickt über den Garten */
-  obstgarten:    'assets/fotos/20-32-453.jpg',  /* Obstbäume, Zaun aus Astwerk */
-  mais:          'assets/fotos/20-32-451.jpg',  /* Maiskolben */
-  aubergine:     'assets/fotos/20-32-44.jpg',            /* Auberginenreihe auf Laterit */
-  mischkultur:   'assets/fotos/20-32-442.jpg',  /* Maniok, Mais, Schlauch */
-  maisreihen:    'assets/fotos/20-32-432.jpg',
-  sesam:         'assets/fotos/20-32-431.jpg',  /* Sesam mit rosa Blüten */
-  maniok:        'assets/fotos/20-32-42.jpg',            /* Maniokstrauch */
-  moringa:       'assets/fotos/20-32-422.jpg',  /* Moringa-Setzlinge */
-  moringabaum:   'assets/fotos/20-32-421.jpg',  /* Moringa und Banane */
-  moringafeld:   'assets/fotos/20-32-411.jpg',
-  moringasesam:  'assets/fotos/20-32-412.jpg',
-  guave:         'assets/fotos/20-32-41.jpg',            /* Blattdetail */
-  reihen:        'assets/fotos/20-32-401.jpg',  /* Reihen: Mais, Aubergine, Maniok */
-  jungpflanzen:  'assets/fotos/20-32-403.jpg',
-  hibiskus:      'assets/fotos/20-31-10.jpg',            /* Roselle, rote Stiele */
-  blattdetail:   'assets/fotos/20-31-111.jpg',
+  gaertner:      N('20.32.45'),            /* Gärtner blickt über den Garten */
+  obstgarten:    N('20.32.45%20%283%29'),  /* Obstbäume, Zaun aus Astwerk */
+  mais:          N('20.32.45%20%281%29'),  /* Maiskolben */
+  aubergine:     N('20.32.44'),            /* Auberginenreihe auf Laterit */
+  mischkultur:   N('20.32.44%20%282%29'),  /* Maniok, Mais, Schlauch */
+  maisreihen:    N('20.32.43%20%282%29'),
+  sesam:         N('20.32.43%20%281%29'),  /* Sesam mit rosa Blüten */
+  maniok:        N('20.32.42'),            /* Maniokstrauch */
+  moringa:       N('20.32.42%20%282%29'),  /* Moringa-Setzlinge */
+  moringabaum:   N('20.32.42%20%281%29'),  /* Moringa und Banane */
+  moringafeld:   N('20.32.41%20%281%29'),
+  moringasesam:  N('20.32.41%20%282%29'),
+  guave:         N('20.32.41'),            /* Blattdetail */
+  reihen:        N('20.32.40%20%281%29'),  /* Reihen: Mais, Aubergine, Maniok */
+  jungpflanzen:  N('20.32.40%20%283%29'),
+  hibiskus:      N('20.31.10'),            /* Roselle, rote Stiele */
+  blattdetail:   N('20.31.11%20%281%29'),
   /* neu, aus der Präsentation Projektbedarf (08/2026) */
-  bertrandSolar: 'assets/fotos-2026/bertrand-solaranlage.jpg',
-  dorfWasser:    'assets/fotos-2026/dorfversammlung-wasserstelle.jpg',
-  uebergabe:     'assets/fotos-2026/uebergabe-wasserstelle.jpg',
-  wasserLaeuft:  'assets/fotos-2026/wasser-laeuft.jpg',
-  turmMontage:   'assets/fotos-2026/wasserturm-montage.jpg',
-  turmKran:      'assets/fotos-2026/wasserturm-kran.jpg',
-  papaya:        'assets/fotos-2026/papaya-bananen.jpg',
-  ernte:         'assets/fotos-2026/ernte-bananen-erdnuesse.jpg',
-  bananenhain:   'assets/fotos-2026/besuch-bananenhain.jpg',
-  bananen:       'assets/fotos-2026/bananenernte.jpg',
-  zitrus:        'assets/fotos-2026/zitrus-kontrolle.jpg',
-  verarbeitung:  'assets/fotos-2026/lebensmittelverarbeitung.jpg',
-  agrarfeld:     'assets/fotos-2026/agrarschule-feld.jpg',
+  bertrandSolar: P('bertrand-solaranlage'),
+  dorfWasser:    P('dorfversammlung-wasserstelle'),
+  uebergabe:     P('uebergabe-wasserstelle'),
+  wasserLaeuft:  P('wasser-laeuft'),
+  turmMontage:   P('wasserturm-montage'),
+  turmKran:      P('wasserturm-kran'),
+  papaya:        P('papaya-bananen'),
+  ernte:         P('ernte-bananen-erdnuesse'),
+  bananenhain:   P('besuch-bananenhain'),
+  bananen:       P('bananenernte'),
+  zitrus:        P('zitrus-kontrolle'),
+  verarbeitung:  P('lebensmittelverarbeitung'),
+  agrarfeld:     P('agrarschule-feld'),
 
   /* alt, von der Live-Website */
-  ekulpung: 'assets/archiv/ekulpung.jpg',
-  ekulpung2: 'assets/archiv/ekulpung2.jpg',
-  ekulpung3: 'assets/archiv/ekulpung3.jpg',
-  wasserturm: 'assets/archiv/wasserturm.jpg',
-  brunnen: 'assets/archiv/brunnen.jpg',
-  zentrum: 'assets/archiv/zentrum.jpg',
-  naeh: 'assets/archiv/naeh.jpg',
-  seife: 'assets/archiv/seife.jpg',
-  solar: 'assets/archiv/solar.jpg',
-  sprachkurs: 'assets/archiv/sprachkurs.jpg',
-  textil: 'assets/archiv/textil.jpg',
-  pflanz: 'assets/archiv/pflanz.jpg',
-  garten: 'assets/archiv/garten.jpg',
-  baum: 'assets/archiv/baum.jpg'
+  ekulpung:  W('2024/01/IMG-20231228-WA0054.jpg?w=1600'),
+  ekulpung2: W('2024/01/IMG-20231228-WA0060.jpg?w=1200'),
+  ekulpung3: W('2024/01/IMG-20231224-WA0009.jpg?w=1200'),
+  wasserturm:W('2021/04/Wasserturm.jpeg?w=1400'),
+  brunnen:   W('2016/08/wasser-fuer-wapa-header-1.jpg?w=1600'),
+  zentrum:   W('2018/10/IMG-20190627-WA0056Ivergr%C3%B6%C3%9Fert.jpg?w=1600'),
+  naeh:      W('2022/02/WhatsApp-Image-2022-02-04-at-20.38.16-2.jpeg?w=1200'),
+  seife:     W('2016/08/seifenherstellung.jpg?w=1200'),
+  solar:     W('2016/08/solarenergie_gr2.jpg?w=1200'),
+  sprachkurs:W('2016/08/sprachkurs_gr.jpg?w=1200'),
+  textil:    W('2020/02/HPWE7802.jpg?w=1200'),
+  pflanz:    W('2022/02/Pflanzungsaktion-Februar-2022-4.jpeg?w=1200'),
+  garten:    W('2021/08/Garten4.jpeg?w=1200'),
+  baum:      W('2016/08/baumprojekt5.jpg?w=1200')
 };
 
 /* --------------------------------------------------------------------------- */
