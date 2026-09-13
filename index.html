@@ -499,7 +499,6 @@ footer a:hover{color:var(--gold)}
       <a href="#/projekte">Projekte</a>
       <a href="#/aktuelles">Aktuelles</a>
       <a href="#/ueber-uns">Über uns</a>
-      <a href="#/mitmachen">Mitmachen</a>
       <a class="b gold klein" href="#/spenden">Spenden</a>
     </nav>
     <button class="burger" onclick="document.getElementById('menu').classList.toggle('auf')">☰</button>
@@ -531,7 +530,7 @@ footer a:hover{color:var(--gold)}
         <h4>Verein</h4>
         <a href="#/ueber-uns">Über uns</a>
         <a href="#/vorstand">Vorstand</a>
-        <a href="#/mitmachen">Mitmachen</a>
+        <a href="#/spenden">Mitmachen</a>
         <a href="#/spenden">Spenden &amp; Patenschaft</a>
         <a href="#/satzung">Satzung &amp; Manifest</a>
         <a href="#/presse">Pressestimmen</a>
@@ -641,11 +640,11 @@ const REG = [
   {y:2020, j:'seit 2020', slug:'textilfaerbung', t:'Textilfärbung',                     u:'Ausbildungsmodul zur Herstellung und Färbung von Textilien.', o:'Réo', k:'Bildung', s:'Laufend', img:B.textil},
   {y:2020, j:'geplant', slug:'serverraum', t:'Serverraum und Copyshop',           u:'Zusätzlicher Raum an der Schule, künftig Druckereiservice für die Region. Kosten 3.500 €, Finanzierung zu 90 % gedeckt.', o:'Réo', k:'Bildung', s:'In Finanzierung', img:null},
   {y:2021, j:'2021', slug:'tiefbrunnen', t:'Tiefbrunnen und Wasserturm',        u:'81 m tief, Pumpe auf 50 m, 2 m³/h, sechs Solarzellen. Zwei Tanks zu 4.000 l, drei öffentliche Wasserhähne.', o:'Wapa', k:'Infrastruktur', s:'Abgeschlossen', img:B.wasserturm},
-  {y:2021, j:'seit 2021', slug:'waldgarten', t:'Waldgarten am Wasserturm',          u:'Agroforstwirtschaft in vier Schichten. Ein Gärtner pflegt ihn für 23 € im Monat, bezahlt aus Spenden.', o:'Wapa', k:'Umweltschutz', s:'Laufend', img:B.gaertner},
+  {y:2021, j:'seit 2021', slug:'waldgarten', t:'Waldgarten am Wasserturm',          u:'Agroforstwirtschaft in vier Schichten. Ein Gärtner pflegt ihn für 150 € im Monat, bezahlt aus Spenden.', o:'Wapa', k:'Umweltschutz', s:'Laufend', img:B.gaertner},
   {y:2021, j:'seit 2021', slug:'sommerschule', t:'Sommerschule',                      u:'Erstmals 2021: Lesen, Schreiben, Rechnen und Französisch für Kinder, unterrichtet von einem Lehrer und einer Lehramtsstudentin der Universität Ouagadougou.', o:'Réo', k:'Bildung', s:'Laufend', img:null},
   {y:2021, j:'geplant', slug:'solaroefen', t:'Solaröfen',                         u:'Umweltfreundliche Öfen aus lokal vorhandenem Material, modelliert mit der Pharmaplan GmbH. Weniger Abholzung für Brennholz.', o:'Sanguié', k:'Umweltschutz', s:'In Planung', img:null},
   {y:2022, j:'2022', slug:'naehmaschinen', t:'Nähmaschinenlieferung',             u:'Gespendete Maschinen, per Containerschiff nach Wapa gebracht.', o:'Wapa', k:'Bildung', s:'Abgeschlossen', img:B.naeh},
-  {y:2022, j:'seit 2022', slug:'tropfenbewaesserung', t:'Tropfenbewässerung',                u:'Gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden rund 1.000 €.', o:'Wapa', k:'Umweltschutz', s:'In Finanzierung', img:null},
+  {y:2022, j:'seit 2022', slug:'tropfenbewaesserung', t:'Tropfenbewässerung',                u:'Gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden rund 3.000 €.', o:'Wapa', k:'Umweltschutz', s:'In Finanzierung', img:null},
   {y:2018, j:'2018', slug:'pumpe-tukon', t:'Wasserpumpe in Tukon', u:'Zweite Pumpenanlage, in der Vereinschronik für 2018 verzeichnet.', o:'Tukon', k:'Grundversorgung', s:'Abgeschlossen', img:null, neu:'Projektbedarf 08/2026'},
   {y:2019, j:'seit 2019', slug:'kinder-academy', t:'Kinder-Academy', u:'Gründung 2019. Wie sie sich zur Sommerschule verhält, geht aus den Unterlagen nicht hervor.', o:'Réo', k:'Bildung', s:'Laufend', img:null, neu:'Projektbedarf 08/2026'},
   {y:2023, j:'2023', slug:'lagerraum-tierzucht', t:'Lagerraum und Schweinezucht', u:'Bau des Lagerraums, Beginn der Schweinezucht, Gründung der Arbeitsgruppe vor Ort.', o:'Réo', k:'Infrastruktur', s:'Abgeschlossen', img:B.agrarfeld, neu:'Projektbedarf 08/2026'},
@@ -668,7 +667,7 @@ const PTEXT = {
   <p>Die Dorfältesten haben mit dem Abschluss dieses Projektes das Ende des Wassermangels für Wapa ausgerufen.</p>`,
  'waldgarten': `<p>Wo sich ein Garten besser anlegen ließe als direkt bei einem Wasserturm, ist schwer zu sagen. Rund um den neuen Turm ist deshalb ein Waldgarten entstanden.</p>
   <p>Angelegt ist er von Anfang an als gemischte Land- und Forstwirtschaft, sogenannte Agroforstwirtschaft, typischerweise in vier Schichten: hohe Bäume, niedrige Bäume, Sträucher und Bodendecker. Sind die Bäume größer, spenden sie Schatten und schaffen ein kühleres, feuchteres Kleinklima für die Nutzpflanzen darunter; die laubabwerfenden Arten bringen zusätzlich Dünger ein.</p>
-  <p>Ein Experte für Baumschulen hat unseren Gärtner in der Pflege junger Bäume unterwiesen. Er erhält einen monatlichen Lohn von umgerechnet 23 Euro, den wir aus Spenden finanzieren. Der Rückhalt des Wassers während der Regenzeit ist durch parzellenartige Vertiefungen optimiert.</p>`,
+  <p>Ein Experte für Baumschulen hat unseren Gärtner in der Pflege junger Bäume unterwiesen. Er erhält einen monatlichen Lohn von umgerechnet 150 Euro, den wir aus Spenden finanzieren. Der Rückhalt des Wassers während der Regenzeit ist durch parzellenartige Vertiefungen optimiert.</p>`,
  'ausbildungszentrum': `<p>Die wirtschaftliche Lage in Réo und der Provinz Sanguié verschlechtert sich mit dem zunehmenden Wassermangel. In einer patriarchalisch geprägten Kultur trifft das die Familien besonders: Männer versuchen aus Verzweiflung ihr Glück beim Goldwaschen oder im Exil, viele sterben bei dem Versuch. Dann übernimmt die Frau die Führung der Familie — nur haben die meisten Frauen nie eine Schule besucht, geschweige denn eine handwerkliche Ausbildung erhalten.</p>
   <p>Gemeinsam mit federführenden Frauen aus Réo ist deshalb ein Zentrum entstanden, das sich dieser Fragen annimmt. In Frauen zu investieren heißt, nachhaltig zu investieren. Angeboten werden Landwirtschaft (Feldbestellung, Gartenbau, Tierzucht) und Handwerk (Schneiderei, Seifenherstellung, Weberei).</p>
   <p>In der ersten Projektphase wurde ein Grundstück für 4.500 Euro gekauft, finanziert mit Spenden des Rotary Service Albstadt und der Schwäbischen Zeitung. Drei Unterrichtsräume und die Sanitärräume kosteten zusammen 10.600 Euro. Ein Raum entspricht 3.050 Euro; Räume werden nach ihren Stiftern benannt und diese ins Gründerbuch des Zentrums eingetragen.</p>
@@ -702,7 +701,7 @@ const PTEXT = {
  'zweites-wassersystem': `<p>Für 2025 verzeichnet die Chronik ein zweites Wassersystem. Ein Ort ist nicht angegeben — vermutlich eine weitere Anlage in der Region Réo. Das gehört geklärt, bevor der Eintrag öffentlich steht.</p>`,
  'wasserstelle-ekulpung': `<p>Am 20. Dezember 2023 konnte unser Vorsitzender die Installation der Wasserstelle in Ekulpung durchführen. Die Zapfstelle wurde in Anwesenheit des dortigen Vorstands und des Dorfoberhaupts offiziell freigegeben und in die Verantwortung des Dorfes übergeben.</p>
   <p>Ekulpung erhält damit den lang ersehnten Zugang zu fließendem Wasser.</p>`,
- 'tropfenbewaesserung': `<p>Mit dem Waldgarten soll unter anderem die Aufforstung im Sahel vorangebracht werden. Beim neuen Brunnen ist dafür ein Pilotprojekt gestartet: Eine Tropfenbewässerung gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden dafür rund 1.000 Euro.</p>
+ 'tropfenbewaesserung': `<p>Mit dem Waldgarten soll unter anderem die Aufforstung im Sahel vorangebracht werden. Beim neuen Brunnen ist dafür ein Pilotprojekt gestartet: Eine Tropfenbewässerung gibt das Wasser aus dem Wasserturm langsam und kontrolliert ab. Benötigt werden dafür rund 3.000 Euro.</p>
   <p><b>Zu prüfen:</b> Die Projektseite der bestehenden Website nennt einen Finanzierungsfortschritt von 0 %, während der Beitrag vom Februar 2022 die Anlage bereits als installiert beschreibt. Was davon stimmt, muss der Vorstand klären.</p>`,
  'serverraum': `<p>Die Schule soll um einen zusätzlichen Raum als Serverraum erweitert werden. Damit soll künftig ein Copyshop mit Druckereiservice für die Region betrieben werden. Die Kosten liegen bei 3.500 Euro, die Finanzierung ist zu 90 Prozent gedeckt.</p>`,
  'solaroefen': `<p>Jedes Jahr fließt viel Geld in Entwicklungsländer, damit Bäume gepflanzt werden, um die Ausbreitung der Wüste zu bremsen. Viele dieser Bäume sterben in der Trockenzeit an Wassermangel, andere werden nach einigen Jahren als Brennstoff abgeholzt. Das geschieht nicht aus mangelndem Umweltbewusstsein, sondern aus einem Mangel an Alternativen.</p>
@@ -942,11 +941,10 @@ function spendenBlock(){ return `
         <p class="lede">Verwaltung und Öffentlichkeitsarbeit machen wir selbst. Wir schreiben lieber auf, was ein Betrag konkret bewirkt, als mit Prozentzahlen zu werben.</p>
         <div class="betrag">
           <button onclick="waehle(this)"><span class="a">2 €</span><span class="w">Ein Baum im Waldgarten</span></button>
-          <button class="on" onclick="waehle(this)"><span class="a">23 €</span><span class="w">Ein Monatslohn des Gärtners</span></button>
+          <button class="on" onclick="waehle(this)"><span class="a">150 €</span><span class="w">Ein Monatslohn des Gärtners</span></button>
           <button onclick="waehle(this)"><span class="a">15 €</span><span class="w">Patenschaft, pro Monat</span></button>
           <button onclick="waehle(this)"><span class="a">Frei</span><span class="w">Eigener Betrag</span></button>
         </div>
-        <a class="b gold" href="https://www.betterplace.org/de/organisations/47348-gemeinsam-fuer-wapa">Über Betterplace spenden</a>
       </div>
       <div>
         <h3 style="color:#FFF6EE">Spendenkonto</h3>
@@ -981,7 +979,7 @@ VIEWS[''] = () => `
   </div>
   <figure class="hero-b" style="margin:0">
     <img src="${B.gaertner}" alt="Der Gärtner blickt über den Waldgarten am Wasserturm in Wapa">
-    <figcaption>Der Waldgarten am Wasserturm, August 2026. Der Gärtner wird aus Spenden bezahlt — 23 € im Monat.</figcaption>
+    <figcaption>Der Waldgarten am Wasserturm, August 2026. Der Gärtner wird aus Spenden bezahlt — 150 € im Monat.</figcaption>
   </figure>
 </div>
 
@@ -1050,7 +1048,7 @@ VIEWS[''] = () => `
         </div>
         <div class="gl">
           <div class="j">seit 2021</div><h3>Wo Wasser ist, kann ein Garten stehen</h3>
-          <p>Rund um den Turm ein Waldgarten in vier Schichten: hohe Bäume, niedrige Bäume, Sträucher, Bodendecker. Ein Gärtner pflegt ihn für 23 € im Monat.</p>
+          <p>Rund um den Turm ein Waldgarten in vier Schichten: hohe Bäume, niedrige Bäume, Sträucher, Bodendecker. Ein Gärtner pflegt ihn für 150 € im Monat.</p>
         </div>
         <div class="gl">
           <div class="j">2022</div><h3>Und ein Garten will bewässert sein</h3>
@@ -1081,10 +1079,10 @@ VIEWS[''] = () => `
     <div class="preise">
       <div class="pz"><div class="b1">2 €</div><div class="b2">Ein Baum im Waldgarten<span>Setzling, gepflanzt und im ersten Jahr gegossen</span></div></div>
       <div class="pz"><div class="b1">15 €</div><div class="b2">Eine Kinderpatenschaft, im Monat<span>Nahrung, Schulbücher und Schulgebühr</span></div></div>
-      <div class="pz"><div class="b1">23 €</div><div class="b2">Der Monatslohn unseres Gärtners<span>Er pflegt den Waldgarten und wartet die Brunnenanlage</span></div></div>
+      <div class="pz"><div class="b1">150 €</div><div class="b2">Der Monatslohn unseres Gärtners<span>Er pflegt den Waldgarten und wartet die Brunnenanlage</span></div></div>
       <div class="pz"><div class="b1">23 €</div><div class="b2">Eine Handwaschstation<span>Tank mit Filter, Wasserhahn und Seifenspender — 25 Stück standen 2020 in Réo</span></div></div>
-      <div class="pz"><div class="b1">1.000 €</div><div class="b2">Die Tropfenbewässerung<span>Noch nicht finanziert</span></div></div>
-      <div class="pz"><div class="b1">3.050 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum<span>Räume werden nach ihren Stiftern benannt und ins Gründerbuch eingetragen</span></div></div>
+      <div class="pz"><div class="b1">3.000 €</div><div class="b2">Die Tropfenbewässerung<span>Noch nicht finanziert</span></div></div>
+      <div class="pz"><div class="b1">3.600 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum<span>Räume werden nach ihren Stiftern benannt und ins Gründerbuch eingetragen</span></div></div>
       <div class="pz"><div class="b1">6.300 €</div><div class="b2">Der Tiefbrunnen von 2021<span>81 m Bohrung, Pumpe, Solarzellen, 4.000 l Speicher</span></div></div>
     </div>
     <div style="margin-top:2rem"><a class="b" href="#/spenden">Spenden</a></div>
@@ -1147,29 +1145,6 @@ VIEWS[''] = () => `
   </div>
 </section>
 
-<!-- ============ 9 · MITMACHEN ============ -->
-<section class="erde">
-  <div class="wrap">
-    <div class="zwei">
-      <div>
-        <span class="kt hell">Mitmachen</span>
-        <h2>Man muss dafür nicht Mitglied werden</h2>
-        <p style="color:#E3CDBD">Der Berufsalltag drängt genug Pflichten auf. Das Engagement im Verein soll ohne Druck stattfinden — und jede und jeder soll die eigenen Stärken einbringen können. Vieles lässt sich als abgeschlossenes Kleinstprojekt erledigen.</p>
-        <a class="b hell" href="#/mitmachen">Was zu tun ist</a>
-      </div>
-      <div class="rollen">
-        <div class="ro"><div class="ro-t">Agrarwissen, Ökologie</div><div class="ro-u">Was passt in den Sahel, welche Symbiosen funktionieren?</div></div>
-        <div class="ro"><div class="ro-t">Vereinsrecht</div><div class="ro-u">Satzungsfragen, Bewertung von Verträgen.</div></div>
-        <div class="ro"><div class="ro-t">Französisch</div><div class="ro-u">Amtssprache vor Ort — Verständigung und Übersetzung.</div></div>
-        <div class="ro"><div class="ro-t">Öffentlichkeitsarbeit</div><div class="ro-u">Inhalte pflegen, Grafiken, Infostände.</div></div>
-        <div class="ro"><div class="ro-t">Netzwerk</div><div class="ro-u">Kontakte und Anerkennung für die Arbeit.</div></div>
-        <div class="ro"><div class="ro-t">Etwas anderes</div><div class="ro-u">Eine eigene Idee genügt.</div></div>
-      </div>
-    </div>
-    ${rn('<b>Nach vorn geholt:</b> „Man muss nicht Mitglied werden“ ist ein ungewöhnliches Angebot und stand bisher auf einer Unterseite, unter einer Liste von Projekten. Für einen Verein, der Nachfolger für die Öffentlichkeitsarbeit sucht, gehört es auf die Startseite.')}
-    ${rn('<b>Hier standen sechs Pflanzenfotos.</b> Sie sahen gut aus und hatten mit dem Text nichts zu tun — gesucht sind Vereinsrecht und Französisch, gezeigt wurden Maniok und Sesam. Bilder, die nur Fläche füllen, sind das eigentliche Kennzeichen einer Vorlage. Jetzt steht dort, was tatsächlich gesucht wird.')}
-  </div>
-</section>
 
 ${spendenBlock()}
 `;
@@ -1310,25 +1285,6 @@ VIEWS['ueber-uns'] = () => `
 </div></section>`;
 
 /* ============ MITMACHEN ============ */
-VIEWS['mitmachen'] = () => `
-<div class="kopf"><div class="wrap">
-  <span class="kt gruen">Mitmachen</span>
-  <h1 style="font-size:clamp(2.1rem,4.2vw,3.2rem);max-width:16ch">Man muss dafür nicht Mitglied werden</h1>
-  <p class="lede">Unser Berufsalltag drängt uns schon genug Pflichten auf. Das Engagement im Verein soll ohne Druck stattfinden — und jede und jeder soll die eigenen Stärken einbringen können.</p>
-</div></div>
-<section style="padding-top:2.4rem"><div class="wrap">
-  <div class="preise" style="max-width:52rem">
-    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Agrarwissen, Ökologie</div><div class="b2">Was passt in den Sahel, welche Symbiosen funktionieren, was könnte ein Geschäftsmodell sein?<span>Es muss keine Professur sein. Einfache Erfahrung genügt, einzelne Hinweise sind willkommen.</span></div></div>
-    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Vereinsrecht</div><div class="b2">Satzungsfragen und die Bewertung von Verträgen.<span>Auch einzelne Tipps helfen — keine Mitgliedschaft nötig.</span></div></div>
-    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Französisch, Kultur</div><div class="b2">Amtssprache in Burkina Faso ist Französisch.<span>Hilfe bei Verständigung und Übersetzung.</span></div></div>
-    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Öffentlichkeitsarbeit</div><div class="b2">Layouts, Grafiken, Inhalte pflegen, Infostände auf Märkten und Messen.<span>Es gibt viele Kanäle — helfen Sie uns, sie zu nutzen.</span></div></div>
-    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Netzwerk</div><div class="b2">Vernetzung und gesellschaftliche Anerkennung unserer Arbeit.<span></span></div></div>
-    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Etwas anderes</div><div class="b2">Sie haben eine Idee oder ein Anliegen?<span>Schreiben Sie uns.</span></div></div>
-  </div>
-  <div style="margin-top:2rem"><a class="b" href="mailto:info@gemeinsamfuerwapa.de">Schreiben Sie uns</a></div>
-  ${rn('<b>Umgebaut:</b> Auf der alten Seite stand diese Liste über einem gefilterten Projektraster, in dem „Marketing“ und „Rechtsberater“ als Projektkacheln zwischen Brunnen und Solaranlagen auftauchten. Aufgaben für Freiwillige sind keine Projekte — hier sind sie getrennt.')}
-</div></section>
-${spendenBlock()}`;
 
 /* ============ SPENDEN ============ */
 VIEWS['spenden'] = () => `
@@ -1342,10 +1298,9 @@ VIEWS['spenden'] = () => `
   <div class="preise">
     <div class="pz"><div class="b1">2 €</div><div class="b2">Ein Baum im Waldgarten</div></div>
     <div class="pz"><div class="b1">15 €</div><div class="b2">Eine Kinderpatenschaft, im Monat<span>Nahrung, Schulbücher und Schulgebühr für ein Kind</span></div></div>
-    <div class="pz"><div class="b1">23 €</div><div class="b2">Der Monatslohn unseres Gärtners</div></div>
-    <div class="pz"><div class="b1">1.000 €</div><div class="b2">Die Tropfenbewässerung für den Waldgarten<span>Noch nicht finanziert</span></div></div>
-    <div class="pz"><div class="b1">3.050 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum</div></div>
-    <div class="pz"><div class="b1">3.500 €</div><div class="b2">Der Serverraum und Copyshop<span>Zu 90 % finanziert</span></div></div>
+    <div class="pz"><div class="b1">150 €</div><div class="b2">Der Monatslohn unseres Gärtners</div></div>
+    <div class="pz"><div class="b1">3.000 €</div><div class="b2">Die Tropfenbewässerung für den Waldgarten<span>Noch nicht finanziert</span></div></div>
+    <div class="pz"><div class="b1">3.600 €</div><div class="b2">Ein Unterrichtsraum im Ausbildungszentrum</div></div>
   </div>
 </div></section>
 ${spendenBlock()}
@@ -1362,7 +1317,6 @@ ${spendenBlock()}
       <span class="kt gruen">Weitere Wege</span>
       <h2>Betterplace und PayPal</h2>
       <p>Über Betterplace.org können Sie sicher und verifiziert spenden; PayPal steht ebenfalls zur Verfügung. Beide Wege sind für uns mit Gebühren verbunden — eine Überweisung kommt vollständig an.</p>
-      <a class="b leer" href="https://www.betterplace.org/de/organisations/47348-gemeinsam-fuer-wapa">Zu Betterplace</a>
       <div style="margin-top:2.4rem;padding-top:1.6rem;border-top:1px solid var(--linie)">
         <span class="kt gruen">Gemeinnütziger Verein</span>
         <div class="stempel auf-hell">
@@ -1372,6 +1326,44 @@ ${spendenBlock()}
       </div>
     </div>
   </div>
+</div></section>
+<section><div class="wrap">
+  <span class="kt gruen">Mitglied werden</span>
+  <h2 style="max-width:18ch">Statt zu spenden — oder zusätzlich</h2>
+  <p style="max-width:38rem">Eine Mitgliedschaft trägt den Verein dauerhaft, nicht nur einmalig.
+  Den Beitrag legen Sie selbst fest.</p>
+  <div class="preise" style="margin-top:1.4rem">
+    <div class="pz"><div class="b1">25 €</div><div class="b2">Ermäßigt, im Monat<span>Für Auszubildende, Studierende und alle, denen mehr nicht möglich ist</span></div></div>
+    <div class="pz"><div class="b1">50 €</div><div class="b2">Regulär, im Monat</div></div>
+    <div class="pz"><div class="b1">100 €</div><div class="b2">Fördernd, im Monat<span>Trägt sichtbar mehr als einen Anteil</span></div></div>
+    <div class="pz"><div class="b1">Frei</div><div class="b2">Eigener Betrag<span>Die Stufen sind ein Vorschlag, kein Tarif</span></div></div>
+  </div>
+  <div class="dl" style="margin-top:1.8rem;max-width:34rem">
+    <a href="assets/dokumente/Wapa-Beitrittserklaerung-2026.pdf"><b>Beitrittserklärung</b><span>PDF · am Rechner ausfüllen oder ausdrucken, dann an info@gemeinsamfuerwapa.de</span></a>
+  </div>
+  <div class="hinweis" style="max-width:38rem;margin-top:1.8rem">
+    <b>Der Vorstand sollte das bestätigen:</b> Die Beitrittserklärung von 2021 nannte
+    <b>12,00 € im Jahr</b> als Beitrag. Die Stufen oben sind Monatsbeiträge — der kleinste
+    ist damit das Fünfundzwanzigfache des bisherigen Jahresbeitrags. Über die Höhe
+    entscheidet nach § 8 der Satzung ohnehin die Mitgliederversammlung.
+  </div>
+  ${rn('<b>Online-Formular statt PDF — was das hieße:</b> Ein Formular, das Name, Anschrift, Geburtsdatum, Beitrag und SEPA-Mandat aufnimmt, verarbeitet personenbezogene Daten und Bankdaten. Diese Seite ist statisch und kann nichts entgegennehmen. Man bräuchte einen Dienst dahinter, einen Auftragsverarbeitungsvertrag nach Art. 28 DSGVO, eine Ergänzung der Datenschutzerklärung und ein Löschkonzept; für das Lastschriftmandat zusätzlich Schriftform oder ein rechtssicheres elektronisches Äquivalent. <b>Einschätzung:</b> technisch an einem Tag gemacht, rechtlich und organisatorisch der größere Teil — und dauerhaft zu pflegen. Das ausfüllbare PDF erreicht dasselbe ohne jede dieser Pflichten; der Aufwand liegt dann beim Verein statt beim Eintretenden.')}
+</div></section>
+
+<section class="erde"><div class="wrap">
+  <span class="kt hell">Mitmachen</span>
+  <h2 style="max-width:18ch">Man muss dafür nicht Mitglied werden</h2>
+  <p class="lede" style="max-width:38rem">Das Engagement soll ohne Druck stattfinden. Vieles lässt
+  sich als abgeschlossenes Kleinstprojekt erledigen — einzelne Hinweise sind willkommen.</p>
+  <div class="rollen" style="margin-top:1.6rem">
+    <div class="ro"><div class="ro-t">Agrarwissen, Ökologie</div><div class="ro-u">Was passt in den Sahel, welche Symbiosen funktionieren?</div></div>
+    <div class="ro"><div class="ro-t">Vereinsrecht</div><div class="ro-u">Satzungsfragen, Bewertung von Verträgen.</div></div>
+    <div class="ro"><div class="ro-t">Französisch</div><div class="ro-u">Amtssprache vor Ort — Verständigung und Übersetzung.</div></div>
+    <div class="ro"><div class="ro-t">Öffentlichkeitsarbeit</div><div class="ro-u">Inhalte pflegen, Grafiken, Infostände.</div></div>
+    <div class="ro"><div class="ro-t">Netzwerk</div><div class="ro-u">Kontakte und Anerkennung für die Arbeit.</div></div>
+    <div class="ro"><div class="ro-t">Etwas anderes</div><div class="ro-u">Eine eigene Idee genügt.</div></div>
+  </div>
+  <div style="margin-top:1.8rem"><a class="b hell" href="mailto:info@gemeinsamfuerwapa.de">Schreiben Sie uns</a></div>
 </div></section>`;
 
 /* ============ EINZELNES PROJEKT ============ */
@@ -1442,6 +1434,9 @@ VIEWS['neu'] = () => {
     <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Kinder-Academy</div><div class="b2">Verhältnis zur Sommerschule unklar — dasselbe Angebot oder zwei?</div></div>
     <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Tropfenbewässerung</div><div class="b2">Projektseite: 0 % finanziert. Beitrag 02/2022: installiert.</div></div>
     <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Zweites Wassersystem</div><div class="b2">Ort nicht angegeben.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Unterrichtsraum</div><div class="b2">Spendenliste nennt 3.600 €, der Projekttext 3.050 € aus der ersten Bauphase. Der Vorstand sollte sagen, welcher Betrag gilt.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Banakio</div><div class="b2">Im Register steht „Bankio“. Richtig ist Banakio; die Adresse <code>#/projekt/wasser-bankio</code> trägt die alte Schreibweise noch.</div></div>
+    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Mitgliedsbeitrag</div><div class="b2">Bisher 12 € im Jahr, neu 25–100 € im Monat. Über die Höhe entscheidet nach § 8 die Mitgliederversammlung.</div></div>
   </div>
   <p style="margin-top:2rem"><a class="pf" href="#/projekte">Zum vollständigen Register</a></p>
 </div></div></section>`;
@@ -1580,7 +1575,7 @@ VIEWS['satzung'] = () => `
   <div class="dl">
     <a href="assets/dokumente/Satzung-2021.pdf"><b>Vereinssatzung 2021</b><span>PDF · rechtlich bindend</span></a>
     <a href="assets/dokumente/Manifest.pdf"><b>Manifest</b><span>PDF · Prinzipien und Arbeitsweise</span></a>
-    <a href="assets/dokumente/Wapa-Beitrittserklaerung-2021-neu.pdf"><b>Beitrittserklärung</b><span>PDF · zum Ausfüllen</span></a>
+    <a href="assets/dokumente/Wapa-Beitrittserklaerung-2026.pdf"><b>Beitrittserklärung</b><span>PDF · am Rechner ausfüllen oder ausdrucken</span></a>
   </div>
   <h2>Vorstand</h2>
   <div class="preise" style="max-width:34rem">
@@ -1654,6 +1649,10 @@ function waehle(el){
 function render(){
   const h = location.hash.replace(/^#\/?/,'').replace(/\/$/,'');
   const teile = h.split('/');
+  // Mitmachen ist keine eigene Ansicht mehr, sondern ein Abschnitt der
+  // Spendenseite. Wer die alte Adresse geteilt oder als Lesezeichen hat,
+  // landet weiterhin an der richtigen Stelle.
+  if(teile[0]==='mitmachen'){ location.replace('#/spenden'); return; }
   let out;
   if(teile[0]==='aktuelles' && teile[1]) out = VIEWS['beitrag'](decodeURIComponent(teile[1]));
   else if(teile[0]==='projekt' && teile[1]) out = VIEWS['projekt'](decodeURIComponent(teile[1]));
