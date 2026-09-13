@@ -77,14 +77,41 @@ rückwirkend geändert.
 
 ## 7 · Mitglied werden (neu, auf der Spendenseite)
 
-Beitragsstufen **25 / 50 / 100 € / Frei**, dazu die vorhandene
-Beitrittserklärung als PDF-Download mit dem Hinweis, sie ausgefüllt an
+Beitragsstufen **25 / 50 / 100 € / Frei, im Monat**, dazu die neue
+Beitrittserklärung als PDF mit dem Hinweis, sie ausgefüllt an
 `info@gemeinsamfuerwapa.de` zu senden.
 
-**Offen und auf der Seite als offen markiert:**
-- Jahres- oder Monatsbeitrag? Steht bewusst nirgends, bis es bestätigt ist.
-- Die Beitrittserklärung ist von **2021** und nennt möglicherweise andere
-  Beträge als 25/50/100. Vor dem Veröffentlichen abgleichen.
+**Bitte gegenlesen:** Die alte Beitrittserklärung nannte **12,00 € im Jahr**.
+25 € im Monat sind das Fünfundzwanzigfache davon. Der Sprung steht so auch als
+Hinweis auf der Seite. Über die Höhe entscheidet nach § 8 der Satzung die
+Mitgliederversammlung — ein Beschluss dazu wäre nötig.
+
+## 8 · Beitrittserklärung neu gesetzt
+
+Neu: `assets/dokumente/Wapa-Beitrittserklaerung-2026.pdf`, eine Seite A4,
+Quelle in `werkzeug/beitrittserklaerung.html`, gerendert mit
+`werkzeug/pdf.mjs`.
+
+Inhaltlich gleichwertig zur alten Fassung, aber:
+
+- **Rücksendung per E-Mail** an `info@gemeinsamfuerwapa.de` statt an eine
+  Privatanschrift
+- **§ 8 statt § 5.** Die alte Erklärung verwies auf „§ 5 der Satzung“ — in der
+  Satzung von 2021 ist § 5 *Unternehmensgründungen*; die Mitgliedsbeiträge
+  stehen in § 8. Der Verweis war schlicht falsch.
+- **Kein fester Betrag im Fließtext.** § 8 überlässt die Höhe der
+  Mitgliederversammlung; die drei Stufen stehen als Ankreuzfelder daneben.
+- **Datenschutzhinweis ergänzt** (Art. 6 Abs. 1 lit. b DSGVO, Zweck, keine
+  Weitergabe, Löschung, Auskunftsrecht). In der alten Fassung fehlte er ganz.
+- Gläubiger-ID `DE42ZZZ00002068902` und der Wortlaut des Lastschriftmandats
+  sind **unverändert übernommen** — daran sollte niemand ohne Not etwas ändern.
+- Feld für Telefon (freiwillig) und für abweichende Kontoinhaber ergänzt.
+
+**Die alte Datei ist gelöscht.** Sie nannte als Rücksendeadresse „Josef Kurz,
+Schulstraße 2/1, 72488 Sigmaringen-Laiz“ — eine Privatanschrift einer Person,
+die im heutigen Vorstand nicht mehr auftaucht. Auf einer öffentlichen Seite hat
+das nichts zu suchen. **In der Git-Historie bleibt die Datei erhalten**; wer sie
+auch dort entfernt haben will, muss die Historie umschreiben.
 
 ---
 

@@ -8,9 +8,8 @@
 <link rel="stylesheet" href="fonts.css">
 <style>
 :root{
-  --gruen:#276F27; --gruen-dark:#1B4F1B; --gruen-soft:#E7EFE4;
-  --gold:#E9A825;  --gold-text:#7E5910;
-  --erde:#7E3A20; --erde-tief:#5C2916; --erde-hell:#B4592F; --erde-soft:#F3E2D8;
+  --gruen:#276F27; --gruen-dark:#1B4F1B; --gold:#E9A825;
+  --erde:#7E3A20; --erde-tief:#5C2916;
   --ink:#231D18; --body:#4F463E; --leise:#847768;
   --papier:#FBF6EE; --papier2:#F2EADD; --linie:#DCD0BE; --linie-stark:#C3B49C;
   --d:'Fraunces',Georgia,serif;
@@ -19,57 +18,55 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--papier2);color:var(--body);font-family:var(--t);
   font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:60rem;margin:0 auto;padding:clamp(28px,5vw,60px) clamp(20px,4vw,44px)}
+.wrap{max-width:62rem;margin:0 auto;padding:clamp(28px,5vw,60px) clamp(20px,4vw,44px)}
 h1{font-family:var(--d);font-weight:500;color:var(--ink);font-size:2rem;margin:0 0 .3em;
   font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 90;letter-spacing:-.012em}
-h2{font-family:var(--d);font-weight:500;color:var(--ink);font-size:1.2rem;margin:2.4rem 0 .8rem}
+h2{font-family:var(--d);font-weight:500;color:var(--ink);font-size:1.24rem;margin:2.8rem 0 .5rem}
 .kt{font-family:var(--t);font-size:.7rem;font-weight:700;letter-spacing:.19em;
   text-transform:uppercase;color:var(--gruen);display:block;margin-bottom:1rem}
-p{max-width:34rem}
+p{max-width:36rem}
 .hinweis{border-left:3px solid var(--gold);background:var(--papier);padding:14px 16px;
-  margin:1.4rem 0;font-size:.92rem;max-width:38rem}
+  margin:1.4rem 0;font-size:.92rem;max-width:40rem}
 .hinweis b{color:var(--ink)}
+.empf{border-left:3px solid var(--gruen)}
 code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--papier);
   padding:1px 5px;border-radius:2px}
 
-/* ============ DIE KARTE ============
-   85 × 55 mm ist das deutsche Standardmaß. Alle Maße in mm, damit der
-   Ausdruck stimmt; am Bildschirm wird nur vergrößert dargestellt. */
-.blatt{display:flex;gap:26px;flex-wrap:wrap;margin:1.6rem 0 0}
+/* ====== KARTE · 85 x 55 mm, deutsches Standardmaß ====== */
+.blatt{display:flex;gap:24px;flex-wrap:wrap;margin:1.1rem 0 0}
 .karte{width:85mm;height:55mm;position:relative;overflow:hidden;
   box-shadow:0 2px 14px rgba(35,29,24,.16);border-radius:1.5mm;flex:none}
 
-/* Vorderseite — hell, die Angaben */
 .vorn{background:var(--papier);padding:7mm 7mm 6mm;display:flex;flex-direction:column}
-.vorn .verein{font-family:var(--d);font-size:4.6mm;color:var(--ink);font-weight:500;
-  font-variation-settings:'SOFT' 18,'WONK' 1,'opsz' 60;letter-spacing:-.01em;line-height:1.1}
-.vorn .ev{font-family:var(--t);font-size:2.1mm;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--leise);margin-top:1mm}
+.vorn .verein{font-family:var(--d);font-size:4.8mm;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 18,'WONK' 1,'opsz' 60;letter-spacing:-.012em;line-height:1}
+.vorn .verein em{font-style:normal;color:var(--gruen)}
+.vorn .ev{font-family:var(--t);font-size:2.05mm;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--leise);margin-top:1.2mm}
 .vorn .strich{height:.35mm;background:var(--gruen);width:11mm;margin:3.4mm 0}
 .vorn .person{font-family:var(--d);font-size:3.9mm;color:var(--ink);font-weight:500;
   font-variation-settings:'SOFT' 14,'opsz' 30;line-height:1.15}
-.vorn .rolle{font-size:2.5mm;color:var(--gruen);margin-top:.6mm;letter-spacing:.02em}
+.vorn .rolle{font-size:2.5mm;color:var(--gruen);margin-top:.6mm}
 .vorn .kontakt{margin-top:auto;font-size:2.55mm;line-height:1.62;color:var(--body)}
 .vorn .kontakt b{color:var(--ink);font-weight:400}
 .platzhalter{color:var(--linie-stark)}
 
-/* Rückseite — Erdrot, Zeichen und Auftrag */
-.hinten{background:var(--erde);color:#F0DDD1;padding:7mm;display:flex;
-  flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.hinten img{width:17mm;height:auto;margin-bottom:3.6mm;border-radius:.8mm}
-.hinten .auftrag{font-family:var(--d);font-size:3.5mm;line-height:1.32;color:#FFF6EE;
-  font-variation-settings:'SOFT' 16,'WONK' 1,'opsz' 40;max-width:64mm}
-.hinten .zweit{font-size:2.4mm;color:#E0C0AC;margin-top:2.6mm;letter-spacing:.14em;
-  text-transform:uppercase}
+.hinten{background:var(--erde);color:#F0DDD1;padding:8mm 8mm 7mm;display:flex;
+  flex-direction:column;justify-content:center}
+.hinten .satz{font-family:var(--d);font-size:5.2mm;line-height:1.2;color:#FFF6EE;
+  font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 70;letter-spacing:-.01em;max-width:64mm}
+.hinten .kette{font-size:2.45mm;line-height:1.55;color:#E3C6B4;margin-top:3.4mm;max-width:66mm}
+.hinten.alt .satz{font-size:4.2mm}
+.hinten.mittig{align-items:center;text-align:center;justify-content:center}
+.hinten.mittig img{width:16mm;margin-bottom:3mm;border-radius:.8mm}
 
-.etikett{font-size:.76rem;color:var(--leise);margin:.7rem 0 0;letter-spacing:.02em}
-
+.etikett{font-size:.78rem;color:var(--leise);margin:.7rem 0 0}
 @media print{
   body{background:#fff}
   .wrap{padding:0;max-width:none}
   .nurbildschirm{display:none}
   .blatt{gap:0;margin:0}
-  .karte{box-shadow:none;border-radius:0;page-break-after:always;break-after:page}
+  .karte{box-shadow:none;border-radius:0;break-after:page}
   @page{size:85mm 55mm;margin:0}
 }
 </style>
@@ -80,75 +77,93 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--p
 <div class="nurbildschirm">
   <span class="kt">Entwurf — noch nichts gedruckt</span>
   <h1>Visitenkarte</h1>
-  <p>85 × 55 mm, das deutsche Standardmaß. Alle Maße stehen in Millimetern,
-  <code>@page</code> ist gesetzt — Drucken aus dem Browser gibt die Karte in
-  Originalgröße aus, Vorder- und Rückseite als zwei Seiten.</p>
+  <p>85 × 55 mm, das deutsche Standardmaß. Alles in Millimetern gesetzt und
+  <code>@page</code> gesetzt — Drucken aus dem Browser gibt Originalgröße aus.
+  Gedruckt wird nur die erste Fassung; die Vergleiche darunter sind nur am Bildschirm.</p>
+
+  <h2>Vorschlag</h2>
+  <p style="margin-bottom:0">Die Rückseite sagt, was der Verein tut, indem sie es erzählt statt
+  es zu benennen. Beide Zeilen stammen von Ihrer eigenen Seite.</p>
 </div>
 
-<h2 class="nurbildschirm">Mit Platzhalter</h2>
 <div class="blatt">
   <div class="karte vorn">
-    <div>
-      <div class="verein">Gemeinsam für Wapa</div>
-      <div class="ev">eingetragener Verein</div>
-    </div>
-    <div class="strich"></div>
-    <div>
-      <div class="person platzhalter">Vorname Nachname</div>
-      <div class="rolle platzhalter">Rolle im Verein</div>
-    </div>
-    <div class="kontakt">
-      <b>+49 151 43627548</b><br>
-      info@gemeinsamfuerwapa.de<br>
-      Römerweg 2 · 72488 Sigmaringen
-    </div>
-  </div>
-
-  <div class="karte hinten">
-    <img src="assets/logo.jpg" alt="Vereinslogo">
-    <div class="auftrag">Infrastruktur, Bildung und Perspektive schaffen</div>
-    <div class="zweit">Chancengleichheit</div>
-  </div>
-</div>
-<p class="etikett nurbildschirm">Vorderseite und Rückseite</p>
-
-<div class="nurbildschirm">
-  <h2>Ausgefüllt, als Beispiel</h2>
-  <div class="blatt">
-    <div class="karte vorn">
       <div>
-        <div class="verein">Gemeinsam für Wapa</div>
-        <div class="ev">eingetragener Verein</div>
+        <div class="verein">Gemeinsam für <em>Wapa</em></div>
+        <div class="ev">eingetragener Verein · Sigmaringen</div>
       </div>
       <div class="strich"></div>
       <div>
-        <div class="person">Kienewoyi Bertrand Bazie</div>
-        <div class="rolle">Vorsitzender</div>
+        <div class="person platzhalter">Vorname Nachname</div>
+        <div class="rolle platzhalter">Rolle im Verein</div>
       </div>
       <div class="kontakt">
         <b>+49 151 43627548</b><br>
         info@gemeinsamfuerwapa.de<br>
-        Römerweg 2 · 72488 Sigmaringen
+        gemeinsamfuerwapa.de
       </div>
     </div>
+  <div class="karte hinten ">
+      <div class="satz">Es fing mit einem Brunnen an.</div>
+      <div class="kette">Heute: Wasserturm, Waldgarten, Ausbildungszentrum für Frauen, Agrarschule.<br>Wapa, Provinz Sanguié, Burkina&nbsp;Faso — seit 2017.</div>
+    </div>
+</div>
+<p class="etikett nurbildschirm">Vorderseite und Rückseite</p>
+
+<div class="nurbildschirm">
+
+  <h2>Ausgefüllt, als Beispiel</h2>
+  <div class="blatt">  <div class="karte vorn">
+      <div>
+        <div class="verein">Gemeinsam für <em>Wapa</em></div>
+        <div class="ev">eingetragener Verein · Sigmaringen</div>
+      </div>
+      <div class="strich"></div>
+      <div>
+        <div class="person ">Kienewoyi Bertrand Bazie</div>
+        <div class="rolle ">Vorsitzender</div>
+      </div>
+      <div class="kontakt">
+        <b>+49 151 43627548</b><br>
+        info@gemeinsamfuerwapa.de<br>
+        gemeinsamfuerwapa.de
+      </div>
+    </div></div>
+
+  <h2>Zwei Alternativen für die Rückseite</h2>
+  <div class="blatt">
+  <div class="karte hinten ">
+      <div class="satz">Ein Ding führt zum nächsten.</div>
+      <div class="kette">Brunnen, Wasserturm, Waldgarten, Schule. Wir fangen selten etwas Neues an — meistens braucht das Gebaute noch etwas.</div>
+    </div>
+  <div class="karte hinten alt">
+      <div class="satz">Infrastruktur, Bildung und Perspektive schaffen</div>
+      <div class="kette">Chancengleichheit</div>
+    </div>
+  </div>
+  <p class="etikett">Links: Ihre Überschrift aus dem Abschnitt „Die Kette“. Rechts: Ihr ursprünglicher Vorschlag.</p>
+
+  <div class="hinweis empf">
+    <b>Warum ich umgeschrieben habe:</b> „Infrastruktur, Bildung und Perspektive schaffen /
+    Chancengleichheit“ sind vier abstrakte Wörter, die auf jede Hilfsorganisation der Welt
+    passen — und genau die Sprache, die Ihre Website sonst konsequent vermeidet. Dort steht
+    „Wir schreiben lieber auf, was ein Betrag konkret bewirkt, als mit Prozentzahlen zu werben“.
+    Eine Karte hat zwei Sekunden Aufmerksamkeit. „Es fing mit einem Brunnen an“ erzeugt eine
+    Rückfrage; „Chancengleichheit“ erzeugt Nicken und Vergessen.
   </div>
 
   <div class="hinweis">
-    <b>Was noch fehlt:</b> Ob jede Person eine eigene Durchwahl und E-Mail-Adresse
-    bekommt oder alle Karten die Vereinsnummer tragen, ist offen. Oben steht die
-    Nummer aus dem Impressum — die gilt für den ganzen Verein.
+    <b>Ohne Logo, mit Absicht:</b> Die vorhandene Logodatei ist 300 × 158 px mit eingebranntem
+    schwarzem Rahmen — auf 16 mm gedruckt rund 45 dpi, sichtbar unscharf, und der weiße Kasten
+    säße als Fleck auf dem Erdrot. Der Schriftzug in Fraunces trägt die Marke hier besser.
+    Mit einem Vektororiginal ließe sich das Zeichen ergänzen.
   </div>
+
   <div class="hinweis">
-    <b>Zum Logo:</b> Die vorhandene Datei ist 300 × 158 px und hat einen
-    eingebrannten schwarzen Rahmen. Auf 17 mm gedruckt sind das rund 45 dpi —
-    sichtbar unscharf. Für den Druck braucht es das Vektororiginal; sonst besser
-    ganz ohne Logo, nur mit dem Schriftzug.
-  </div>
-  <div class="hinweis">
-    <b>Auftrag wörtlich übernommen:</b> „Infrastruktur, Bildung und Perspektive
-    schaffen“ und „Chancengleichheit“ stehen so, wie sie durchgegeben wurden.
-    Auf der Karte trägt der erste Teil den Satz, der zweite steht als Zeile
-    darunter — beides gleichrangig nebeneinander wäre auf 85 mm zu viel Text.
+    <b>Zu prüfen vor dem Druck:</b> Auf der Karte steht <code>gemeinsamfuerwapa.de</code> —
+    unter dieser Adresse läuft derzeit noch die <i>alte</i> Website. Ferner: ob jede Person eine
+    eigene Nummer und E-Mail-Adresse bekommt oder alle Karten die Vereinsnummer aus dem
+    Impressum tragen, wie hier.
   </div>
 </div>
 

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Beitrittserklärung — Gemeinsam für Wapa e. V.</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+:root{
+  --gruen:#276F27; --gold:#E9A825; --erde:#7E3A20;
+  --ink:#231D18; --body:#4F463E; --leise:#7A6E61;
+  --linie:#C9BCA8; --fein:#E4DACA; --feld:#F7F2E9;
+  --d:'Fraunces',Georgia,serif;
+  --t:'Atkinson Hyperlegible',system-ui,sans-serif;
+}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--t);color:var(--body);background:#fff;
+  -webkit-font-smoothing:antialiased;font-size:3.05mm;line-height:1.45}
+.blatt{width:210mm;height:297mm;padding:13mm 17mm 9mm;position:relative;overflow:hidden}
+
+/* --- Kopf --- */
+.kopf{display:flex;justify-content:space-between;align-items:flex-start;
+  border-bottom:.5mm solid var(--ink);padding-bottom:3.4mm}
+.marke{font-family:var(--d);font-size:6.4mm;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 20,'WONK' 1,'opsz' 90;letter-spacing:-.01em;line-height:1}
+.marke em{font-style:normal;color:var(--gruen)}
+.unter{font-size:2.5mm;color:var(--leise);margin-top:1.4mm;line-height:1.5}
+.nr{text-align:right;font-size:2.5mm;color:var(--leise)}
+.nr .kast{width:34mm;height:7mm;border:.3mm solid var(--linie);background:var(--feld);
+  margin-top:1.2mm;border-radius:.6mm}
+
+h1{font-family:var(--d);font-size:7.4mm;color:var(--ink);font-weight:500;margin:4.6mm 0 1mm;
+  font-variation-settings:'SOFT' 22,'WONK' 1,'opsz' 110;letter-spacing:-.015em;line-height:1}
+.vorspann{max-width:132mm;font-size:3.05mm;color:var(--body);margin:0 0 4mm}
+
+/* --- Abschnitte --- */
+.abschnitt{margin-top:4.4mm}
+.balken{font-size:2.5mm;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--gruen);border-bottom:.3mm solid var(--fein);padding-bottom:1.4mm;margin-bottom:3.2mm}
+
+/* --- Felder --- */
+.reihe{display:flex;gap:4mm;margin-bottom:2.6mm}
+.feld{flex:1}
+.feld .lab{font-size:2.4mm;color:var(--leise);margin-bottom:1mm;letter-spacing:.03em}
+.feld .box{height:7.4mm;border:.3mm solid var(--linie);border-radius:.6mm;background:var(--feld)}
+.feld.eng{flex:0 0 34mm}
+.feld.halb{flex:0 0 56mm}
+.vorbelegt{display:flex;align-items:center;padding:0 2.5mm;font-size:3mm;color:var(--ink);
+  background:#fff;border-style:dashed}
+.vorbelegt.leise{color:var(--leise);font-style:italic}
+
+/* --- Beitrag --- */
+.stufen{display:flex;gap:3mm;margin:1mm 0 2.6mm}
+.stufe{flex:1;border:.3mm solid var(--linie);border-radius:.8mm;padding:2.6mm 3mm;
+  display:flex;align-items:center;gap:2.4mm;background:var(--feld)}
+.kasten{width:4.2mm;height:4.2mm;border:.4mm solid var(--ink);background:#fff;
+  border-radius:.4mm;flex:none}
+.stufe .betrag{font-family:var(--d);font-size:4.4mm;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 40;line-height:1}
+.stufe .wie{font-size:2.35mm;color:var(--leise);margin-top:.4mm}
+.stufe.frei .linie{flex:1;border-bottom:.3mm solid var(--linie);height:4.6mm;margin-right:1mm}
+.satz{font-size:2.75mm;color:var(--body);max-width:150mm}
+
+/* --- Mandatstext --- */
+.mandat{border-left:.7mm solid var(--gold);background:var(--feld);padding:2.8mm 3.4mm;
+  font-size:2.65mm;line-height:1.5;margin-top:3mm}
+.mandat b{color:var(--ink)}
+
+/* --- Unterschrift --- */
+.unterschrift{display:flex;gap:5mm;margin-top:5.4mm}
+.us{flex:1}
+.us .strich{border-bottom:.35mm solid var(--ink);height:9mm}
+.us .lab{font-size:2.45mm;color:var(--leise);margin-top:1.2mm}
+
+/* --- Fuß --- */
+.senden{margin-top:5mm;border:.4mm solid var(--gruen);border-radius:1mm;
+  padding:3mm 4mm;background:#F3F7F1}
+.senden .t{font-family:var(--d);font-size:3.9mm;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 40}
+.senden .m{font-size:3.3mm;color:var(--gruen);font-weight:700;margin-top:.8mm;letter-spacing:.01em}
+.senden .k{font-size:2.55mm;color:var(--body);margin-top:1.4mm;max-width:150mm}
+.klein{font-size:2.3mm;color:var(--leise);line-height:1.45;margin-top:3mm;max-width:176mm}
+.klein b{color:var(--body)}
+</style>
+</head>
+<body>
+<div class="blatt">
+
+  <div class="kopf">
+    <div>
+      <div class="marke">Gemeinsam für <em>Wapa</em></div>
+      <div class="unter">Mudawane Wapa Yila · eingetragener, gemeinnütziger Verein<br>
+        Römerweg 2 · 72488 Sigmaringen</div>
+    </div>
+    <div class="nr">Mitglieds-Nr.<div class="kast"></div>
+      <div style="margin-top:1mm;font-size:2.2mm">füllt der Verein aus</div></div>
+  </div>
+
+  <h1>Beitrittserklärung</h1>
+  <p class="vorspann">Hiermit beantrage ich die Mitgliedschaft im gemeinnützigen Verein
+  Mudawane Wapa Yila / Gemeinsam für Wapa mit Sitz in Sigmaringen.</p>
+
+  <div class="abschnitt">
+    <div class="balken">1 · Angaben zur Person</div>
+    <div class="reihe">
+      <div class="feld"><div class="lab">Nachname</div><div class="box"></div></div>
+      <div class="feld"><div class="lab">Vorname</div><div class="box"></div></div>
+    </div>
+    <div class="reihe">
+      <div class="feld"><div class="lab">Straße und Hausnummer</div><div class="box"></div></div>
+      <div class="feld eng"><div class="lab">PLZ</div><div class="box"></div></div>
+      <div class="feld halb"><div class="lab">Ort</div><div class="box"></div></div>
+    </div>
+    <div class="reihe" style="margin-bottom:0">
+      <div class="feld eng"><div class="lab">Geburtsdatum</div><div class="box"></div></div>
+      <div class="feld"><div class="lab">E-Mail</div><div class="box"></div></div>
+      <div class="feld halb"><div class="lab">Telefon <span style="font-style:italic">(freiwillig)</span></div><div class="box"></div></div>
+    </div>
+  </div>
+
+  <div class="abschnitt">
+    <div class="balken">2 · Mitgliedsbeitrag</div>
+    <p class="satz" style="margin:0 0 2.2mm">Über die Höhe des Mitgliedsbeitrags entscheidet
+    nach <b>§ 8 der Satzung</b> die Mitgliederversammlung. Die Stufen unten sind ein Vorschlag —
+    jeder andere Betrag ist möglich, nach oben wie nach unten.</p>
+    <div class="stufen">
+      <div class="stufe"><span class="kasten"></span><div><div class="betrag">25 €</div><div class="wie">im Monat · ermäßigt</div></div></div>
+      <div class="stufe"><span class="kasten"></span><div><div class="betrag">50 €</div><div class="wie">im Monat · regulär</div></div></div>
+      <div class="stufe"><span class="kasten"></span><div><div class="betrag">100 €</div><div class="wie">im Monat · fördernd</div></div></div>
+      <div class="stufe frei"><span class="kasten"></span><div style="flex:1"><div style="display:flex;align-items:flex-end"><span class="linie"></span><span class="betrag">€</span></div><div class="wie">im Monat · eigener Betrag</div></div></div>
+    </div>
+  </div>
+
+  <div class="abschnitt">
+    <div class="balken">3 · SEPA-Lastschriftmandat</div>
+    <div class="reihe">
+      <div class="feld halb"><div class="lab">Gläubiger-Identifikationsnummer</div>
+        <div class="box vorbelegt">DE42ZZZ00002068902</div></div>
+      <div class="feld"><div class="lab">Mandatsreferenz</div>
+        <div class="box vorbelegt leise">wird separat mitgeteilt</div></div>
+    </div>
+    <div class="reihe">
+      <div class="feld"><div class="lab">Kontoinhaberin oder Kontoinhaber, falls abweichend</div><div class="box"></div></div>
+    </div>
+    <div class="reihe" style="margin-bottom:0">
+      <div class="feld"><div class="lab">IBAN</div><div class="box"></div></div>
+      <div class="feld eng"><div class="lab">BIC</div><div class="box"></div></div>
+      <div class="feld halb"><div class="lab">Kreditinstitut</div><div class="box"></div></div>
+    </div>
+    <div class="mandat">
+      Ich ermächtige Mudawane Wapa Yila Sigmaringen, den von mir oben angegebenen Beitrag
+      wiederkehrend von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein
+      Kreditinstitut an, die von Mudawane Wapa Yila Sigmaringen auf mein Konto gezogenen
+      Lastschriften einzulösen.<br>
+      <b>Hinweis:</b> Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum,
+      die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem
+      Kreditinstitut vereinbarten Bedingungen.
+    </div>
+  </div>
+
+  <div class="unterschrift">
+    <div class="us" style="flex:0 0 44mm"><div class="strich"></div><div class="lab">Ort</div></div>
+    <div class="us" style="flex:0 0 34mm"><div class="strich"></div><div class="lab">Datum</div></div>
+    <div class="us"><div class="strich"></div><div class="lab">Unterschrift — bei Minderjährigen die der gesetzlichen Vertretung</div></div>
+  </div>
+
+  <div class="senden">
+    <div class="t">Ausgefüllt zurücksenden an</div>
+    <div class="m">info@gemeinsamfuerwapa.de</div>
+    <div class="k">Ein Foto oder ein Scan genügt — die Unterschrift muss darauf zu sehen sein.
+    Wer lieber per Post schickt: Gemeinsam für Wapa e. V., Römerweg 2, 72488 Sigmaringen.</div>
+  </div>
+
+  <div class="klein">
+    <b>Zum Datenschutz:</b> Die hier angegebenen Daten verarbeiten wir ausschließlich zur
+    Mitgliederverwaltung und zum Beitragseinzug (Art. 6 Abs. 1 lit. b DSGVO). Wir geben sie nicht
+    an Dritte weiter, ausgenommen an unser Kreditinstitut zur Ausführung des Lastschriftmandats.
+    Nach Ende der Mitgliedschaft löschen wir sie, sobald keine steuer- oder handelsrechtlichen
+    Aufbewahrungsfristen mehr entgegenstehen. Auskunft, Berichtigung und Löschung können jederzeit
+    unter info@gemeinsamfuerwapa.de verlangt werden.
+  </div>
+
+</div>
+</body>
+</html>
