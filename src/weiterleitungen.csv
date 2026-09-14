@@ -2,7 +2,7 @@ alt,neu,grund
 /,#/,Seite
 /home/,#/,Seite
 /ueber-uns/,#/ueber-uns,Seite
-/mitmachen/,#/mitmachen,Seite
+/mitmachen/,#/spenden,Seite
 /spenden/,#/spenden,Seite
 /impressum/,#/impressum,Seite
 /datenschutzerklaerung/,#/datenschutz,Seite
@@ -38,14 +38,14 @@ alt,neu,grund
 /unser-besuch-in-burkina-faso/,#/aktuelles/besuch-in-burkina-faso,Beitrag
 /waldgarten-waechst/,#/aktuelles/waldgarten-waechst,Beitrag
 /wasser-fuer-ekulpung/,#/aktuelles/wasser-fuer-ekulpung,Beitrag
-/portfolio-items/agrarexperten/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/agrarexperten/,#/spenden,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
 /portfolio-items/ausbildungszentrum/,#/projekt/ausbildungszentrum,Projekt
 /portfolio-items/baumprojekt/,#/projekt/baumprojekt,Projekt
 /portfolio-items/garten-wasserturm/,#/projekt/waldgarten,Projekt
-/portfolio-items/impressionen/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
-/portfolio-items/marketing/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/impressionen/,#/spenden,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/marketing/,#/spenden,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
 /portfolio-items/neuer-brunnen-in-wapa/,#/projekt/tiefbrunnen,Projekt
-/portfolio-items/rechtsberater/,#/mitmachen,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
+/portfolio-items/rechtsberater/,#/spenden,"war kein Projekt, sondern eine Aufgabe für Freiwillige"
 /portfolio-items/seife/,#/projekt/seifenherstellung,Projekt
 /portfolio-items/serverraum/,#/projekt/serverraum,Projekt
 /portfolio-items/solaranlage/,#/projekt/solaranlage,Projekt
@@ -56,7 +56,7 @@ alt,neu,grund
 /portfolio-items/wasser/,#/projekt/wasser-fuer-wapa,Projekt
 /portfolio_category/all/,#/projekte,Portfolio-Kategorie
 /portfolio_category/baumprojekt/,#/projekte/Umweltschutz,Portfolio-Kategorie
-/portfolio_category/mithelfen/,#/mitmachen,Portfolio-Kategorie
+/portfolio_category/mithelfen/,#/spenden,Portfolio-Kategorie
 /portfolio_category/polytechnisches-ausbildungszentrum/,#/projekte/Bildung,Portfolio-Kategorie
 /portfolio_category/projekt-finanzieren/,#/spenden,Portfolio-Kategorie
 /portfolio_category/wasser-fuer-wapa/,#/projekte/Grundversorgung,Portfolio-Kategorie

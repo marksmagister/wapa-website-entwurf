@@ -95,7 +95,6 @@ Sitzung zu klären, der sechste (Domain) ist ein Anruf bei Bateau Blanc.
 | B12 | **Projektregister auf 2024/2025 nachziehen** | ⬜ | Das Register im Entwurf endet 2023. Die Präsentation *Projektbedarf* (08/2026) nennt Vorhaben, die auf der Website vollständig fehlen: Pumpe in **Tukon** (2018), **Kinder-Academy** (2019), Lagerraum und Schweinezucht (2023), **700 Bäume** (2024), Wasseranlagen für die muslimische Gemeinde und ein zweites Wassersystem (2025). Datierungen weichen teils von der Website ab (Pumpe Wapa: 2017 laut Präsentation, 2016 laut Website). **Der Vorstand muss die Liste einmal bestätigen**, bevor sie online geht — danach ist das Register auf Stand. |
 | B13 | **Agrarschule als laufendes Vorhaben aufnehmen?** | ⬜ | Seit drei Jahren im Aufbau, Bedarf **20.000 €, davon 15.000 € vorhanden** — die erste bezifferte Finanzierungslücke, die der Verein selbst nennt. Für eine Spendenseite das stärkste vorhandene Argument, deutlich konkreter als alles bisher Verlinkte. Zu klären: Sind die Zahlen aktuell und dürfen sie öffentlich stehen? |
 | B14 | **Mitgliedsbeitrag: 25–100 € im Jahr?** | ⬜ | Bertrand hat am 13.09.2026 die Stufen 25/50/100 € durchgegeben, Noah am 14.09. als **Jahresbeitrag** bestätigt. Bisher galten laut Beitrittserklärung von 2021 **12,00 € im Jahr**; die neue Einstiegsstufe wäre gut das Doppelte. Nach **§ 8 der Satzung entscheidet die Mitgliederversammlung** über die Höhe, nicht der Vorstand — ohne Beschluss steht die Zahl ohne Grundlage auf der Seite. Auf der Spendenseite ist der Punkt sichtbar als offen markiert. |
-| B15 | **Banakio oder Bankio?** | ⬜ | Noah sagt Banakio. Im Register steht viermal Bankio: Titel, Ortsfeld, Projekttext und der Slug `wasser-bankio`. Titel und Text sind schnell geändert — **der Slug ist Teil einer teilbaren Adresse** (`#/projekt/wasser-bankio`). Wer ihn ändert, macht bereits verschickte Links ungültig; wer ihn behält, hat dauerhaft die falsche Schreibweise in der URL. Notfalls Weiterleitung wie bei B4. |
 | B16 | **Unterrichtsraum: 3.050 € oder 3.600 €?** | ⬜ | Die Spendenliste nennt jetzt 3.600 € (Bertrand, 13.09.2026), der Projekttext weiter 3.050 € aus der ersten Bauphase 2018 (10.600 € für drei Räume plus Sanitär). Vermutlich alt gegen aktuell — solange das nicht gesagt ist, stehen zwei Preise für dieselbe Sache auf der Seite. |
 | B17 | **Serverraum ganz aus dem Register?** | ⬜ | „Kann aus dem Plan raus“ (Bertrand, 13.09.2026) ist als *nicht mehr um Geld bitten* umgesetzt: aus der Spendenliste entfernt, Registereintrag und Projektseite geblieben. Falls das Projekt ganz verschwinden soll, fehlt noch ein Wort. |
 
@@ -129,3 +128,11 @@ Fraunces und Atkinson Hyperlegible von ihrem eigenen Server; es besteht keine
 Verbindung mehr zu Google. Damit stimmt endlich, was die Datenschutzerklärung
 ohnehin schon behauptet. Die Dateien liegen unter `assets/fonts/`, eingebunden
 über `fonts.css`. *(Betrifft weiterhin B9: die Erklärung selbst muss trotzdem neu.)*
+
+**B15 · Banakio oder Bankio** — erledigt 14.09.2026. Richtig ist **Banakio**
+(Noah). Im Register standen Titel, Ortsfeld, Projekttext und der Slug auf
+„Bankio“. Alle vier sind berichtigt, der Slug heißt jetzt `wasser-banakio`.
+Die Abwägung „richtige Schreibweise gegen geteilte Links“ war keine: eine
+Zeile im Generator (`SLUG_ALT`) löst die alte Adresse auf die neue auf, beide
+führen auf dieselbe Seite. Geprüft — `#/projekt/wasser-bankio` und
+`#/projekt/wasser-banakio` zeigen beide *Solar-Wasseranlage Banakio*.

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Visitenkarte</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+/* Fassung A. 85 × 55 mm, einseitig, ohne Anschnitt.
+   Alle Maße in mm, @page gesetzt — der Ausdruck stimmt 1:1. */
+:root{
+  --gruen:#276F27; --ink:#231D18; --body:#4F463E; --leise:#7A6E61;
+  --papier:#FBF6EE;
+  --d:'Fraunces',Georgia,serif;
+  --t:'Atkinson Hyperlegible',system-ui,sans-serif;
+}
+@page{size:85mm 55mm;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff}
+.karte{width:85mm;height:55mm;background:var(--papier);overflow:hidden;
+  padding:8mm;display:flex;flex-direction:column;
+  font-family:var(--t);color:var(--body);-webkit-font-smoothing:antialiased}
+.org{font-family:var(--d);font-size:4.2mm;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 16,'opsz' 50;line-height:1.1;letter-spacing:-.008em}
+.ev{font-size:2.3mm;color:var(--leise);margin-top:.9mm}
+.person{font-family:var(--d);font-size:4.6mm;color:var(--ink);font-weight:500;
+  font-variation-settings:'SOFT' 14,'opsz' 40;line-height:1.1;margin-top:3mm}
+.rolle{font-size:2.5mm;color:var(--leise);margin-top:.8mm}
+.kontakt{margin-top:auto;font-size:2.6mm;line-height:1.55;color:var(--body)}
+.kontakt .z{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="karte">
+  <div>
+    <div class="org">Gemeinsam für Wapa</div>
+    <div class="ev">eingetragener Verein · Sigmaringen</div>
+  </div>
+  <div class="person">Kienewoyi Bertrand Bazie</div>
+  <div class="rolle">Vorsitzender</div>
+  <div class="kontakt">
+    <span class="z">+49 151 43627548</span><br>
+    info@gemeinsamfuerwapa.de<br>
+    gemeinsamfuerwapa.de
+  </div>
+</div>
+</body>
+</html>

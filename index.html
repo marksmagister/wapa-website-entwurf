@@ -649,7 +649,7 @@ const REG = [
   {y:2019, j:'seit 2019', slug:'kinder-academy', t:'Kinder-Academy', u:'Gründung 2019. Wie sie sich zur Sommerschule verhält, geht aus den Unterlagen nicht hervor.', o:'Réo', k:'Bildung', s:'Laufend', img:null, neu:'Projektbedarf 08/2026'},
   {y:2023, j:'2023', slug:'lagerraum-tierzucht', t:'Lagerraum und Schweinezucht', u:'Bau des Lagerraums, Beginn der Schweinezucht, Gründung der Arbeitsgruppe vor Ort.', o:'Réo', k:'Infrastruktur', s:'Abgeschlossen', img:B.agrarfeld, neu:'Projektbedarf 08/2026'},
   {y:2024, j:'2024', slug:'baeume-2024', t:'700 Bäume auf dem Gelände der Agrarschule', u:'Der Bestand auf dem Gelände der Agrarschule wurde auf 700 Bäume gebracht. Im Mai 2025 kamen 100 Setzlinge nach, weil aus der ersten Pflanzung einige eingegangen waren — 700 ist also der gepflegte Bestand, nicht die Summe aller Pflanzungen.', o:'Sanguié', k:'Umweltschutz', s:'Abgeschlossen', img:B.papaya, neu:'Projektbedarf 08/2026'},
-  {y:2025, j:'2025', slug:'wasser-bankio', t:'Solar-Wasseranlage Bankio', u:'Im Oktober 2025 in Betrieb genommen. Christen und Muslime teilen sich die Wasserstelle — die Schwäbische Zeitung hat darüber berichtet.', o:'Bankio', k:'Grundversorgung', s:'Abgeschlossen', img:B.dorfWasser, neu:'Projektbedarf 08/2026 · Presse 11/2025'},
+  {y:2025, j:'2025', slug:'wasser-banakio', t:'Solar-Wasseranlage Banakio', u:'Im Oktober 2025 in Betrieb genommen. Christen und Muslime teilen sich die Wasserstelle — die Schwäbische Zeitung hat darüber berichtet.', o:'Banakio', k:'Grundversorgung', s:'Abgeschlossen', img:B.dorfWasser, neu:'Projektbedarf 08/2026 · Presse 11/2025'},
   {y:2025, j:'2025', slug:'zweites-wassersystem', t:'Zweites Wassersystem', u:'In der Chronik für 2025 verzeichnet. Ein Ort ist nicht angegeben — vermutlich eine weitere Anlage in der Region Réo.', o:'Sanguié', k:'Grundversorgung', s:'Abgeschlossen', img:null, neu:'Projektbedarf 08/2026'},
   {y:2026, j:'im Bau', slug:'agrarschule', t:'Agrarschule', u:'Seit drei Jahren im Aufbau. Es fehlen eine neue Wasserpumpe, der Schulungs- und Lernraum, die Tierzuchtanlagen für Hühner, Fische, Ziegen und Schweine, ein Zaun und ein Konzept zur Lebensmittelverarbeitung. Benötigt werden 20.000 €, davon stehen 15.000 € bereit.', o:'Réo', k:'Bildung', s:'In Finanzierung', img:B.verarbeitung, neu:'Projektbedarf 08/2026'},
   {y:2023, j:'2023', slug:'wasserstelle-ekulpung', t:'Wasserstelle Ekulpung',             u:'Am 20. Dezember 2023 in Anwesenheit des Dorfoberhaupts übergeben und in die Verantwortung des Dorfes gelegt.', o:'Ekulpung', k:'Grundversorgung', s:'Abgeschlossen', img:B.ekulpung2}
@@ -690,7 +690,7 @@ const PTEXT = {
  'agrarschule': `<p>Seit drei Jahren bauen wir parallel zu den laufenden Projekten eine Agrarschule auf. Junge Menschen sollen dort in der Landwirtschaft ausgebildet werden — und die neue Wasserpumpe, die dazugehört, versorgt zugleich das Dorf mit Trinkwasser.</p>
   <p>Was noch fehlt: die neue Wasserpumpe, die Fertigstellung des Schulungs- und Lernraums, die Tierzuchtanlagen für Hühner, Fische, Ziegen und Schweine, ein neuer Zaun und ein Konzept zur Lebensmittelverarbeitung. Mit der Verarbeitung eigener Produkte ist bereits begonnen worden.</p>
   <p><b>Benötigt werden 20.000 €. 15.000 € stehen bereits zur Verfügung.</b></p>`,
- 'wasser-bankio': `<p>Im Oktober 2025 ging im Dorf Bankio eine solarbetriebene Wasseranlage in Betrieb. Finanziert wurde sie unter anderem aus einer Spende der Kirche.</p>
+ 'wasser-banakio': `<p>Im Oktober 2025 ging im Dorf Banakio eine solarbetriebene Wasseranlage in Betrieb. Finanziert wurde sie unter anderem aus einer Spende der Kirche.</p>
   <p>Das Besondere daran beschreibt die Schwäbische Zeitung: In einer Region, in der die Lage angespannt ist, teilen sich Christen und Muslime eine Wasserstelle — und tragen gemeinsam die Verantwortung dafür.</p>
   <p>Der Verein selbst schreibt dazu: Viele Dörfer in Burkina Faso leiden unter Gewalt und Vertreibung. Hier holen Christen und Muslime Wasser aus derselben Quelle und pflegen die Anlage gemeinsam. Die Menschen des Dorfes müssen dafür keine kilometerlangen Wege mehr auf sich nehmen.</p>`,
  'baeume-2024': `<p>Auf dem Gelände der Agrarschule stehen 700 Bäume. Im Mai 2025 wurden 100 Setzlinge nachgepflanzt, nachdem aus der ersten Pflanzung einige eingegangen waren — die 700 sind damit der gepflegte Bestand, nicht die Summe aller je gesetzten Bäume.</p>
@@ -1366,7 +1366,12 @@ ${spendenBlock()}
 </div></section>`;
 
 /* ============ EINZELNES PROJEKT ============ */
+/* Bis 09/2026 stand „Bankio" im Register und damit in der Adresse. Die
+   Schreibweise ist falsch, geteilte Links sollen aber weiter funktionieren. */
+const SLUG_ALT = {'wasser-bankio':'wasser-banakio'};
+
 VIEWS['projekt'] = (slug) => {
+  slug = SLUG_ALT[slug] || slug;
   const pr = REG.find(x=>x.slug===slug);
   if(!pr) return VIEWS['projekte']();
   const text = PTEXT[slug] || `<p>${pr.u}</p><p style="color:var(--leise)">Zu diesem Projekt liegt auf der bestehenden Website kein ausführlicher Text vor.</p>`;
@@ -1434,7 +1439,6 @@ VIEWS['neu'] = () => {
     <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Tropfenbewässerung</div><div class="b2">Projektseite: 0 % finanziert. Beitrag 02/2022: installiert.</div></div>
     <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Zweites Wassersystem</div><div class="b2">Ort nicht angegeben.</div></div>
     <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Unterrichtsraum</div><div class="b2">Spendenliste nennt 3.600 €, der Projekttext 3.050 € aus der ersten Bauphase. Der Vorstand sollte sagen, welcher Betrag gilt.</div></div>
-    <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Banakio</div><div class="b2">Im Register steht „Bankio“. Richtig ist Banakio; die Adresse <code>#/projekt/wasser-bankio</code> trägt die alte Schreibweise noch.</div></div>
     <div class="pz pz-def"><div class="b2" style="font-weight:700;color:var(--ink)">Mitgliedsbeitrag</div><div class="b2">Bisher 12 € im Jahr, neu 25–100 € im Jahr. Über die Höhe entscheidet nach § 8 die Mitgliederversammlung.</div></div>
   </div>
   <p style="margin-top:2rem"><a class="pf" href="#/projekte">Zum vollständigen Register</a></p>
